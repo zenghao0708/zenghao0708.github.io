@@ -53,15 +53,25 @@
 
 
 
-<meta name="description">
+<meta name="description" content="Unable to read plist data from `”/Users/hoare/Git_Repo/Misfit-BLE-iOS-SDK/Misfit-BLE-iOS-SDK/Misfit-BLE-iOS-SDK.xcodeproj/project.pbxproj”‘: Unexpected character / at line 1
+
+
+出现这种情况的原因是，cocoapods的版本不">
 <meta property="og:type" content="website">
-<meta property="og:title" content="zenghao0708的博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:title" content="Cocoapods 常见错误及解决方法">
+<meta property="og:url" content="http://yoursite.com/Cocoapods-常见错误及解决方法/index.html">
 <meta property="og:site_name" content="zenghao0708的博客">
-<meta property="og:description">
+<meta property="og:description" content="Unable to read plist data from `”/Users/hoare/Git_Repo/Misfit-BLE-iOS-SDK/Misfit-BLE-iOS-SDK/Misfit-BLE-iOS-SDK.xcodeproj/project.pbxproj”‘: Unexpected character / at line 1
+
+
+出现这种情况的原因是，cocoapods的版本不">
+<meta property="og:updated_time" content="2015-11-12T15:46:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zenghao0708的博客">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Cocoapods 常见错误及解决方法">
+<meta name="twitter:description" content="Unable to read plist data from `”/Users/hoare/Git_Repo/Misfit-BLE-iOS-SDK/Misfit-BLE-iOS-SDK/Misfit-BLE-iOS-SDK.xcodeproj/project.pbxproj”‘: Unexpected character / at line 1
+
+
+出现这种情况的原因是，cocoapods的版本不">
 
 
 
@@ -73,7 +83,13 @@
   };
 </script>
 
-  <title> 归档 | zenghao0708的博客 </title>
+  <title>
+  
+
+  
+    Cocoapods 常见错误及解决方法 | zenghao0708的博客
+  
+</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -94,7 +110,7 @@
 
 
 
-  <div class="container one-column  page-archive ">
+  <div class="container one-column ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -192,74 +208,89 @@
         <div id="content" class="content">
           
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 1 篇日志。 继续努力。
-    </span>
+  <div id="posts" class="posts-expand">
+    
+    
+      <ul>
+<li><p><strong>Unable to read plist data from `”/Users/hoare/Git_Repo/Misfit-BLE-iOS-SDK/Misfit-BLE-iOS-SDK/Misfit-BLE-iOS-SDK.xcodeproj/project.pbxproj”‘: Unexpected character / at line 1
+</strong></p>
+<ul>
+<li><p>出现这种情况的原因是，cocoapods的版本不兼容。</p>
+<ul>
+<li><p>方案一：清除 cocoapods 的本地缓存：</p>
+<p>   cd ~/.cocoapods/repos rm -rf master pod setup</p>
+</li>
+<li><p>方案二：安装特定版本的 cocoapods：</p>
+<p>  卸载当前版本： sudo gem uninstall cocoapods</p>
+<p>  安装0.32.1版本： sudo gem install cocoapods -v 0.32.1</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>error: The sandbox is not in sync with the Podfile.lock. Run ‘pod install’ or update your CocoaPods installation.</strong></p>
+<ul>
+<li>这个错误一般会显示下面三行：<ul>
+<li>diff: /../Podfile.lock: No such file or directory</li>
+<li>diff: /Manifest.lock: No such file or directory</li>
+<li>error: The sandbox is not in sync with the Podfile.lock. Run ‘pod install’ or update your CocoaPods installation.</li>
+</ul>
+</li>
+<li><p><a href="http://stackoverflow.com/questions/17072396/cocoapods-errors-on-project-build" target="_blank" rel="external">StackOverflow上的回答:</a></p>
+<ul>
+<li>删除xcworkspace文件，然后运行pod install</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>运行“pod install”速度慢</strong></p>
+<ul>
+<li><p>运行”pod install”命令对从github上面把所有的pod specs repo信息重新下载到本地，所以速度很慢，解决方法：</p>
+<ul>
+<li><p>先运行“pod setup”来下载specs文件，然后运行pod install</p>
+</li>
+<li><p>或者运行“pod install –no-repo-update”</p>
+</li>
+<li><p>无论什么时候出现问题，可以通过开启调试模式( —verbose)来查看详细log</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>共享的Scheme:</strong></p>
+<ul>
+<li><p>共享的Scheme与属于用户的Scheme有下面的异同点:</p>
+<ul>
+<li><p>都在xcodeproj这个目录里</p>
+</li>
+<li><p>但是属于用户的Scheme: 存放在xcuserdata这个目录中,包含了每一个用户的Xcode设置项，每个用户都会一个属于自己的scheme（用户名.scheme）</p>
+</li>
+<li><p>共享的Scheme: 存放在xcshareddata目录中,一个项目里只能有一份共享的scheme，每个人都可以更改和使用。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
     
+  </div>
 
-      
-      
-      
 
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2015">2015</h2>
         </div>
-      
-      
 
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2015/11/11/MAC常用软件/" itemprop="url">
-              
-                <span itemprop="name">MAC常用软件</span>
-              
-            </a>
-        
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-11-11T23:36:04+08:00"
-              content="2015-11-11" >
-          11-11
-        </time>
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="Cocoapods-常见错误及解决方法/index.html"
+           data-title="Cocoapods 常见错误及解决方法" data-url="http://yoursite.com/Cocoapods-常见错误及解决方法/index.html">
       </div>
-
-    </header>
-  </article>
-
-
-
     
+  </div>
 
-  </section>
-
-  
-
-
-
-        </div>
-
-        
-
-
-        
 
       </div>
 
@@ -290,7 +321,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">0</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -304,7 +335,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">0</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -386,12 +417,6 @@
 
   
   
-  
-    <script type="text/javascript">
-      postMotionOptions = {stagger: 100, drag: true};
-    </script>
-  
-
 
   
     
@@ -435,12 +460,6 @@
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
-
 
   <script type="text/javascript" src="/js/bootstrap.js"></script>
 
