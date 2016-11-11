@@ -68,4 +68,7 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: https://github.com/zenghao0708/zenghao0708.github.io
+  branch: master
+  message: 重新配置hexo，生成新的文章
