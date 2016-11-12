@@ -3,14 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>使用hexo+github page搭建个人博客 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。
+首先简单介绍下github page和hexo：
+
+Github Page: 使用github repo的静态网页工具，可以无缝地与github一起使用，每个github帐号都有400M的免费空间来存放博客文件，具体的使用说明可以参看github page网站
+hexo:一个node.js的框架，使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用hexo+github page搭建个人博客">
+<meta property="og:url" content="http://yoursite.com/2016/11/12/使用hexo-github-page搭建个人博客/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。
+首先简单介绍下github page和hexo：
+
+Github Page: 使用github repo的静态网页工具，可以无缝地与github一起使用，每个github帐号都有400M的免费空间来存放博客文件，具体的使用说明可以参看github page网站
+hexo:一个node.js的框架，使">
+<meta property="og:updated_time" content="2016-11-12T07:05:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="使用hexo+github page搭建个人博客">
+<meta name="twitter:description" content="我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。
+首先简单介绍下github page和hexo：
+
+Github Page: 使用github repo的静态网页工具，可以无缝地与github一起使用，每个github帐号都有400M的免费空间来存放博客文件，具体的使用说明可以参看github page网站
+hexo:一个node.js的框架，使">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,9 +75,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-使用hexo-github-page搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-使用hexo-github-page搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/12/使用hexo-github-page搭建个人博客/" class="article-date">
   <time datetime="2016-11-12T06:36:16.000Z" itemprop="datePublished">2016-11-12</time>
@@ -74,8 +88,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/12/使用hexo-github-page搭建个人博客/">使用hexo+github page搭建个人博客</a>
+    <h1 class="article-title" itemprop="name">
+      使用hexo+github page搭建个人博客
     </h1>
   
 
@@ -173,132 +187,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-git常用手册" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/11/git常用手册/" class="article-date">
-  <time datetime="2016-11-11T08:26:14.000Z" itemprop="datePublished">2016-11-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/11/git常用手册/">git常用手册</a>
-    </h1>
+    <a href="/2016/11/11/git常用手册/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">git常用手册</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>主要记录日常开发时遇到的问题和常用的解决方法：</p>
-<ol>
-<li>No submodule mapping found in .gitmodules for path ‘Frameworks/XXX’<ol>
-<li>参考：<a href="http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule" target="_blank" rel="external">http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule</a></li>
-<li>$<strong>git submodule</strong></li>
-<li>$<strong>git rm ‘Frameworks/XXX’</strong></li>
-</ol>
-</li>
-<li>检查非法的branch名字<ol>
-<li>A branch name can not:</li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>Have a path component that begins with “.”</li>
-<li>Have a double dot “..”</li>
-<li>Have an ASCII control character, “~”, “^”, “:” or SP, anywhere</li>
-<li>End with a “/“ - End with “.lock”</li>
-<li>Contain a “\” (backslash</li>
-</ul>
-<ol>
-<li>拉取其他分支代码到当前分支：Git pull rebase<ol>
-<li>当我们需要从别的分支上面拉取代码，并且希望被拉取的commit能够很好地rebase到当前分支,我们就需要用到pull rebase</li>
-<li>示例：从develop拉取代码到当前分支：<ul>
-<li>确保本地分支代码和develop都已经push到origin</li>
-<li>git pull –rebase origin develop<ul>
-<li>把develop分支代码拉取到当前分支，此时会发现当前分支和develop分支代码并没有rebase,还是在两条不同的线上</li>
-<li>拉取完成后会发现如下的一些提示：<ul>
-<li>On branch feature/music</li>
-<li>Your branch and ‘origin/feature/xxx’ have diverged,</li>
-<li>and have 9 and 6 different commits each, respectively.</li>
-<li>(use “git pull” to merge the remote branch into yours)</li>
-<li>nothing to commit, working directory clean</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>git push -f<ul>
-<li>把本地分支和develop分支强行push到origin</li>
-<li>git push 会导致错误，因为使用pull rebase操作会生成两个不同的分支（Your branch and ‘origin/feature/music’ have diverged）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>Git分支管理策略<br>  1.推荐阅读 《<a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="external">Git分支管理策略 - 阮一峰的网络日志</a>》<ol>
-<li>git workflow:<ol>
-<li>只需要保留master和develop分支。</li>
-<li>日常开发时，从develop上面开一个feature分支，完成开发后，按需merge到develop分支中，merge成功后，可以删除feature分支。</li>
-<li>发布前，使用release分支</li>
-<li>产品上线后，使用从master分支fork出hotfix分支，完成bug修复后，merge到master和develop分支。</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Github pull request<ol>
-<li>《Mort | Pull Request的正确打开方式（如何在GitHub上贡献开源项目）》 – 原文404，可以参考转载</li>
-</ol>
-</li>
-<li>Github Repo Migration:<ol>
-<li>Github fork repo</li>
-<li>Github import repo</li>
-</ol>
-</li>
-<li>Git 修改commit message:<ol>
-<li>git commit –amend -m “New commit message”</li>
-</ol>
-</li>
-<li>查找commit message:<ol>
-<li>git log –oneline | grep PATTERN</li>
-</ol>
-</li>
-<li>多个github账号的管理：<ol>
-<li><a href="https://gist.github.com/jexchan/2351996" target="_blank" rel="external">https://gist.github.com/jexchan/2351996</a></li>
-<li>本人常年使用公司和个人的Github帐号，在正确配置github帐号后，可以用命令行进行帐号切换。</li>
-</ol>
-</li>
-<li>清除git缓存：<ol>
-<li>有的时候会出现.gitignore文件不起作用的情况，需要清理git缓存：</li>
-<li>$ git rm –cached -r FOLDER_NAME</li>
-<li>$ git add .</li>
-<li>$ git commit -m “COMMIT_MSG”</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/11/git常用手册/" data-id="civev3sqr0001rifshk1xvolk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
 
 </section>
         
