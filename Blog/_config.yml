@@ -71,4 +71,4 @@ deploy:
   type: git
   repo: https://github.com/zenghao0708/zenghao0708.github.io
   branch: master
-  message: 重新配置hexo，生成新的文章
+  message: 添加新文章：iOS多线程开发笔记
