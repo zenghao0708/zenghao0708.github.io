@@ -65,9 +65,9 @@ menu_icons:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
-#scheme: Mist
-#scheme: Pisces
+# scheme: Muse
+scheme: Mist
+# scheme: Pisces
 
 
 # ---------------------------------------------------------------
@@ -148,7 +148,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-#avatar:
+avatar: /images/avatar.png
 
 
 # Table Of Contents in the Sidebar
@@ -257,10 +257,10 @@ mathjax:
 #swiftype_key:
 
 # Baidu Analytics ID
-#baidu_analytics:
+baidu_analytics: 353c598206661dd4387e7c76896dbd4c
 
 # Duoshuo ShortName
-#duoshuo_shortname:
+duoshuo_shortname: zenghao0708
 
 # Disqus
 #disqus_shortname:
@@ -330,9 +330,9 @@ facebook_comments_plugin:
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
-  enable: false
-  app_id: #<app_id>
-  app_key: #<app_key>
+  enable: true
+  app_id: EhIiyeJmhodJT8I7qVn4i9ru-gzGzoHsz
+  app_key: UeWHHgFp0nmo9v3nTvFQRBIs
 
 # Show PV/UV of the website/page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
