@@ -14,59 +14,39 @@ tags:
 
   - 手动添加 bridging header 的步骤，直接把 finder 中的代码文件夹拖拽到 xcode 中:
 
-    图1-1
-
-    ![](images/swiftOCMixing/1-1.jpg)
+    [图1-1]{% asset_img 1-1.jpg %}
 
     如上图，需要选中“**Create groups**”，这样就可以在 xcode代码浏览目录中添加一个 group
 
-    图1-2 
-
-    ![](images/swiftOCMixing/1-2.jpg)
+    图1-2 {% asset_img 1-2.jpg %}
 
     但是，这样的操作不会让 Xcode 自动为我们创建 bridging header 文件，需要手动在 Xcode 中**添加 header 文件**，这里要注意命名规范，必须是“ModuleName-Bridging-Header.h”，然后设置**编译选项**
 
-    图1-3
+    图1-3{% asset_img 1-3.jpg %}
 
-    ![](images/swiftOCMixing/1-3.jpg)
-
-    图1-4
-
-    ![](images/swiftOCMixing/1-4.jpg)
+    图1-4{% asset_img 1-4.jpg %}
 
   - **自动添加bridging header 的步骤**
 
     - 其实 xcode 可以自动添加桥接头文件，只是需要我们在刚开始的时候，**拖拽一个 OC 的源文件**(包含.h 和.m 文件)，而不是拖拽整个源代码的目录到 xcode 中
 
-      图2-1
+      图2-1{% asset_img 2-1.jpg %}
 
-      ![](images/swiftOCMixing/2-1.jpg)
-
-      图2-2
-
-      ![](images/swiftOCMixing/2-2.jpg)
+      图2-2{% asset_img 2-2.jpg %}
 
     - 下面是拖拽 OC 源代码后的项目浏览结构，xcode自动创建一个 ModuleName-Bridging-Header.h 的头文件，并且设置好了编译选项：
 
-      图2-3
+      图2-3{% asset_img 2-3.jpg %}
 
-      ![](images/swiftOCMixing/2-3.jpg)
-
-      图2-4
-
-      ![](images/swiftOCMixing/2-4.jpg)
+      图2-4{% asset_img 2-4.jpg %}
 
 - OC中调用Swift：**
 
   - OC来调用 Swift 的时候，需要依赖一个 Swift **默认提供**的“ModuleName-swift.h”文件，这个文件是隐藏的，**不需要也不能够由开发者来提供**，但是可以使用\#include包含到 OC 代码中，这个 OC头文件中可以看到 swift 类、结构体、常量的定义。
 
-    图3-1
+    图3-1{% asset_img 3-1.jpg %}
 
-    ![](images/swiftOCMixing/3-1.jpg)
-
-    图3-2
-
-    ![](images/swiftOCMixing/3-2.jpg)
+    图3-2{% asset_img 3-2.jpg %}
 
   - 需要注意的是，只有**继承自 NSObject 的swift类才能被 OC 调用**，在 swift.h 文件中是看不到纯 swift类的定义。
 
