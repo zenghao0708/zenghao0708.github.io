@@ -8,7 +8,7 @@ subtitle:
 description: Life is struggle!
 author: zenghao0708
 language: zh-Hans
-timezone: 
+timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: https://github.com/zenghao0708/zenghao0708.github.io
   branch: master
-  message: 添加新文章：Swift-与-OC-混编小技巧
+  message: 删除无用的文章，添加 CNAME 来自定义域名
