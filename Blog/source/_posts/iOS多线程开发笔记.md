@@ -22,6 +22,8 @@ tags:
 2. [深入浅出 Cocoa 多线程编程之 block 与 dispatch quene](http://www.cppblog.com/kesalin/archive/2011/08/26/154411.aspx)
 3. [GCD使用经验与技巧浅谈](http://tutuge.me/2015/04/03/something-about-gcd/)
 
+<!-- more -->
+
 ## 多线程编程概念
 
 ### 基本概念、术语：

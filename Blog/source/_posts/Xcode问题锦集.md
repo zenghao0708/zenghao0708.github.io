@@ -3,7 +3,12 @@ title: Xcode问题锦集
 date: 2017-08-12 20:59:56
 tags: 
  - iOS
+
 ---
+
+Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。
+
+<!-- more -->
 
 1. **代码提示不起作用**：
    This fix from apple dev forums works for me. I have had autocomplete issues with Xcode 6.1/Yosemite.

@@ -7,6 +7,8 @@ tags:
 
 我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。
 
+<!-- more -->
+
 首先简单介绍下github page和hexo：
 
 - Github Page: 使用github repo的静态网页工具，可以无缝地与github一起使用，每个github帐号都有400M的免费空间来存放博客文件，具体的使用说明可以参看[github page网站](https://pages.github.com/)

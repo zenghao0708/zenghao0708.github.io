@@ -4,6 +4,10 @@ date: 2017-01-07 22:43:35
 tags:
 ---
 
+Swift 与 OC交织在一起缠绵的爱情故事，在接下来的几年里将伴随着 iOS 开发人员，下面我们起来看看他们的恩怨纠葛。
+
+<!-- more -->
+
 **Swift 和ObjC混编：**
 
 - **[Apple的文档](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/index.html#//apple_ref/doc/uid/TP40014216-CH2-ID0)**

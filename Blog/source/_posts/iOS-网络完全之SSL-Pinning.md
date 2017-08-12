@@ -9,6 +9,8 @@ tags:
 
 Apple要求所有的 App 在2017年1月必须强制使用 ATS(Application Transport Security)，即 App 必须使用 HTTPS，而不能使用 HTTP 网络协议。这是Apple 在 app 安全领域做出的一个重大的举动，HTTP 由于使用明文进行传输，存在很大的安全隐患，网络请求容易被拦截和篡改。HTTPS 在安全性上相较于 HTTP 有很大的提升，依然存在一些问题：如 [MITT](http://www.secbox.cn/hacker/7846.html)(Man-In-The-Middle)中间人攻击和2014年 SSL 的[心脏出血漏洞](http://www.ithome.com/html/soft/80224.htm)。网络安全的问题看似离我们很远，其实就发生在我们身边，对我们的日常生活也会有很大的影响，特别是在移动互联网的浪潮下，人手一台手机的情况下，大家普遍使用支付宝和微信支付来进行支付，能够联网的智能家居产品越来越多的走入到普通家庭中，网络安全是一个需要引起重视的问题。而在网络传输过程中起到安全保障作用的，就是我们今天要讲的 SSL/TLS，当然主要是集中在 iOS 客户端。
 
+<!-- more -->
+
 ## **0x00 - 什么是 SSL/TLS**
 
 SSL(Secure Sockets Layer 安全套接层)及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。SSL为Netscape所研发，用以保障在Internet上数据传输的安全，利用数据加密(Encryption)的技术，可确保数据在网络上的传输过程中不会被截取及窃听。SSL协议位于TCP/IP协议与各种应用层协议之间，为数据通讯提供安全支持。 **— 摘自《互动百科》**
