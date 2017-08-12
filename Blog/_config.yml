@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: https://github.com/zenghao0708/zenghao0708.github.io
   branch: master
-  message: 删除无用的文章，添加 CNAME 来自定义域名
+  message: 新文章《Xcode 问题锦集》
