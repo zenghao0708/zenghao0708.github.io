@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: https://github.com/zenghao0708/zenghao0708.github.io
   branch: master
-  message: 新文章《Xcode 问题锦集》
+  message: 添加文章摘要
