@@ -3,6 +3,7 @@ title: iOS 网络完全之SSL Pinning
 date: 2016-12-27 11:33:56
 tags: 
  - iOS
+categories: 开发
 ---
 
 ## **前言：**

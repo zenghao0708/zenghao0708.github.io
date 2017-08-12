@@ -3,6 +3,7 @@ title: Xcode问题锦集
 date: 2017-08-12 20:59:56
 tags: 
  - iOS
+categories: 开发
 
 ---
 
@@ -45,7 +46,7 @@ Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面�
    1. [fix-xcode-upgrade-plugin-invalid](http://joeshang.github.io/2015/04/10/fix-xcode-upgrade-plugin-invalid/)
    2. find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID`
 10. **检查代码中的FIXME、TODO、ERROR**
-    1. [http://krakendev.io/blog/generating-warnings-in-xcode](http://krakendev.io/blog/generating-warnings-in-xcode)
+   1. [http://krakendev.io/blog/generating-warnings-in-xcode](http://krakendev.io/blog/generating-warnings-in-xcode)
 11. **Xcode 7.3(Swift 2.2) Release配置出现Crash：**
     1. 在Debug和Staging配置环境下的build没有问题，但是Release编译出来的build会出现crash: unrecognised selector sent to instance
     2. 尝试方法

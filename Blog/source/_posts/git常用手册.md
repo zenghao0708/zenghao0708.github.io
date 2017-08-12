@@ -2,6 +2,7 @@
 title: git常用手册
 date: 2016-11-11 16:26:14
 tags: git
+categories: 开发
 ---
 
 Git 是每个开发童鞋必须掌握的工具，本文记录博主日常开发使用 git时，遇到的问题和常用的解决方法：
@@ -51,8 +52,8 @@ Git 是每个开发童鞋必须掌握的工具，本文记录博主日常开发�
 9. 查找commit message:
     1. git log --oneline | grep PATTERN
 10. 多个github账号的管理：
-    1. https://gist.github.com/jexchan/2351996
-    2. 本人常年使用公司和个人的Github帐号，在正确配置github帐号后，可以用命令行进行帐号切换。
+   1. https://gist.github.com/jexchan/2351996
+   2. 本人常年使用公司和个人的Github帐号，在正确配置github帐号后，可以用命令行进行帐号切换。
 11. 清除git缓存：
     1. 有的时候会出现.gitignore文件不起作用的情况，需要清理git缓存：
     2. $ git rm --cached -r FOLDER_NAME

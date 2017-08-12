@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: https://github.com/zenghao0708/zenghao0708.github.io
   branch: master
-  message: 添加关于页面
+  message: 添加分类页面
