@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: https://github.com/zenghao0708/zenghao0708.github.io
   branch: master
-  message: 添加"Cocoapods采坑记-Podfile-lock-冲突问题"
+  message: 添加"最靠谱的『科学上网』方式 - VPS 搭建SSR 服务端教程"
