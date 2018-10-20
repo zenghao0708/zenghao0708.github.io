@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: https://github.com/zenghao0708/zenghao0708.github.io
   branch: master
-  message: 添加"Xcode-10-beta-版本迁移指南"
+  message: 添加"iOS ReactNative私有库指南"
