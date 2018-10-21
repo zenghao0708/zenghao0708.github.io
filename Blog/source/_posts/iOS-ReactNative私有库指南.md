@@ -3,6 +3,7 @@ title: iOS ReactNative私有库指南
 date: 2018-10-20 22:11:52
 categories:
 - 开发
+- ReactNative
 tags: 
 - iOS
 - ReactNative
@@ -45,7 +46,7 @@ pod ipc spec yoga.podspec >> yoga.podspec.json
 
 - 修改yoga.podspec.json
 ```ruby
-"git": "git@code.byted.org:ee/ReactNative.git"
+"git": "YOUR_RN_GIT"
 "source_files": "ReactCommon/yoga/**/*.{cpp,h}",
 "public_header_files": "ReactCommon/yoga/**/{Yoga,YGEnums,YGMacros}.h"
 ```
@@ -54,7 +55,7 @@ pod ipc spec yoga.podspec >> yoga.podspec.json
 
 - 需要注意的是，修改后的podspec.json文件，需要进行lint校验、上传到私有源，下面是yoga的方法
 ```bash
-pod spec lint yoga.podspec.json --no-clean --verbose *--allow-warnings*
+pod spec lint yoga.podspec.json --no-clean --verbose --allow-warnings
 pod repo push YOUR_SPECS_REPO yoga.podspec.json --allow-warnings
 ```
 
@@ -70,7 +71,7 @@ pod repo push YOUR_SPECS_REPO Folly.podspec --allow-warnings
 ```
 - 类似的，我们也需要把React.podspec.json文件提交到私有源中：
 ```bash
-pod spec lint React.podspec.json --no-clean --fail-fast --verbose *--allow-warnings* --sources=YOUR_SPECS_GIT,https://github.com/CocoaPods/Specs.git
+pod spec lint React.podspec.json --no-clean --fail-fast --verbose --allow-warnings --sources=YOUR_SPECS_GIT,https://github.com/CocoaPods/Specs.git
 pod repo push YOUR_SPECS_REPO React.podspec.json --verbose --allow-warnings --sources=YOUR_SPECS_GIT,https://github.com/CocoaPods/Specs.git
 ```
 最终，我们总共需要添加了三个私有repo：**RN/Folly/yoga**
