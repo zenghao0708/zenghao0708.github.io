@@ -165,9 +165,17 @@ menu:
   #commonweal: /404.html
 
 # Enable / Disable menu icons / item badges.
-menu_settings:
-  icons: true
-  badges: false
+menu_icons:
+  enable: true
+  #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
+  home: home
+  about: user
+  categories: th
+  schedule: calendar
+  tags: tags
+  archives: archive
+  sitemap: sitemap
+  commonweal: heartbeat
 
 
 # ---------------------------------------------------------------
