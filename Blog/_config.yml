@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: https://github.com/zenghao0708/zenghao0708.github.io
   branch: master
-  message: 升级Next主题，更新依赖的npm包
+  message: 添加“像自己的孩子一样带新人”

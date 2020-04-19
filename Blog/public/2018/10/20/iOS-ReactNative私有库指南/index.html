@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.7.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Zenghao0708的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="创建RN私有库为了加速RN的下载和方便集成，我把RN(0.56.0)做成私有pod放到了gitlab的私有源中，参考《使用Cocoapods创建私有podspec》、《私有Pods集成react-native库》。">
+<meta name="keywords" content="iOS,ReactNative">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS ReactNative私有库指南">
+<meta property="og:url" content="http://yoursite.com/2018/10/20/iOS-ReactNative私有库指南/index.html">
+<meta property="og:site_name" content="Zenghao0708的小站">
+<meta property="og:description" content="创建RN私有库为了加速RN的下载和方便集成，我把RN(0.56.0)做成私有pod放到了gitlab的私有源中，参考《使用Cocoapods创建私有podspec》、《私有Pods集成react-native库》。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/iOS-ReactNative私有库指南/Folly-error.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/iOS-ReactNative私有库指南/sourcetree.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/iOS-ReactNative私有库指南/schedule-error.png">
+<meta property="og:updated_time" content="2019-09-17T03:05:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS ReactNative私有库指南">
+<meta name="twitter:description" content="创建RN私有库为了加速RN的下载和方便集成，我把RN(0.56.0)做成私有pod放到了gitlab的私有源中，参考《使用Cocoapods创建私有podspec》、《私有Pods集成react-native库》。">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/20/iOS-ReactNative私有库指南/Folly-error.png">
+  <link rel="canonical" href="http://yoursite.com/2018/10/20/iOS-ReactNative私有库指南/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>iOS ReactNative私有库指南 | Zenghao0708的小站</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?353c598206661dd4387e7c76896dbd4c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zenghao0708的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section">Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section">About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section">Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section">Tags</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/20/iOS-ReactNative私有库指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zenghao0708">
+      <meta itemprop="description" content="Life is struggle!">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zenghao0708的小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">iOS ReactNative私有库指南
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-10-20 22:11:52" itemprop="dateCreated datePublished" datetime="2018-10-20T22:11:52+08:00">2018-10-20</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-09-17 11:05:11" itemprop="dateModified" datetime="2019-09-17T11:05:11+08:00">2019-09-17</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/ReactNative/" itemprop="url" rel="index"><span itemprop="name">ReactNative</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2018/10/20/iOS-ReactNative私有库指南/" class="post-meta-item leancloud_visitors" data-flag-title="iOS ReactNative私有库指南" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="创建RN私有库"><a href="#创建RN私有库" class="headerlink" title="创建RN私有库"></a>创建RN私有库</h1><p>为了加速RN的下载和方便集成，我把RN(0.56.0)做成私有pod放到了gitlab的私有源中，参考《<a href="http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/" target="_blank" rel="noopener">使用Cocoapods创建私有podspec</a>》、《<a href="https://imfong.com/post/Private-Pods-Add-react-native#yoga" target="_blank" rel="noopener">私有Pods集成react-native库</a>》。</p>
+<a id="more"></a>
+
+<p>开始之前，需要搞清楚两个概念：</p>
+<p>cocoapods 是通过spec repos + pod source code repo 来进行代码版本管理，cocoapods 的<a href="https://github.com/CocoaPods/Specs" target="_blank" rel="noopener">master spec repo</a>来管理所有的第三方库 spec，每个 spec 中都包含了对于 pod 的 source code pod。</p>
+<p><strong>私有源仓库：</strong>类似于 cocoapods 官方来管理 specs 的仓库，用来管理私有库的 spec，下文中使用<code>YOUR_SPECS_REPO</code>来指代。同时，这个 repo 也有自己的 git 地址，下文使用<code>YOUR_SPECS_GIT</code></p>
+<p><strong>私有 pod 代码仓库</strong>：存放私有库 source code 的 repo。</p>
+<p>下面是具体的操作步骤：</p>
+<h2 id="创建私有ReactNative-repo"><a href="#创建私有ReactNative-repo" class="headerlink" title="创建私有ReactNative repo"></a>创建私有ReactNative repo</h2><ul>
+<li>把 github 上的源码 clone 下来，然后 push 到自己的私有库 git 中</li>
+<li><strong>仓库代码是github源码</strong></li>
+<li>修复0.56.0中WebSocket问题</li>
+</ul>
+<h2 id="创建-amp-修改-podspec-json"><a href="#创建-amp-修改-podspec-json" class="headerlink" title="创建&amp;修改 podspec.json"></a>创建&amp;修改 podspec.json</h2><ul>
+<li><strong>切换到对应的tag commit: 如v0.56.0，下面的yoga和React需要保存version一致。</strong><ul>
+<li>然后按照《<a href="https://imfong.com/post/Private-Pods-Add-react-native" target="_blank" rel="noopener">私有Pods集成react-native库</a>》中生成和修改了yoga.podspec.json、React.podspec.json，需要修改yoga.podspec.json的source_files和public_header_files</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod ipc spec React.podspec &gt;&gt; React.podspec.json</span><br><span class="line"><span class="built_in">cd</span> ReactCommon/yoga</span><br><span class="line">pod ipc spec yoga.podspec &gt;&gt; yoga.podspec.json</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改yoga.podspec.json<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"git"</span>: <span class="string">"YOUR_RN_GIT"</span></span><br><span class="line"><span class="string">"source_files"</span>: <span class="string">"ReactCommon/yoga/**/*.&#123;cpp,h&#125;"</span>,</span><br><span class="line"><span class="string">"public_header_files"</span>: <span class="string">"ReactCommon/yoga/**/&#123;Yoga,YGEnums,YGMacros&#125;.h"</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="lint-amp-push-podspec-json"><a href="#lint-amp-push-podspec-json" class="headerlink" title="lint &amp; push podspec.json"></a>lint &amp; push podspec.json</h2><ul>
+<li><p>需要注意的是，修改后的podspec.json文件，需要进行lint校验、上传到私有源，下面是yoga的方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint yoga.podspec.json --no-clean --verbose --allow-warnings</span><br><span class="line">pod repo push YOUR_SPECS_REPO yoga.podspec.json --allow-warnings</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过上面的方法可以吧RN和yoga添加到私有源中，但是我们pod install的时候，还是会报错</p>
+<img src="/2018/10/20/iOS-ReactNative私有库指南/Folly-error.png">
+
+<ul>
+<li><p>Folly在RN中被CxxBridge、jschelpers等subspecs依赖，Folly.podspec文件本身在RN源码目录third-party-podspecs中，需要把Folly.podspec也上传到私有源中，否则pod install会出现错误</p>
+</li>
+<li><p>由于Folly在cocoapods公共源中已经没有维护，但是有志愿者维护了一个folly-ios的pod，需要我们添加到私有源中，添加方法和上面类似</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push YOUR_SPECS_REPO Folly.podspec --allow-warnings</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>类似的，我们也需要把React.podspec.json文件提交到私有源中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint React.podspec.json --no-clean --fail-fast --verbose --allow-warnings --sources=YOUR_SPECS_GIT,https://github.com/CocoaPods/Specs.git</span><br><span class="line">pod repo push YOUR_SPECS_REPO React.podspec.json --verbose --allow-warnings --sources=YOUR_SPECS_GIT,https://github.com/CocoaPods/Specs.git</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>最终，我们总共需要添加了三个私有repo：<strong>RN/Folly/yoga</strong></p>
+<h2 id="创建离线js-bundle包"><a href="#创建离线js-bundle包" class="headerlink" title="创建离线js bundle包"></a>创建离线js bundle包</h2><p>使用下面命令生成js bundle:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native bundle --dev <span class="literal">true</span> --entry-file index.ios.js --bundle-output ios/main.jsbundle --platform ios</span><br></pre></td></tr></table></figure>
+
+<p>通过–dev参数(true/false)控制生成debug/release包</p>
+<h1 id="如何维护RN版本"><a href="#如何维护RN版本" class="headerlink" title="如何维护RN版本"></a>如何维护RN版本</h1><p>同步Github上的ReactNative源码，在sourceTree中，添加remote:</p>
+<img src="/2018/10/20/iOS-ReactNative私有库指南/sourcetree.png">
+
+<p>切换到当前的分支(0.57-stable)，可以从github上面拉取最新代码（使用rebase）<br>更新podspec.json</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod ipc spec React.podspec &gt;&gt; React.podspec.json</span><br><span class="line"><span class="built_in">cd</span> ReactCommon/yoga</span><br><span class="line">pod ipc spec yoga.podspec &gt;&gt; yoga.podspec.json</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建RN私有库</strong>的中已经提供了需要修改的地方。</p>
+<p><strong>lint &amp; push podspec.json</strong>，或者直接在私有源中进行修改。</p>
+<h2 id="RN代码有bug怎么办？"><a href="#RN代码有bug怎么办？" class="headerlink" title="RN代码有bug怎么办？"></a>RN代码有bug怎么办？</h2><p>从RN 0.56.0到RN 0.57.3，都没有解决websocket crash问题。</p>
+<p>解决方法：</p>
+<ol>
+<li><p>查看github issue，寻找问题解决方法。已web socket为例，已经用人<a href="https://github.com/facebook/react-native/pull/19489" target="_blank" rel="noopener">提了PR</a></p>
+</li>
+<li><p>把PR中的源代码下载到本地，然后本地进行验证。验证通过后，则commit &amp;&amp; push到当前tag 所在的分支</p>
+</li>
+<li><p>由于更新了RN源码，我们需要修改私有库中tag对应的commit：</p>
+<ol>
+<li>删除之前的tag（0.57.3），在最新的commit中来添加新tag（0.57.3)</li>
+<li>在React.podspec.json中，使用branch替代tag</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;source&quot;: &#123;</span><br><span class="line">    &quot;git&quot;: &quot;YOUR_RN_GIT&quot;,</span><br><span class="line">    &quot;branch&quot;: &quot;0.57-stable&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h1 id="专治疑难杂症"><a href="#专治疑难杂症" class="headerlink" title="专治疑难杂症"></a>专治疑难杂症</h1><h2 id="RN-0-56-0-问题："><a href="#RN-0-56-0-问题：" class="headerlink" title="RN 0.56.0 问题："></a><strong>RN 0.56.0 问题：</strong></h2><ul>
+<li><p><a href="https://github.com/facebook/react-native/issues/21086" target="_blank" rel="noopener"><strong>com.squareup.SocketRocket.NetworkThread(18): EXC_BAD_ACCESS</strong></a></p>
+<ul>
+<li>解决的PR:<a href="https://github.com/facebook/react-native/pull/19489" target="_blank" rel="noopener">https://github.com/facebook/react-native/pull/19489</a></li>
+</ul>
+</li>
+<li><p><a href="https://github.com/facebook/react-native/issues/20567" target="_blank" rel="noopener"><strong>WebSocket <code>registerEvents</code> is undefined when running master</strong></a></p>
+<ul>
+<li>解决方法：<a href="https://stackoverflow.com/a/52486616" target="_blank" rel="noopener">https://stackoverflow.com/a/52486616</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="RN-0-57-3-问题："><a href="#RN-0-57-3-问题：" class="headerlink" title="RN 0.57.3 问题："></a><strong>RN 0.57.3 问题：</strong></h2><ul>
+<li><p><strong>Unable to resolve module <code>schedule/tracking</code></strong></p>
+<img src="/2018/10/20/iOS-ReactNative私有库指南/schedule-error.png">
+
+</li>
+</ul>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a><strong>参考资料：</strong></h1><ul>
+<li><p><a href="https://github.com/facebook/react-native/issues/19892" target="_blank" rel="noopener">swift cocoapods Could not build Objective-C module ‘React’</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/611b49ccf351" target="_blank" rel="noopener">含泪导入React-native 0.54到Swift原生项目</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/57ed76e90605" target="_blank" rel="noopener">React Native 0.50.0 集成遇到的问题</a></p>
+</li>
+<li><p>《<a href="http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/" target="_blank" rel="noopener">使用Cocoapods创建私有podspec</a>》</p>
+</li>
+<li><p>《<a href="https://imfong.com/post/Private-Pods-Add-react-native#yoga" target="_blank" rel="noopener">私有Pods集成react-native库</a>》</p>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/32304421/whats-the-difference-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="noopener">What’s the difference between ‘pod spec lint’ and ‘pod lib lint’?</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/iOS/" rel="tag"># iOS</a>
+            
+              <a href="/tags/ReactNative/" rel="tag"># ReactNative</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/06/21/Xcode-10-beta-版本迁移指南/" rel="next" title="Xcode 10 beta 版本迁移指南">
+                  <i class="fa fa-chevron-left"></i> Xcode 10 beta 版本迁移指南
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/04/19/像自己的孩子一样带新人/" rel="prev" title="像自己的孩子一样带新人">
+                  像自己的孩子一样带新人 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建RN私有库"><span class="nav-number">1.</span> <span class="nav-text">创建RN私有库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建私有ReactNative-repo"><span class="nav-number">1.1.</span> <span class="nav-text">创建私有ReactNative repo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-amp-修改-podspec-json"><span class="nav-number">1.2.</span> <span class="nav-text">创建&amp;修改 podspec.json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lint-amp-push-podspec-json"><span class="nav-number">1.3.</span> <span class="nav-text">lint &amp; push podspec.json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建离线js-bundle包"><span class="nav-number">1.4.</span> <span class="nav-text">创建离线js bundle包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何维护RN版本"><span class="nav-number">2.</span> <span class="nav-text">如何维护RN版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RN代码有bug怎么办？"><span class="nav-number">2.1.</span> <span class="nav-text">RN代码有bug怎么办？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#专治疑难杂症"><span class="nav-number">3.</span> <span class="nav-text">专治疑难杂症</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RN-0-56-0-问题："><span class="nav-number">3.1.</span> <span class="nav-text">RN 0.56.0 问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RN-0-57-3-问题："><span class="nav-number">3.2.</span> <span class="nav-text">RN 0.57.3 问题：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料："><span class="nav-number">4.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zenghao0708</p>
+  <div class="site-description" itemprop="description">Life is struggle!</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags">
+          
+        
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/zenghao0708" title="GitHub &rarr; https://github.com/zenghao0708" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="http://weibo.com/zenghao0708" title="微博 &rarr; http://weibo.com/zenghao0708" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zenghao0708</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.7.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI',
+            'X-LC-Key': 'r39ndDzcLWt6uwrMWfLpahzS',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/muse.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
