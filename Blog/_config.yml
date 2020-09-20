@@ -82,3 +82,9 @@ deploy:
   repo: https://github.com/zenghao0708/zenghao0708.github.io
   branch: master
   message: 添加“像自己的孩子一样带新人”
+
+# Lean Cloud"
+leancloud_counter_security:
+  enable_sync: true
+  app_id: GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI
+  app_key: r39ndDzcLWt6uwrMWfLpahzS
