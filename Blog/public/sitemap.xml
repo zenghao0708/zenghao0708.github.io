@@ -102,7 +102,7 @@
 
   <url>
     <loc>http://coolzeng.com/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -110,49 +110,49 @@
   
   <url>
     <loc>http://coolzeng.com/tags/iOS/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://coolzeng.com/tags/cocoapods/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://coolzeng.com/tags/git/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://coolzeng.com/tags/ReactNative/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://coolzeng.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://coolzeng.com/tags/hexo/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://coolzeng.com/tags/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -161,14 +161,14 @@
   
   <url>
     <loc>http://coolzeng.com/categories/%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://coolzeng.com/categories/%E5%BC%80%E5%8F%91/ReactNative/</loc>
-    <lastmod>2020-09-20</lastmod>
+    <lastmod>2020-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
