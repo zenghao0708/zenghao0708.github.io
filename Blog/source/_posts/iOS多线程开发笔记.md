@@ -4,7 +4,7 @@ tags:
   - iOS
   - 多线程
 categories: 开发
-abbrlink: 81762ee9
+abbrlink: ios-thread-tips
 date: 2016-11-15 21:51:37
 ---
 

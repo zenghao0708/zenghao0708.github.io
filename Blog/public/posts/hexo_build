@@ -18,27 +18,27 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"coolzeng.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。 2018年2月18日更新：域名绑定和https 访问问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用hexo+github page搭建个人博客">
-<meta property="og:url" content="http://yoursite.com/posts/e234e595/index.html">
+<meta property="og:url" content="https://coolzeng.com/posts/hexo_build">
 <meta property="og:site_name" content="Zenghao0708的小站">
 <meta property="og:description" content="我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。 2018年2月18日更新：域名绑定和https 访问问题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-11-12T06:36:16.000Z">
-<meta property="article:modified_time" content="2022-04-05T05:52:59.468Z">
+<meta property="article:modified_time" content="2022-04-05T07:09:14.145Z">
 <meta property="article:author" content="zenghao0708">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://yoursite.com/posts/e234e595/">
+<link rel="canonical" href="https://coolzeng.com/posts/hexo_build">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/posts/e234e595/","path":"posts/e234e595/","title":"使用hexo+github page搭建个人博客"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coolzeng.com/posts/hexo_build","path":"posts/hexo_build","title":"使用hexo+github page搭建个人博客"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>使用hexo+github page搭建个人博客 | Zenghao0708的小站</title>
@@ -214,7 +214,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/e234e595/">
+    <link itemprop="mainEntityOfPage" href="https://coolzeng.com/posts/hexo_build">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -250,11 +250,11 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-05 13:52:59" itemprop="dateModified" datetime="2022-04-05T13:52:59+08:00">2022-04-05</time>
+      <time title="修改时间：2022-04-05 15:09:14" itemprop="dateModified" datetime="2022-04-05T15:09:14+08:00">2022-04-05</time>
     </span>
 
   
-    <span id="/posts/e234e595/" class="post-meta-item leancloud_visitors" data-flag-title="使用hexo+github page搭建个人博客" title="阅读次数">
+    <span id="/posts/hexo_build" class="post-meta-item leancloud_visitors" data-flag-title="使用hexo+github page搭建个人博客" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -269,8 +269,8 @@
     </span>
     <span class="post-meta-item-text">Valine：</span>
   
-    <a title="valine" href="/posts/e234e595/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/e234e595/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/hexo_build#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/hexo_build" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -443,7 +443,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/posts/e234e595/" title="使用hexo+github page搭建个人博客">http://yoursite.com/posts/e234e595/</a>
+      <a href="https://coolzeng.com/posts/hexo_build" title="使用hexo+github page搭建个人博客">https://coolzeng.com/posts/hexo_build</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -476,12 +476,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/1fe13d7d/" rel="prev" title="git常用手册">
+                <a href="/posts/git_manual" rel="prev" title="git常用手册">
                   <i class="fa fa-chevron-left"></i> git常用手册
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/81762ee9/" rel="next" title="iOS多线程开发笔记">
+                <a href="/posts/ios-thread-tips" rel="next" title="iOS多线程开发笔记">
                   iOS多线程开发笔记 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -550,7 +550,7 @@
 
 
 
-<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/e234e595/"}</script>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/hexo_build"}</script>
 <script>
 document.addEventListener('page:loaded', () => {
   NexT.utils.loadComments(CONFIG.valine.el)

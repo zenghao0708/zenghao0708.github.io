@@ -2,7 +2,7 @@
 title: git常用手册
 tags: git
 categories: 开发
-abbrlink: 1fe13d7d
+abbrlink: git_manual
 date: 2016-11-11 16:26:14
 ---
 

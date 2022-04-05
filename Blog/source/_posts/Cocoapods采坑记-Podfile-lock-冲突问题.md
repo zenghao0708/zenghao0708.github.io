@@ -4,7 +4,7 @@ categories: 开发
 tags:
   - iOS
   - cocoapods
-abbrlink: '33721673'
+abbrlink: podfile_lock_conflict
 date: 2018-01-10 22:00:43
 ---
 

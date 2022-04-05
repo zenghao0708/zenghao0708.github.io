@@ -6,7 +6,7 @@ categories:
 tags:
   - iOS
   - ReactNative
-abbrlink: 4fdd55
+abbrlink: react-native-private-repo
 date: 2018-10-20 22:11:52
 ---
 

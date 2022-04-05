@@ -3,7 +3,7 @@ title: Xcode 10 beta 版本迁移指南
 categories: 开发
 tags:
   - iOS
-abbrlink: 630942d2
+abbrlink: xcode-10-migrate
 date: 2018-06-21 20:15:29
 ---
 

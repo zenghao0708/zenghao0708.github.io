@@ -3,7 +3,7 @@ title: iOS 网络安全之SSL Pinning
 tags:
   - iOS
 categories: 开发
-abbrlink: '4875e776'
+abbrlink: ios-ssl-pinning
 date: 2016-12-27 11:33:56
 ---
 

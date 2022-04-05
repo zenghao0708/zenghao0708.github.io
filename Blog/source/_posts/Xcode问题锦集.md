@@ -3,7 +3,7 @@ title: Xcode问题锦集
 tags:
   - iOS
 categories: 开发
-abbrlink: 98b18fa0
+abbrlink: xcode-tips
 date: 2017-08-12 20:59:56
 ---
 

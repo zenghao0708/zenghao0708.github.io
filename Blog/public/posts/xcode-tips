@@ -18,30 +18,30 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"coolzeng.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Git 是每个开发童鞋必须掌握的工具，本文记录博主日常开发使用 git时，遇到的问题和常用的解决方法：">
+    <meta name="description" content="Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git常用手册">
-<meta property="og:url" content="http://yoursite.com/posts/1fe13d7d/index.html">
+<meta property="og:title" content="Xcode问题锦集">
+<meta property="og:url" content="https://coolzeng.com/posts/xcode-tips">
 <meta property="og:site_name" content="Zenghao0708的小站">
-<meta property="og:description" content="Git 是每个开发童鞋必须掌握的工具，本文记录博主日常开发使用 git时，遇到的问题和常用的解决方法：">
+<meta property="og:description" content="Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2016-11-11T08:26:14.000Z">
-<meta property="article:modified_time" content="2022-04-05T05:52:59.465Z">
+<meta property="article:published_time" content="2017-08-12T12:59:56.000Z">
+<meta property="article:modified_time" content="2022-04-05T07:07:05.762Z">
 <meta property="article:author" content="zenghao0708">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://yoursite.com/posts/1fe13d7d/">
+<link rel="canonical" href="https://coolzeng.com/posts/xcode-tips">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/posts/1fe13d7d/","path":"posts/1fe13d7d/","title":"git常用手册"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coolzeng.com/posts/xcode-tips","path":"posts/xcode-tips","title":"Xcode问题锦集"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>git常用手册 | Zenghao0708的小站</title>
+<title>Xcode问题锦集 | Zenghao0708的小站</title>
   
 
 
@@ -213,7 +213,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/1fe13d7d/">
+    <link itemprop="mainEntityOfPage" href="https://coolzeng.com/posts/xcode-tips">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -226,12 +226,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="git常用手册 | Zenghao0708的小站">
+      <meta itemprop="name" content="Xcode问题锦集 | Zenghao0708的小站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          git常用手册
+          Xcode问题锦集
         </h1>
 
         <div class="post-meta-container">
@@ -242,14 +242,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2016-11-11 16:26:14" itemprop="dateCreated datePublished" datetime="2016-11-11T16:26:14+08:00">2016-11-11</time>
+      <time title="创建时间：2017-08-12 20:59:56" itemprop="dateCreated datePublished" datetime="2017-08-12T20:59:56+08:00">2017-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-05 13:52:59" itemprop="dateModified" datetime="2022-04-05T13:52:59+08:00">2022-04-05</time>
+      <time title="修改时间：2022-04-05 15:07:05" itemprop="dateModified" datetime="2022-04-05T15:07:05+08:00">2022-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,7 +262,7 @@
     </span>
 
   
-    <span id="/posts/1fe13d7d/" class="post-meta-item leancloud_visitors" data-flag-title="git常用手册" title="阅读次数">
+    <span id="/posts/xcode-tips" class="post-meta-item leancloud_visitors" data-flag-title="Xcode问题锦集" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -277,8 +277,8 @@
     </span>
     <span class="post-meta-item-text">Valine：</span>
   
-    <a title="valine" href="/posts/1fe13d7d/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/1fe13d7d/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/xcode-tips#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/xcode-tips" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -289,14 +289,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.7k</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -307,81 +307,79 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Git 是每个开发童鞋必须掌握的工具，本文记录博主日常开发使用 git时，遇到的问题和常用的解决方法：</p>
+        <p>Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。</p>
 <span id="more"></span>
 
 <ol>
-<li>No submodule mapping found in .gitmodules for path ‘Frameworks&#x2F;XXX’<ol>
-<li>参考：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule">http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule</a></li>
-<li>$<strong>git submodule</strong></li>
-<li>$<strong>git rm ‘Frameworks&#x2F;XXX’</strong></li>
+<li><strong>代码提示不起作用</strong>：<br>This fix from apple dev forums works for me. I have had autocomplete issues with Xcode 6.1&#x2F;Yosemite.<ol>
+<li>Quit Xcode.</li>
+<li>Restart the computer (this is to clear any in-memory caches).</li>
+<li>Delete the contents of the DerivedData folder (~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData), precisely run,<br>a) <strong>cd ~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData&#x2F;</strong><br>b) **rm -rf ***</li>
+<li>(Try this if Steps 1-3 dont really work as it rebuilds the cache later on restart which takes time) Delete the contents of folder ~&#x2F;Library&#x2F;Caches&#x2F;com.apple.dt.Xcode, i.e.,<br>a) <strong>cd ~&#x2F;Library&#x2F;Caches&#x2F;com.apple.dt.Xcode</strong><br>b) **rm -rf ***</li>
+<li>Now launch Xcode once more…</li>
 </ol>
 </li>
-<li>检查非法的branch名字<ol>
-<li>A branch name can not:</li>
+<li><strong>Logic Testing Unavailable</strong>：<br>Logic Testing on iOS devices is not supported. You can run logic tests on the Simulator.<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported">http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported</a><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported">Log</a><br>ic test need a framework which has not installed with iOS device. Set a Host Application for Unit Test can resolve this issue: App will run first and Uint Test run.</li>
+<li><strong>$(inherited) in xcode</strong>:<ol>
+<li>inherited值的是xcode设置项的继承关系。</li>
+<li>每个项目都有PROJECT的设置与TARGETS设置，TARGETS一般情况下就是继承自PROJECT</li>
+</ol>
+</li>
+<li><strong>“Xcode 6.3: Can not verify build to install on device”</strong><ol>
+<li>$(inherited) can be used to inherit build settings from the project level to the target level. When you define library or header search paths at the project level you can use $(inherited) in the target build settings to use these search paths in the search paths of the project targets.</li>
+</ol>
+</li>
+<li><strong>Verify Xcode:</strong><ol>
+<li>spctl –assess –verbose &#x2F;Applications&#x2F;Xcode.app</li>
+</ol>
+</li>
+<li><strong>Xcode显示模拟器时，使用的是UUID，而不是系统型号</strong><ol>
+<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/26533025/xcode-using-guid-instead-of-ios-version-number-in-simulator-selection">http://stackoverflow.com/questions/26533025/xcode-using-guid-instead-of-ios-version-number-in-simulator-selection</a></li>
+<li>在Xcode-&gt;Devices里，选中重复的模拟器，右键菜单“删除”，即可。</li>
+</ol>
+</li>
+<li><strong>iPhone Simulator没有网络</strong><ol>
+<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/13542706/iphone-simulator-cannot-connect-to-internet">http://stackoverflow.com/questions/13542706/iphone-simulator-cannot-connect-to-internet</a></li>
+<li>iOS Simulator (menu, top left) &gt; Reset Content and Settings… fixed it for me. Note this will delete all the apps and associated data you have on the simulator.</li>
+</ol>
+</li>
+<li><strong>ineligible device</strong><ol>
+<li>当前iOS版本比xcode版本高，就会出现这种情况，如iOS 9.1 就不能在Xcode 7上面进行调试，而只能在xcode 7.1进行调试。</li>
+</ol>
+</li>
+<li><strong>更新xcode版本后，出现插件不兼容的问题</strong><ol>
+<li><a target="_blank" rel="noopener" href="http://joeshang.github.io/2015/04/10/fix-xcode-upgrade-plugin-invalid/">fix-xcode-upgrade-plugin-invalid</a></li>
+<li>find ~&#x2F;Library&#x2F;Application\ Support&#x2F;Developer&#x2F;Shared&#x2F;Xcode&#x2F;Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add <code>defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID</code></li>
+</ol>
+</li>
+<li><strong>检查代码中的FIXME、TODO、ERROR</strong></li>
+<li><a target="_blank" rel="noopener" href="http://krakendev.io/blog/generating-warnings-in-xcode">http://krakendev.io/blog/generating-warnings-in-xcode</a></li>
+<li><strong>Xcode 7.3(Swift 2.2) Release配置出现Crash：</strong><ol>
+<li>在Debug和Staging配置环境下的build没有问题，但是Release编译出来的build会出现crash: unrecognised selector sent to instance</li>
+<li>尝试方法<ol>
+<li>《<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/06fcd298ef4c">iOS开发调试技巧</a>》</li>
+</ol>
+</li>
+<li>解决方法：<ol>
+<li>在Swift Compiler -&gt; Code Generation选择,使用<strong>Fast [-O]，而不能使用Fast, Whole Module Optimization</strong></li>
 </ol>
 </li>
 </ol>
-<ul>
-<li>Have a path component that begins with “.”</li>
-<li>Have a double dot “..”</li>
-<li>Have an ASCII control character, “~”, “^”, “:” or SP, anywhere</li>
-<li>End with a “&#x2F;“ - End with “.lock”</li>
-<li>Contain a “&quot; (backslash</li>
-</ul>
-<ol start="3">
-<li>拉取其他分支代码到当前分支：Git pull rebase<ol>
-<li>当我们需要从别的分支上面拉取代码，并且希望被拉取的commit能够很好地rebase到当前分支,我们就需要用到pull rebase</li>
-<li>示例：从develop拉取代码到当前分支：<ul>
-<li>确保本地分支代码和develop都已经push到origin</li>
-<li>git pull –rebase origin develop<ul>
-<li>把develop分支代码拉取到当前分支，此时会发现当前分支和develop分支代码并没有rebase,还是在两条不同的线上</li>
-<li>拉取完成后会发现如下的一些提示：<ul>
-<li>On branch feature&#x2F;music</li>
-<li>Your branch and ‘origin&#x2F;feature&#x2F;xxx’ have diverged,</li>
-<li>and have 9 and 6 different commits each, respectively.</li>
-<li>(use “git pull” to merge the remote branch into yours)</li>
-<li>nothing to commit, working directory clean</li>
-</ul>
 </li>
-</ul>
-</li>
-<li>git push -f<ul>
-<li>把本地分支和develop分支强行push到origin</li>
-<li>git push 会导致错误，因为使用pull rebase操作会生成两个不同的分支（Your branch and ‘origin&#x2F;feature&#x2F;music’ have diverged）</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>查看所有的Simulator：</strong><ol>
+<li>xcrun simctl list devices</li>
 </ol>
 </li>
-<li>Git分支管理策略<br>  1.推荐阅读 《<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2012/07/git.html">Git分支管理策略 - 阮一峰的网络日志</a>》</li>
-<li>git workflow:<br> 1. 只需要保留master和develop分支。<br> 2. 日常开发时，从develop上面开一个feature分支，完成开发后，按需merge到develop分支中，merge成功后，可以删除feature分支。<br> 3. 发布前，使用release分支<br> 4. 产品上线后，使用从master分支fork出hotfix分支，完成bug修复后，merge到master和develop分支。</li>
-<li>Github pull request<ol>
-<li>《Mort | Pull Request的正确打开方式（如何在GitHub上贡献开源项目）》 – 原文404，可以参考转载</li>
+<li><strong>Xcode 注释功能不起作用：</strong><ol>
+<li>重启 Xcode,重启 MAC</li>
+<li>运行：sudo usr&#x2F;libexec&#x2F;xpccachectl</li>
+<li>重命名 Xcode，然后打开，恢复后，重新改名为 Xcode</li>
 </ol>
 </li>
-<li>Github Repo Migration:<ol>
-<li>Github fork repo</li>
-<li>Github import repo</li>
-</ol>
-</li>
-<li>Git 修改commit message:<ol>
-<li>git commit –amend -m “New commit message”</li>
-</ol>
-</li>
-<li>查找commit message:<ol>
-<li>git log –oneline | grep PATTERN</li>
-</ol>
-</li>
-<li>多个github账号的管理：</li>
-<li><a target="_blank" rel="noopener" href="https://gist.github.com/jexchan/2351996">https://gist.github.com/jexchan/2351996</a></li>
-<li>本人常年使用公司和个人的Github帐号，在正确配置github帐号后，可以用命令行进行帐号切换。</li>
-<li>清除git缓存：<ol>
-<li>有的时候会出现.gitignore文件不起作用的情况，需要清理git缓存：</li>
-<li>$ git rm –cached -r FOLDER_NAME</li>
-<li>$ git add .</li>
-<li>$ git commit -m “COMMIT_MSG”</li>
+<li><strong>使用 Code Snippet</strong><ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/wzzvictory/article/details/12163939">Xcode开发技巧之code snippets(代码片段)</a></li>
+<li>&lt;#type#&gt;占位符</li>
+<li>Xcode中的代码片段默认放在下面的目录中：~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;UserData&#x2F;CodeSnippets</li>
 </ol>
 </li>
 </ol>
@@ -402,7 +400,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/posts/1fe13d7d/" title="git常用手册">http://yoursite.com/posts/1fe13d7d/</a>
+      <a href="https://coolzeng.com/posts/xcode-tips" title="Xcode问题锦集">https://coolzeng.com/posts/xcode-tips</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -428,17 +426,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/iOS/" rel="tag"># iOS</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/posts/swift-oc-mix" rel="prev" title="Swift 与 OC 混编小技巧">
+                  <i class="fa fa-chevron-left"></i> Swift 与 OC 混编小技巧
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/e234e595/" rel="next" title="使用hexo+github page搭建个人博客">
-                  使用hexo+github page搭建个人博客 <i class="fa fa-chevron-right"></i>
+                <a href="/posts/podfile_lock_conflict" rel="next" title="Cocoapods采坑记 - Podfile.lock 冲突问题">
+                  Cocoapods采坑记 - Podfile.lock 冲突问题 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -506,7 +507,7 @@
 
 
 
-<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/1fe13d7d/"}</script>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/xcode-tips"}</script>
 <script>
 document.addEventListener('page:loaded', () => {
   NexT.utils.loadComments(CONFIG.valine.el)

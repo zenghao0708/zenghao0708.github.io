@@ -18,41 +18,30 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"coolzeng.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Swift 与 OC交织在一起缠绵的爱情故事，在接下来的几年里将伴随着 iOS 开发人员，下面我们起来看看他们的恩怨纠葛。">
+    <meta name="description" content="今天的主角就是开发者接触最多的 Xcode 10 beta，详细内容可以参考 WWDC 18 Session ，同时可以看下 Xcode 10 的 release note, 官方文档永远是学习新内容的第一手资料。 Xcode 10 beta 在 WWDC 18后就对开发者开放下载了，WWDC 18的新内容不多，Apple 今年把主要精力放在 Bugfix和性能优化上面，还这几年欠下来的技术债，关">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift 与 OC 混编小技巧">
-<meta property="og:url" content="http://yoursite.com/posts/f60ef46c/index.html">
+<meta property="og:title" content="Xcode 10 beta 版本迁移指南">
+<meta property="og:url" content="https://coolzeng.com/posts/xcode-10-migrate">
 <meta property="og:site_name" content="Zenghao0708的小站">
-<meta property="og:description" content="Swift 与 OC交织在一起缠绵的爱情故事，在接下来的几年里将伴随着 iOS 开发人员，下面我们起来看看他们的恩怨纠葛。">
+<meta property="og:description" content="今天的主角就是开发者接触最多的 Xcode 10 beta，详细内容可以参考 WWDC 18 Session ，同时可以看下 Xcode 10 的 release note, 官方文档永远是学习新内容的第一手资料。 Xcode 10 beta 在 WWDC 18后就对开发者开放下载了，WWDC 18的新内容不多，Apple 今年把主要精力放在 Bugfix和性能优化上面，还这几年欠下来的技术债，关">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/1-1.jpg">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/1-2.jpg">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/1-3.jpg">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/1-4.jpg">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/2-1.jpg">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/2-2.jpg">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/2-3.jpg">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/2-4.jpg">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/3-1.jpg">
-<meta property="og:image" content="http://yoursite.com/posts/f60ef46c/3-2.jpg">
-<meta property="article:published_time" content="2017-01-07T14:43:35.000Z">
-<meta property="article:modified_time" content="2022-04-05T05:52:59.463Z">
+<meta property="article:published_time" content="2018-06-21T12:15:29.000Z">
+<meta property="article:modified_time" content="2022-04-05T07:06:58.611Z">
 <meta property="article:author" content="zenghao0708">
 <meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/posts/f60ef46c/1-1.jpg">
 
 
-<link rel="canonical" href="http://yoursite.com/posts/f60ef46c/">
+<link rel="canonical" href="https://coolzeng.com/posts/xcode-10-migrate">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/posts/f60ef46c/","path":"posts/f60ef46c/","title":"Swift 与 OC 混编小技巧"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coolzeng.com/posts/xcode-10-migrate","path":"posts/xcode-10-migrate","title":"Xcode 10 beta 版本迁移指南"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Swift 与 OC 混编小技巧 | Zenghao0708的小站</title>
+<title>Xcode 10 beta 版本迁移指南 | Zenghao0708的小站</title>
   
 
 
@@ -224,7 +213,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/f60ef46c/">
+    <link itemprop="mainEntityOfPage" href="https://coolzeng.com/posts/xcode-10-migrate">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -237,12 +226,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Swift 与 OC 混编小技巧 | Zenghao0708的小站">
+      <meta itemprop="name" content="Xcode 10 beta 版本迁移指南 | Zenghao0708的小站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Swift 与 OC 混编小技巧
+          Xcode 10 beta 版本迁移指南
         </h1>
 
         <div class="post-meta-container">
@@ -253,14 +242,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-01-07 22:43:35" itemprop="dateCreated datePublished" datetime="2017-01-07T22:43:35+08:00">2017-01-07</time>
+      <time title="创建时间：2018-06-21 20:15:29" itemprop="dateCreated datePublished" datetime="2018-06-21T20:15:29+08:00">2018-06-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-05 13:52:59" itemprop="dateModified" datetime="2022-04-05T13:52:59+08:00">2022-04-05</time>
+      <time title="修改时间：2022-04-05 15:06:58" itemprop="dateModified" datetime="2022-04-05T15:06:58+08:00">2022-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,7 +262,7 @@
     </span>
 
   
-    <span id="/posts/f60ef46c/" class="post-meta-item leancloud_visitors" data-flag-title="Swift 与 OC 混编小技巧" title="阅读次数">
+    <span id="/posts/xcode-10-migrate" class="post-meta-item leancloud_visitors" data-flag-title="Xcode 10 beta 版本迁移指南" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -288,8 +277,8 @@
     </span>
     <span class="post-meta-item-text">Valine：</span>
   
-    <a title="valine" href="/posts/f60ef46c/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/f60ef46c/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/xcode-10-migrate#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/xcode-10-migrate" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -300,7 +289,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -318,81 +307,64 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Swift 与 OC交织在一起缠绵的爱情故事，在接下来的几年里将伴随着 iOS 开发人员，下面我们起来看看他们的恩怨纠葛。</p>
+        <p>今天的主角就是开发者接触最多的 Xcode 10 beta，详细内容可以参考 <a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2018/408/">WWDC 18 Session</a> ，同时可以看下 Xcode 10 的 <a target="_blank" rel="noopener" href="https://developerbetas.com/wp-content/uploads/2018/06/Xcode_10_Beta_Release_Notes.pdf">release note</a>, 官方文档永远是学习新内容的第一手资料。</p>
+<p>Xcode 10 beta 在 WWDC 18后就对<a target="_blank" rel="noopener" href="https://developer.apple.com/xcode/">开发者开放下载</a>了，WWDC 18的新内容不多，Apple 今年把主要精力放在 Bugfix和性能优化上面，还这几年欠下来的技术债，关于 iOS 11的诟病一直不绝入耳，不得不说，Apple 今年的决策还是比较明智的。</p>
 <span id="more"></span>
 
-<p><strong>Swift 和ObjC混编：</strong></p>
+<p>我们项目现在是 OC 和 Swift 混编，Xcode 版本是9.4.1，swift 4，平时用公司的 iMac Late 2013编译感觉有点吃力，用自己的 MBP 14则编译速度足够去喝杯咖啡，享受人生。</p>
+<p>我尝试把自己的主力机（iPhone 7）升级到 iOS 12后，内心抑制不住冲动把14年的 iPhone 6也升级下 iOS 12试试，重新体会到了之前 iOS 的那种流畅，真的是老泪纵横。平时 iPhone 6只能沦为测试手机，跑跑单元测试啥的。</p>
+<p>升级了 iOS 12后，Xcode 9已经不能进行调试了，本着生命不息，折腾不止的精神，顺带体验了一下 Xcode 10的各种新功能，总结了一下升级 Xcode 10过程中踩的坑。</p>
 <ul>
-<li><p><strong><a target="_blank" rel="noopener" href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/index.html#//apple_ref/doc/uid/TP40014216-CH2-ID0">Apple的文档</a></strong></p>
-</li>
-<li><p><strong>Swift中调用OC：</strong></p>
+<li><p>Xcode 10 beta 版本迁移指南：</p>
 <ul>
-<li><p>在 Swift 中调用 OC 的代码时，需要使用到 bridging header 文件来把 OC 的类暴露给 swift</p>
-</li>
-<li><p>手动添加 bridging header 的步骤，直接把 finder 中的代码文件夹拖拽到 xcode 中:</p>
-<p>[图1-1]<img src="/posts/f60ef46c/1-1.jpg" class=""></p>
-<p>如上图，需要选中“<strong>Create groups</strong>”，这样就可以在 xcode代码浏览目录中添加一个 group</p>
-<p>图1-2 <img src="/posts/f60ef46c/1-2.jpg" class=""></p>
-<p>但是，这样的操作不会让 Xcode 自动为我们创建 bridging header 文件，需要手动在 Xcode 中<strong>添加 header 文件</strong>，这里要注意命名规范，必须是“ModuleName-Bridging-Header.h”，然后设置<strong>编译选项</strong></p>
-<p>图1-3<img src="/posts/f60ef46c/1-3.jpg" class=""></p>
-<p>图1-4<img src="/posts/f60ef46c/1-4.jpg" class=""></p>
-</li>
-<li><p><strong>自动添加bridging header 的步骤</strong></p>
+<li><blockquote>
+<p><strong>指定 swift版本</strong>：4.1，Xcode 10使用的是 swift 4.2版本，而 Xcode 9.4则使用 Swift 4.1,基本改动不大，为了兼容 Xcode 9，这里统一使用 Swift 4.1。</p>
+</blockquote>
 <ul>
-<li><p>其实 xcode 可以自动添加桥接头文件，只是需要我们在刚开始的时候，<strong>拖拽一个 OC 的源文件</strong>(包含.h 和.m 文件)，而不是拖拽整个源代码的目录到 xcode 中</p>
-<p>图2-1<img src="/posts/f60ef46c/2-1.jpg" class=""></p>
-<p>图2-2<img src="/posts/f60ef46c/2-2.jpg" class=""></p>
-</li>
-<li><p>下面是拖拽 OC 源代码后的项目浏览结构，xcode自动创建一个 ModuleName-Bridging-Header.h 的头文件，并且设置好了编译选项：</p>
-<p>图2-3<img src="/posts/f60ef46c/2-3.jpg" class=""></p>
-<p>图2-4<img src="/posts/f60ef46c/2-4.jpg" class=""></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>OC中调用Swift：**</p>
+<li><p>podfile设置如下:</p>
 <ul>
-<li><p>OC来调用 Swift 的时候，需要依赖一个 Swift <strong>默认提供</strong>的“ModuleName-swift.h”文件，这个文件是隐藏的，<strong>不需要也不能够由开发者来提供</strong>，但是可以使用#include包含到 OC 代码中，这个 OC头文件中可以看到 swift 类、结构体、常量的定义。</p>
-<p>图3-1<img src="/posts/f60ef46c/3-1.jpg" class=""></p>
-<p>图3-2<img src="/posts/f60ef46c/3-2.jpg" class=""></p>
-</li>
-<li><p>需要注意的是，只有<strong>继承自 NSObject 的swift类才能被 OC 调用</strong>，在 swift.h 文件中是看不到纯 swift类的定义。</p>
+<li>&#96;&#96;&#96;<br>config.build_settings[‘SWIFT_VERSION’] &#x3D; ‘4.1’<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    ​</span><br><span class="line"></span><br><span class="line">- xcode 项目设置：</span><br><span class="line"></span><br><span class="line">  - **SWIFT_VERSION**为 swift 4</span><br><span class="line"></span><br><span class="line">- xcode command tool设置: 使用 Xcode 10</span><br><span class="line"></span><br><span class="line">  - sudo xcode-select --switch /Applications/Xcode-beta.app</span><br><span class="line"></span><br><span class="line">  - xcodebuild -version可以查看</span><br><span class="line"></span><br><span class="line">    - ```</span><br><span class="line">      - Xcode 10.0</span><br><span class="line">      - Build version 10L176w</span><br></pre></td></tr></table></figure>
+
+  ​</li>
+</ul>
 </li>
 </ul>
 </li>
-<li><p><strong>Swift使用OC中的宏</strong></p>
+<li><blockquote>
+<p>更新部分 pod 库：</p>
+</blockquote>
 <ul>
-<li>可以参考<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/24325477/how-to-use-a-objective-c-define-from-swift">这个提问</a></li>
-<li>有哪些问题：<ul>
-<li>Swift 只能使用OC 中常量的宏定义，如<ul>
-<li>#define MAX_WIDTH  100</li>
-<li>#define Name_KeyPath @“Name_KeyPath”</li>
-</ul>
-</li>
-<li>而不同使用函数调用的宏，如<ul>
-<li>#define SCREEN_WIDTH  [[[UIScreen mainScreen] bounds] width]</li>
-<li>#define DBQuerySuccess YES</li>
+<li>RACObjcBridge&#x2F;RACObjc升级到3.1.0，之前是3.0.0版本，swift 版本导致需要升级。</li>
+<li>删除 Tencent SDK pod spec 中的s.resource_bundle字段，参见 xcode 10 beta release note。多个相同的输入文件导致冲突，这个也是 xcode 10新增的功能，为了加快编译速度，对编译依赖检测得很严格。</li>
+<li>使用 Carthage 的话，则需要指定手动指定 Swift 版本：<ul>
+<li>carthage update –platform iOS –toolchain com.apple.dt.toolchain.Swift_4_1 –no-use-binaries REPO_NAME</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>解决方法：<ul>
-<li>在 OC 文件中创建一个Constant类，使用类方法(screenWidth)来包装现有的宏定义</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>@objc 关键字的作用</strong></p>
+<li><blockquote>
+<p>更新 swift lint: disable identifier_name</p>
+</blockquote>
 <ul>
-<li>当 swift 中要使用 OC 的一些特性的时候，如 runtime，@objc 关键字用来 提供这个功能。</li>
+<li>参见<a target="_blank" rel="noopener" href="https://github.com/realm/SwiftLint/issues/2231">False positive for rule identifier_name in Xcode 10 beta</a></li>
 </ul>
 </li>
-<li><p>源代码</p>
+<li><blockquote>
+<p>其他错误：</p>
+</blockquote>
 <ul>
-<li>具体的使用，可以参见 Github上的<a target="_blank" rel="noopener" href="https://github.com/zenghao0708/SwiftOCMixing">代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mapbox/mapbox-gl-native/issues/12084">Command CompileC failed with a nonzero exit code</a></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<p>整个升级过程中，需要注意的几点：</p>
+<ul>
+<li>及时清理 DerivedData目录，由于整个编译过程中会产生众多的中间文件，非常容易导致编译依赖检测出错。</li>
+<li>更新 carthage framework和使用 pod install 重新编译第三方库。</li>
+<li>New Build System: Xcode 9.4引入了 preview 版本，Xcode 10则是默认开启，开启后，编译速度确认有所提升，但是也会导致一些比较奇怪的编译问题，上面只是记录了笔者遇到的几个问题。</li>
+<li>完成升级后，Xcode 9.4和 Xcode 10 beta 可以共存，笔者使用 Xcode 10 beta，其他开发同事继续使用 Xcode 9。</li>
 </ul>
 
     </div>
@@ -411,7 +383,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/posts/f60ef46c/" title="Swift 与 OC 混编小技巧">http://yoursite.com/posts/f60ef46c/</a>
+      <a href="https://coolzeng.com/posts/xcode-10-migrate" title="Xcode 10 beta 版本迁移指南">https://coolzeng.com/posts/xcode-10-migrate</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -444,13 +416,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/4875e776/" rel="prev" title="iOS 网络安全之SSL Pinning">
-                  <i class="fa fa-chevron-left"></i> iOS 网络安全之SSL Pinning
+                <a href="/posts/podfile_lock_conflict" rel="prev" title="Cocoapods采坑记 - Podfile.lock 冲突问题">
+                  <i class="fa fa-chevron-left"></i> Cocoapods采坑记 - Podfile.lock 冲突问题
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/98b18fa0/" rel="next" title="Xcode问题锦集">
-                  Xcode问题锦集 <i class="fa fa-chevron-right"></i>
+                <a href="/posts/react-native-private-repo" rel="next" title="iOS ReactNative私有库指南">
+                  iOS ReactNative私有库指南 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -518,7 +490,7 @@
 
 
 
-<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/f60ef46c/"}</script>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/xcode-10-migrate"}</script>
 <script>
 document.addEventListener('page:loaded', () => {
   NexT.utils.loadComments(CONFIG.valine.el)

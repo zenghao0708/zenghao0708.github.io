@@ -12,12 +12,16 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://coolzeng.com
 root: /
 # permalink: :year/:month/:day/:title/
+# permalink_defaults:
 # abbrlink插件 配置文章id，默认的是按时间标题配置的
-permalink: posts/:abbrlink/
-permalink_defaults:
+permalink: posts/:abbrlink
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hex
+
 
 # Directory
 source_dir: source
@@ -77,12 +81,6 @@ leancloud_counter_security:
   app_key: r39ndDzcLWt6uwrMWfLpahzS
   username: zenghao0708
   password: haozi0708
-
-# abbrlink插件配置 生成固定的文章id
-# npm install hexo-abbrlink --save
-abbrlink:
-  alg: crc32  #support crc16(default) and crc32
-  rep: hex    #support dec(default) and hex
 
 # Local Search
 search:

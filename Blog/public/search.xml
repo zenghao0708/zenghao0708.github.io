@@ -2,19 +2,19 @@
 <search>
   <entry>
     <title>Cocoapods采坑记 - Podfile.lock 冲突问题</title>
-    <url>/posts/33721673/</url>
+    <url>/posts/podfile_lock_conflict</url>
     <content><![CDATA[<h2 id="故事的开端是这样的："><a href="#故事的开端是这样的：" class="headerlink" title="故事的开端是这样的："></a><strong>故事的开端是这样的：</strong></h2><p>我们的项目中使用了<a href="https://github.com/facebook/FBRetainCycleDetector">FBRetainCycleDetector</a>这个第三方库来检查内存泄露，在升级到某一个版本后，出现部分同事的 podfile.lock中FBRetainCycleDetector的checksum 值不一致，每次都需要运行 pod install 来更新 podfile.lock,然后git push 到仓库。其他的同事又出现 podfile.lock 冲突，需要运行 pod install 更新，然后push到 git 仓库。</p>
 <span id="more"></span>
 
 <p>喜剧上演多次后，我们采取少数服从多数的原则，让出现冲突的同事git push 的时候手动去掉 podfile.lock。</p>
-<p>podfile.lock冲突<img src="/posts/33721673/podfile.lock%E5%86%B2%E7%AA%81.png" class=""></p>
+<p>podfile.lock冲突<img src="/posts/podfile_lock_conflict/podfile.lock%E5%86%B2%E7%AA%81.png" class=""></p>
 <h2 id="Podfile-lock-不一致的原因："><a href="#Podfile-lock-不一致的原因：" class="headerlink" title="Podfile.lock 不一致的原因："></a><strong>Podfile.lock 不一致的原因：</strong></h2><p><strong>Podfile.lock和Manifest.lock：</strong></p>
 <ul>
 <li>项目中集成 cocoapods 的时候，运行 pod install 后，项目根目录中会生成Podfile.lock，而Pods目录中会有Manifest.lock。</li>
 <li>Xcode 编译项目的时候，会执行 Build Phases 中的[CP] Check Pods Manifest.lock 脚本，这个脚本会比对Podfile.lock和Manifest.lock，<strong>如果两个文件不相同就会报错</strong>。</li>
 </ul>
-<p>xcode编译脚本<img src="/posts/33721673/xcode%E7%BC%96%E8%AF%91%E8%84%9A%E6%9C%AC.png" class=""></p>
-<p>pod check失败<img src="/posts/33721673/pod%20check%E5%A4%B1%E8%B4%A5.png" class=""></p>
+<p>xcode编译脚本<img src="/posts/podfile_lock_conflict/xcode%E7%BC%96%E8%AF%91%E8%84%9A%E6%9C%AC.png" class=""></p>
+<p>pod check失败<img src="/posts/podfile_lock_conflict/pod%20check%E5%A4%B1%E8%B4%A5.png" class=""></p>
 <p><strong>Podfile.lock是什么：</strong></p>
 <ul>
 <li>Podfile.lock 文件主要包含三个块：PODS、DEPENDENCIES、SPEC CHECKSUMS，用来记录每个pod的版本号、依赖的其他库和每个库对应的podspec.json文件的 checksum(SHA-1算法)。通过这些信息可以确保多人协作的时候，大家使用的是相同版本的第三方库。</li>
@@ -28,7 +28,7 @@
 
 <p>但是在设置了 locale环境变量之后，问题还是没有解决。</p>
 <p>前两天，在FBRetainCycleDetector的 issues 列表中，发现也有人遇到了<a href="https://github.com/facebook/FBRetainCycleDetector/issues/52">相同的问题</a>，更加可喜的是，这个小伙子提了一个 <a href="https://github.com/facebook/FBRetainCycleDetector/pull/53/files">PR</a> 修复了这个问题，其实只有一行代码：</p>
-<p>PR 代码<img src="/posts/33721673/PR%20%E4%BB%A3%E7%A0%81.png" class=""></p>
+<p>PR 代码<img src="/posts/podfile_lock_conflict/PR%20%E4%BB%A3%E7%A0%81.png" class=""></p>
 <h2 id="问题是如何解决的："><a href="#问题是如何解决的：" class="headerlink" title="问题是如何解决的："></a><strong>问题是如何解决的：</strong></h2><p>在运行 pod install 后，生成FBRetainCycleDetector.podspec.json文件中， repuires_arc字段是需要设置-fno-objc-arc的文件列表，但是不知道某种原因，出现文件路径排序在不同电脑上不同，从而导致最后FBRetainCycleDetector.podspec.json的CHECKSUMS(SHA-1) 值不一致。</p>
 <p><strong>使用 sort 方法后，解决了文件排序问题。Cheers!</strong> </p>
 <p>参考资料：</p>
@@ -47,8 +47,78 @@
       </tags>
   </entry>
   <entry>
+    <title>Xcode 10 beta 版本迁移指南</title>
+    <url>/posts/xcode-10-migrate</url>
+    <content><![CDATA[<p>今天的主角就是开发者接触最多的 Xcode 10 beta，详细内容可以参考 <a href="https://developer.apple.com/videos/play/wwdc2018/408/">WWDC 18 Session</a> ，同时可以看下 Xcode 10 的 <a href="https://developerbetas.com/wp-content/uploads/2018/06/Xcode_10_Beta_Release_Notes.pdf">release note</a>, 官方文档永远是学习新内容的第一手资料。</p>
+<p>Xcode 10 beta 在 WWDC 18后就对<a href="https://developer.apple.com/xcode/">开发者开放下载</a>了，WWDC 18的新内容不多，Apple 今年把主要精力放在 Bugfix和性能优化上面，还这几年欠下来的技术债，关于 iOS 11的诟病一直不绝入耳，不得不说，Apple 今年的决策还是比较明智的。</p>
+<span id="more"></span>
+
+<p>我们项目现在是 OC 和 Swift 混编，Xcode 版本是9.4.1，swift 4，平时用公司的 iMac Late 2013编译感觉有点吃力，用自己的 MBP 14则编译速度足够去喝杯咖啡，享受人生。</p>
+<p>我尝试把自己的主力机（iPhone 7）升级到 iOS 12后，内心抑制不住冲动把14年的 iPhone 6也升级下 iOS 12试试，重新体会到了之前 iOS 的那种流畅，真的是老泪纵横。平时 iPhone 6只能沦为测试手机，跑跑单元测试啥的。</p>
+<p>升级了 iOS 12后，Xcode 9已经不能进行调试了，本着生命不息，折腾不止的精神，顺带体验了一下 Xcode 10的各种新功能，总结了一下升级 Xcode 10过程中踩的坑。</p>
+<ul>
+<li><p>Xcode 10 beta 版本迁移指南：</p>
+<ul>
+<li><blockquote>
+<p><strong>指定 swift版本</strong>：4.1，Xcode 10使用的是 swift 4.2版本，而 Xcode 9.4则使用 Swift 4.1,基本改动不大，为了兼容 Xcode 9，这里统一使用 Swift 4.1。</p>
+</blockquote>
+<ul>
+<li><p>podfile设置如下:</p>
+<ul>
+<li>&#96;&#96;&#96;<br>config.build_settings[‘SWIFT_VERSION’] &#x3D; ‘4.1’<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    ​</span><br><span class="line"></span><br><span class="line">- xcode 项目设置：</span><br><span class="line"></span><br><span class="line">  - **SWIFT_VERSION**为 swift 4</span><br><span class="line"></span><br><span class="line">- xcode command tool设置: 使用 Xcode 10</span><br><span class="line"></span><br><span class="line">  - sudo xcode-select --switch /Applications/Xcode-beta.app</span><br><span class="line"></span><br><span class="line">  - xcodebuild -version可以查看</span><br><span class="line"></span><br><span class="line">    - ```</span><br><span class="line">      - Xcode 10.0</span><br><span class="line">      - Build version 10L176w</span><br></pre></td></tr></table></figure>
+
+  ​</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><blockquote>
+<p>更新部分 pod 库：</p>
+</blockquote>
+<ul>
+<li>RACObjcBridge&#x2F;RACObjc升级到3.1.0，之前是3.0.0版本，swift 版本导致需要升级。</li>
+<li>删除 Tencent SDK pod spec 中的s.resource_bundle字段，参见 xcode 10 beta release note。多个相同的输入文件导致冲突，这个也是 xcode 10新增的功能，为了加快编译速度，对编译依赖检测得很严格。</li>
+<li>使用 Carthage 的话，则需要指定手动指定 Swift 版本：<ul>
+<li>carthage update –platform iOS –toolchain com.apple.dt.toolchain.Swift_4_1 –no-use-binaries REPO_NAME</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><blockquote>
+<p>更新 swift lint: disable identifier_name</p>
+</blockquote>
+<ul>
+<li>参见<a href="https://github.com/realm/SwiftLint/issues/2231">False positive for rule identifier_name in Xcode 10 beta</a></li>
+</ul>
+</li>
+<li><blockquote>
+<p>其他错误：</p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/mapbox/mapbox-gl-native/issues/12084">Command CompileC failed with a nonzero exit code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>整个升级过程中，需要注意的几点：</p>
+<ul>
+<li>及时清理 DerivedData目录，由于整个编译过程中会产生众多的中间文件，非常容易导致编译依赖检测出错。</li>
+<li>更新 carthage framework和使用 pod install 重新编译第三方库。</li>
+<li>New Build System: Xcode 9.4引入了 preview 版本，Xcode 10则是默认开启，开启后，编译速度确认有所提升，但是也会导致一些比较奇怪的编译问题，上面只是记录了笔者遇到的几个问题。</li>
+<li>完成升级后，Xcode 9.4和 Xcode 10 beta 可以共存，笔者使用 Xcode 10 beta，其他开发同事继续使用 Xcode 9。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>开发</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Swift 与 OC 混编小技巧</title>
-    <url>/posts/f60ef46c/</url>
+    <url>/posts/swift-oc-mix</url>
     <content><![CDATA[<p>Swift 与 OC交织在一起缠绵的爱情故事，在接下来的几年里将伴随着 iOS 开发人员，下面我们起来看看他们的恩怨纠葛。</p>
 <span id="more"></span>
 
@@ -61,22 +131,22 @@
 <li><p>在 Swift 中调用 OC 的代码时，需要使用到 bridging header 文件来把 OC 的类暴露给 swift</p>
 </li>
 <li><p>手动添加 bridging header 的步骤，直接把 finder 中的代码文件夹拖拽到 xcode 中:</p>
-<p>[图1-1]<img src="/posts/f60ef46c/1-1.jpg" class=""></p>
+<p>[图1-1]<img src="/posts/swift-oc-mix/1-1.jpg" class=""></p>
 <p>如上图，需要选中“<strong>Create groups</strong>”，这样就可以在 xcode代码浏览目录中添加一个 group</p>
-<p>图1-2 <img src="/posts/f60ef46c/1-2.jpg" class=""></p>
+<p>图1-2 <img src="/posts/swift-oc-mix/1-2.jpg" class=""></p>
 <p>但是，这样的操作不会让 Xcode 自动为我们创建 bridging header 文件，需要手动在 Xcode 中<strong>添加 header 文件</strong>，这里要注意命名规范，必须是“ModuleName-Bridging-Header.h”，然后设置<strong>编译选项</strong></p>
-<p>图1-3<img src="/posts/f60ef46c/1-3.jpg" class=""></p>
-<p>图1-4<img src="/posts/f60ef46c/1-4.jpg" class=""></p>
+<p>图1-3<img src="/posts/swift-oc-mix/1-3.jpg" class=""></p>
+<p>图1-4<img src="/posts/swift-oc-mix/1-4.jpg" class=""></p>
 </li>
 <li><p><strong>自动添加bridging header 的步骤</strong></p>
 <ul>
 <li><p>其实 xcode 可以自动添加桥接头文件，只是需要我们在刚开始的时候，<strong>拖拽一个 OC 的源文件</strong>(包含.h 和.m 文件)，而不是拖拽整个源代码的目录到 xcode 中</p>
-<p>图2-1<img src="/posts/f60ef46c/2-1.jpg" class=""></p>
-<p>图2-2<img src="/posts/f60ef46c/2-2.jpg" class=""></p>
+<p>图2-1<img src="/posts/swift-oc-mix/2-1.jpg" class=""></p>
+<p>图2-2<img src="/posts/swift-oc-mix/2-2.jpg" class=""></p>
 </li>
 <li><p>下面是拖拽 OC 源代码后的项目浏览结构，xcode自动创建一个 ModuleName-Bridging-Header.h 的头文件，并且设置好了编译选项：</p>
-<p>图2-3<img src="/posts/f60ef46c/2-3.jpg" class=""></p>
-<p>图2-4<img src="/posts/f60ef46c/2-4.jpg" class=""></p>
+<p>图2-3<img src="/posts/swift-oc-mix/2-3.jpg" class=""></p>
+<p>图2-4<img src="/posts/swift-oc-mix/2-4.jpg" class=""></p>
 </li>
 </ul>
 </li>
@@ -85,8 +155,8 @@
 <li><p>OC中调用Swift：**</p>
 <ul>
 <li><p>OC来调用 Swift 的时候，需要依赖一个 Swift <strong>默认提供</strong>的“ModuleName-swift.h”文件，这个文件是隐藏的，<strong>不需要也不能够由开发者来提供</strong>，但是可以使用#include包含到 OC 代码中，这个 OC头文件中可以看到 swift 类、结构体、常量的定义。</p>
-<p>图3-1<img src="/posts/f60ef46c/3-1.jpg" class=""></p>
-<p>图3-2<img src="/posts/f60ef46c/3-2.jpg" class=""></p>
+<p>图3-1<img src="/posts/swift-oc-mix/3-1.jpg" class=""></p>
+<p>图3-2<img src="/posts/swift-oc-mix/3-2.jpg" class=""></p>
 </li>
 <li><p>需要注意的是，只有<strong>继承自 NSObject 的swift类才能被 OC 调用</strong>，在 swift.h 文件中是看不到纯 swift类的定义。</p>
 </li>
@@ -134,95 +204,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Xcode问题锦集</title>
-    <url>/posts/98b18fa0/</url>
-    <content><![CDATA[<p>Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。</p>
-<span id="more"></span>
-
-<ol>
-<li><strong>代码提示不起作用</strong>：<br>This fix from apple dev forums works for me. I have had autocomplete issues with Xcode 6.1&#x2F;Yosemite.<ol>
-<li>Quit Xcode.</li>
-<li>Restart the computer (this is to clear any in-memory caches).</li>
-<li>Delete the contents of the DerivedData folder (~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData), precisely run,<br>a) <strong>cd ~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData&#x2F;</strong><br>b) **rm -rf ***</li>
-<li>(Try this if Steps 1-3 dont really work as it rebuilds the cache later on restart which takes time) Delete the contents of folder ~&#x2F;Library&#x2F;Caches&#x2F;com.apple.dt.Xcode, i.e.,<br>a) <strong>cd ~&#x2F;Library&#x2F;Caches&#x2F;com.apple.dt.Xcode</strong><br>b) **rm -rf ***</li>
-<li>Now launch Xcode once more…</li>
-</ol>
-</li>
-<li><strong>Logic Testing Unavailable</strong>：<br>Logic Testing on iOS devices is not supported. You can run logic tests on the Simulator.<br><a href="http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported">http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported</a><br><a href="http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported">Log</a><br>ic test need a framework which has not installed with iOS device. Set a Host Application for Unit Test can resolve this issue: App will run first and Uint Test run.</li>
-<li><strong>$(inherited) in xcode</strong>:<ol>
-<li>inherited值的是xcode设置项的继承关系。</li>
-<li>每个项目都有PROJECT的设置与TARGETS设置，TARGETS一般情况下就是继承自PROJECT</li>
-</ol>
-</li>
-<li><strong>“Xcode 6.3: Can not verify build to install on device”</strong><ol>
-<li>$(inherited) can be used to inherit build settings from the project level to the target level. When you define library or header search paths at the project level you can use $(inherited) in the target build settings to use these search paths in the search paths of the project targets.</li>
-</ol>
-</li>
-<li><strong>Verify Xcode:</strong><ol>
-<li>spctl –assess –verbose &#x2F;Applications&#x2F;Xcode.app</li>
-</ol>
-</li>
-<li><strong>Xcode显示模拟器时，使用的是UUID，而不是系统型号</strong><ol>
-<li><a href="http://stackoverflow.com/questions/26533025/xcode-using-guid-instead-of-ios-version-number-in-simulator-selection">http://stackoverflow.com/questions/26533025/xcode-using-guid-instead-of-ios-version-number-in-simulator-selection</a></li>
-<li>在Xcode-&gt;Devices里，选中重复的模拟器，右键菜单“删除”，即可。</li>
-</ol>
-</li>
-<li><strong>iPhone Simulator没有网络</strong><ol>
-<li><a href="http://stackoverflow.com/questions/13542706/iphone-simulator-cannot-connect-to-internet">http://stackoverflow.com/questions/13542706/iphone-simulator-cannot-connect-to-internet</a></li>
-<li>iOS Simulator (menu, top left) &gt; Reset Content and Settings… fixed it for me. Note this will delete all the apps and associated data you have on the simulator.</li>
-</ol>
-</li>
-<li><strong>ineligible device</strong><ol>
-<li>当前iOS版本比xcode版本高，就会出现这种情况，如iOS 9.1 就不能在Xcode 7上面进行调试，而只能在xcode 7.1进行调试。</li>
-</ol>
-</li>
-<li><strong>更新xcode版本后，出现插件不兼容的问题</strong><ol>
-<li><a href="http://joeshang.github.io/2015/04/10/fix-xcode-upgrade-plugin-invalid/">fix-xcode-upgrade-plugin-invalid</a></li>
-<li>find ~&#x2F;Library&#x2F;Application\ Support&#x2F;Developer&#x2F;Shared&#x2F;Xcode&#x2F;Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add <code>defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID</code></li>
-</ol>
-</li>
-<li><strong>检查代码中的FIXME、TODO、ERROR</strong></li>
-<li><a href="http://krakendev.io/blog/generating-warnings-in-xcode">http://krakendev.io/blog/generating-warnings-in-xcode</a></li>
-<li><strong>Xcode 7.3(Swift 2.2) Release配置出现Crash：</strong><ol>
-<li>在Debug和Staging配置环境下的build没有问题，但是Release编译出来的build会出现crash: unrecognised selector sent to instance</li>
-<li>尝试方法<ol>
-<li>《<a href="http://www.jianshu.com/p/06fcd298ef4c">iOS开发调试技巧</a>》</li>
-</ol>
-</li>
-<li>解决方法：<ol>
-<li>在Swift Compiler -&gt; Code Generation选择,使用<strong>Fast [-O]，而不能使用Fast, Whole Module Optimization</strong></li>
-</ol>
-</li>
-</ol>
-</li>
-<li><strong>查看所有的Simulator：</strong><ol>
-<li>xcrun simctl list devices</li>
-</ol>
-</li>
-<li><strong>Xcode 注释功能不起作用：</strong><ol>
-<li>重启 Xcode,重启 MAC</li>
-<li>运行：sudo usr&#x2F;libexec&#x2F;xpccachectl</li>
-<li>重命名 Xcode，然后打开，恢复后，重新改名为 Xcode</li>
-</ol>
-</li>
-<li><strong>使用 Code Snippet</strong><ol>
-<li><a href="http://blog.csdn.net/wzzvictory/article/details/12163939">Xcode开发技巧之code snippets(代码片段)</a></li>
-<li>&lt;#type#&gt;占位符</li>
-<li>Xcode中的代码片段默认放在下面的目录中：~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;UserData&#x2F;CodeSnippets</li>
-</ol>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>开发</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>git常用手册</title>
-    <url>/posts/1fe13d7d/</url>
+    <url>/posts/git_manual</url>
     <content><![CDATA[<p>Git 是每个开发童鞋必须掌握的工具，本文记录博主日常开发使用 git时，遇到的问题和常用的解决方法：</p>
 <span id="more"></span>
 
@@ -310,8 +293,95 @@
       </tags>
   </entry>
   <entry>
+    <title>Xcode问题锦集</title>
+    <url>/posts/xcode-tips</url>
+    <content><![CDATA[<p>Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。</p>
+<span id="more"></span>
+
+<ol>
+<li><strong>代码提示不起作用</strong>：<br>This fix from apple dev forums works for me. I have had autocomplete issues with Xcode 6.1&#x2F;Yosemite.<ol>
+<li>Quit Xcode.</li>
+<li>Restart the computer (this is to clear any in-memory caches).</li>
+<li>Delete the contents of the DerivedData folder (~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData), precisely run,<br>a) <strong>cd ~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData&#x2F;</strong><br>b) **rm -rf ***</li>
+<li>(Try this if Steps 1-3 dont really work as it rebuilds the cache later on restart which takes time) Delete the contents of folder ~&#x2F;Library&#x2F;Caches&#x2F;com.apple.dt.Xcode, i.e.,<br>a) <strong>cd ~&#x2F;Library&#x2F;Caches&#x2F;com.apple.dt.Xcode</strong><br>b) **rm -rf ***</li>
+<li>Now launch Xcode once more…</li>
+</ol>
+</li>
+<li><strong>Logic Testing Unavailable</strong>：<br>Logic Testing on iOS devices is not supported. You can run logic tests on the Simulator.<br><a href="http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported">http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported</a><br><a href="http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported">Log</a><br>ic test need a framework which has not installed with iOS device. Set a Host Application for Unit Test can resolve this issue: App will run first and Uint Test run.</li>
+<li><strong>$(inherited) in xcode</strong>:<ol>
+<li>inherited值的是xcode设置项的继承关系。</li>
+<li>每个项目都有PROJECT的设置与TARGETS设置，TARGETS一般情况下就是继承自PROJECT</li>
+</ol>
+</li>
+<li><strong>“Xcode 6.3: Can not verify build to install on device”</strong><ol>
+<li>$(inherited) can be used to inherit build settings from the project level to the target level. When you define library or header search paths at the project level you can use $(inherited) in the target build settings to use these search paths in the search paths of the project targets.</li>
+</ol>
+</li>
+<li><strong>Verify Xcode:</strong><ol>
+<li>spctl –assess –verbose &#x2F;Applications&#x2F;Xcode.app</li>
+</ol>
+</li>
+<li><strong>Xcode显示模拟器时，使用的是UUID，而不是系统型号</strong><ol>
+<li><a href="http://stackoverflow.com/questions/26533025/xcode-using-guid-instead-of-ios-version-number-in-simulator-selection">http://stackoverflow.com/questions/26533025/xcode-using-guid-instead-of-ios-version-number-in-simulator-selection</a></li>
+<li>在Xcode-&gt;Devices里，选中重复的模拟器，右键菜单“删除”，即可。</li>
+</ol>
+</li>
+<li><strong>iPhone Simulator没有网络</strong><ol>
+<li><a href="http://stackoverflow.com/questions/13542706/iphone-simulator-cannot-connect-to-internet">http://stackoverflow.com/questions/13542706/iphone-simulator-cannot-connect-to-internet</a></li>
+<li>iOS Simulator (menu, top left) &gt; Reset Content and Settings… fixed it for me. Note this will delete all the apps and associated data you have on the simulator.</li>
+</ol>
+</li>
+<li><strong>ineligible device</strong><ol>
+<li>当前iOS版本比xcode版本高，就会出现这种情况，如iOS 9.1 就不能在Xcode 7上面进行调试，而只能在xcode 7.1进行调试。</li>
+</ol>
+</li>
+<li><strong>更新xcode版本后，出现插件不兼容的问题</strong><ol>
+<li><a href="http://joeshang.github.io/2015/04/10/fix-xcode-upgrade-plugin-invalid/">fix-xcode-upgrade-plugin-invalid</a></li>
+<li>find ~&#x2F;Library&#x2F;Application\ Support&#x2F;Developer&#x2F;Shared&#x2F;Xcode&#x2F;Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add <code>defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID</code></li>
+</ol>
+</li>
+<li><strong>检查代码中的FIXME、TODO、ERROR</strong></li>
+<li><a href="http://krakendev.io/blog/generating-warnings-in-xcode">http://krakendev.io/blog/generating-warnings-in-xcode</a></li>
+<li><strong>Xcode 7.3(Swift 2.2) Release配置出现Crash：</strong><ol>
+<li>在Debug和Staging配置环境下的build没有问题，但是Release编译出来的build会出现crash: unrecognised selector sent to instance</li>
+<li>尝试方法<ol>
+<li>《<a href="http://www.jianshu.com/p/06fcd298ef4c">iOS开发调试技巧</a>》</li>
+</ol>
+</li>
+<li>解决方法：<ol>
+<li>在Swift Compiler -&gt; Code Generation选择,使用<strong>Fast [-O]，而不能使用Fast, Whole Module Optimization</strong></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>查看所有的Simulator：</strong><ol>
+<li>xcrun simctl list devices</li>
+</ol>
+</li>
+<li><strong>Xcode 注释功能不起作用：</strong><ol>
+<li>重启 Xcode,重启 MAC</li>
+<li>运行：sudo usr&#x2F;libexec&#x2F;xpccachectl</li>
+<li>重命名 Xcode，然后打开，恢复后，重新改名为 Xcode</li>
+</ol>
+</li>
+<li><strong>使用 Code Snippet</strong><ol>
+<li><a href="http://blog.csdn.net/wzzvictory/article/details/12163939">Xcode开发技巧之code snippets(代码片段)</a></li>
+<li>&lt;#type#&gt;占位符</li>
+<li>Xcode中的代码片段默认放在下面的目录中：~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;UserData&#x2F;CodeSnippets</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>开发</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>iOS ReactNative私有库指南</title>
-    <url>/posts/4fdd55/</url>
+    <url>/posts/react-native-private-repo</url>
     <content><![CDATA[<h1 id="创建RN私有库"><a href="#创建RN私有库" class="headerlink" title="创建RN私有库"></a>创建RN私有库</h1><p>为了加速RN的下载和方便集成，我把RN(0.56.0)做成私有pod放到了gitlab的私有源中，参考《<a href="http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/">使用Cocoapods创建私有podspec</a>》、《<a href="https://imfong.com/post/Private-Pods-Add-react-native#yoga">私有Pods集成react-native库</a>》。</p>
 <span id="more"></span>
 
@@ -341,7 +411,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pod spec lint yoga.podspec.json --no-clean --verbose --allow-warnings</span><br><span class="line">pod repo push YOUR_SPECS_REPO yoga.podspec.json --allow-warnings</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>通过上面的方法可以吧RN和yoga添加到私有源中，但是我们pod install的时候，还是会报错</p>
-<img src="/posts/4fdd55/Folly-error.png" class="">
+<img src="/posts/react-native-private-repo/Folly-error.png" class="">
 
 <ul>
 <li><p>Folly在RN中被CxxBridge、jschelpers等subspecs依赖，Folly.podspec文件本身在RN源码目录third-party-podspecs中，需要把Folly.podspec也上传到私有源中，否则pod install会出现错误</p>
@@ -361,7 +431,7 @@
 
 <p>通过–dev参数(true&#x2F;false)控制生成debug&#x2F;release包</p>
 <h1 id="如何维护RN版本"><a href="#如何维护RN版本" class="headerlink" title="如何维护RN版本"></a>如何维护RN版本</h1><p>同步Github上的ReactNative源码，在sourceTree中，添加remote:</p>
-<img src="/posts/4fdd55/sourcetree.png" class="">
+<img src="/posts/react-native-private-repo/sourcetree.png" class="">
 
 <p>切换到当前的分支(0.57-stable)，可以从github上面拉取最新代码（使用rebase）<br>更新podspec.json</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pod ipc spec React.podspec &gt;&gt; React.podspec.json</span><br><span class="line"><span class="built_in">cd</span> ReactCommon/yoga</span><br><span class="line">pod ipc spec yoga.podspec &gt;&gt; yoga.podspec.json</span><br></pre></td></tr></table></figure>
@@ -398,7 +468,7 @@
 </ul>
 <h2 id="RN-0-57-3-问题："><a href="#RN-0-57-3-问题：" class="headerlink" title="RN 0.57.3 问题："></a><strong>RN 0.57.3 问题：</strong></h2><ul>
 <li><p><strong>Unable to resolve module <code>schedule/tracking</code></strong></p>
-<img src="/posts/4fdd55/schedule-error.png" class=""></li>
+<img src="/posts/react-native-private-repo/schedule-error.png" class=""></li>
 </ul>
 <h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a><strong>参考资料：</strong></h1><ul>
 <li><p><a href="https://github.com/facebook/react-native/issues/19892">swift cocoapods Could not build Objective-C module ‘React’</a></p>
@@ -425,78 +495,40 @@
       </tags>
   </entry>
   <entry>
-    <title>Xcode 10 beta 版本迁移指南</title>
-    <url>/posts/630942d2/</url>
-    <content><![CDATA[<p>今天的主角就是开发者接触最多的 Xcode 10 beta，详细内容可以参考 <a href="https://developer.apple.com/videos/play/wwdc2018/408/">WWDC 18 Session</a> ，同时可以看下 Xcode 10 的 <a href="https://developerbetas.com/wp-content/uploads/2018/06/Xcode_10_Beta_Release_Notes.pdf">release note</a>, 官方文档永远是学习新内容的第一手资料。</p>
-<p>Xcode 10 beta 在 WWDC 18后就对<a href="https://developer.apple.com/xcode/">开发者开放下载</a>了，WWDC 18的新内容不多，Apple 今年把主要精力放在 Bugfix和性能优化上面，还这几年欠下来的技术债，关于 iOS 11的诟病一直不绝入耳，不得不说，Apple 今年的决策还是比较明智的。</p>
+    <title>《人生战术本》- 里弗斯教练帮助他人“成为更好的人”</title>
+    <url>/posts/the-palybook</url>
+    <content><![CDATA[<p>本文内容节选自 Netflix 20 年推出的纪录片《人生战术本》（The Playbook）第一季第一集，主人公是拥有 22 年 NBA 执教经验的主教练道格·里弗斯。</p>
 <span id="more"></span>
 
-<p>我们项目现在是 OC 和 Swift 混编，Xcode 版本是9.4.1，swift 4，平时用公司的 iMac Late 2013编译感觉有点吃力，用自己的 MBP 14则编译速度足够去喝杯咖啡，享受人生。</p>
-<p>我尝试把自己的主力机（iPhone 7）升级到 iOS 12后，内心抑制不住冲动把14年的 iPhone 6也升级下 iOS 12试试，重新体会到了之前 iOS 的那种流畅，真的是老泪纵横。平时 iPhone 6只能沦为测试手机，跑跑单元测试啥的。</p>
-<p>升级了 iOS 12后，Xcode 9已经不能进行调试了，本着生命不息，折腾不止的精神，顺带体验了一下 Xcode 10的各种新功能，总结了一下升级 Xcode 10过程中踩的坑。</p>
-<ul>
-<li><p>Xcode 10 beta 版本迁移指南：</p>
-<ul>
-<li><blockquote>
-<p><strong>指定 swift版本</strong>：4.1，Xcode 10使用的是 swift 4.2版本，而 Xcode 9.4则使用 Swift 4.1,基本改动不大，为了兼容 Xcode 9，这里统一使用 Swift 4.1。</p>
-</blockquote>
-<ul>
-<li><p>podfile设置如下:</p>
-<ul>
-<li>&#96;&#96;&#96;<br>config.build_settings[‘SWIFT_VERSION’] &#x3D; ‘4.1’<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    ​</span><br><span class="line"></span><br><span class="line">- xcode 项目设置：</span><br><span class="line"></span><br><span class="line">  - **SWIFT_VERSION**为 swift 4</span><br><span class="line"></span><br><span class="line">- xcode command tool设置: 使用 Xcode 10</span><br><span class="line"></span><br><span class="line">  - sudo xcode-select --switch /Applications/Xcode-beta.app</span><br><span class="line"></span><br><span class="line">  - xcodebuild -version可以查看</span><br><span class="line"></span><br><span class="line">    - ```</span><br><span class="line">      - Xcode 10.0</span><br><span class="line">      - Build version 10L176w</span><br></pre></td></tr></table></figure>
+<img src="/posts/the-palybook/the-playbook.png" class="">
 
-  ​</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><blockquote>
-<p>更新部分 pod 库：</p>
-</blockquote>
-<ul>
-<li>RACObjcBridge&#x2F;RACObjc升级到3.1.0，之前是3.0.0版本，swift 版本导致需要升级。</li>
-<li>删除 Tencent SDK pod spec 中的s.resource_bundle字段，参见 xcode 10 beta release note。多个相同的输入文件导致冲突，这个也是 xcode 10新增的功能，为了加快编译速度，对编译依赖检测得很严格。</li>
-<li>使用 Carthage 的话，则需要指定手动指定 Swift 版本：<ul>
-<li>carthage update –platform iOS –toolchain com.apple.dt.toolchain.Swift_4_1 –no-use-binaries REPO_NAME</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><blockquote>
-<p>更新 swift lint: disable identifier_name</p>
-</blockquote>
-<ul>
-<li>参见<a href="https://github.com/realm/SwiftLint/issues/2231">False positive for rule identifier_name in Xcode 10 beta</a></li>
-</ul>
-</li>
-<li><blockquote>
-<p>其他错误：</p>
-</blockquote>
-<ul>
-<li><a href="https://github.com/mapbox/mapbox-gl-native/issues/12084">Command CompileC failed with a nonzero exit code</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>整个升级过程中，需要注意的几点：</p>
-<ul>
-<li>及时清理 DerivedData目录，由于整个编译过程中会产生众多的中间文件，非常容易导致编译依赖检测出错。</li>
-<li>更新 carthage framework和使用 pod install 重新编译第三方库。</li>
-<li>New Build System: Xcode 9.4引入了 preview 版本，Xcode 10则是默认开启，开启后，编译速度确认有所提升，但是也会导致一些比较奇怪的编译问题，上面只是记录了笔者遇到的几个问题。</li>
-<li>完成升级后，Xcode 9.4和 Xcode 10 beta 可以共存，笔者使用 Xcode 10 beta，其他开发同事继续使用 Xcode 9。</li>
-</ul>
+<p>“我是里弗斯，我是人，我也会犯错”，开场白非常的平易近人，让人倍感亲切~</p>
+<p><strong>做你自己喜欢的事情，你才不会觉得累。</strong></p>
+<p>几十年来，里弗斯起床到篮球场去训练，但是他不喜欢用“训练”这个词，当被人问到去做什么的时候，他总是喜欢说去“打篮球”。里弗斯小时候被问到成长以后想变成一个什么样的人，第一次他在黑板上面写到“成为一名 NBA球员”但是被老师给擦掉了，然后对他说道“降低预期，现实一点”，于是当里弗斯第二次在黑板上面写到“我想成为一名 NBA 球员”，老师让他直接回家请家长了“那你收拾好自己的东西回家想想吧”。</p>
+<p>回到家里，里弗斯的爸爸这样对他说“你在学校没有好好听老师讲课，你总是把事情搞砸、喜欢胡闹，你以后当不了职业球员”，最终里弗斯不仅成为了 NBA球员，到目前为止也在 NBA执教了 20 多年，这一切出自于他对篮球的喜爱和坚持吧</p>
+<p><strong>凯尔特人第十八冠的故事 -不会熄灭的灯和“乌班图”的生活方式</strong></p>
+<p>他和队员都在一起践行“乌班图”的生活方式，在团队中相信他人、成就他人，最终形成一个“共同体”。</p>
+<p>在比赛前夕里弗斯的父亲去世了，他离开团队飞回老家参加父亲的葬礼，当里弗斯和家人在电视机前面观看比赛的时候，中场休息时间收到了加内特打过来的电话，加内特说道“当你难过的时候，我们也感到很难过”，里弗斯谈到此情此景的时候都会感到很激动。那场比赛在的最后 7 秒钟，皮尔斯把球传给了雷·阿伦，由雷·阿伦投入了制胜三分最终帮助球队完成逆转，我们通过电视转播能够看到凯尔特人逆转比赛、看到赢得胜利之后队员们欢快的庆祝，但是背后的故事也挺让人感动。</p>
+<p>有一场比赛胜利之后，记者问加内特“今晚你非常注重防守，你觉得自己在防守方面有哪些地方做的比较好？”，“不是我，而是我们。我在我应该在的位置，而我的队友们也在他们应该在的位置（这样才能不失位）。我们需要靠这种积极的补位来赢得比赛”，加内特给出了这样的回答。</p>
+<p>有一天里弗斯在球馆上方的 17 块总冠军旗帜旁边打了一个灯光，寓意“不会熄灭的灯”，当天训练介绍之后他询问球员们今天球馆有什么不同的地方，只有托尼·阿伦发现在球馆上方多出了一块光。“是的，灯不会熄灭，我们的焦点就在那里，我们比赛就是为了这个”，“每天、每次练习，他们都看到那盏灯照着墙”，激发队员们“我们是波士顿凯尔特人队，我们就是要赢”。</p>
+<p>里弗斯谈到自己的偶像是拳王阿里，“直觉上大家会觉得冠军是不被击打的，但是事实其实是相反的，冠军会被一次次的击打，就看你能挨多少次打，同时还要向前进，直到取得胜利”。</p>
+<p>一个好的教练，需要让自己的队员相信自己能够赢得下一场比赛。里弗斯小的时候的目标就是击败自己的哥哥，哥哥比他健壮、力量更强，从最开始32：0到 32：4，然后到 32：8，通过自己持续练习、一步步成长起来最终击败了哥哥。</p>
+<p>一开始里弗斯认为自己作为主教练的职责是带领团队赢得一场场的胜利，后面能够通过指导队员、看着他们逐渐成熟起来、“打出来”也是一种喜悦或者说幸福。不过，他也有收到过一些忠告“不要和团队成员走得太近了，因为总有人会让你失望”。但是里弗斯认为教练的职责就是指导他们，让他们成为更好的球员、更好的人、更好的队友、变得坚强、有热情，学会面对赢输。</p>
+<p>19 年CBA的 官方纪录片《敢梦敢当》里面，看到了杜峰作为球队主教练的成长，也看到了他不为人知的一面：一个有血有肉的人、体贴他人、关注成长、激励队员。在竞技体育里面，一个团队要想在顶级舞台上面想要夺得冠军，背后一定是付出了巨大的努力，除了日复一日的练习，研究对手的强弱点，还需要一名优秀的教练，给大家带来前进的方向，激励团队里面的每一个人成为更好的自己。 </p>
+<hr>
+<p>《人生战术本》分享了传奇教练在运动和生活中取得成功所遵循的规则。通过感人的深度访谈，每位教练都透露了他们个人生活和职业生涯中的关键时刻，这些时刻最终帮助他们形成了自己的教练哲学。</p>
+<p>B站链接：<a href="https://www.bilibili.com/video/BV1WA411J76h">https://www.bilibili.com/video/BV1WA411J76h</a></p>
 ]]></content>
       <categories>
-        <category>开发</category>
+        <category>分享</category>
       </categories>
       <tags>
-        <tag>iOS</tag>
+        <tag>分享</tag>
       </tags>
   </entry>
   <entry>
     <title>iOS多线程开发笔记</title>
-    <url>/posts/81762ee9/</url>
+    <url>/posts/ios-thread-tips</url>
     <content><![CDATA[<p>[TOC]</p>
 <h2 id="GCD、NSOperation和多线程编程推荐阅读"><a href="#GCD、NSOperation和多线程编程推荐阅读" class="headerlink" title="GCD、NSOperation和多线程编程推荐阅读"></a>GCD、NSOperation和多线程编程推荐阅读</h2><p><strong>五星：</strong></p>
 <ol>
@@ -706,46 +738,8 @@
       </tags>
   </entry>
   <entry>
-    <title>iOS 网络安全之SSL Pinning</title>
-    <url>/posts/4875e776/</url>
-    <content><![CDATA[<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a><strong>前言：</strong></h2><p>Apple要求所有的 App 在2017年1月必须强制使用 ATS(Application Transport Security)，即 App 必须使用 HTTPS，而不能使用 HTTP 网络协议。这是Apple 在 app 安全领域做出的一个重大的举动，HTTP 由于使用明文进行传输，存在很大的安全隐患，网络请求容易被拦截和篡改。HTTPS 在安全性上相较于 HTTP 有很大的提升，依然存在一些问题：如 <a href="http://www.secbox.cn/hacker/7846.html">MITT</a>(Man-In-The-Middle)中间人攻击和2014年 SSL 的<a href="http://www.ithome.com/html/soft/80224.htm">心脏出血漏洞</a>。网络安全的问题看似离我们很远，其实就发生在我们身边，对我们的日常生活也会有很大的影响，特别是在移动互联网的浪潮下，人手一台手机的情况下，大家普遍使用支付宝和微信支付来进行支付，能够联网的智能家居产品越来越多的走入到普通家庭中，网络安全是一个需要引起重视的问题。而在网络传输过程中起到安全保障作用的，就是我们今天要讲的 SSL&#x2F;TLS，当然主要是集中在 iOS 客户端。</p>
-<span id="more"></span>
-
-<h2 id="0x00-什么是-SSL-x2F-TLS"><a href="#0x00-什么是-SSL-x2F-TLS" class="headerlink" title="0x00 - 什么是 SSL&#x2F;TLS"></a><strong>0x00 - 什么是 SSL&#x2F;TLS</strong></h2><p>SSL(Secure Sockets Layer 安全套接层)及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。SSL为Netscape所研发，用以保障在Internet上数据传输的安全，利用数据加密(Encryption)的技术，可确保数据在网络上的传输过程中不会被截取及窃听。SSL协议位于TCP&#x2F;IP协议与各种应用层协议之间，为数据通讯提供安全支持。 <strong>— 摘自《互动百科》</strong></p>
-<p>从上面的定义可以看出 SSL 是一个加密层，主要用于信息加密、验证。</p>
-<p>SSL 主要提供下面三个服务：</p>
-<ol>
-<li><strong>认证用户和服务器</strong>，确保数据发送到正确的客户机和服务器；</li>
-<li><strong>加密数据</strong>以防止数据中途被窃听；</li>
-<li>维护<strong>数据的完整性</strong>，确保数据在传输过程中不被改变。</li>
-</ol>
-<h2 id="0x01-什么是-HTTPS"><a href="#0x01-什么是-HTTPS" class="headerlink" title="0x01 - 什么是 HTTPS"></a><strong>0x01 - 什么是 HTTPS</strong></h2><p>HTTPS（Hypertext Transfer Protocol Secure 安全超文本传输协议） 是由 Netscape 开发并内置于其浏览器中，用于对数据进行压缩和解压操作，并返回网络上传送回的结果，HTTPS 实际上运用了 Netscape 的完全套接字层（SSL）作为 HTTP 应用层的子层。</p>
-<h2 id="0x02-SSL-Pinning-是什么"><a href="#0x02-SSL-Pinning-是什么" class="headerlink" title="0x02 - SSL Pinning 是什么"></a><strong>0x02 - SSL Pinning 是什么</strong></h2><p>当前主流的各大网站 Google、Facebook 等都使用 HTTPS 来保障数据的安全性和私密性，但是在 HTTPS 协议也存在一定的问题，其中广为人知是 MIIT（中间人工具），攻击者在客户端和服务器中进行伪装和欺骗，从而获取敏感信息。</p>
-<p>SSL Pinning 是一个业界预防 MIIT 攻击的解决方案，其主要思想是在客户端绑定（Pin）服务器SSL 证书的核心信息，这个解决方案代价小，易于实施，因此被普遍使用。</p>
-<h2 id="0x03-在-iOS-中如何使用-SSL-Pinning"><a href="#0x03-在-iOS-中如何使用-SSL-Pinning" class="headerlink" title="0x03 - 在 iOS 中如何使用 SSL Pinning"></a><strong>0x03 - 在 iOS 中如何使用 SSL Pinning</strong></h2><p>iOS 中的 SSL Pinning 主要有三种形式：</p>
-<ol>
-<li>直接使用 NSURLSession</li>
-<li>配合AFNetworking 使用</li>
-<li>配合 Alamofire 使用</li>
-</ol>
-<p>NSURLSession 是 iOS 系统提供的类，AFNetworking 和 Alamofire 识别是 ObjC和 Swift 编写的第三方库，具体实施步骤，可以参考<a href="https://infinum.co/the-capsized-eight/how-to-make-your-ios-apps-more-secure-with-ssl-pinning">这篇 blog</a>。</p>
-<h2 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a><strong>参考文章：</strong></h2><ul>
-<li><a href="http://www.baike.com/wiki/ssl&prd=button_doc_entry">SSL - 互动百科</a></li>
-<li><a href="http://baike.baidu.com/item/ssl">SSL - 百度百科</a></li>
-<li><a href="https://infinum.co/the-capsized-eight/how-to-make-your-ios-apps-more-secure-with-ssl-pinning">How to make your iOS apps more secure with SSL pinning</a></li>
-<li><a href="http://www.secbox.cn/hacker/7846.html">iOS环境下的中间人攻击风险浅析</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>开发</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用hexo+github page搭建个人博客</title>
-    <url>/posts/e234e595/</url>
+    <url>/posts/hexo_build</url>
     <content><![CDATA[<p>我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。</p>
 <p>2018年2月18日更新：域名绑定和https 访问问题。</p>
 <span id="more"></span>
@@ -879,35 +873,41 @@
       </tags>
   </entry>
   <entry>
-    <title>《人生战术本》- 里弗斯教练帮助他人“成为更好的人”</title>
-    <url>/posts/fb92daee/</url>
-    <content><![CDATA[<p>本文内容节选自 Netflix 20 年推出的纪录片《人生战术本》（The Playbook）第一季第一集，主人公是拥有 22 年 NBA 执教经验的主教练道格·里弗斯。</p>
+    <title>iOS 网络安全之SSL Pinning</title>
+    <url>/posts/ios-ssl-pinning</url>
+    <content><![CDATA[<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a><strong>前言：</strong></h2><p>Apple要求所有的 App 在2017年1月必须强制使用 ATS(Application Transport Security)，即 App 必须使用 HTTPS，而不能使用 HTTP 网络协议。这是Apple 在 app 安全领域做出的一个重大的举动，HTTP 由于使用明文进行传输，存在很大的安全隐患，网络请求容易被拦截和篡改。HTTPS 在安全性上相较于 HTTP 有很大的提升，依然存在一些问题：如 <a href="http://www.secbox.cn/hacker/7846.html">MITT</a>(Man-In-The-Middle)中间人攻击和2014年 SSL 的<a href="http://www.ithome.com/html/soft/80224.htm">心脏出血漏洞</a>。网络安全的问题看似离我们很远，其实就发生在我们身边，对我们的日常生活也会有很大的影响，特别是在移动互联网的浪潮下，人手一台手机的情况下，大家普遍使用支付宝和微信支付来进行支付，能够联网的智能家居产品越来越多的走入到普通家庭中，网络安全是一个需要引起重视的问题。而在网络传输过程中起到安全保障作用的，就是我们今天要讲的 SSL&#x2F;TLS，当然主要是集中在 iOS 客户端。</p>
 <span id="more"></span>
 
-<img src="/posts/fb92daee/the-playbook.png" class="">
-
-<p>“我是里弗斯，我是人，我也会犯错”，开场白非常的平易近人，让人倍感亲切~</p>
-<p><strong>做你自己喜欢的事情，你才不会觉得累。</strong></p>
-<p>几十年来，里弗斯起床到篮球场去训练，但是他不喜欢用“训练”这个词，当被人问到去做什么的时候，他总是喜欢说去“打篮球”。里弗斯小时候被问到成长以后想变成一个什么样的人，第一次他在黑板上面写到“成为一名 NBA球员”但是被老师给擦掉了，然后对他说道“降低预期，现实一点”，于是当里弗斯第二次在黑板上面写到“我想成为一名 NBA 球员”，老师让他直接回家请家长了“那你收拾好自己的东西回家想想吧”。</p>
-<p>回到家里，里弗斯的爸爸这样对他说“你在学校没有好好听老师讲课，你总是把事情搞砸、喜欢胡闹，你以后当不了职业球员”，最终里弗斯不仅成为了 NBA球员，到目前为止也在 NBA执教了 20 多年，这一切出自于他对篮球的喜爱和坚持吧</p>
-<p><strong>凯尔特人第十八冠的故事 -不会熄灭的灯和“乌班图”的生活方式</strong></p>
-<p>他和队员都在一起践行“乌班图”的生活方式，在团队中相信他人、成就他人，最终形成一个“共同体”。</p>
-<p>在比赛前夕里弗斯的父亲去世了，他离开团队飞回老家参加父亲的葬礼，当里弗斯和家人在电视机前面观看比赛的时候，中场休息时间收到了加内特打过来的电话，加内特说道“当你难过的时候，我们也感到很难过”，里弗斯谈到此情此景的时候都会感到很激动。那场比赛在的最后 7 秒钟，皮尔斯把球传给了雷·阿伦，由雷·阿伦投入了制胜三分最终帮助球队完成逆转，我们通过电视转播能够看到凯尔特人逆转比赛、看到赢得胜利之后队员们欢快的庆祝，但是背后的故事也挺让人感动。</p>
-<p>有一场比赛胜利之后，记者问加内特“今晚你非常注重防守，你觉得自己在防守方面有哪些地方做的比较好？”，“不是我，而是我们。我在我应该在的位置，而我的队友们也在他们应该在的位置（这样才能不失位）。我们需要靠这种积极的补位来赢得比赛”，加内特给出了这样的回答。</p>
-<p>有一天里弗斯在球馆上方的 17 块总冠军旗帜旁边打了一个灯光，寓意“不会熄灭的灯”，当天训练介绍之后他询问球员们今天球馆有什么不同的地方，只有托尼·阿伦发现在球馆上方多出了一块光。“是的，灯不会熄灭，我们的焦点就在那里，我们比赛就是为了这个”，“每天、每次练习，他们都看到那盏灯照着墙”，激发队员们“我们是波士顿凯尔特人队，我们就是要赢”。</p>
-<p>里弗斯谈到自己的偶像是拳王阿里，“直觉上大家会觉得冠军是不被击打的，但是事实其实是相反的，冠军会被一次次的击打，就看你能挨多少次打，同时还要向前进，直到取得胜利”。</p>
-<p>一个好的教练，需要让自己的队员相信自己能够赢得下一场比赛。里弗斯小的时候的目标就是击败自己的哥哥，哥哥比他健壮、力量更强，从最开始32：0到 32：4，然后到 32：8，通过自己持续练习、一步步成长起来最终击败了哥哥。</p>
-<p>一开始里弗斯认为自己作为主教练的职责是带领团队赢得一场场的胜利，后面能够通过指导队员、看着他们逐渐成熟起来、“打出来”也是一种喜悦或者说幸福。不过，他也有收到过一些忠告“不要和团队成员走得太近了，因为总有人会让你失望”。但是里弗斯认为教练的职责就是指导他们，让他们成为更好的球员、更好的人、更好的队友、变得坚强、有热情，学会面对赢输。</p>
-<p>19 年CBA的 官方纪录片《敢梦敢当》里面，看到了杜峰作为球队主教练的成长，也看到了他不为人知的一面：一个有血有肉的人、体贴他人、关注成长、激励队员。在竞技体育里面，一个团队要想在顶级舞台上面想要夺得冠军，背后一定是付出了巨大的努力，除了日复一日的练习，研究对手的强弱点，还需要一名优秀的教练，给大家带来前进的方向，激励团队里面的每一个人成为更好的自己。 </p>
-<hr>
-<p>《人生战术本》分享了传奇教练在运动和生活中取得成功所遵循的规则。通过感人的深度访谈，每位教练都透露了他们个人生活和职业生涯中的关键时刻，这些时刻最终帮助他们形成了自己的教练哲学。</p>
-<p>B站链接：<a href="https://www.bilibili.com/video/BV1WA411J76h">https://www.bilibili.com/video/BV1WA411J76h</a></p>
+<h2 id="0x00-什么是-SSL-x2F-TLS"><a href="#0x00-什么是-SSL-x2F-TLS" class="headerlink" title="0x00 - 什么是 SSL&#x2F;TLS"></a><strong>0x00 - 什么是 SSL&#x2F;TLS</strong></h2><p>SSL(Secure Sockets Layer 安全套接层)及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。SSL为Netscape所研发，用以保障在Internet上数据传输的安全，利用数据加密(Encryption)的技术，可确保数据在网络上的传输过程中不会被截取及窃听。SSL协议位于TCP&#x2F;IP协议与各种应用层协议之间，为数据通讯提供安全支持。 <strong>— 摘自《互动百科》</strong></p>
+<p>从上面的定义可以看出 SSL 是一个加密层，主要用于信息加密、验证。</p>
+<p>SSL 主要提供下面三个服务：</p>
+<ol>
+<li><strong>认证用户和服务器</strong>，确保数据发送到正确的客户机和服务器；</li>
+<li><strong>加密数据</strong>以防止数据中途被窃听；</li>
+<li>维护<strong>数据的完整性</strong>，确保数据在传输过程中不被改变。</li>
+</ol>
+<h2 id="0x01-什么是-HTTPS"><a href="#0x01-什么是-HTTPS" class="headerlink" title="0x01 - 什么是 HTTPS"></a><strong>0x01 - 什么是 HTTPS</strong></h2><p>HTTPS（Hypertext Transfer Protocol Secure 安全超文本传输协议） 是由 Netscape 开发并内置于其浏览器中，用于对数据进行压缩和解压操作，并返回网络上传送回的结果，HTTPS 实际上运用了 Netscape 的完全套接字层（SSL）作为 HTTP 应用层的子层。</p>
+<h2 id="0x02-SSL-Pinning-是什么"><a href="#0x02-SSL-Pinning-是什么" class="headerlink" title="0x02 - SSL Pinning 是什么"></a><strong>0x02 - SSL Pinning 是什么</strong></h2><p>当前主流的各大网站 Google、Facebook 等都使用 HTTPS 来保障数据的安全性和私密性，但是在 HTTPS 协议也存在一定的问题，其中广为人知是 MIIT（中间人工具），攻击者在客户端和服务器中进行伪装和欺骗，从而获取敏感信息。</p>
+<p>SSL Pinning 是一个业界预防 MIIT 攻击的解决方案，其主要思想是在客户端绑定（Pin）服务器SSL 证书的核心信息，这个解决方案代价小，易于实施，因此被普遍使用。</p>
+<h2 id="0x03-在-iOS-中如何使用-SSL-Pinning"><a href="#0x03-在-iOS-中如何使用-SSL-Pinning" class="headerlink" title="0x03 - 在 iOS 中如何使用 SSL Pinning"></a><strong>0x03 - 在 iOS 中如何使用 SSL Pinning</strong></h2><p>iOS 中的 SSL Pinning 主要有三种形式：</p>
+<ol>
+<li>直接使用 NSURLSession</li>
+<li>配合AFNetworking 使用</li>
+<li>配合 Alamofire 使用</li>
+</ol>
+<p>NSURLSession 是 iOS 系统提供的类，AFNetworking 和 Alamofire 识别是 ObjC和 Swift 编写的第三方库，具体实施步骤，可以参考<a href="https://infinum.co/the-capsized-eight/how-to-make-your-ios-apps-more-secure-with-ssl-pinning">这篇 blog</a>。</p>
+<h2 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a><strong>参考文章：</strong></h2><ul>
+<li><a href="http://www.baike.com/wiki/ssl&prd=button_doc_entry">SSL - 互动百科</a></li>
+<li><a href="http://baike.baidu.com/item/ssl">SSL - 百度百科</a></li>
+<li><a href="https://infinum.co/the-capsized-eight/how-to-make-your-ios-apps-more-secure-with-ssl-pinning">How to make your iOS apps more secure with SSL pinning</a></li>
+<li><a href="http://www.secbox.cn/hacker/7846.html">iOS环境下的中间人攻击风险浅析</a></li>
+</ul>
 ]]></content>
       <categories>
-        <category>分享</category>
+        <category>开发</category>
       </categories>
       <tags>
-        <tag>分享</tag>
+        <tag>iOS</tag>
       </tags>
   </entry>
 </search>

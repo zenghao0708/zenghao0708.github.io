@@ -2,7 +2,7 @@
 title: 使用hexo+github page搭建个人博客
 tags:
   - hexo
-abbrlink: e234e595
+abbrlink: hexo_build
 date: 2016-11-12 14:36:16
 ---
 

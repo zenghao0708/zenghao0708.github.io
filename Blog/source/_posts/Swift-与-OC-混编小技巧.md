@@ -2,7 +2,7 @@
 title: Swift 与 OC 混编小技巧
 tags: iOS
 categories: 开发
-abbrlink: f60ef46c
+abbrlink: swift-oc-mix
 date: 2017-01-07 22:43:35
 ---
 
