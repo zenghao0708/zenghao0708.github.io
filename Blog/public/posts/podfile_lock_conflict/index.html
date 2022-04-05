@@ -20,28 +20,34 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"coolzeng.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。 2018年2月18日更新：域名绑定和https 访问问题。">
+    <meta name="description" content="故事的开端是这样的：我们的项目中使用了FBRetainCycleDetector这个第三方库来检查内存泄露，在升级到某一个版本后，出现部分同事的 podfile.lock中FBRetainCycleDetector的checksum 值不一致，每次都需要运行 pod install 来更新 podfile.lock,然后git push 到仓库。其他的同事又出现 podfile.lock 冲突，需">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用hexo+github page搭建个人博客">
-<meta property="og:url" content="https://coolzeng.com/posts/hexo_build">
+<meta property="og:title" content="Cocoapods采坑记 - Podfile.lock 冲突问题">
+<meta property="og:url" content="https://coolzeng.com/posts/podfile_lock_conflict/index.html">
 <meta property="og:site_name" content="Zenghao0708的小站">
-<meta property="og:description" content="我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。 2018年2月18日更新：域名绑定和https 访问问题。">
+<meta property="og:description" content="故事的开端是这样的：我们的项目中使用了FBRetainCycleDetector这个第三方库来检查内存泄露，在升级到某一个版本后，出现部分同事的 podfile.lock中FBRetainCycleDetector的checksum 值不一致，每次都需要运行 pod install 来更新 podfile.lock,然后git push 到仓库。其他的同事又出现 podfile.lock 冲突，需">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2016-11-12T06:36:16.000Z">
-<meta property="article:modified_time" content="2022-04-05T07:09:14.145Z">
+<meta property="og:image" content="https://coolzeng.com/posts/podfile_lock_conflict/podfile.lock%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="https://coolzeng.com/posts/podfile_lock_conflict/xcode%E7%BC%96%E8%AF%91%E8%84%9A%E6%9C%AC.png">
+<meta property="og:image" content="https://coolzeng.com/posts/podfile_lock_conflict/pod%20check%E5%A4%B1%E8%B4%A5.png">
+<meta property="og:image" content="https://coolzeng.com/posts/podfile_lock_conflict/PR%20%E4%BB%A3%E7%A0%81.png">
+<meta property="article:published_time" content="2018-01-10T14:00:43.000Z">
+<meta property="article:modified_time" content="2022-04-05T08:21:41.198Z">
 <meta property="article:author" content="zenghao0708">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="cocoapods">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://coolzeng.com/posts/podfile_lock_conflict/podfile.lock%E5%86%B2%E7%AA%81.png">
 
 
-<link rel="canonical" href="https://coolzeng.com/posts/hexo_build">
+<link rel="canonical" href="https://coolzeng.com/posts/podfile_lock_conflict/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coolzeng.com/posts/hexo_build","path":"posts/hexo_build","title":"使用hexo+github page搭建个人博客"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coolzeng.com/posts/podfile_lock_conflict/","path":"posts/podfile_lock_conflict/","title":"Cocoapods采坑记 - Podfile.lock 冲突问题"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>使用hexo+github page搭建个人博客 | Zenghao0708的小站</title>
+<title>Cocoapods采坑记 - Podfile.lock 冲突问题 | Zenghao0708的小站</title>
   
 
 
@@ -144,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8Bgithub-page%E5%92%8Chexo%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">首先简单介绍下github page和hexo：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%94-2018%E5%B9%B42%E6%9C%8818%E6%97%A5%E6%9B%B4%E6%96%B0%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">— 2018年2月18日更新：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">绑定域名：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">HTTPS问题：</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E4%BA%8B%E7%9A%84%E5%BC%80%E7%AB%AF%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">故事的开端是这样的：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Podfile-lock-%E4%B8%8D%E4%B8%80%E8%87%B4%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">Podfile.lock 不一致的原因：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%98%AF%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%9A%84%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">问题是如何解决的：</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -214,7 +220,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coolzeng.com/posts/hexo_build">
+    <link itemprop="mainEntityOfPage" href="https://coolzeng.com/posts/podfile_lock_conflict/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -227,12 +233,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="使用hexo+github page搭建个人博客 | Zenghao0708的小站">
+      <meta itemprop="name" content="Cocoapods采坑记 - Podfile.lock 冲突问题 | Zenghao0708的小站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用hexo+github page搭建个人博客
+          Cocoapods采坑记 - Podfile.lock 冲突问题
         </h1>
 
         <div class="post-meta-container">
@@ -243,18 +249,27 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2016-11-12 14:36:16" itemprop="dateCreated datePublished" datetime="2016-11-12T14:36:16+08:00">2016-11-12</time>
+      <time title="创建时间：2018-01-10 22:00:43" itemprop="dateCreated datePublished" datetime="2018-01-10T22:00:43+08:00">2018-01-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-05 15:09:14" itemprop="dateModified" datetime="2022-04-05T15:09:14+08:00">2022-04-05</time>
+      <time title="修改时间：2022-04-05 16:21:41" itemprop="dateModified" datetime="2022-04-05T16:21:41+08:00">2022-04-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">开发</span></a>
+        </span>
     </span>
 
   
-    <span id="/posts/hexo_build" class="post-meta-item leancloud_visitors" data-flag-title="使用hexo+github page搭建个人博客" title="阅读次数">
+    <span id="/posts/podfile_lock_conflict/" class="post-meta-item leancloud_visitors" data-flag-title="Cocoapods采坑记 - Podfile.lock 冲突问题" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -269,8 +284,8 @@
     </span>
     <span class="post-meta-item-text">Valine：</span>
   
-    <a title="valine" href="/posts/hexo_build#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/hexo_build" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/podfile_lock_conflict/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/podfile_lock_conflict/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -281,14 +296,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.5k</span>
+      <span>1.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>1 分钟</span>
     </span>
 </div>
 
@@ -299,132 +314,39 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。</p>
-<p>2018年2月18日更新：域名绑定和https 访问问题。</p>
+        <h2 id="故事的开端是这样的："><a href="#故事的开端是这样的：" class="headerlink" title="故事的开端是这样的："></a><strong>故事的开端是这样的：</strong></h2><p>我们的项目中使用了<a target="_blank" rel="noopener" href="https://github.com/facebook/FBRetainCycleDetector">FBRetainCycleDetector</a>这个第三方库来检查内存泄露，在升级到某一个版本后，出现部分同事的 podfile.lock中FBRetainCycleDetector的checksum 值不一致，每次都需要运行 pod install 来更新 podfile.lock,然后git push 到仓库。其他的同事又出现 podfile.lock 冲突，需要运行 pod install 更新，然后push到 git 仓库。</p>
 <span id="more"></span>
 
-<h2 id="首先简单介绍下github-page和hexo："><a href="#首先简单介绍下github-page和hexo：" class="headerlink" title="首先简单介绍下github page和hexo："></a>首先简单介绍下github page和hexo：</h2><ul>
-<li>Github Page: 使用github repo的静态网页工具，可以无缝地与github一起使用，每个github帐号都有400M的免费空间来存放博客文件，具体的使用说明可以参看<a target="_blank" rel="noopener" href="https://pages.github.com/">github page网站</a></li>
-<li>hexo:一个node.js的框架，使用npm进行安装和配置，能够快速的搭建静态博客。主要特点是搭建快速、支持markdown编辑、一键部署、本地预览。</li>
-<li>使用github page+hexo主要是考虑到能够快速搭建、维护方便、技术栈匹配。</li>
-</ul>
-<p>下面来说具体的搭建步骤，这里使用<strong>MAC的开发环境</strong>：</p>
+<p>喜剧上演多次后，我们采取少数服从多数的原则，让出现冲突的同事git push 的时候手动去掉 podfile.lock。</p>
+<p>podfile.lock冲突<img src="/posts/podfile_lock_conflict/podfile.lock%E5%86%B2%E7%AA%81.png" class=""></p>
+<h2 id="Podfile-lock-不一致的原因："><a href="#Podfile-lock-不一致的原因：" class="headerlink" title="Podfile.lock 不一致的原因："></a><strong>Podfile.lock 不一致的原因：</strong></h2><p><strong>Podfile.lock和Manifest.lock：</strong></p>
 <ul>
-<li><p>配置github repo：</p>
+<li>项目中集成 cocoapods 的时候，运行 pod install 后，项目根目录中会生成Podfile.lock，而Pods目录中会有Manifest.lock。</li>
+<li>Xcode 编译项目的时候，会执行 Build Phases 中的[CP] Check Pods Manifest.lock 脚本，这个脚本会比对Podfile.lock和Manifest.lock，<strong>如果两个文件不相同就会报错</strong>。</li>
+</ul>
+<p>xcode编译脚本<img src="/posts/podfile_lock_conflict/xcode%E7%BC%96%E8%AF%91%E8%84%9A%E6%9C%AC.png" class=""></p>
+<p>pod check失败<img src="/posts/podfile_lock_conflict/pod%20check%E5%A4%B1%E8%B4%A5.png" class=""></p>
+<p><strong>Podfile.lock是什么：</strong></p>
 <ul>
-<li>新建一个username.github.io的仓库，注意一定要使用自己的<strong>github用户名</strong></li>
-<li>设置ssh key：参见<a target="_blank" rel="noopener" href="https://help.github.com/articles/generating-an-ssh-key/">github ssh教程</a></li>
-<li>这里需要说明的是：github page默认使用的是<strong>master分支</strong>，在master分支中的<strong>index.html</strong>文件会被解析并且作为网页的入口。</li>
+<li>Podfile.lock 文件主要包含三个块：PODS、DEPENDENCIES、SPEC CHECKSUMS，用来记录每个pod的版本号、依赖的其他库和每个库对应的podspec.json文件的 checksum(SHA-1算法)。通过这些信息可以确保多人协作的时候，大家使用的是相同版本的第三方库。</li>
 </ul>
-</li>
-<li><p>安装Hexo命令行工具hexo-cli</p>
-<ul>
-<li>参考<a target="_blank" rel="noopener" href="https://hexo.io/docs/index.html">官方教程</a></li>
-<li>安装git、Node.js等工具</li>
-<li>安装hexo-cli命令行工具：npm install -g hexo-cli<ul>
-<li>hexo-cli是hexo的命令行工具，用于执行hexo init</li>
-</ul>
-</li>
-<li>Setup Hexo:<ul>
-<li>命令行为：hexo init <folder></li>
-<li>使用hexo的模板生成项目，下面几个文件比较重要：<ul>
-<li>package.json: Node js用于指定依赖包的配置文件，在不清楚的情况下，不要随意修改。</li>
-<li>_config.yml: hexo的配置文件，可以设置网站title、主题、字体、制定域名等。</li>
-<li>source: Blog的源文件目录，使用hexo new生成的md文件存放在这个目录中。</li>
-<li>scaffolds：模板文件，hexo new使用它来生成新的模板md。</li>
-<li>themes：主题目录，设置网站版式。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>写Blog：</p>
-<ul>
-<li>hexo new post_title：生成新的模板文件。</li>
-<li>注意：这里使用hexo命令和上面的hexo init不是同一个命令，这个hexo是在setup过程中下载的npm包，<strong>需要在Blog这个目录中使用才有效。</strong></li>
-<li>生成的文件在source&#x2F;_post目录中，使用markdown编辑器来写博客。</li>
-</ul>
-</li>
-<li><p>本机调试：</p>
-<ul>
-<li>在写blog的过程中，可以直接在本机进行预览：hexo serve</li>
-<li>默认使用4000端口，还可以<a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html#Custom-IP">设置其他的端口</a></li>
-</ul>
-</li>
-<li><p>生成Blog文件：</p>
-<ul>
-<li>生成编译后的blog：hexo generate</li>
-<li>生成后的文件存放在public目录中</li>
-<li>也可以使用下面的命令直接完成发布: hexo generate —deploy</li>
-</ul>
-</li>
-<li><p>发布blog：</p>
-<ul>
-<li>使用hexo deploy完成发布</li>
-<li>第一次发布之前，需要修改_config.yml文件，参见：<a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html#Git">hexo deploy</a></li>
-</ul>
-</li>
-<li><p>最后要说下Troubleshooting和需要注意的地方:</p>
-<ul>
-<li>hexo new不起作用<ul>
-<li>我们需要另外开一个branch来进行blog的写作（如source分支），然后使用hexo deploy到master分支上面。在不同的分支进行切换的时候，由于.gitignore文件不一样，导致我们可能在master分支上面删除了一些source分支上面重要的文件，如node_modules目录，则需要我们在切换到source分支的时候，重新下载npm包：npm i</li>
-</ul>
-</li>
-<li>hexo deploy失败<ul>
-<li>需要安装hexo-deployer-git包，参考 <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html#Git">hexo deploy</a></li>
-</ul>
-</li>
-<li>master分支的使用方法<ul>
-<li>master分支上面<strong>不要放文件</strong>，这个分支在使用hexo deploy之后自动更新，所以会覆盖我们自己的文件。</li>
-</ul>
-</li>
-<li>使用source分支来进行写作<ul>
-<li>上面提高了不能使用master分支，那么就需要我们使用别的分支来进行hexo的搭建和写作，我个人使用source分支，当然你也可以取一个自己喜欢的名字。</li>
-</ul>
-</li>
-</ul>
+<p>在我们的项目中遇到的是 podfile.lock 中 checksum 部分的冲突，其实就是由于FBRetainCycleDetector.podspec.json文件的checksum不一致。</p>
+<p>通过对比了有冲突的同事 mac 中生产的FBRetainCycleDetector.podspec.json文件，发现主要是repuires_arc 字段中的文件列表顺序不同。</p>
 <hr>
-<h2 id="—-2018年2月18日更新："><a href="#—-2018年2月18日更新：" class="headerlink" title="— 2018年2月18日更新："></a>— 2018年2月18日更新：</h2></li>
-<li><h3 id="绑定域名："><a href="#绑定域名：" class="headerlink" title="绑定域名："></a><strong>绑定域名</strong>：</h3><p>绑定域名主要分为3个步骤：申请域名、Github Page 设置域名、域名解析</p>
+<p>在找到问题产生的原因后，就着手解决问题：</p>
+<p>一开始怀疑是MAC的 locale 不同导致文件的排序不一致，因为之前使用翻译脚本来做文件排序的时候，也出现过类似的问题。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system(&quot;LANG=zh_CN.utf-8 sort $tmpFileOut | uniq &gt;&gt; $fileNameOut”);</span><br></pre></td></tr></table></figure>
+
+<p>但是在设置了 locale环境变量之后，问题还是没有解决。</p>
+<p>前两天，在FBRetainCycleDetector的 issues 列表中，发现也有人遇到了<a target="_blank" rel="noopener" href="https://github.com/facebook/FBRetainCycleDetector/issues/52">相同的问题</a>，更加可喜的是，这个小伙子提了一个 <a target="_blank" rel="noopener" href="https://github.com/facebook/FBRetainCycleDetector/pull/53/files">PR</a> 修复了这个问题，其实只有一行代码：</p>
+<p>PR 代码<img src="/posts/podfile_lock_conflict/PR%20%E4%BB%A3%E7%A0%81.png" class=""></p>
+<h2 id="问题是如何解决的："><a href="#问题是如何解决的：" class="headerlink" title="问题是如何解决的："></a><strong>问题是如何解决的：</strong></h2><p>在运行 pod install 后，生成FBRetainCycleDetector.podspec.json文件中， repuires_arc字段是需要设置-fno-objc-arc的文件列表，但是不知道某种原因，出现文件路径排序在不同电脑上不同，从而导致最后FBRetainCycleDetector.podspec.json的CHECKSUMS(SHA-1) 值不一致。</p>
+<p><strong>使用 sort 方法后，解决了文件排序问题。Cheers!</strong> </p>
+<p>参考资料：</p>
 <ul>
-<li><p>申请域名</p>
-<ul>
-<li>国内：<a target="_blank" rel="noopener" href="https://wanwang.aliyun.com/domain/com/">万网</a>、<a target="_blank" rel="noopener" href="http://www.xinnet.com/domain/domain.html">新网</a></li>
-</ul>
-<p>国内域名申请有一些繁杂的手续和步骤，特别是域名备案。</p>
-<ul>
-<li>国外：<a target="_blank" rel="noopener" href="https://www.godaddy.com/">GoDaddy</a>、<a target="_blank" rel="noopener" href="https://www.namecheap.com/">namecheap</a>、<a target="_blank" rel="noopener" href="https://www.name.com/">name</a>、<a target="_blank" rel="noopener" href="http://www.enom.com/">enom</a></li>
-<li>国外的域名则相对操作简单很多，一般只需要提供联系方式即可，主要注意的是：Godaddy没有提供免费的域名信息保护功能，需要付费购买，否者别人可以通过 whois 查到域名持有者的信息。</li>
-</ul>
-</li>
-<li><p>设置 Github Page 的域名</p>
-<ul>
-<li>Github Page提供域名比对的功能，只需要在网站的根目录中添加 CNAME（全部大写）文件，填写自己申请的域名（一般是<a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=nBRFxvXXBbhf6esboaTgsAPqBASt6IT7cXro_okFQ9Xe8MOEaCnFOuJ1jxg0BRirAdJPU4XRrKZkYZSKzry4EmR21yJdMGuqG2TzJigDYipm0ZAAZTQGKg04IqSgAQ6E">顶级域名</a>）即可，不需要带 https:&#x2F;&#x2F;（如 baidu.com，而不是 <a target="_blank" rel="noopener" href="http://www.baidu.com),github/">http://www.baidu.com），github</a> page 会自动把 www的请求重定向到顶级域名下。</li>
-<li>使用 hexo 搭建起来的博客，则是在 source 目录中，来添加 CNAME 文件，然后部署到 github 上面（命令行为 hexo d -g）。</li>
-</ul>
-</li>
-<li><p>域名解析</p>
-<ul>
-<li>申请好的域名，一般由提供商来进行解析（把域名映射为 IP 地址），我们这里不适用 Godaddy 提供的域名解析（NameServer） 服务，而是使用 NDSPod 作为我们的域名解析商。</li>
-<li>申请 NDSPod 账户</li>
-<li>在 NDSPod 添加域名、添加 A&#x2F;CNAME 记录<ul>
-<li>A 记录</li>
-<li>CNAME 记录</li>
-</ul>
-</li>
-<li>在 Godaddy 绑定 DNSPod的域名解析地址</li>
-<li>wait a moment</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h3 id="HTTPS问题："><a href="#HTTPS问题：" class="headerlink" title="HTTPS问题："></a><strong>HTTPS问题：</strong></h3><ul>
-<li>github page 的 ssl证书绑定的是 github.io 的域名。如果在 chrome 中使用 https 访问自定义的域名，会提示<strong>NET::ERR_CERT_COMMON_NAME_INVALID</strong>。</li>
-<li>CloudFlare 来做域名解析，开启 ssl 为 Flexble 之后，可以让chrome和 CloudFlare 之间使用 https访问，而CloudFlare 与 github page 中继续使用 http 来访问。</li>
-<li>参考文章：<a target="_blank" rel="noopener" href="https://blog.chionlab.moe/2016/01/28/github-pages-with-https/">在GitHub Pages上使用CloudFlare https CDN</a></li>
-</ul>
-</li>
+<li><a target="_blank" rel="noopener" href="http://guides.cocoapods.org/making/specs-and-specs-repo.html">http://guides.cocoapods.org/making/specs-and-specs-repo.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://guides.cocoapods.org/syntax/podspec.html">http://guides.cocoapods.org/syntax/podspec.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9285be04310c">cocopods在更新过程中产生Podfile.lock 和 Manifest.lock: No such file or directory</a></li>
 </ul>
 
     </div>
@@ -443,7 +365,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://coolzeng.com/posts/hexo_build" title="使用hexo+github page搭建个人博客">https://coolzeng.com/posts/hexo_build</a>
+      <a href="https://coolzeng.com/posts/podfile_lock_conflict/" title="Cocoapods采坑记 - Podfile.lock 冲突问题">https://coolzeng.com/posts/podfile_lock_conflict/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -469,20 +391,21 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/iOS/" rel="tag"># iOS</a>
+              <a href="/tags/cocoapods/" rel="tag"># cocoapods</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/git_manual" rel="prev" title="git常用手册">
-                  <i class="fa fa-chevron-left"></i> git常用手册
+                <a href="/posts/xcode-tips/" rel="prev" title="Xcode问题锦集">
+                  <i class="fa fa-chevron-left"></i> Xcode问题锦集
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/ios-thread-tips" rel="next" title="iOS多线程开发笔记">
-                  iOS多线程开发笔记 <i class="fa fa-chevron-right"></i>
+                <a href="/posts/xcode-10-migrate/" rel="next" title="Xcode 10 beta 版本迁移指南">
+                  Xcode 10 beta 版本迁移指南 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -550,7 +473,7 @@
 
 
 
-<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/hexo_build"}</script>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/podfile_lock_conflict/"}</script>
 <script>
 document.addEventListener('page:loaded', () => {
   NexT.utils.loadComments(CONFIG.valine.el)

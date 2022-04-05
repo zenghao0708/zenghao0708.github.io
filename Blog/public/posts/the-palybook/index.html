@@ -20,28 +20,30 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"coolzeng.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。">
+    <meta name="description" content="本文内容节选自 Netflix 20 年推出的纪录片《人生战术本》（The Playbook）第一季第一集，主人公是拥有 22 年 NBA 执教经验的主教练道格·里弗斯。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xcode问题锦集">
-<meta property="og:url" content="https://coolzeng.com/posts/xcode-tips">
+<meta property="og:title" content="《人生战术本》- 里弗斯教练帮助他人“成为更好的人”">
+<meta property="og:url" content="https://coolzeng.com/posts/the-palybook/index.html">
 <meta property="og:site_name" content="Zenghao0708的小站">
-<meta property="og:description" content="Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。">
+<meta property="og:description" content="本文内容节选自 Netflix 20 年推出的纪录片《人生战术本》（The Playbook）第一季第一集，主人公是拥有 22 年 NBA 执教经验的主教练道格·里弗斯。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2017-08-12T12:59:56.000Z">
-<meta property="article:modified_time" content="2022-04-05T07:07:05.762Z">
+<meta property="og:image" content="https://coolzeng.com/posts/the-palybook/the-playbook.png">
+<meta property="article:published_time" content="2022-04-05T06:36:16.000Z">
+<meta property="article:modified_time" content="2022-04-05T08:21:41.200Z">
 <meta property="article:author" content="zenghao0708">
-<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="分享">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://coolzeng.com/posts/the-palybook/the-playbook.png">
 
 
-<link rel="canonical" href="https://coolzeng.com/posts/xcode-tips">
+<link rel="canonical" href="https://coolzeng.com/posts/the-palybook/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coolzeng.com/posts/xcode-tips","path":"posts/xcode-tips","title":"Xcode问题锦集"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coolzeng.com/posts/the-palybook/","path":"posts/the-palybook/","title":"《人生战术本》- 里弗斯教练帮助他人“成为更好的人”"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Xcode问题锦集 | Zenghao0708的小站</title>
+<title>《人生战术本》- 里弗斯教练帮助他人“成为更好的人” | Zenghao0708的小站</title>
   
 
 
@@ -213,7 +215,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://coolzeng.com/posts/xcode-tips">
+    <link itemprop="mainEntityOfPage" href="https://coolzeng.com/posts/the-palybook/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -226,12 +228,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Xcode问题锦集 | Zenghao0708的小站">
+      <meta itemprop="name" content="《人生战术本》- 里弗斯教练帮助他人“成为更好的人” | Zenghao0708的小站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Xcode问题锦集
+          《人生战术本》- 里弗斯教练帮助他人“成为更好的人”
         </h1>
 
         <div class="post-meta-container">
@@ -241,15 +243,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2017-08-12 20:59:56" itemprop="dateCreated datePublished" datetime="2017-08-12T20:59:56+08:00">2017-08-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-05 15:07:05" itemprop="dateModified" datetime="2022-04-05T15:07:05+08:00">2022-04-05</time>
+      <time title="创建时间：2022-04-05 14:36:16 / 修改时间：16:21:41" itemprop="dateCreated datePublished" datetime="2022-04-05T14:36:16+08:00">2022-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -257,12 +253,12 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">开发</span></a>
+          <a href="/categories/%E5%88%86%E4%BA%AB/" itemprop="url" rel="index"><span itemprop="name">分享</span></a>
         </span>
     </span>
 
   
-    <span id="/posts/xcode-tips" class="post-meta-item leancloud_visitors" data-flag-title="Xcode问题锦集" title="阅读次数">
+    <span id="/posts/the-palybook/" class="post-meta-item leancloud_visitors" data-flag-title="《人生战术本》- 里弗斯教练帮助他人“成为更好的人”" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -277,8 +273,8 @@
     </span>
     <span class="post-meta-item-text">Valine：</span>
   
-    <a title="valine" href="/posts/xcode-tips#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/xcode-tips" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/the-palybook/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/the-palybook/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -289,14 +285,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.8k</span>
+      <span>1.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -307,82 +303,27 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。</p>
+        <p>本文内容节选自 Netflix 20 年推出的纪录片《人生战术本》（The Playbook）第一季第一集，主人公是拥有 22 年 NBA 执教经验的主教练道格·里弗斯。</p>
 <span id="more"></span>
 
-<ol>
-<li><strong>代码提示不起作用</strong>：<br>This fix from apple dev forums works for me. I have had autocomplete issues with Xcode 6.1&#x2F;Yosemite.<ol>
-<li>Quit Xcode.</li>
-<li>Restart the computer (this is to clear any in-memory caches).</li>
-<li>Delete the contents of the DerivedData folder (~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData), precisely run,<br>a) <strong>cd ~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData&#x2F;</strong><br>b) **rm -rf ***</li>
-<li>(Try this if Steps 1-3 dont really work as it rebuilds the cache later on restart which takes time) Delete the contents of folder ~&#x2F;Library&#x2F;Caches&#x2F;com.apple.dt.Xcode, i.e.,<br>a) <strong>cd ~&#x2F;Library&#x2F;Caches&#x2F;com.apple.dt.Xcode</strong><br>b) **rm -rf ***</li>
-<li>Now launch Xcode once more…</li>
-</ol>
-</li>
-<li><strong>Logic Testing Unavailable</strong>：<br>Logic Testing on iOS devices is not supported. You can run logic tests on the Simulator.<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported">http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported</a><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8454935/logic-testing-on-ios-devices-is-not-supported">Log</a><br>ic test need a framework which has not installed with iOS device. Set a Host Application for Unit Test can resolve this issue: App will run first and Uint Test run.</li>
-<li><strong>$(inherited) in xcode</strong>:<ol>
-<li>inherited值的是xcode设置项的继承关系。</li>
-<li>每个项目都有PROJECT的设置与TARGETS设置，TARGETS一般情况下就是继承自PROJECT</li>
-</ol>
-</li>
-<li><strong>“Xcode 6.3: Can not verify build to install on device”</strong><ol>
-<li>$(inherited) can be used to inherit build settings from the project level to the target level. When you define library or header search paths at the project level you can use $(inherited) in the target build settings to use these search paths in the search paths of the project targets.</li>
-</ol>
-</li>
-<li><strong>Verify Xcode:</strong><ol>
-<li>spctl –assess –verbose &#x2F;Applications&#x2F;Xcode.app</li>
-</ol>
-</li>
-<li><strong>Xcode显示模拟器时，使用的是UUID，而不是系统型号</strong><ol>
-<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/26533025/xcode-using-guid-instead-of-ios-version-number-in-simulator-selection">http://stackoverflow.com/questions/26533025/xcode-using-guid-instead-of-ios-version-number-in-simulator-selection</a></li>
-<li>在Xcode-&gt;Devices里，选中重复的模拟器，右键菜单“删除”，即可。</li>
-</ol>
-</li>
-<li><strong>iPhone Simulator没有网络</strong><ol>
-<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/13542706/iphone-simulator-cannot-connect-to-internet">http://stackoverflow.com/questions/13542706/iphone-simulator-cannot-connect-to-internet</a></li>
-<li>iOS Simulator (menu, top left) &gt; Reset Content and Settings… fixed it for me. Note this will delete all the apps and associated data you have on the simulator.</li>
-</ol>
-</li>
-<li><strong>ineligible device</strong><ol>
-<li>当前iOS版本比xcode版本高，就会出现这种情况，如iOS 9.1 就不能在Xcode 7上面进行调试，而只能在xcode 7.1进行调试。</li>
-</ol>
-</li>
-<li><strong>更新xcode版本后，出现插件不兼容的问题</strong><ol>
-<li><a target="_blank" rel="noopener" href="http://joeshang.github.io/2015/04/10/fix-xcode-upgrade-plugin-invalid/">fix-xcode-upgrade-plugin-invalid</a></li>
-<li>find ~&#x2F;Library&#x2F;Application\ Support&#x2F;Developer&#x2F;Shared&#x2F;Xcode&#x2F;Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add <code>defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID</code></li>
-</ol>
-</li>
-<li><strong>检查代码中的FIXME、TODO、ERROR</strong></li>
-<li><a target="_blank" rel="noopener" href="http://krakendev.io/blog/generating-warnings-in-xcode">http://krakendev.io/blog/generating-warnings-in-xcode</a></li>
-<li><strong>Xcode 7.3(Swift 2.2) Release配置出现Crash：</strong><ol>
-<li>在Debug和Staging配置环境下的build没有问题，但是Release编译出来的build会出现crash: unrecognised selector sent to instance</li>
-<li>尝试方法<ol>
-<li>《<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/06fcd298ef4c">iOS开发调试技巧</a>》</li>
-</ol>
-</li>
-<li>解决方法：<ol>
-<li>在Swift Compiler -&gt; Code Generation选择,使用<strong>Fast [-O]，而不能使用Fast, Whole Module Optimization</strong></li>
-</ol>
-</li>
-</ol>
-</li>
-<li><strong>查看所有的Simulator：</strong><ol>
-<li>xcrun simctl list devices</li>
-</ol>
-</li>
-<li><strong>Xcode 注释功能不起作用：</strong><ol>
-<li>重启 Xcode,重启 MAC</li>
-<li>运行：sudo usr&#x2F;libexec&#x2F;xpccachectl</li>
-<li>重命名 Xcode，然后打开，恢复后，重新改名为 Xcode</li>
-</ol>
-</li>
-<li><strong>使用 Code Snippet</strong><ol>
-<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/wzzvictory/article/details/12163939">Xcode开发技巧之code snippets(代码片段)</a></li>
-<li>&lt;#type#&gt;占位符</li>
-<li>Xcode中的代码片段默认放在下面的目录中：~&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;UserData&#x2F;CodeSnippets</li>
-</ol>
-</li>
-</ol>
+<img src="/posts/the-palybook/the-playbook.png" class="">
+
+<p>“我是里弗斯，我是人，我也会犯错”，开场白非常的平易近人，让人倍感亲切~</p>
+<p><strong>做你自己喜欢的事情，你才不会觉得累。</strong></p>
+<p>几十年来，里弗斯起床到篮球场去训练，但是他不喜欢用“训练”这个词，当被人问到去做什么的时候，他总是喜欢说去“打篮球”。里弗斯小时候被问到成长以后想变成一个什么样的人，第一次他在黑板上面写到“成为一名 NBA球员”但是被老师给擦掉了，然后对他说道“降低预期，现实一点”，于是当里弗斯第二次在黑板上面写到“我想成为一名 NBA 球员”，老师让他直接回家请家长了“那你收拾好自己的东西回家想想吧”。</p>
+<p>回到家里，里弗斯的爸爸这样对他说“你在学校没有好好听老师讲课，你总是把事情搞砸、喜欢胡闹，你以后当不了职业球员”，最终里弗斯不仅成为了 NBA球员，到目前为止也在 NBA执教了 20 多年，这一切出自于他对篮球的喜爱和坚持吧</p>
+<p><strong>凯尔特人第十八冠的故事 -不会熄灭的灯和“乌班图”的生活方式</strong></p>
+<p>他和队员都在一起践行“乌班图”的生活方式，在团队中相信他人、成就他人，最终形成一个“共同体”。</p>
+<p>在比赛前夕里弗斯的父亲去世了，他离开团队飞回老家参加父亲的葬礼，当里弗斯和家人在电视机前面观看比赛的时候，中场休息时间收到了加内特打过来的电话，加内特说道“当你难过的时候，我们也感到很难过”，里弗斯谈到此情此景的时候都会感到很激动。那场比赛在的最后 7 秒钟，皮尔斯把球传给了雷·阿伦，由雷·阿伦投入了制胜三分最终帮助球队完成逆转，我们通过电视转播能够看到凯尔特人逆转比赛、看到赢得胜利之后队员们欢快的庆祝，但是背后的故事也挺让人感动。</p>
+<p>有一场比赛胜利之后，记者问加内特“今晚你非常注重防守，你觉得自己在防守方面有哪些地方做的比较好？”，“不是我，而是我们。我在我应该在的位置，而我的队友们也在他们应该在的位置（这样才能不失位）。我们需要靠这种积极的补位来赢得比赛”，加内特给出了这样的回答。</p>
+<p>有一天里弗斯在球馆上方的 17 块总冠军旗帜旁边打了一个灯光，寓意“不会熄灭的灯”，当天训练介绍之后他询问球员们今天球馆有什么不同的地方，只有托尼·阿伦发现在球馆上方多出了一块光。“是的，灯不会熄灭，我们的焦点就在那里，我们比赛就是为了这个”，“每天、每次练习，他们都看到那盏灯照着墙”，激发队员们“我们是波士顿凯尔特人队，我们就是要赢”。</p>
+<p>里弗斯谈到自己的偶像是拳王阿里，“直觉上大家会觉得冠军是不被击打的，但是事实其实是相反的，冠军会被一次次的击打，就看你能挨多少次打，同时还要向前进，直到取得胜利”。</p>
+<p>一个好的教练，需要让自己的队员相信自己能够赢得下一场比赛。里弗斯小的时候的目标就是击败自己的哥哥，哥哥比他健壮、力量更强，从最开始32：0到 32：4，然后到 32：8，通过自己持续练习、一步步成长起来最终击败了哥哥。</p>
+<p>一开始里弗斯认为自己作为主教练的职责是带领团队赢得一场场的胜利，后面能够通过指导队员、看着他们逐渐成熟起来、“打出来”也是一种喜悦或者说幸福。不过，他也有收到过一些忠告“不要和团队成员走得太近了，因为总有人会让你失望”。但是里弗斯认为教练的职责就是指导他们，让他们成为更好的球员、更好的人、更好的队友、变得坚强、有热情，学会面对赢输。</p>
+<p>19 年CBA的 官方纪录片《敢梦敢当》里面，看到了杜峰作为球队主教练的成长，也看到了他不为人知的一面：一个有血有肉的人、体贴他人、关注成长、激励队员。在竞技体育里面，一个团队要想在顶级舞台上面想要夺得冠军，背后一定是付出了巨大的努力，除了日复一日的练习，研究对手的强弱点，还需要一名优秀的教练，给大家带来前进的方向，激励团队里面的每一个人成为更好的自己。 </p>
+<hr>
+<p>《人生战术本》分享了传奇教练在运动和生活中取得成功所遵循的规则。通过感人的深度访谈，每位教练都透露了他们个人生活和职业生涯中的关键时刻，这些时刻最终帮助他们形成了自己的教练哲学。</p>
+<p>B站链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1WA411J76h">https://www.bilibili.com/video/BV1WA411J76h</a></p>
 
     </div>
 
@@ -400,7 +341,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://coolzeng.com/posts/xcode-tips" title="Xcode问题锦集">https://coolzeng.com/posts/xcode-tips</a>
+      <a href="https://coolzeng.com/posts/the-palybook/" title="《人生战术本》- 里弗斯教练帮助他人“成为更好的人”">https://coolzeng.com/posts/the-palybook/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -426,21 +367,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/iOS/" rel="tag"># iOS</a>
+              <a href="/tags/%E5%88%86%E4%BA%AB/" rel="tag"># 分享</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/swift-oc-mix" rel="prev" title="Swift 与 OC 混编小技巧">
-                  <i class="fa fa-chevron-left"></i> Swift 与 OC 混编小技巧
+                <a href="/posts/react-native-private-repo/" rel="prev" title="iOS ReactNative私有库指南">
+                  <i class="fa fa-chevron-left"></i> iOS ReactNative私有库指南
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/podfile_lock_conflict" rel="next" title="Cocoapods采坑记 - Podfile.lock 冲突问题">
-                  Cocoapods采坑记 - Podfile.lock 冲突问题 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -507,7 +445,7 @@
 
 
 
-<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/xcode-tips"}</script>
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","appKey":"r39ndDzcLWt6uwrMWfLpahzS","serverURLs":"https://guk7zyvw.api.lncldglobal.com","placeholder":"留下你的想法","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"language":"zh-cn","el":"#valine-comments","path":"/posts/the-palybook/"}</script>
 <script>
 document.addEventListener('page:loaded', () => {
   NexT.utils.loadComments(CONFIG.valine.el)
