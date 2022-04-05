@@ -1,0 +1,852 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zenghao0708的小站" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言：Apple要求所有的 App 在2017年1月必须强制使用 ATS(Application Transport Security)，即 App 必须使用 HTTPS，而不能使用 HTTP 网络协议。这是Apple 在 app 安全领域做出的一个重大的举动，HTTP 由于使用明文进行传输，存在很大的安全隐患，网络请求容易被拦截和篡改。HTTPS 在安全性上相较于 HTTP 有很大的提升，依然存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 网络安全之SSL Pinning">
+<meta property="og:url" content="http://yoursite.com/2016/12/27/iOS-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B9%8BSSL-Pinning/index.html">
+<meta property="og:site_name" content="Zenghao0708的小站">
+<meta property="og:description" content="前言：Apple要求所有的 App 在2017年1月必须强制使用 ATS(Application Transport Security)，即 App 必须使用 HTTPS，而不能使用 HTTP 网络协议。这是Apple 在 app 安全领域做出的一个重大的举动，HTTP 由于使用明文进行传输，存在很大的安全隐患，网络请求容易被拦截和篡改。HTTPS 在安全性上相较于 HTTP 有很大的提升，依然存">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-12-27T03:33:56.000Z">
+<meta property="article:modified_time" content="2018-10-20T15:59:18.997Z">
+<meta property="article:author" content="zenghao0708">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/27/iOS-网络安全之SSL-Pinning/"/>
+
+
+
+
+
+  <title> iOS 网络安全之SSL Pinning | Zenghao0708的小站 </title>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?353c598206661dd4387e7c76896dbd4c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zenghao0708的小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/27/iOS-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B9%8BSSL-Pinning/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zenghao0708的小站">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zenghao0708的小站" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS 网络安全之SSL Pinning
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-27T11:33:56+08:00">
+                2016-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/27/iOS-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B9%8BSSL-Pinning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/27/iOS-网络安全之SSL-Pinning/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/27/iOS-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B9%8BSSL-Pinning/" class="leancloud_visitors" data-flag-title="iOS 网络安全之SSL Pinning">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a><strong>前言：</strong></h2><p>Apple要求所有的 App 在2017年1月必须强制使用 ATS(Application Transport Security)，即 App 必须使用 HTTPS，而不能使用 HTTP 网络协议。这是Apple 在 app 安全领域做出的一个重大的举动，HTTP 由于使用明文进行传输，存在很大的安全隐患，网络请求容易被拦截和篡改。HTTPS 在安全性上相较于 HTTP 有很大的提升，依然存在一些问题：如 <a href="http://www.secbox.cn/hacker/7846.html" target="_blank" rel="noopener">MITT</a>(Man-In-The-Middle)中间人攻击和2014年 SSL 的<a href="http://www.ithome.com/html/soft/80224.htm" target="_blank" rel="noopener">心脏出血漏洞</a>。网络安全的问题看似离我们很远，其实就发生在我们身边，对我们的日常生活也会有很大的影响，特别是在移动互联网的浪潮下，人手一台手机的情况下，大家普遍使用支付宝和微信支付来进行支付，能够联网的智能家居产品越来越多的走入到普通家庭中，网络安全是一个需要引起重视的问题。而在网络传输过程中起到安全保障作用的，就是我们今天要讲的 SSL/TLS，当然主要是集中在 iOS 客户端。</p>
+<a id="more"></a>
+<h2 id="0x00-什么是-SSL-TLS"><a href="#0x00-什么是-SSL-TLS" class="headerlink" title="0x00 - 什么是 SSL/TLS"></a><strong>0x00 - 什么是 SSL/TLS</strong></h2><p>SSL(Secure Sockets Layer 安全套接层)及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。SSL为Netscape所研发，用以保障在Internet上数据传输的安全，利用数据加密(Encryption)的技术，可确保数据在网络上的传输过程中不会被截取及窃听。SSL协议位于TCP/IP协议与各种应用层协议之间，为数据通讯提供安全支持。 <strong>— 摘自《互动百科》</strong></p>
+<p>从上面的定义可以看出 SSL 是一个加密层，主要用于信息加密、验证。</p>
+<p>SSL 主要提供下面三个服务：</p>
+<ol>
+<li><strong>认证用户和服务器</strong>，确保数据发送到正确的客户机和服务器；</li>
+<li><strong>加密数据</strong>以防止数据中途被窃听；</li>
+<li>维护<strong>数据的完整性</strong>，确保数据在传输过程中不被改变。</li>
+</ol>
+<h2 id="0x01-什么是-HTTPS"><a href="#0x01-什么是-HTTPS" class="headerlink" title="0x01 - 什么是 HTTPS"></a><strong>0x01 - 什么是 HTTPS</strong></h2><p>HTTPS（Hypertext Transfer Protocol Secure 安全超文本传输协议） 是由 Netscape 开发并内置于其浏览器中，用于对数据进行压缩和解压操作，并返回网络上传送回的结果，HTTPS 实际上运用了 Netscape 的完全套接字层（SSL）作为 HTTP 应用层的子层。</p>
+<h2 id="0x02-SSL-Pinning-是什么"><a href="#0x02-SSL-Pinning-是什么" class="headerlink" title="0x02 - SSL Pinning 是什么"></a><strong>0x02 - SSL Pinning 是什么</strong></h2><p>当前主流的各大网站 Google、Facebook 等都使用 HTTPS 来保障数据的安全性和私密性，但是在 HTTPS 协议也存在一定的问题，其中广为人知是 MIIT（中间人工具），攻击者在客户端和服务器中进行伪装和欺骗，从而获取敏感信息。</p>
+<p>SSL Pinning 是一个业界预防 MIIT 攻击的解决方案，其主要思想是在客户端绑定（Pin）服务器SSL 证书的核心信息，这个解决方案代价小，易于实施，因此被普遍使用。</p>
+<h2 id="0x03-在-iOS-中如何使用-SSL-Pinning"><a href="#0x03-在-iOS-中如何使用-SSL-Pinning" class="headerlink" title="0x03 - 在 iOS 中如何使用 SSL Pinning"></a><strong>0x03 - 在 iOS 中如何使用 SSL Pinning</strong></h2><p>iOS 中的 SSL Pinning 主要有三种形式：</p>
+<ol>
+<li>直接使用 NSURLSession</li>
+<li>配合AFNetworking 使用</li>
+<li>配合 Alamofire 使用</li>
+</ol>
+<p>NSURLSession 是 iOS 系统提供的类，AFNetworking 和 Alamofire 识别是 ObjC和 Swift 编写的第三方库，具体实施步骤，可以参考<a href="https://infinum.co/the-capsized-eight/how-to-make-your-ios-apps-more-secure-with-ssl-pinning" target="_blank" rel="noopener">这篇 blog</a>。</p>
+<h2 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a><strong>参考文章：</strong></h2><ul>
+<li><a href="http://www.baike.com/wiki/ssl&amp;prd=button_doc_entry" target="_blank" rel="noopener">SSL - 互动百科</a></li>
+<li><a href="http://baike.baidu.com/item/ssl" target="_blank" rel="noopener">SSL - 百度百科</a></li>
+<li><a href="https://infinum.co/the-capsized-eight/how-to-make-your-ios-apps-more-secure-with-ssl-pinning" target="_blank" rel="noopener">How to make your iOS apps more secure with SSL pinning</a></li>
+<li><a href="http://www.secbox.cn/hacker/7846.html" target="_blank" rel="noopener">iOS环境下的中间人攻击风险浅析</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/15/iOS%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" rel="next" title="iOS多线程开发笔记">
+                <i class="fa fa-chevron-left"></i> iOS多线程开发笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/07/Swift-%E4%B8%8E-OC-%E6%B7%B7%E7%BC%96%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="prev" title="Swift 与 OC 混编小技巧">
+                Swift 与 OC 混编小技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/27/iOS-网络安全之SSL-Pinning/"
+           data-title="iOS 网络安全之SSL Pinning" data-url="http://yoursite.com/2016/12/27/iOS-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B9%8BSSL-Pinning/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E4%BB%80%E4%B9%88%E6%98%AF-SSL-TLS"><span class="nav-number">2.</span> <span class="nav-text">0x00 - 什么是 SSL&#x2F;TLS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E4%BB%80%E4%B9%88%E6%98%AF-HTTPS"><span class="nav-number">3.</span> <span class="nav-text">0x01 - 什么是 HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-SSL-Pinning-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">4.</span> <span class="nav-text">0x02 - SSL Pinning 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E5%9C%A8-iOS-%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-SSL-Pinning"><span class="nav-number">5.</span> <span class="nav-text">0x03 - 在 iOS 中如何使用 SSL Pinning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">参考文章：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zenghao0708</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zenghao0708"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("EhIiyeJmhodJT8I7qVn4i9ru-gzGzoHsz", "UeWHHgFp0nmo9v3nTvFQRBIs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

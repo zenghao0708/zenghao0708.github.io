@@ -5,7 +5,7 @@ date: 2017-08-12 22:04:39
 
 ## [Who am I]{% asset_img about.jpg %}
 
-曾浩，男，90后，iOS开发攻城狮，目前就职于[深圳真时科技](http://pacewear.cn/)，担任 iOS 团队 Leader，负责Pacewear 智能手表 iOS App开发和团队管理工作。
+目前就职于字节飞书团队，担任 iOS 团队 Leader，负责飞书文档iOS 端开发和团队管理工作。
 
 老东家有：
 
@@ -18,5 +18,9 @@ date: 2017-08-12 22:04:39
 - [Misfit App](https://itunes.apple.com/us/app/misfit/id564157241?mt=8) - Misfit 智能手环 iOS App
 - [Learning Lodge](http://www.vtechda.com/downloadpage/) - 儿童学习系统客户端(C/S 架构，支持 PC 和 MAC 双平台)
 
-欢迎关注我的微博：@[貉子的微博](http://weibo.com/zenghao0708)和我的 [Github](https://www.github.com/zenghao0708)
+目前飞书深圳团队招聘中，感兴趣的童鞋可以发送简历到[zenghao.howie@bytedance.com]或者加微信[tel: 15625261320]
 
+iOS 职位：https://job.toutiao.com/s/Nx12FCw
+Android 职位：https://job.toutiao.com/s/Nx1MJAA
+前端职位：https://job.toutiao.com/s/N9ofyju
+后端职位：https://job.toutiao.com/s/Nx1DXTR
