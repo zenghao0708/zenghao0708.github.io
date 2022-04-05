@@ -70,6 +70,14 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: next
 
+# leancloud_counter_security
+leancloud_counter_security:
+  enable_sync: true
+  app_id: GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI
+  app_key: r39ndDzcLWt6uwrMWfLpahzS
+  username: zenghao0708
+  password: haozi0708
+
 # abbrlink插件配置 生成固定的文章id
 # npm install hexo-abbrlink --save
 abbrlink:
@@ -89,7 +97,8 @@ feed:
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: https://github.com/zenghao0708/zenghao0708.github.io
-  branch: master
-  message: 更新"iOS ReactNative私有库指南"
+  - type: git
+    repo: https://github.com/zenghao0708/zenghao0708.github.io
+    branch: master
+    message: 更新"iOS ReactNative私有库指南"
+  - type: leancloud_counter_security_sync

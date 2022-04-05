@@ -1,0 +1,5 @@
+# 临时修改: hexo-leancloud-counter-security
+- name: Temporary fix hexo-leancloud-counter-security
+run: |
+  mv node_modules/hexo-leancloud-counter-security/index.js node_modules/hexo-leancloud-counter-security/index.js.bak
+  mv source/_data/hexo-leancloud-counter-security-fix.js node_modules/hexo-leancloud-counter-security/index.js
