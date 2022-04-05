@@ -17,7 +17,7 @@ root: /
 # permalink: :year/:month/:day/:title/
 # permalink_defaults:
 # abbrlink插件 配置文章id，默认的是按时间标题配置的
-permalink: posts/:abbrlink
+permalink: posts/:abbrlink/
 abbrlink:
   alg: crc32  # 算法：crc16(default) and crc32
   rep: hex    # 进制：dec(default) and hex
