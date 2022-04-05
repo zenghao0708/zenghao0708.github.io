@@ -1,8 +1,9 @@
 ---
 title: 使用hexo+github page搭建个人博客
+tags:
+  - hexo
+abbrlink: e234e595
 date: 2016-11-12 14:36:16
-tags: 
- - hexo
 ---
 
 我的这个博客就是使用hexo+github搭建起来的，这篇文章记录了相关步骤和一些需要注意的地方。

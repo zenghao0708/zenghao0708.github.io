@@ -1,10 +1,11 @@
 ---
 title: iOS多线程开发笔记
-date: 2016-11-15 21:51:37
-tags: 
- - iOS
- - 多线程
+tags:
+  - iOS
+  - 多线程
 categories: 开发
+abbrlink: 81762ee9
+date: 2016-11-15 21:51:37
 ---
 
 [TOC]

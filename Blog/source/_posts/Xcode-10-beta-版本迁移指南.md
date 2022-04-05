@@ -1,9 +1,10 @@
 ---
 title: Xcode 10 beta 版本迁移指南
-date: 2018-06-21 20:15:29
 categories: 开发
-tags: 
-- iOS
+tags:
+  - iOS
+abbrlink: 630942d2
+date: 2018-06-21 20:15:29
 ---
 
 今天的主角就是开发者接触最多的 Xcode 10 beta，详细内容可以参考 [WWDC 18 Session](https://developer.apple.com/videos/play/wwdc2018/408/) ，同时可以看下 Xcode 10 的 [release note](https://developerbetas.com/wp-content/uploads/2018/06/Xcode_10_Beta_Release_Notes.pdf), 官方文档永远是学习新内容的第一手资料。

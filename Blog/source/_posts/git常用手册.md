@@ -1,8 +1,9 @@
 ---
 title: git常用手册
-date: 2016-11-11 16:26:14
 tags: git
 categories: 开发
+abbrlink: 1fe13d7d
+date: 2016-11-11 16:26:14
 ---
 
 Git 是每个开发童鞋必须掌握的工具，本文记录博主日常开发使用 git时，遇到的问题和常用的解决方法：

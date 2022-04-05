@@ -1,10 +1,10 @@
 ---
 title: Xcode问题锦集
-date: 2017-08-12 20:59:56
-tags: 
- - iOS
+tags:
+  - iOS
 categories: 开发
-
+abbrlink: 98b18fa0
+date: 2017-08-12 20:59:56
 ---
 
 Xcode 是 iOS开发人员的利器，偶尔也会变为“猪队友”，下面是本人在开发中积累的一些遇到的问题和解决方案。

@@ -1,12 +1,13 @@
 ---
 title: iOS ReactNative私有库指南
-date: 2018-10-20 22:11:52
 categories:
-- 开发
-- ReactNative
-tags: 
-- iOS
-- ReactNative
+  - 开发
+  - ReactNative
+tags:
+  - iOS
+  - ReactNative
+abbrlink: 4fdd55
+date: 2018-10-20 22:11:52
 ---
 
 # 创建RN私有库
