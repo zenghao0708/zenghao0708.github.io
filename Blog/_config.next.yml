@@ -576,7 +576,7 @@ comments:
   # Setting `true` means remembering the comment system selected by the visitor.
   storage: true
   # Lazyload all comment systems.
-  lazyload: false
+  lazyload: true
   # Modify texts or order for any naves, here are some examples.
   nav:
     #disqus:
@@ -697,10 +697,10 @@ clarity_analytics: # <project_id>
 # You can visit https://www.leancloud.cn to get AppID and AppKey.
 leancloud_visitors:
   enable: true
-  app_id: EhIiyeJmhodJT8I7qVn4i9ru
-  app_key: UeWHHgFp0nmo9v3nTvFQRBIs
+  app_id: GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI
+  app_key: r39ndDzcLWt6uwrMWfLpahzS
   # Required for apps from CN region
-  server_url: https://ehiiyejm.lc-cn-n1-shared.com
+  server_url: # <your server url>
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
   # If you don't care about security in leancloud counter and just want to use it directly
   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.
@@ -742,7 +742,7 @@ algolia_search:
 # Local Search
 # Dependencies: https://github.com/next-theme/hexo-generator-searchdb
 local_search:
-  enable: false
+  enable: true
   # If auto, trigger search by changing input.
   # If manual, trigger search by pressing enter key or search button.
   trigger: auto
@@ -898,3 +898,20 @@ vendors:
 css: css
 js: js
 images: images
+
+# Valine
+
+valine:
+  enable: true
+  appId: GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI # Your leancloud application appid
+  appKey: r39ndDzcLWt6uwrMWfLpahzS # Your leancloud application appkey
+  placeholder: 留下你的想法 # Comment box placeholder
+  avatar: mm # Gravatar style
+  meta: [nick, mail, link] # Custom comment header
+  pageSize: 10 # Pagination size
+  language: zh-cn # Language, available values: en, zh-cn
+  visitor: false # Article reading statistic
+  comment_count: true # If false, comment count will only be displayed in post page, not in home page
+  recordIP: false # Whether to record the commenter IP
+  serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)
+  #post_meta_order: 0
