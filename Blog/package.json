@@ -15,6 +15,8 @@
     "hexo-generator-index": "^2.0.0",
     "hexo-generator-searchdb": "^1.4.0",
     "hexo-generator-tag": "^1.0.0",
+    "hexo-image-link-with-display-size": "^0.0.3",
+    "hexo-image-sizes": "^2.1.0",
     "hexo-leancloud-counter-security": "^1.5.0",
     "hexo-next-valine": "github:next-theme/hexo-next-valine",
     "hexo-renderer-ejs": "^2.0.0",

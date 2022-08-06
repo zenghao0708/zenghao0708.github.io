@@ -43,7 +43,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: true
+# post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -99,11 +99,31 @@ feed:
   path: atom.xml
   limit: 20
 
+# Image Res: https://github.com/hexojs/hexo-renderer-marked
+hexo-asset-folder: true
+post_asset_folder: true
+marked:
+  prependRoot: true
+  postAsset: true
+
+# Image Size: https://github.com/ottobonn/hexo-image-sizes
+image_sizes:
+  pattern: !!js/regexp /\.(gif|jpg|jpeg|png)$/i
+  profiles:
+    body:
+      width: 600 # height will adjust to preserve aspect ratio
+    thumbnail:
+      width: 400 # Image will be cropped to a square
+    huge:
+      height: 1000
+  link: true
+  useAltForTitle: true
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   - type: git
     repo: https://github.com/zenghao0708/zenghao0708.github.io
     branch: master
-    message: 更新"iOS ReactNative私有库指南"
+    message: 添加"关于HTTP/3的那些事"
   - type: leancloud_counter_security_sync

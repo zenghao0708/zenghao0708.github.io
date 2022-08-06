@@ -3,3 +3,4 @@ node_modules/
 .deploy*/
 *.log
 .vscode/
+Blog/public/
