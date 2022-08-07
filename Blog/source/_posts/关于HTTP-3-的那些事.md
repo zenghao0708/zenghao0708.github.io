@@ -36,14 +36,7 @@ HTTP/3其实是**HTTP-over-QUIC**，而QUIC（Quick UDP Internet Connections）�
 
 相比于 HTTP/2，HTTP/3主要是将**传输层的TCP改为UDP协议**，然后在应用层用QUIC协议来实现TCP的可靠性，解决TCP少量丢包导致队头阻塞（head-of-line blocking）问题&继承HTTP2.0的多路复用优点。
 
-{% imsize %}
-src: /images/http3-overview/HTTP2vsHTTP3.png
-alt: HTTP2 vs HTTP3
-title:  HTTP2 vs HTTP3
-profile: thumbnail
-link: true
-linkProfile: huge
-{% endimsize %}
+{% asset_img HTTP2vsHTTP3.png 500  '"HTTP2vsHTTP3" "HTTP2vsHTTP3"' %}
 
 **HTTP/2 vs HTTP/3**
 
