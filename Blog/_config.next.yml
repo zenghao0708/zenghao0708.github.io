@@ -900,9 +900,10 @@ js: js
 images: images
 
 # Valine
+# For more information: https://valine.js.org, https://github.com/xCss/Valine
 
 valine:
-  enable: true
+  enable: false
   appId: GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI # Your leancloud application appid
   appKey: r39ndDzcLWt6uwrMWfLpahzS # Your leancloud application appkey
   placeholder: 留下你的想法 # Comment box placeholder

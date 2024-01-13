@@ -76,7 +76,7 @@ theme: next
 
 # leancloud_counter_security
 leancloud_counter_security:
-  enable_sync: true
+  enable_sync: false
   app_id: GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI
   app_key: r39ndDzcLWt6uwrMWfLpahzS
   username: zenghao0708
@@ -125,5 +125,5 @@ deploy:
   - type: git
     repo: https://github.com/zenghao0708/zenghao0708.github.io
     branch: master
-    message: 添加"关于HTTP/3的那些事"
+    message: 添加"ChatGPT & LLM 的那些事（一）：新手上路"
   - type: leancloud_counter_security_sync

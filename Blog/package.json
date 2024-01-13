@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "6.1.0"
+    "version": "6.3.0"
   },
   "dependencies": {
-    "hexo": "^6.1.0",
+    "hexo": "^6.3.0",
     "hexo-abbrlink": "^2.2.1",
     "hexo-deployer-git": "^3.0.0",
     "hexo-generator-archive": "^1.0.0",
@@ -24,6 +24,7 @@
     "hexo-renderer-stylus": "^2.0.1",
     "hexo-renderer-swig": "^1.1.0",
     "hexo-server": "^3.0.0",
+    "hexo-tag-embed": "^1.0.0",
     "hexo-theme-next": "^8.11.0",
     "hexo-word-counter": "^0.0.3"
   }
