@@ -128,3 +128,22 @@ deploy:
     branch: master
     message: 添加"ChatGPT & LLM 的那些事（一）：新手上路"
   # - type: leancloud_counter_security_sync
+
+jsonContent:
+  meta: true
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: true
+    excerpt: false
+    categories: true
+    tags: true
