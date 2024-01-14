@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="zenghao0708">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="zenghao0708">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Life is struggle!">
+    <meta name="description" content="开场白在当今的技术世界中，了解人工智能的最新进展对于一名移动端开发工程师至关重要。OpenAI的ChatGPT是这一领域的最新成果，它不仅代表了大模型时代的前沿，而且还体现了AI技术在日常生活中应用的无限可能性，本文会给大家介绍一些chatGPT 相关的基本概念、Prompt 技巧、GPT 4的能力对比和一些学习资料，希望大家能够在大模型的时代继续遨游。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ChatGPT &amp; LLM 的那些事（一）：新手上路">
+<meta property="og:url" content="https://coolzeng.com/posts/chatpgt-introduce/index.html">
+<meta property="og:site_name" content="Zenghao0708的小站">
+<meta property="og:description" content="开场白在当今的技术世界中，了解人工智能的最新进展对于一名移动端开发工程师至关重要。OpenAI的ChatGPT是这一领域的最新成果，它不仅代表了大模型时代的前沿，而且还体现了AI技术在日常生活中应用的无限可能性，本文会给大家介绍一些chatGPT 相关的基本概念、Prompt 技巧、GPT 4的能力对比和一些学习资料，希望大家能够在大模型的时代继续遨游。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/10%E4%BA%BF%E7%94%A8%E6%88%B7%E6%95%B0%E6%8E%92%E5%90%8D.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/GPT%E6%BC%94%E5%8C%96%E5%8E%86%E7%A8%8B.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/LLM&GPT%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/tokens-gpt-helloworld1.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/token-raw-hello.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/tokens-gpt-%E4%BD%A0%E5%A5%BD.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/tokens-gpt-%E4%BD%A0%E5%A5%BD.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/gpt4-%E8%A1%A8%E6%83%85.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/demo-iOS%E4%B8%93%E5%AE%B6-rxswift-1.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/demo-iOS%E4%B8%93%E5%AE%B6-rxswift-2.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/demo-generate-prompt-1.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/demo-generate-prompt-2.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/demo-mr.ranedeer.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/demo-gpt-store-%E8%A1%A8%E6%83%85%E7%94%9F%E6%88%90%E5%99%A8-1.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/demo-gpt-store-%E8%A1%A8%E6%83%85%E7%94%9F%E6%88%90%E5%99%A8-2.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/demo-gpt-store-B%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%99%A8-1.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/demo-gpt-store-B%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%99%A8-2.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/vpn-1.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/vpn-2.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/wildcard-1.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/wildcard-2.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/wildcard-3.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E5%BC%A0%E6%97%A0%E5%B8%B8.png">
+<meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E7%8E%8B%E5%BB%BA%E7%A1%95.png">
+<meta property="article:published_time" content="2024-01-13T02:16:28.000Z">
+<meta property="article:modified_time" content="2024-01-14T04:35:30.839Z">
+<meta property="article:author" content="zenghao0708">
+<meta property="article:tag" content="LLM, GPT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://coolzeng.com/posts/chatpgt-introduce/10%E4%BA%BF%E7%94%A8%E6%88%B7%E6%95%B0%E6%8E%92%E5%90%8D.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>ChatGPT &amp; LLM 的那些事（一）：新手上路 · fi3ework&#39;s Studio</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- Google tag (gtag.js) -->
+    
+
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zenghao0708的小站" type="application/atom+xml">
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>fi3ework's Studio.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">fi3ework&#39;s Studio.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">ChatGPT & LLM 的那些事（一）：新手上路</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+    
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                ChatGPT & LLM 的那些事（一）：新手上路
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="LLM, GPT">LLM, GPT</a>
+    
+</div>
+
+                
+                <!-- 文章字数统计 -->
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2024/01/13</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="开场白"><a href="#开场白" class="headerlink" title="开场白"></a>开场白</h2><p>在当今的技术世界中，了解人工智能的最新进展对于一名移动端开发工程师至关重要。OpenAI的ChatGPT是这一领域的最新成果，它不仅代表了大模型时代的前沿，而且还体现了AI技术在日常生活中应用的无限可能性，本文会给大家介绍一些chatGPT 相关的基本概念、Prompt 技巧、GPT 4的能力对比和一些学习资料，希望大家能够在大模型的时代继续遨游。</p>
+<span id="more"></span>
+
+
+
+<p><strong>最快到达十亿用户数的应用 – ChatGPT</strong></p>
+<blockquote>
+<p>之前是 Tiktok 用了 9 个月~</p>
+</blockquote>
+<p>10亿用户数排名<img src="/posts/chatpgt-introduce/10%E4%BA%BF%E7%94%A8%E6%88%B7%E6%95%B0%E6%8E%92%E5%90%8D.png" class=""></p>
+<h2 id="OpenAI和ChatGPT的发展历程"><a href="#OpenAI和ChatGPT的发展历程" class="headerlink" title="OpenAI和ChatGPT的发展历程"></a>OpenAI和ChatGPT的发展历程</h2><ol>
+<li><h3 id="OpenAI的愿景与成立"><a href="#OpenAI的愿景与成立" class="headerlink" title="OpenAI的愿景与成立"></a>OpenAI的愿景与成立</h3></li>
+</ol>
+<p>OpenAI成立于2015年，其愿景是推动人工智能技术的友好发展，以使全人类受益。它最初是作为非盈利组织成立的，但后来转型为“有限盈利”公司，旨在平衡盈利与研究目标之间的关系。</p>
+<ol>
+<li><h3 id="GPT系列的演进"><a href="#GPT系列的演进" class="headerlink" title="GPT系列的演进"></a>GPT系列的演进</h3></li>
+</ol>
+<ul>
+<li><strong>GPT-1</strong>: OpenAI首个显著的成果是GPT-1，它标志着利用大规模数据集进行深度学习的开始。这个模型虽小，但已显示出巨大潜力。</li>
+<li><strong>GPT-2</strong>: 随后，GPT-2的发布展示了在文本生成方面的显著进步，其更大的模型和更复杂的训练数据使其成为当时最强大的语言模型之一。</li>
+<li><strong>GPT-3</strong>: GPT-3的发布是一个历史性时刻，其<strong>1750亿参数</strong>量使其成为当时世界上最大的语言模型。它的出现不仅是技术上的飞跃，也为AI的未来应用开辟了新的道路。</li>
+<li><strong>ChatGPT</strong>: 结合了GPT-3的能力和进一步的优化，ChatGPT专注于<strong>生成更自然、连贯的对话式文本</strong>。它的出现标志着AI在自然语言处理领域的一个重要里程碑。</li>
+<li><strong>GPT-4</strong>: 最新一代的GPT-4在2023年推出，它不仅在模型大小上有所增长，而且在<strong>理解复杂文本、<strong><strong>多模态</strong></strong>能力（处理文本和图像）以及更精准的信息处理方面都显示了显著进步</strong>。GPT-4的推出进一步拓宽了AI在各种复杂任务中的应用前景，标志着AI技术向更高层次的演进。</li>
+</ul>
+<p>GPT演化历程<img src="/posts/chatpgt-introduce/GPT%E6%BC%94%E5%8C%96%E5%8E%86%E7%A8%8B.png" class=""></p>
+<h2 id="关键技术要点"><a href="#关键技术要点" class="headerlink" title="关键技术要点"></a>关键技术要点</h2><ol>
+<li><h3 id="一些基础术语"><a href="#一些基础术语" class="headerlink" title="一些基础术语"></a>一些基础术语</h3></li>
+</ol>
+<h4 id="Prompt（提示）"><a href="#Prompt（提示）" class="headerlink" title="Prompt（提示）"></a>Prompt（提示）</h4><ul>
+<li>含义: Prompt是指向AI模型提供的输入文本，它起到<strong>引导模型生成特定回答或内容</strong>的作用。</li>
+<li>示例: 在ChatGPT中，输入“写一篇关于人工智能未来的文章”是一个prompt。</li>
+<li>原理: Prompt工作机制基于模型的<strong>预训练知识</strong>。它解读输入文本，结合学习到的语言模式和知识，生成相关回答。</li>
+<li>拓展一下: 最初的AI模型依赖于特定的命令或关键词触发。随着NLP技术的进步，现代模型如GPT系列能理解更自然的语言和复杂的prompt。</li>
+</ul>
+<p>用好Prompt可以让AGI 更好的帮助我们解决问题，值得花点时间深入研究下。</p>
+<h4 id="LLM（Large-Language-Models，大型语言模型）"><a href="#LLM（Large-Language-Models，大型语言模型）" class="headerlink" title="LLM（Large Language Models，大型语言模型）"></a>LLM（Large Language Models，大型语言模型）</h4><ul>
+<li>含义: LLM指的是在<strong>大量文本数据上训练的模型，能够处理、理解和生成人类语言</strong>。</li>
+<li>示例: GPT-3和GPT-4是典型的LLM。</li>
+<li>原理: LLM通过学习大规模文本数据集，掌握语言的深层结构和复杂性。这使得它们能够<strong>生成连贯、相关且多样的文****本</strong>。</li>
+<li>拓展一下: LLM的发展始于较小的模型，如GPT-1，随着时间的推移，模型变得越来越大，学习能力也不断增强，直至能处理极其复杂的语言任务。</li>
+</ul>
+<p>LLM 是一个新事物，但也是站在已有的技术上面进行创新。而且很有可能是超出创始人预期的「上帝的礼物」。</p>
+<p>LLM&amp;GPT关系<img src="/posts/chatpgt-introduce/LLM&GPT%E5%85%B3%E7%B3%BB.png" class=""></p>
+<h4 id="G-P-T是什么？（Generate-Predict-and-Transform，生成、预测、转换）"><a href="#G-P-T是什么？（Generate-Predict-and-Transform，生成、预测、转换）" class="headerlink" title="G, P, T是什么？（Generate, Predict, and Transform，生成、预测、转换）"></a>G, P, T是什么？（Generate, Predict, and Transform，生成、预测、转换）</h4><ul>
+<li>含义: 这些术语描述了大型语言模型的三个基本功能：生成（Generate）文本，预测（Predict）下一个词，转换（Transform）输入数据。</li>
+<li>示例: 在文本生成任务中，模型生成（Generate）连续的文本，预测（Predict）基于上下文的下一个最可能的词，转换（Transform）用户输入为有意义的输出。</li>
+<li>原理: 这些功能基于<strong>Transformer架构，该架构能够有效处理序列数据，并在不同的上下文中生成、预测和转换文本</strong>。</li>
+<li>拓展一下: 这些概念随着深度学习和NLP技术的发展而进化，尤其是随着Transformer模型的引入和完善。</li>
+</ul>
+<p>GPT是一个重要的里程碑，有更好的交互形式、从而可以让大众使用进而快速传播。以此来看，鼠标、触摸屏是PC和互联网时代典型的交互形态。</p>
+<h4 id="预训练（Pre-training）和Fine-Tuning"><a href="#预训练（Pre-training）和Fine-Tuning" class="headerlink" title="预训练（Pre-training）和Fine-Tuning"></a>预训练（Pre-training）和Fine-Tuning</h4><ul>
+<li>含义: 预训练是指在大规模数据集上进行的<strong>初步模型训练，而Fine-Tuning是针对特定任务的二次训练</strong>。</li>
+<li>示例: GPT-3首先在大量文本上进行预训练，然后可以通过Fine-Tuning来执行特定的任务，比如法律咨询或医学诊断。</li>
+<li>原理: 预训练使模型学会语言的基本结构和模式，Fine-Tuning则调整模型以更好地适应特定应用场景的需求。</li>
+<li>拓展一下: 预训练和Fine-Tuning的概念随着深度学习的发展而出现，尤其是在大型模型如GPT系列的研究和开发过程中变得至关重要。</li>
+</ul>
+<p>预训练让LLM有了更强大的能力，Fine-Tuning让LLM更好用。</p>
+<h4 id="Token（令牌）"><a href="#Token（令牌）" class="headerlink" title="Token（令牌）"></a>Token（令牌）</h4><ul>
+<li>含义: 在NLP中，Token是<strong>文本分割的基本单位，通常是词或子词片段</strong>。</li>
+<li>示例: 在处理句子“Hello, world!”时，它可以被分割为Tokens：“Hello”, “,”, “world”, “!”。</li>
+<li>原理: Token化是文本处理的基本步骤，使得模型能够以更细粒度理解和生成文本。</li>
+<li>拓展一下: 随着NLP技术的进步，Token化方法也在不断优化，以更好地适应不同语言和文本的复杂性。</li>
+</ul>
+<p>GPT-3拥有1400万字符串组成的词汇表，主要有下面三个局限性：区分大小写；数字分块不一致；有时候会附带空格</p>
+<p>在<a target="_blank" rel="noopener" href="https://platform.openai.com/tokenizer">https://platform.openai.com/tokenizer</a> 中可以看到 “<strong>Hello, World</strong>“和「<strong>你好，世界</strong>」的 token 数量。各种 LLM 的交互上下文限制、API Cost都是token 来计数的。</p>
+<p><strong>Hello, World</strong></p>
+<p>tokens-gpt-helloworld1<img src="/posts/chatpgt-introduce/tokens-gpt-helloworld1.png" class=""><br>token-raw-hello<img src="/posts/chatpgt-introduce/token-raw-hello.png" class=""></p>
+<p><strong>你好，世界</strong></p>
+<p>tokens-gpt-你好<img src="/posts/chatpgt-introduce/tokens-gpt-%E4%BD%A0%E5%A5%BD.png" class=""><br>tokens-gpt-你好<img src="/posts/chatpgt-introduce/tokens-gpt-%E4%BD%A0%E5%A5%BD.png" class=""></p>
+<h3 id="编写高效Prompt的规则"><a href="#编写高效Prompt的规则" class="headerlink" title="编写高效Prompt的规则"></a>编写高效Prompt的规则</h3><p>推荐两个学习源：</p>
+<ul>
+<li>吴恩达的 Prompt Engingerring 教程：<a target="_blank" rel="noopener" href="https://github.com/GitHubDaily/ChatGPT-Prompt-Engineering-for-Developers-in-Chinese">https://github.com/GitHubDaily/ChatGPT-Prompt-Engineering-for-Developers-in-Chinese</a></li>
+<li>Learning Prompt 课程 By Jimmy Wong： <a target="_blank" rel="noopener" href="https://learningprompt.wiki/zh-Hans/">https://learningprompt.wiki/zh-Hans/</a></li>
+</ul>
+<p>大型语言模型如GPT系列在生成回答时依赖于输入的质量和准确性。清晰和具体的prompt可以提高模型生成文本的相关性和质量。</p>
+<ol>
+<li><p><strong>明确性</strong>: 提供明确、具体的指令或问题。明确的prompt帮助模型更准确地理解预期的输出。</p>
+</li>
+<li><p><strong>详细性</strong>: 包含足够的背景信息和细节。这有助于模型生成更相关和准确的回答。</p>
+</li>
+<li><p><strong>上下文相关</strong>: 保持prompt与所需任务或问题的相关性。相关的上下文信息可以指导模型生成更合适的内容。</p>
+</li>
+<li><p><strong>避免歧义</strong>: 尽量使用无歧义的语言，避免引起模型的误解。</p>
+</li>
+<li><p><strong>适当的长度</strong>: 不宜过长或过短。过长可能导致模型混淆，过短可能导致信息不足。</p>
+</li>
+<li><h3 id="Demos"><a href="#Demos" class="headerlink" title="Demos"></a>Demos</h3></li>
+</ol>
+<h4 id="emoji-工厂"><a href="#emoji-工厂" class="headerlink" title="emoji 工厂"></a>emoji 工厂</h4><p>要求：GPT Plus账号 + DELL·E3</p>
+<p>Prompt：</p>
+<p>给你几个表情关键字：</p>
+<p>“开心”：代表现在很高兴、开心、愉悦、心情舒畅</p>
+<p>“愤怒”：代表现在有点懊恼，有一种想要找个地方发泄不满情绪。 </p>
+<p>我会给你一段文字描述，你给我匹配相关的表情关键字，然后画出emoji表情。 </p>
+<p>下面是示例：文字描述「我今天中奖了，想要大吃一顿满足下」， 表情关键字：开心</p>
+<p>效果如下：</p>
+<p>gpt4-表情<img src="/posts/chatpgt-introduce/gpt4-%E8%A1%A8%E6%83%85.png" class=""></p>
+<h4 id="iOS-技术专家"><a href="#iOS-技术专家" class="headerlink" title="iOS 技术专家"></a>iOS 技术专家</h4><p>要求：chatGPT</p>
+<p>Prompt:</p>
+<p>你作为一名经验丰富的iOS开发者，帮我解决一些iOS和Swift相关的技术问题。希望给出相关知识点、实践案例，最好搭配上相关代码。</p>
+<p>我作为一名iOS开发新手，经常会遇到循环引用导致的内存泄露问题，有什么好的建议或者最佳实践呢？</p>
+<p>demo-iOS专家-rxswift-1<img src="/posts/chatpgt-introduce/demo-iOS%E4%B8%93%E5%AE%B6-rxswift-1.png" class=""><br>demo-iOS专家-rxswift-2<img src="/posts/chatpgt-introduce/demo-iOS%E4%B8%93%E5%AE%B6-rxswift-2.png" class=""></p>
+<h4 id="让GPT-来写Prompt（比如写一个技术调研文档😊）"><a href="#让GPT-来写Prompt（比如写一个技术调研文档😊）" class="headerlink" title="让GPT 来写Prompt（比如写一个技术调研文档😊）"></a>让GPT 来写Prompt（比如写一个技术调研文档😊）</h4><p>要求：chatGPT(gpt4 效果更佳)</p>
+<p>Prompt：</p>
+<p>Web search results:</p>
+<p>[1] “Oops, there was an error.  Please try again.If it persists, please email <a href="mailto:&#x6f;&#x70;&#x73;&#x40;&#x64;&#117;&#x63;&#x6b;&#100;&#117;&#x63;&#x6b;&#103;&#x6f;&#x2e;&#x63;&#x6f;&#x6d;">&#x6f;&#x70;&#x73;&#x40;&#x64;&#117;&#x63;&#x6b;&#100;&#117;&#x63;&#x6b;&#103;&#x6f;&#x2e;&#x63;&#x6f;&#x6d;</a>“</p>
+<p>URL: <a target="_blank" rel="noopener" href="https://lite.duckduckgo.com/50x.html?e=3">https://lite.duckduckgo.com/50x.html?e=3</a></p>
+<p>Current date: 2023&#x2F;4&#x2F;9</p>
+<p>Instructions: Using the provided web search results, write a comprehensive reply to the given query. Make sure to cite results using [<a href="URL">number</a>] notation after the reference. If the provided search results refer to multiple subjects with the same name, write separate answers for each subject.</p>
+<p>Query: I want you to become my Expert Prompt Creator. Your goal is to help me craft the best possible prompt for my needs. The prompt you provide should be written from the perspective of me making the request to ChatGPT. Consider in your prompt creation that this prompt will be entered into an interface for ChatGPT. The process is as follows: </p>
+<ol>
+<li>You will generate the following sections:</li>
+</ol>
+<p>Prompt:</p>
+<p>我需要写一个技术调研文档，这个文档是关于“移动端类似Notion产品的技术方案设计”，现在有三个思路：Native实现、Webview实现、类似RN&#x2F;Weex的混合开发。技术方案需要考虑到如下几个方面：竞品是如何实现的？三种实现方式的优缺点是什么？采用不同方案短期的成本和长期的收益什么？</p>
+<p>Critique:</p>
+<p>需要有可以量化的指标（比如开发人天数），有足够的说服力（写清楚优缺点）。</p>
+<p>Questions:</p>
+<p>{ask any questions pertaining to what additional information is needed from me to improve the prompt(max of 3). If the prompt needs more clarification or details in certain areas, ask questions to get more information to include in the prompt} </p>
+<ol start="2">
+<li>I will provide my answers to your response, which you will then incorporate into your next response using the same format. We will continue this iterative process with me providing additional information to you and updating the prompt until the prompt is perfected.</li>
+</ol>
+<p>Remember, the prompt we are creating should be written from the perspective of me making a request to ChatGPT. Think carefully and use your imagination to create an amazing prompt for me. </p>
+<p>Your first response should only be a greeting to the user and to ask what the prompt should be about.</p>
+<p>Reply in 中文</p>
+<p>效果：</p>
+<p>目测chatGPT的效果比GPT 4好一些，能够比较完整的输出整个文档内容</p>
+<p><strong>chatGPT 版本</strong>   </p>
+<p>完整对话：<a target="_blank" rel="noopener" href="https://shareg.pt/sGNglFQ">https://shareg.pt/sGNglFQ</a> </p>
+<p>demo-generate-prompt-1<img src="/posts/chatpgt-introduce/demo-generate-prompt-1.png" class=""><br>demo-generate-prompt-2<img src="/posts/chatpgt-introduce/demo-generate-prompt-2.png" class=""></p>
+<p><strong>GPT4 +Bing 版本</strong></p>
+<p>完整对话：</p>
+<h4 id="Mr-Ranedeer-AI-Tutor"><a href="#Mr-Ranedeer-AI-Tutor" class="headerlink" title="Mr.-Ranedeer-AI-Tutor"></a>Mr.-Ranedeer-AI-Tutor</h4><p>一个非常强大的课程生成器，支持中文、难度选择。</p>
+<p>github地址：<a target="_blank" rel="noopener" href="https://github.com/JushBJJ/Mr.-Ranedeer-AI-Tutor">https://github.com/JushBJJ/Mr.-Ranedeer-AI-Tutor</a></p>
+<p>要求：GPT Plus账号</p>
+<p>中文指南：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/642238713">https://zhuanlan.zhihu.com/p/642238713</a></p>
+<p>效果:</p>
+<p>demo-mr.ranedeer<img src="/posts/chatpgt-introduce/demo-mr.ranedeer.png" class=""></p>
+<ol>
+<li><h3 id="My-GPTs"><a href="#My-GPTs" class="headerlink" title="My GPTs"></a>My GPTs</h3></li>
+</ol>
+<p>一个字：牛；两个字：牛逼； 三个字：很牛逼</p>
+<p>不用任何编程能力，使用自然语言来完成各种任务，写网站、实现视频下载能力····</p>
+<h4 id="emoji工厂-My-GPT-版本"><a href="#emoji工厂-My-GPT-版本" class="headerlink" title="emoji工厂- My GPT 版本"></a>emoji工厂- My GPT 版本</h4><p>继续使用上面的「emoji  工厂」来创建自己 GPT 应用。</p>
+<p>demo-gpt-store-表情生成器-1<img src="/posts/chatpgt-introduce/demo-gpt-store-%E8%A1%A8%E6%83%85%E7%94%9F%E6%88%90%E5%99%A8-1.png" class=""><br>demo-gpt-store-表情生成器-2<img src="/posts/chatpgt-introduce/demo-gpt-store-%E8%A1%A8%E6%83%85%E7%94%9F%E6%88%90%E5%99%A8-2.png" class=""></p>
+<h4 id="B站视频下载器-My-GPT-版本"><a href="#B站视频下载器-My-GPT-版本" class="headerlink" title="B站视频下载器 - My GPT 版本"></a>B站视频下载器 - My GPT 版本</h4><p>全程使用中文来定义你的需求，GPT还会帮你生成Logo。</p>
+<p>GPTs 不能直接下载视频，但是可以推荐一些相关的工具</p>
+<p>体验地址【需要GPT Plus?】：<a target="_blank" rel="noopener" href="https://chat.openai.com/g/g-ozticvPaK-bzhan-shen-qi">https://chat.openai.com/g/g-ozticvPaK-bzhan-shen-qi</a></p>
+<p>demo-gpt-store-B站下载器-1<img src="/posts/chatpgt-introduce/demo-gpt-store-B%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%99%A8-1.png" class=""><br>demo-gpt-store-B站下载器-2<img src="/posts/chatpgt-introduce/demo-gpt-store-B%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%99%A8-2.png" class=""></p>
+<h2 id="如何开通-Plus-账号"><a href="#如何开通-Plus-账号" class="headerlink" title="如何开通 Plus 账号"></a>如何开通 Plus 账号</h2><h3 id="chatGPT-Plus-账号、OpenAI-API-账号的关系"><a href="#chatGPT-Plus-账号、OpenAI-API-账号的关系" class="headerlink" title="chatGPT Plus 账号、OpenAI API 账号的关系"></a>chatGPT Plus 账号、OpenAI API 账号的关系</h3><p><strong>ChatGPT 是基于 OpenAI 的 GPT-4 模型开发的一款聊天式人工智能</strong>。它可以理解和生成自然语言，与用户进行多轮对话。ChatGPT 旨在为用户提供智能、有趣的对话体验，可用于回答问题、进行讨论等。它仍然存在一些局限性，如模型输出可能不准确或不可靠，无法实时更新知识库，以及容易产生偏见。</p>
+<p><strong>ChatGPT Plus 是针对 ChatGPT 的一项增值服务，通过订阅此服务，用户可以获得更多功能和优先支持</strong>。这个服务主要面向那些希望在使用 ChatGPT 时获得更高质量、更个性化体验的用户。ChatGPT Plus 更适合企业级应用、专业人士和教育领域等场景。</p>
+<p><strong>OpenAI API 是一种开放的应用程序编程接口</strong>，通过这个接口，开发者可以将 OpenAI 开发的人工智能技术应用到各种软件中。通过调用这个 API，开发者可以实现对话生成、摘要、翻译等自然语言处理任务。OpenAI API 被广泛应用于聊天机器人、内容生成、文本摘要和语言翻译等场景。</p>
+<ul>
+<li>轻度使用 ChatGPT <strong>免费版</strong>足够。</li>
+<li><strong>ChatGPT Plus</strong> 适合不熟悉代码，不喜欢折腾，对稳定性有强需求的用户。ChatGPT-4 更新后，性价比高了很多，推荐。</li>
+<li>喜欢折腾的朋友，ChatGPT plus 也满足不了你，直接上 <strong>OpenAI API</strong> 吧。</li>
+</ul>
+<p>分享两个小工具：</p>
+<ul>
+<li><strong>虚拟信用卡</strong>：<a target="_blank" rel="noopener" href="https://2chuhai.com/recommend/openai-chatgpt-pay/">https://2chuhai.com/recommend/openai-chatgpt-pay/</a> ，实测很方便、支持很多美区应用；开通信用卡送3个虚拟手机号</li>
+<li><strong>科学上网</strong>：<a target="_blank" rel="noopener" href="https://s.stotik.com/dashboard/invite%EF%BC%8C%E5%B7%B2%E7%BB%8F%E7%A8%B3%E5%AE%9A%E4%BD%BF%E7%94%A83">https://s.stotik.com/dashboard/invite，已经稳定使用3</a> 年、支持 YouTube 4k 视频； 推荐半年或者一年套餐</li>
+</ul>
+<ol>
+<li><h3 id="找一个靠谱的梯子"><a href="#找一个靠谱的梯子" class="headerlink" title="找一个靠谱的梯子"></a>找一个靠谱的梯子</h3></li>
+</ol>
+<p>推荐使用<strong>stotik</strong>，专业客服解决问题，稳定运行多年、多平台适配，价格合适</p>
+<p>vpn-1<img src="/posts/chatpgt-introduce/vpn-1.png" class=""><br>vpn-2<img src="/posts/chatpgt-introduce/vpn-2.png" class=""></p>
+<ol>
+<li><h3 id="开通虚拟信用卡"><a href="#开通虚拟信用卡" class="headerlink" title="开通虚拟信用卡"></a>开通虚拟信用卡</h3></li>
+</ol>
+<p>推荐使用<strong>WildCard</strong>（推荐码链接：<a target="_blank" rel="noopener" href="https://bewildcard.com/i/HAO102%EF%BC%89">https://bewildcard.com/i/HAO102）</a> 来开通美国信用卡，然后绑定到 chatGPT 和 OpenAI 后台支付渠道。</p>
+<p>收费：两年开卡费用大概100 RMB，充值手续费3.5%。 遇到问题有客服帮助解决，本人能够一次性绑定好信用卡。</p>
+<p>wildcard-1<img src="/posts/chatpgt-introduce/wildcard-1.png" class=""><br>wildcard-2<img src="/posts/chatpgt-introduce/wildcard-2.png" class=""><br>wildcard-3<img src="/posts/chatpgt-introduce/wildcard-3.png" class=""></p>
+<h2 id="大模型时代的移动端开发者应该做什么？"><a href="#大模型时代的移动端开发者应该做什么？" class="headerlink" title="大模型时代的移动端开发者应该做什么？"></a>大模型时代的移动端开发者应该做什么？</h2><p>正如某个大佬所说「chatGPT 就是移动时代的 iPhone4」，他们都有的特点：产品本身足够优秀、充满想象力和魔力、开启下一个十年。作为经历了互联网和移动互联网时代的十年行业老兵，下面是我我的真心想法：</p>
+<ol>
+<li><strong>体验行业里面最好的产品</strong>（强烈安利 GPT plus 账号，能够体验 GPT 4 和各种丰富的插件）,学习并使用 Prompt 的技巧和经验，提升生产力或者实现自己的创意。</li>
+<li><strong>解决一个你自己遇到的问题，</strong>亲自跑 OpenAI 的 API，了解一些基本的概念。<ol>
+<li>把『小宇宙』上面的播客下周到本地，然后上传到飞书妙记，然后使用 MyAI 总结文档内容</li>
+</ol>
+</li>
+<li><strong>Be Patient and  Keep Going</strong>（持续跟踪3 ~5个行牛大牛，学习他们的技术文章、分享和观点，沉淀自己的技术能力、发挥想象力）</li>
+</ol>
+<p>写会议纪要、建日程、汇总群聊信息、建任务、润色文案、写文档等等痛点问题，用之前的技术，很难解决。现在，大模型技术可以轻而易举地搞定这些事。<strong>钉子早就有，现在，合适的锤子终于来了</strong>。</p>
+<h3 id="推荐两个公众号："><a href="#推荐两个公众号：" class="headerlink" title="推荐两个公众号："></a><strong>推荐两个公众号</strong>：</h3><ul>
+<li><p><strong>张无常</strong>：真名张海庚，字节跳动产品经理。</p>
+<ul>
+<li><strong>LLM****主题</strong>: <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzIwODA3MDUwOQ==&action=getalbum&album_id=2962216275081166849&scene=173&from_msgid=2652773232&from_itemidx=1&count=3&nolastread=1#wechat_redirect">https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzIwODA3MDUwOQ==&amp;action=getalbum&amp;album_id=2962216275081166849&amp;scene=173&amp;from_msgid=2652773232&amp;from_itemidx=1&amp;count=3&amp;nolastread=1#wechat_redirect</a></li>
+<li><a target="_blank" rel="noopener" href="https://bytedance.larkoffice.com/docs/doccnY3LlUFThQaZRc73PXSFAbg">Hey! 这有一座重庆大厦</a> </li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/tdWzDCL5EqQyIn9KfL_kBQ">如何成为初代 AGI 产品经理？</a><br>公众号-张无常<img src="/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E5%BC%A0%E6%97%A0%E5%B8%B8.png" class=""></li>
+</ul>
+</li>
+<li><p><strong>王建硕</strong>：百姓网创始人，知名 Blog 主。很有意思的一个技术人，可以帮助打开思路。</p>
+<ul>
+<li><strong>ChatGPT 开创的时代</strong>：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NzI0Mjg0MA==&action=getalbum&album_id=2801018476114149380&scene=173&from_msgid=2652376733&from_itemidx=1&count=3&nolastread=1#wechat_redirect">https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NzI0Mjg0MA==&amp;action=getalbum&amp;album_id=2801018476114149380&amp;scene=173&amp;from_msgid=2652376733&amp;from_itemidx=1&amp;count=3&amp;nolastread=1#wechat_redirect</a></li>
+</ul>
+</li>
+</ul>
+<p>公众号-王建硕<img src="/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E7%8E%8B%E5%BB%BA%E7%A1%95.png" class=""></p>
+<h3 id="学习资料："><a href="#学习资料：" class="headerlink" title="学习资料："></a>学习资料：</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://bytedance.larkoffice.com/base/AIMAbnJxQaNgSGsBAtwcdAkLnvf?table=tblmZTd8VuUOOONh&view=vew0Eo17BB">AIGC交流群工具沉淀 by 乔向阳</a> : ⭐️⭐️⭐️⭐️⭐️，很全面的工具、X 账号、产品合集，找到你感兴趣的Topic 深入体验、交流，感觉吃透这里面的内容，遇到 AGI 的话题应该能做到「侃侃而谈」</li>
+<li><a target="_blank" rel="noopener" href="https://bytedance.larkoffice.com/docx/LgTSdzOREosKYRxjtATcF81kngx">如何成为初代 AGI 产品经理？</a>  ： ⭐️⭐️⭐️⭐️，海庚从产品经理角度来解读 LLM 时代的现状和机会，产品经理是最接近用户的群体，多看看产品经理的思路有助于自己更好的解决问题。</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/609716668">GPT &#x2F; GPT-2 &#x2F; GPT-3 &#x2F; InstructGPT 进化之路</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/CRZlXIOkLEfTUaklfq9yCQ">一个产品经理的大模型观察、反思与预测  – 张无常</a></li>
+<li><a target="_blank" rel="noopener" href="https://2chuhai.com/recommend/openai-chatgpt-pay/">💳虚拟信用卡推荐Wildcard升级🤖OpenAI&#x2F;ChatGPT Plus付款教程,非DePay&amp;Dupay💥⭐ 爱出海导航💖</a></li>
+</ul>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://coolzeng.com">zenghao0708</a>
+            <p>原文链接：<a href="https://coolzeng.com/posts/chatpgt-introduce/">https://coolzeng.com/posts/chatpgt-introduce/</a>
+            <p>发表日期：<a href="https://coolzeng.com/posts/chatpgt-introduce/">January 13th 2024, 10:16:28 am</a>
+            <p>更新日期：<a href="https://coolzeng.com/posts/chatpgt-introduce/">January 14th 2024, 12:35:30 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/posts/http3-overview/" title="关于HTTP/3 的那些事">
+                    <div class="prevTitle">关于HTTP/3 的那些事</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:zenghao.0708@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zenghao0708" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                    
+                    <img class="profile-qr" src="/images/wechat_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%9C%BA%E7%99%BD"><span class="toc-number">1.</span> <span class="toc-text">开场白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenAI%E5%92%8CChatGPT%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">OpenAI和ChatGPT的发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenAI%E7%9A%84%E6%84%BF%E6%99%AF%E4%B8%8E%E6%88%90%E7%AB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">OpenAI的愿景与成立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPT%E7%B3%BB%E5%88%97%E7%9A%84%E6%BC%94%E8%BF%9B"><span class="toc-number">2.2.</span> <span class="toc-text">GPT系列的演进</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">关键技术要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E6%9C%AF%E8%AF%AD"><span class="toc-number">3.1.</span> <span class="toc-text">一些基础术语</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Prompt%EF%BC%88%E6%8F%90%E7%A4%BA%EF%BC%89"><span class="toc-number">3.1.1.</span> <span class="toc-text">Prompt（提示）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LLM%EF%BC%88Large-Language-Models%EF%BC%8C%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="toc-number">3.1.2.</span> <span class="toc-text">LLM（Large Language Models，大型语言模型）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#G-P-T%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%88Generate-Predict-and-Transform%EF%BC%8C%E7%94%9F%E6%88%90%E3%80%81%E9%A2%84%E6%B5%8B%E3%80%81%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-number">3.1.3.</span> <span class="toc-text">G, P, T是什么？（Generate, Predict, and Transform，生成、预测、转换）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%88Pre-training%EF%BC%89%E5%92%8CFine-Tuning"><span class="toc-number">3.1.4.</span> <span class="toc-text">预训练（Pre-training）和Fine-Tuning</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Token%EF%BC%88%E4%BB%A4%E7%89%8C%EF%BC%89"><span class="toc-number">3.1.5.</span> <span class="toc-text">Token（令牌）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E9%AB%98%E6%95%88Prompt%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-number">3.2.</span> <span class="toc-text">编写高效Prompt的规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Demos"><span class="toc-number">3.3.</span> <span class="toc-text">Demos</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#emoji-%E5%B7%A5%E5%8E%82"><span class="toc-number">3.3.1.</span> <span class="toc-text">emoji 工厂</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS-%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6"><span class="toc-number">3.3.2.</span> <span class="toc-text">iOS 技术专家</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A9GPT-%E6%9D%A5%E5%86%99Prompt%EF%BC%88%E6%AF%94%E5%A6%82%E5%86%99%E4%B8%80%E4%B8%AA%E6%8A%80%E6%9C%AF%E8%B0%83%E7%A0%94%E6%96%87%E6%A1%A3%F0%9F%98%8A%EF%BC%89"><span class="toc-number">3.3.3.</span> <span class="toc-text">让GPT 来写Prompt（比如写一个技术调研文档😊）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mr-Ranedeer-AI-Tutor"><span class="toc-number">3.3.4.</span> <span class="toc-text">Mr.-Ranedeer-AI-Tutor</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#My-GPTs"><span class="toc-number">3.4.</span> <span class="toc-text">My GPTs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#emoji%E5%B7%A5%E5%8E%82-My-GPT-%E7%89%88%E6%9C%AC"><span class="toc-number">3.4.1.</span> <span class="toc-text">emoji工厂- My GPT 版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B%E7%AB%99%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E5%99%A8-My-GPT-%E7%89%88%E6%9C%AC"><span class="toc-number">3.4.2.</span> <span class="toc-text">B站视频下载器 - My GPT 版本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%BC%80%E9%80%9A-Plus-%E8%B4%A6%E5%8F%B7"><span class="toc-number">4.</span> <span class="toc-text">如何开通 Plus 账号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#chatGPT-Plus-%E8%B4%A6%E5%8F%B7%E3%80%81OpenAI-API-%E8%B4%A6%E5%8F%B7%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.1.</span> <span class="toc-text">chatGPT Plus 账号、OpenAI API 账号的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%BE%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84%E6%A2%AF%E5%AD%90"><span class="toc-number">4.2.</span> <span class="toc-text">找一个靠谱的梯子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E9%80%9A%E8%99%9A%E6%8B%9F%E4%BF%A1%E7%94%A8%E5%8D%A1"><span class="toc-number">4.3.</span> <span class="toc-text">开通虚拟信用卡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%97%B6%E4%BB%A3%E7%9A%84%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E8%80%85%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">大模型时代的移动端开发者应该做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E4%B8%A4%E4%B8%AA%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">推荐两个公众号：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">学习资料：</span></a></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 13
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2024 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/13</span>
+            <a class="archive-post-title" href="/posts/chatpgt-introduce/">ChatGPT & LLM 的那些事（一）：新手上路</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/06</span>
+            <a class="archive-post-title" href="/posts/http3-overview/">关于HTTP/3 的那些事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span>
+            <a class="archive-post-title" href="/posts/http2-overview/">关于HTTP/2 的那些事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/05</span>
+            <a class="archive-post-title" href="/posts/the-palybook/">《人生战术本》- 里弗斯教练帮助他人“成为更好的人”</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2018 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/20</span>
+            <a class="archive-post-title" href="/posts/react-native-private-repo/">iOS ReactNative私有库指南</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span>
+            <a class="archive-post-title" href="/posts/xcode-10-migrate/">Xcode 10 beta 版本迁移指南</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/10</span>
+            <a class="archive-post-title" href="/posts/podfile_lock_conflict/">Cocoapods采坑记 - Podfile.lock 冲突问题</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2017 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span>
+            <a class="archive-post-title" href="/posts/xcode-tips/">Xcode问题锦集</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/07</span>
+            <a class="archive-post-title" href="/posts/swift-oc-mix/">Swift 与 OC 混编小技巧</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2016 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span>
+            <a class="archive-post-title" href="/posts/ios-ssl-pinning/">iOS 网络安全之SSL Pinning</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span>
+            <a class="archive-post-title" href="/posts/ios-thread-tips/">iOS多线程开发笔记</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/12</span>
+            <a class="archive-post-title" href="/posts/hexo_build/">使用hexo+github page搭建个人博客</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/11</span>
+            <a class="archive-post-title" href="/posts/git_manual/">git常用手册</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="LLM, GPT">
+                <span class="iconfont-archer">&#xe606;</span>
+                LLM, GPT
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iOS">
+                <span class="iconfont-archer">&#xe606;</span>
+                iOS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="cocoapods">
+                <span class="iconfont-archer">&#xe606;</span>
+                cocoapods
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ReactNative">
+                <span class="iconfont-archer">&#xe606;</span>
+                ReactNative
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="多线程">
+                <span class="iconfont-archer">&#xe606;</span>
+                多线程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="hexo">
+                <span class="iconfont-archer">&#xe606;</span>
+                hexo
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="分享">
+                <span class="iconfont-archer">&#xe606;</span>
+                分享
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="网络编程">
+                <span class="iconfont-archer">&#xe606;</span>
+                网络编程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="git">
+                <span class="iconfont-archer">&#xe606;</span>
+                git
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="AI">
+            <span class="iconfont-archer">&#xe60a;</span>
+            AI
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="开发">
+            <span class="iconfont-archer">&#xe60a;</span>
+            开发
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="ReactNative">
+            <span class="iconfont-archer">&#xe60a;</span>
+            ReactNative
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="分享">
+            <span class="iconfont-archer">&#xe60a;</span>
+            分享
+        </span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://coolzeng.com",
+        root: siteMetaRoot,
+        author: "zenghao0708"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

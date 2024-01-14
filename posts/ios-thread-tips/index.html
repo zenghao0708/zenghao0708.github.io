@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="zenghao0708">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="zenghao0708">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Life is struggle!">
+    <meta name="description" content="[TOC] GCD、NSOperation和多线程编程推荐阅读五星：  iOS 并发编程之 Operation Queues GCD 深入理解：第一部分 iOS并发编程对比总结,NSThread,NSOperation,GCD - iOS    四星：  NSOperation in NShipster  深入浅出 Cocoa 多线程编程之 block 与 dispatch quene GCD使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS多线程开发笔记">
+<meta property="og:url" content="https://coolzeng.com/posts/ios-thread-tips/index.html">
+<meta property="og:site_name" content="Zenghao0708的小站">
+<meta property="og:description" content="[TOC] GCD、NSOperation和多线程编程推荐阅读五星：  iOS 并发编程之 Operation Queues GCD 深入理解：第一部分 iOS并发编程对比总结,NSThread,NSOperation,GCD - iOS    四星：  NSOperation in NShipster  深入浅出 Cocoa 多线程编程之 block 与 dispatch quene GCD使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-11-15T13:51:37.000Z">
+<meta property="article:modified_time" content="2022-08-06T08:40:55.195Z">
+<meta property="article:author" content="zenghao0708">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>iOS多线程开发笔记 · fi3ework&#39;s Studio</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- Google tag (gtag.js) -->
+    
+
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zenghao0708的小站" type="application/atom+xml">
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>fi3ework's Studio.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">fi3ework&#39;s Studio.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">iOS多线程开发笔记</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+    
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                iOS多线程开发笔记
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="iOS">iOS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="多线程">多线程</a>
+    
+</div>
+
+                
+                <!-- 文章字数统计 -->
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2016/11/15</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>[TOC]</p>
+<h2 id="GCD、NSOperation和多线程编程推荐阅读"><a href="#GCD、NSOperation和多线程编程推荐阅读" class="headerlink" title="GCD、NSOperation和多线程编程推荐阅读"></a>GCD、NSOperation和多线程编程推荐阅读</h2><p><strong>五星：</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.leichunfeng.com/blog/2015/07/29/ios-concurrency-programming-operation-queues/">iOS 并发编程之 Operation Queues</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/nixzhu/dev-blog/blob/master/2014-04-19-grand-central-dispatch-in-depth-part-1.md#gcd-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86">GCD 深入理解：第一部分</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/zyq522376829/article/details/52373154">iOS并发编程对比总结,NSThread,NSOperation,GCD - iOS</a></li>
+</ol>
+<p> </p>
+<p><strong>四星：</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://nshipster.cn/nsoperation/">NSOperation in NShipster</a> </li>
+<li><a target="_blank" rel="noopener" href="http://www.cppblog.com/kesalin/archive/2011/08/26/154411.aspx">深入浅出 Cocoa 多线程编程之 block 与 dispatch quene</a></li>
+<li><a target="_blank" rel="noopener" href="http://tutuge.me/2015/04/03/something-about-gcd/">GCD使用经验与技巧浅谈</a></li>
+</ol>
+<span id="more"></span>
+
+<h2 id="多线程编程概念"><a href="#多线程编程概念" class="headerlink" title="多线程编程概念"></a>多线程编程概念</h2><h3 id="基本概念、术语："><a href="#基本概念、术语：" class="headerlink" title="基本概念、术语："></a>基本概念、术语：</h3><ol>
+<li>进程（Precess）：进程是操作系统管理和分配资源的最小单位，每个进程都有自己的内存空间、系统资源，至少有一个主线程和多个辅助线程。在iOS中，每个App运行的时候，都有对应的进程。</li>
+<li>线程（Thread）：线程则是操作系统具体的执行单元，代码的执行是在线程来完成的。在iOS中，线程的底层实现是基于POSIX thread API的，也就是我们常说的pthread。</li>
+<li>任务（Task）：任务是我们抽象出来的需要执行的工作，一般指代一段代码。</li>
+<li>同步 vs 异步<ol>
+<li>同步是指函数的调用会阻塞当前的线程，必须等待函数返回才能继续执行接下来的代码。</li>
+<li>异步函数的调用则不会阻塞当前线程，函数调用之后立刻返回，一般通过回调函数来处理函数的执行结果。</li>
+<li>异步函数能够有效的完成一些耗时的任务，而不必影响代码的执行流，能够提高代码的处理效率。</li>
+</ol>
+</li>
+<li>串行 vs 并发<ol>
+<li>串行指的是在同一个时间只能有一个任务在执行。</li>
+<li>并发指的是在同一个时间可以有多个任务一起执行。</li>
+<li>并发一般用于多核编程，通过高效的利用多核的优势，把不同的任务分配到各个执行单元来提高效率。</li>
+</ol>
+</li>
+<li>Dispatch Queue vs Operation Queue<ol>
+<li>GCD和NSOperation&#x2F;NSOperationQueue是iOS上面来处理多线程开发的工具，对应的概念分别是Dispatch Queue和Operation Queue。</li>
+</ol>
+</li>
+</ol>
+<h3 id="iOS并发编程模型"><a href="#iOS并发编程模型" class="headerlink" title="iOS并发编程模型"></a>iOS并发编程模型</h3><ol>
+<li>在其他的操作系统中，我们往往需要手动创建线程、管理线程的生命周期，在不需要的时候负责销毁线程和线程使用的资源，更加痛苦的是需要使用线程锁、信号量、代码临界区等手段完成线程的同步工作，这些操作往往容易出错而且繁杂。</li>
+<li>iOS通过抽象出队列的概念，让开发者更加关注于任务的安排和调度，而从线程的管理工作中解脱出来。在很多时候，iOS把一些繁杂且容易出错的工作（ARC代替MRC）抽离到底层中，能够让开发者把注意力更多地放到真正的任务上，这也是iOS能够吸引广大开发者的原因之一吧。</li>
+</ol>
+<h2 id="NSThread-vs-GCD-vs-NSOperation，它们到底是什么？"><a href="#NSThread-vs-GCD-vs-NSOperation，它们到底是什么？" class="headerlink" title="NSThread vs GCD vs NSOperation，它们到底是什么？"></a>NSThread vs GCD vs NSOperation，它们到底是什么？</h2><h3 id="三种解决方案"><a href="#三种解决方案" class="headerlink" title="三种解决方案"></a>三种解决方案</h3><ol>
+<li>NSThread：一个封装pthread API的线程对象，需要进行线程创建、销毁和处理线程同步，是最接近系统底层的解决方案。</li>
+<li>GCD：苹果基于C语言开发的，一个用于多核编程的解决方案，是一个轻量级的、以FIFO的顺序来执行并发任务的库。</li>
+<li>NSOperation：建立在GCD的基础上，面向对象的解决方案，比GCD更加灵活，也更加强大。</li>
+</ol>
+<h4 id="它们具体是什么？"><a href="#它们具体是什么？" class="headerlink" title="它们具体是什么？"></a>它们具体是什么？</h4><ol>
+<li>NSThread: Cocoa对于pthread API的封装，提供了一套面向对象的接口，需要开发者自行管理线程的生命周期、处理线程同步。大多是的时候，我们是不需要直接使用这些底层的对象，而是使用GCD或者NSOperation等更加高级的接口。</li>
+<li>关于Operation对象<ol>
+<li>NSOperation对象本身是一个抽象类，不能直接使用。要么使用系统预定义的两个子类NSInvocationOperation和NSBlockOperation或者定义它的子类。</li>
+<li>NSInvocationOperation:可以使用<strong>object</strong>和<strong>selector</strong>来创建一个NSInvocationOperation，非常的方便和灵活。当代码中已经有相关的处理逻辑方法时，建议直接使用NSInvocationOperation来进行替代。</li>
+<li>NSBlockOperation：可以使用NSBlockOperation来并发的执行一个或者多个block，只有当所有的block都执行完毕，NSBlockOperation才算执行完成，有点像dispatch_group的概念。</li>
+<li>所有的Operation都有下面的特性：<ol>
+<li>支持在 operation 之间建立依赖关系，只有当一个 operation 所依赖的所有 operation 都执行完成时，这个 operation 才能开始执行；</li>
+<li>支持一个可选的 completion block ，这个 block 将会在 operation 的主任务执行完成时被调用，在任务被取消的时候也会执行；</li>
+<li>支持通过 KVO 来观察 operation 执行状态的变化，Operation正是通过KVO通知来实现依赖运行，所以我们需要在自定义的子类中的处理好KVO的属性；</li>
+<li>支持设置执行的优先级，从而影响 operation 之间的相对执行顺序；</li>
+<li>支持取消操作，可以允许我们停止正在执行的 operation 。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>GCD队列：<ol>
+<li>以FIFO顺序执行任务的队列调度系统，先入队列的任务一定先执行。</li>
+<li>两种类型的队列：<ol>
+<li>串行队列（Serial Queue）:同一时间内只能有一个任务正在被执行。</li>
+<li>并发队列（Concurrent Queue）:同一时间内可以有多个任务同时被执行。</li>
+<li>iOS默认提供5个队列：<ol>
+<li>主队列（Main Queue）：应用程序主线程应用的队列，用于更新UI，属于串行队列。</li>
+<li>四个全局队列：<ol>
+<li>按照队列优先级排序，分别是：High、Default、Low、Background。</li>
+<li>这四个全局队列是由系统提供的，在所有的App中共享，当然也包含了Apple的应用。</li>
+</ol>
+</li>
+<li>并发队列中任务的执行顺序：<ol>
+<li>由于队列的并发数是有系统根据当前的资源动态管理的，我们不知道也不能够设置队列中任务执行的时机和所需时长。</li>
+<li>只有当位于队列前面的任务执行完毕、出队列后，才会执行后面的任务，但是当前并发执行的任务数量我们不得而知。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>自定义队列：<ol>
+<li>我们可以自定义串行或者并发队列来完成任务的执行和调度。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="各自的优势和劣势"><a href="#各自的优势和劣势" class="headerlink" title="各自的优势和劣势"></a>各自的优势和劣势</h3><ol>
+<li>优势：<ol>
+<li>NSThread：<ol>
+<li>能够执行实时任务。其他两者都是由系统管理的队列，不能保证实时性。</li>
+</ol>
+</li>
+<li>GCD：<ol>
+<li>可以非常简洁的完成简单异步任务的调用，如在主线程更新UI，延迟执行。</li>
+<li>只需要把任务分发到队列之后，不需要管理任务的调度情况。</li>
+</ol>
+</li>
+<li>NSOperation：<ol>
+<li>给任务添加依赖</li>
+<li>取消或者暂停一个正在执行的任务</li>
+<li>有一个可选的completionBlock</li>
+<li>可以通过KVO来查看任务的执行情况</li>
+<li>可以给任务设置优先级，从而影响任务的执行顺序</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>短板：<ol>
+<li>NSThread：需要进行线程的创建、销毁，以及处理线程同步的问题，过于繁杂，而且容易出错。</li>
+<li>GCD:<ol>
+<li>对于任务的管理不够：如不能取消任务、设置依赖和优先级等。</li>
+</ol>
+</li>
+<li>NSOperation:<ol>
+<li>相比于GCD，会增加系统的额外开销。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="多线程代码中，需要注意哪些问题？"><a href="#多线程代码中，需要注意哪些问题？" class="headerlink" title="多线程代码中，需要注意哪些问题？"></a>多线程代码中，需要注意哪些问题？</h2><ol>
+<li>有了GCD来调度block，我们为什么还需要NSBlockOperation?<ol>
+<li>现有代码已经在使用OperationQueue，而我们不想使用Dispatch Queue的时候，NSBlockOperation提供了一个面向对象的封装。</li>
+<li>当我们需要dispatch queue不能提供的功能时，如KVO观察Operation状态变化、设置operation之间依赖等。</li>
+</ol>
+</li>
+<li>NSInvocationOperation的灵活性是什么意思？<ol>
+<li>我们可以通过上下文来改变selector和object对象。</li>
+</ol>
+</li>
+<li>如何定义一个非并发的operation？<ol>
+<li>对于非并发的operation，我们只需要实现main方法和能够正常响应取消事件。</li>
+<li>其他复杂的工作如KVO通知、依赖设置等工作NSOperation类的start方法已经帮我们提供了默认实现。</li>
+<li>简单实现：<ol>
+<li>提供一个自定义的初始化方法</li>
+<li>重写main方法</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>如何实现一个并发的operation？<ol>
+<li>一般我们不需要实现并发的operation，当operation和operation queue一起使用的时候，Operation Queue会为非并发的operation创建单独的线程。</li>
+<li>默认情况下，operation是同步执行的，也就是我们直接使用start方法的时候，它是在调用者的线程中执行的。</li>
+<li>Operation的isConcurrent属性表明一个operation是否支持并发。</li>
+<li>配置并发的Operation：只有当我们需要手动执行operation，并且希望支持并发执行，需要重写下面的方法。<ol>
+<li>start：必须，配置任务执行的线程和其他资源，但是一定<strong>不能调用父类的实现</strong>。</li>
+<li>main：可选，一般用来执行具体的任务，而start方法更多是用来配置初始环境，当然也可以用来执行具体的任务。</li>
+<li>isExecuting和isFinished：必须，并发的Operation需要自己来配置环境，同时还需要向外界来传递状态的变化，而isExecuting和isFinished这两个状态的变化需要使用KVO来通知外部。</li>
+<li>isConcurrent：必须，用来标识一个Operation是否支持并发。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>如何完成自定义operation的cancel操作？<ol>
+<li>在下面这几个关键点的检查isCancelled属性<ol>
+<li>在真正开始执行operaiton之前</li>
+<li>至少在一次循环之中需要检查一次，如果单次循环耗时较长，则需要更加频繁的检查</li>
+<li>在任何相对比较容易终止Operation的地方</li>
+</ol>
+</li>
+<li>需要注意的是虽然Operation支持取消操作，但是并不是立刻就可以被终止的，而是在下一个isCancelled的检查点。</li>
+<li>在我们自定义Operation子类的时候，即使operation是被cancel了，我们仍然需要设置isFinished方法为true，因为在设置operation依赖的时候，它们的operation就是通过KVO来观察isFinished方法来判断时候可以执行的，如果在cancel的时候，没有设置isFinished方法，那么其他的operation将永远不会执行。</li>
+</ol>
+</li>
+<li>如何定制Operation对象的执行行为：<ol>
+<li>在Operation添加到Operation Queue之前，我们可以配置Operation的一些行为。</li>
+<li>配置依赖关系<ol>
+<li>依赖关系是在Operation之间的，与是否在同一个Operation Queue没有关系，也就是说，我们在位于不同的Operation Queue中的Operation之间设置依赖。</li>
+<li>注意不要产生依赖循环。</li>
+<li>在把operation添加到Operation Queue之前就需要配置好依赖，在添加后设置的依赖可能无效。</li>
+</ol>
+</li>
+<li>修改operation在队列中的优先级<ol>
+<li>Operation在队列中的执行顺序取决于isReady状态和队列优先级。</li>
+<li>isReady受它所依赖的operation状态的影响，只有当依赖的所有operation都变为isFinished的时候，isReady状态才为true。</li>
+<li>queuePriority只能作用与相同队列中的operation，并且队列优先级只有当isReady为true的时候，才会决定operation的执行顺序。</li>
+<li>isReady为FALSE的时候，isReady为true的低队列优先级的operation也会先执行。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>一个串行的 operation queue 与一个串行的 dispatch queue是一样的么？<ol>
+<li>两者都是在同一时间内只能有一个任务被执行，但是在任务的执行顺序上是不同的：<ol>
+<li>dispatch queue 的执行顺序一直是 FIFO 的</li>
+<li>operation queue中的operation执行的顺序取决于isReady和queuePriority状态。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>如何用GCD实现一个线程安全的单例？<ol>
+<li>ObjC</li>
+<li>Swift</li>
+</ol>
+</li>
+</ol>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://coolzeng.com">zenghao0708</a>
+            <p>原文链接：<a href="https://coolzeng.com/posts/ios-thread-tips/">https://coolzeng.com/posts/ios-thread-tips/</a>
+            <p>发表日期：<a href="https://coolzeng.com/posts/ios-thread-tips/">November 15th 2016, 9:51:37 pm</a>
+            <p>更新日期：<a href="https://coolzeng.com/posts/ios-thread-tips/">August 6th 2022, 4:40:55 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/posts/ios-ssl-pinning/" title="iOS 网络安全之SSL Pinning">
+                    <div class="nextTitle">iOS 网络安全之SSL Pinning</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/posts/hexo_build/" title="使用hexo+github page搭建个人博客">
+                    <div class="prevTitle">使用hexo+github page搭建个人博客</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:zenghao.0708@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zenghao0708" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                    
+                    <img class="profile-qr" src="/images/wechat_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD%E3%80%81NSOperation%E5%92%8C%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">GCD、NSOperation和多线程编程推荐阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">多线程编程概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E3%80%81%E6%9C%AF%E8%AF%AD%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">基本概念、术语：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iOS%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">iOS并发编程模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSThread-vs-GCD-vs-NSOperation%EF%BC%8C%E5%AE%83%E4%BB%AC%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">NSThread vs GCD vs NSOperation，它们到底是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.1.</span> <span class="toc-text">三种解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%83%E4%BB%AC%E5%85%B7%E4%BD%93%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">3.1.1.</span> <span class="toc-text">它们具体是什么？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E8%87%AA%E7%9A%84%E4%BC%98%E5%8A%BF%E5%92%8C%E5%8A%A3%E5%8A%BF"><span class="toc-number">3.2.</span> <span class="toc-text">各自的优势和劣势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BB%A3%E7%A0%81%E4%B8%AD%EF%BC%8C%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">多线程代码中，需要注意哪些问题？</span></a></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 13
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2024 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/13</span>
+            <a class="archive-post-title" href="/posts/chatpgt-introduce/">ChatGPT & LLM 的那些事（一）：新手上路</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/06</span>
+            <a class="archive-post-title" href="/posts/http3-overview/">关于HTTP/3 的那些事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span>
+            <a class="archive-post-title" href="/posts/http2-overview/">关于HTTP/2 的那些事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/05</span>
+            <a class="archive-post-title" href="/posts/the-palybook/">《人生战术本》- 里弗斯教练帮助他人“成为更好的人”</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2018 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/20</span>
+            <a class="archive-post-title" href="/posts/react-native-private-repo/">iOS ReactNative私有库指南</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span>
+            <a class="archive-post-title" href="/posts/xcode-10-migrate/">Xcode 10 beta 版本迁移指南</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/10</span>
+            <a class="archive-post-title" href="/posts/podfile_lock_conflict/">Cocoapods采坑记 - Podfile.lock 冲突问题</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2017 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span>
+            <a class="archive-post-title" href="/posts/xcode-tips/">Xcode问题锦集</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/07</span>
+            <a class="archive-post-title" href="/posts/swift-oc-mix/">Swift 与 OC 混编小技巧</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2016 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span>
+            <a class="archive-post-title" href="/posts/ios-ssl-pinning/">iOS 网络安全之SSL Pinning</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span>
+            <a class="archive-post-title" href="/posts/ios-thread-tips/">iOS多线程开发笔记</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/12</span>
+            <a class="archive-post-title" href="/posts/hexo_build/">使用hexo+github page搭建个人博客</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/11</span>
+            <a class="archive-post-title" href="/posts/git_manual/">git常用手册</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="LLM, GPT">
+                <span class="iconfont-archer">&#xe606;</span>
+                LLM, GPT
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iOS">
+                <span class="iconfont-archer">&#xe606;</span>
+                iOS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="cocoapods">
+                <span class="iconfont-archer">&#xe606;</span>
+                cocoapods
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ReactNative">
+                <span class="iconfont-archer">&#xe606;</span>
+                ReactNative
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="多线程">
+                <span class="iconfont-archer">&#xe606;</span>
+                多线程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="hexo">
+                <span class="iconfont-archer">&#xe606;</span>
+                hexo
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="分享">
+                <span class="iconfont-archer">&#xe606;</span>
+                分享
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="网络编程">
+                <span class="iconfont-archer">&#xe606;</span>
+                网络编程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="git">
+                <span class="iconfont-archer">&#xe606;</span>
+                git
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="AI">
+            <span class="iconfont-archer">&#xe60a;</span>
+            AI
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="开发">
+            <span class="iconfont-archer">&#xe60a;</span>
+            开发
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="ReactNative">
+            <span class="iconfont-archer">&#xe60a;</span>
+            ReactNative
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="分享">
+            <span class="iconfont-archer">&#xe60a;</span>
+            分享
+        </span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://coolzeng.com",
+        root: siteMetaRoot,
+        author: "zenghao0708"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>
