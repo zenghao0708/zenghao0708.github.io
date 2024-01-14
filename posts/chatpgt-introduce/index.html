@@ -51,7 +51,7 @@
 <meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E5%BC%A0%E6%97%A0%E5%B8%B8.png">
 <meta property="og:image" content="https://coolzeng.com/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E7%8E%8B%E5%BB%BA%E7%A1%95.png">
 <meta property="article:published_time" content="2024-01-13T02:16:28.000Z">
-<meta property="article:modified_time" content="2024-01-14T04:35:30.839Z">
+<meta property="article:modified_time" content="2024-01-14T12:53:35.935Z">
 <meta property="article:author" content="zenghao0708">
 <meta property="article:tag" content="LLM, GPT">
 <meta name="twitter:card" content="summary">
@@ -527,7 +527,8 @@
 <blockquote>
 <p>之前是 Tiktok 用了 9 个月~</p>
 </blockquote>
-<p>10亿用户数排名<img src="/posts/chatpgt-introduce/10%E4%BA%BF%E7%94%A8%E6%88%B7%E6%95%B0%E6%8E%92%E5%90%8D.png" class=""></p>
+<img src="/posts/chatpgt-introduce/10%E4%BA%BF%E7%94%A8%E6%88%B7%E6%95%B0%E6%8E%92%E5%90%8D.png" class="" width="800" title="10亿用户数排名">
+
 <h2 id="OpenAI和ChatGPT的发展历程"><a href="#OpenAI和ChatGPT的发展历程" class="headerlink" title="OpenAI和ChatGPT的发展历程"></a>OpenAI和ChatGPT的发展历程</h2><ol>
 <li><h3 id="OpenAI的愿景与成立"><a href="#OpenAI的愿景与成立" class="headerlink" title="OpenAI的愿景与成立"></a>OpenAI的愿景与成立</h3></li>
 </ol>
@@ -542,7 +543,9 @@
 <li><strong>ChatGPT</strong>: 结合了GPT-3的能力和进一步的优化，ChatGPT专注于<strong>生成更自然、连贯的对话式文本</strong>。它的出现标志着AI在自然语言处理领域的一个重要里程碑。</li>
 <li><strong>GPT-4</strong>: 最新一代的GPT-4在2023年推出，它不仅在模型大小上有所增长，而且在<strong>理解复杂文本、<strong><strong>多模态</strong></strong>能力（处理文本和图像）以及更精准的信息处理方面都显示了显著进步</strong>。GPT-4的推出进一步拓宽了AI在各种复杂任务中的应用前景，标志着AI技术向更高层次的演进。</li>
 </ul>
-<p>GPT演化历程<img src="/posts/chatpgt-introduce/GPT%E6%BC%94%E5%8C%96%E5%8E%86%E7%A8%8B.png" class=""></p>
+<img src="/posts/chatpgt-introduce/GPT%E6%BC%94%E5%8C%96%E5%8E%86%E7%A8%8B.png" class="" width="800" title="GPT演化历程">
+
+
 <h2 id="关键技术要点"><a href="#关键技术要点" class="headerlink" title="关键技术要点"></a>关键技术要点</h2><ol>
 <li><h3 id="一些基础术语"><a href="#一些基础术语" class="headerlink" title="一些基础术语"></a>一些基础术语</h3></li>
 </ol>
@@ -560,7 +563,8 @@
 <li>拓展一下: LLM的发展始于较小的模型，如GPT-1，随着时间的推移，模型变得越来越大，学习能力也不断增强，直至能处理极其复杂的语言任务。</li>
 </ul>
 <p>LLM 是一个新事物，但也是站在已有的技术上面进行创新。而且很有可能是超出创始人预期的「上帝的礼物」。</p>
-<p>LLM&amp;GPT关系<img src="/posts/chatpgt-introduce/LLM&GPT%E5%85%B3%E7%B3%BB.png" class=""></p>
+<img src="/posts/chatpgt-introduce/LLM&GPT%E5%85%B3%E7%B3%BB.png" class="" width="800" title="LLM&amp;GPT关系">
+
 <h4 id="G-P-T是什么？（Generate-Predict-and-Transform，生成、预测、转换）"><a href="#G-P-T是什么？（Generate-Predict-and-Transform，生成、预测、转换）" class="headerlink" title="G, P, T是什么？（Generate, Predict, and Transform，生成、预测、转换）"></a>G, P, T是什么？（Generate, Predict, and Transform，生成、预测、转换）</h4><ul>
 <li>含义: 这些术语描述了大型语言模型的三个基本功能：生成（Generate）文本，预测（Predict）下一个词，转换（Transform）输入数据。</li>
 <li>示例: 在文本生成任务中，模型生成（Generate）连续的文本，预测（Predict）基于上下文的下一个最可能的词，转换（Transform）用户输入为有意义的输出。</li>
@@ -584,9 +588,14 @@
 <p>GPT-3拥有1400万字符串组成的词汇表，主要有下面三个局限性：区分大小写；数字分块不一致；有时候会附带空格</p>
 <p>在<a target="_blank" rel="noopener" href="https://platform.openai.com/tokenizer">https://platform.openai.com/tokenizer</a> 中可以看到 “<strong>Hello, World</strong>“和「<strong>你好，世界</strong>」的 token 数量。各种 LLM 的交互上下文限制、API Cost都是token 来计数的。</p>
 <p><strong>Hello, World</strong></p>
-<p>tokens-gpt-helloworld1<img src="/posts/chatpgt-introduce/tokens-gpt-helloworld1.png" class=""><br>token-raw-hello<img src="/posts/chatpgt-introduce/token-raw-hello.png" class=""></p>
+<img src="/posts/chatpgt-introduce/tokens-gpt-helloworld1.png" class="" width="500" title="tokens-gpt-helloworld">
+<img src="/posts/chatpgt-introduce/token-raw-hello.png" class="" width="500" title="token-raw-hello">
+
+
 <p><strong>你好，世界</strong></p>
-<p>tokens-gpt-你好<img src="/posts/chatpgt-introduce/tokens-gpt-%E4%BD%A0%E5%A5%BD.png" class=""><br>tokens-gpt-你好<img src="/posts/chatpgt-introduce/tokens-gpt-%E4%BD%A0%E5%A5%BD.png" class=""></p>
+<img src="/posts/chatpgt-introduce/tokens-gpt-%E4%BD%A0%E5%A5%BD.png" class="" width="500">
+<img src="/posts/chatpgt-introduce/tokens-gpt-%E4%BD%A0%E5%A5%BD.png" class="" width="500">
+
 <h3 id="编写高效Prompt的规则"><a href="#编写高效Prompt的规则" class="headerlink" title="编写高效Prompt的规则"></a>编写高效Prompt的规则</h3><p>推荐两个学习源：</p>
 <ul>
 <li>吴恩达的 Prompt Engingerring 教程：<a target="_blank" rel="noopener" href="https://github.com/GitHubDaily/ChatGPT-Prompt-Engineering-for-Developers-in-Chinese">https://github.com/GitHubDaily/ChatGPT-Prompt-Engineering-for-Developers-in-Chinese</a></li>
@@ -614,16 +623,19 @@
 <p>我会给你一段文字描述，你给我匹配相关的表情关键字，然后画出emoji表情。 </p>
 <p>下面是示例：文字描述「我今天中奖了，想要大吃一顿满足下」， 表情关键字：开心</p>
 <p>效果如下：</p>
-<p>gpt4-表情<img src="/posts/chatpgt-introduce/gpt4-%E8%A1%A8%E6%83%85.png" class=""></p>
+<img src="/posts/chatpgt-introduce/gpt4-%E8%A1%A8%E6%83%85.png" class="" width="500">
+
 <h4 id="iOS-技术专家"><a href="#iOS-技术专家" class="headerlink" title="iOS 技术专家"></a>iOS 技术专家</h4><p>要求：chatGPT</p>
 <p>Prompt:</p>
 <p>你作为一名经验丰富的iOS开发者，帮我解决一些iOS和Swift相关的技术问题。希望给出相关知识点、实践案例，最好搭配上相关代码。</p>
 <p>我作为一名iOS开发新手，经常会遇到循环引用导致的内存泄露问题，有什么好的建议或者最佳实践呢？</p>
-<p>demo-iOS专家-rxswift-1<img src="/posts/chatpgt-introduce/demo-iOS%E4%B8%93%E5%AE%B6-rxswift-1.png" class=""><br>demo-iOS专家-rxswift-2<img src="/posts/chatpgt-introduce/demo-iOS%E4%B8%93%E5%AE%B6-rxswift-2.png" class=""></p>
+<img src="/posts/chatpgt-introduce/demo-iOS%E4%B8%93%E5%AE%B6-rxswift-1.png" class="" width="400">
+<img src="/posts/chatpgt-introduce/demo-iOS%E4%B8%93%E5%AE%B6-rxswift-2.png" class="" width="400">
+
 <h4 id="让GPT-来写Prompt（比如写一个技术调研文档😊）"><a href="#让GPT-来写Prompt（比如写一个技术调研文档😊）" class="headerlink" title="让GPT 来写Prompt（比如写一个技术调研文档😊）"></a>让GPT 来写Prompt（比如写一个技术调研文档😊）</h4><p>要求：chatGPT(gpt4 效果更佳)</p>
 <p>Prompt：</p>
 <p>Web search results:</p>
-<p>[1] “Oops, there was an error.  Please try again.If it persists, please email <a href="mailto:&#x6f;&#x70;&#x73;&#x40;&#x64;&#117;&#x63;&#x6b;&#100;&#117;&#x63;&#x6b;&#103;&#x6f;&#x2e;&#x63;&#x6f;&#x6d;">&#x6f;&#x70;&#x73;&#x40;&#x64;&#117;&#x63;&#x6b;&#100;&#117;&#x63;&#x6b;&#103;&#x6f;&#x2e;&#x63;&#x6f;&#x6d;</a>“</p>
+<p>[1] “Oops, there was an error.  Please try again.If it persists, please email <a href="mailto:&#111;&#112;&#115;&#x40;&#100;&#117;&#99;&#107;&#x64;&#x75;&#99;&#x6b;&#x67;&#x6f;&#x2e;&#99;&#111;&#109;">&#111;&#112;&#115;&#x40;&#100;&#117;&#99;&#107;&#x64;&#x75;&#99;&#x6b;&#x67;&#x6f;&#x2e;&#99;&#111;&#109;</a>“</p>
 <p>URL: <a target="_blank" rel="noopener" href="https://lite.duckduckgo.com/50x.html?e=3">https://lite.duckduckgo.com/50x.html?e=3</a></p>
 <p>Current date: 2023&#x2F;4&#x2F;9</p>
 <p>Instructions: Using the provided web search results, write a comprehensive reply to the given query. Make sure to cite results using [<a href="URL">number</a>] notation after the reference. If the provided search results refer to multiple subjects with the same name, write separate answers for each subject.</p>
@@ -647,7 +659,9 @@
 <p>目测chatGPT的效果比GPT 4好一些，能够比较完整的输出整个文档内容</p>
 <p><strong>chatGPT 版本</strong>   </p>
 <p>完整对话：<a target="_blank" rel="noopener" href="https://shareg.pt/sGNglFQ">https://shareg.pt/sGNglFQ</a> </p>
-<p>demo-generate-prompt-1<img src="/posts/chatpgt-introduce/demo-generate-prompt-1.png" class=""><br>demo-generate-prompt-2<img src="/posts/chatpgt-introduce/demo-generate-prompt-2.png" class=""></p>
+<img src="/posts/chatpgt-introduce/demo-generate-prompt-1.png" class="" width="400">
+<img src="/posts/chatpgt-introduce/demo-generate-prompt-2.png" class="" width="400">
+
 <p><strong>GPT4 +Bing 版本</strong></p>
 <p>完整对话：</p>
 <h4 id="Mr-Ranedeer-AI-Tutor"><a href="#Mr-Ranedeer-AI-Tutor" class="headerlink" title="Mr.-Ranedeer-AI-Tutor"></a>Mr.-Ranedeer-AI-Tutor</h4><p>一个非常强大的课程生成器，支持中文、难度选择。</p>
@@ -655,18 +669,24 @@
 <p>要求：GPT Plus账号</p>
 <p>中文指南：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/642238713">https://zhuanlan.zhihu.com/p/642238713</a></p>
 <p>效果:</p>
-<p>demo-mr.ranedeer<img src="/posts/chatpgt-introduce/demo-mr.ranedeer.png" class=""></p>
+<img src="/posts/chatpgt-introduce/demo-mr.ranedeer.png" class="" width="600">
+
 <ol>
 <li><h3 id="My-GPTs"><a href="#My-GPTs" class="headerlink" title="My GPTs"></a>My GPTs</h3></li>
 </ol>
 <p>一个字：牛；两个字：牛逼； 三个字：很牛逼</p>
 <p>不用任何编程能力，使用自然语言来完成各种任务，写网站、实现视频下载能力····</p>
 <h4 id="emoji工厂-My-GPT-版本"><a href="#emoji工厂-My-GPT-版本" class="headerlink" title="emoji工厂- My GPT 版本"></a>emoji工厂- My GPT 版本</h4><p>继续使用上面的「emoji  工厂」来创建自己 GPT 应用。</p>
-<p>demo-gpt-store-表情生成器-1<img src="/posts/chatpgt-introduce/demo-gpt-store-%E8%A1%A8%E6%83%85%E7%94%9F%E6%88%90%E5%99%A8-1.png" class=""><br>demo-gpt-store-表情生成器-2<img src="/posts/chatpgt-introduce/demo-gpt-store-%E8%A1%A8%E6%83%85%E7%94%9F%E6%88%90%E5%99%A8-2.png" class=""></p>
+<img src="/posts/chatpgt-introduce/demo-gpt-store-%E8%A1%A8%E6%83%85%E7%94%9F%E6%88%90%E5%99%A8-1.png" class="" width="500">
+<img src="/posts/chatpgt-introduce/demo-gpt-store-%E8%A1%A8%E6%83%85%E7%94%9F%E6%88%90%E5%99%A8-2.png" class="" width="500">
+
+
 <h4 id="B站视频下载器-My-GPT-版本"><a href="#B站视频下载器-My-GPT-版本" class="headerlink" title="B站视频下载器 - My GPT 版本"></a>B站视频下载器 - My GPT 版本</h4><p>全程使用中文来定义你的需求，GPT还会帮你生成Logo。</p>
 <p>GPTs 不能直接下载视频，但是可以推荐一些相关的工具</p>
 <p>体验地址【需要GPT Plus?】：<a target="_blank" rel="noopener" href="https://chat.openai.com/g/g-ozticvPaK-bzhan-shen-qi">https://chat.openai.com/g/g-ozticvPaK-bzhan-shen-qi</a></p>
-<p>demo-gpt-store-B站下载器-1<img src="/posts/chatpgt-introduce/demo-gpt-store-B%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%99%A8-1.png" class=""><br>demo-gpt-store-B站下载器-2<img src="/posts/chatpgt-introduce/demo-gpt-store-B%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%99%A8-2.png" class=""></p>
+<img src="/posts/chatpgt-introduce/demo-gpt-store-B%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%99%A8-1.png" class="" width="500">
+<img src="/posts/chatpgt-introduce/demo-gpt-store-B%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%99%A8-2.png" class="" width="500">
+
 <h2 id="如何开通-Plus-账号"><a href="#如何开通-Plus-账号" class="headerlink" title="如何开通 Plus 账号"></a>如何开通 Plus 账号</h2><h3 id="chatGPT-Plus-账号、OpenAI-API-账号的关系"><a href="#chatGPT-Plus-账号、OpenAI-API-账号的关系" class="headerlink" title="chatGPT Plus 账号、OpenAI API 账号的关系"></a>chatGPT Plus 账号、OpenAI API 账号的关系</h3><p><strong>ChatGPT 是基于 OpenAI 的 GPT-4 模型开发的一款聊天式人工智能</strong>。它可以理解和生成自然语言，与用户进行多轮对话。ChatGPT 旨在为用户提供智能、有趣的对话体验，可用于回答问题、进行讨论等。它仍然存在一些局限性，如模型输出可能不准确或不可靠，无法实时更新知识库，以及容易产生偏见。</p>
 <p><strong>ChatGPT Plus 是针对 ChatGPT 的一项增值服务，通过订阅此服务，用户可以获得更多功能和优先支持</strong>。这个服务主要面向那些希望在使用 ChatGPT 时获得更高质量、更个性化体验的用户。ChatGPT Plus 更适合企业级应用、专业人士和教育领域等场景。</p>
 <p><strong>OpenAI API 是一种开放的应用程序编程接口</strong>，通过这个接口，开发者可以将 OpenAI 开发的人工智能技术应用到各种软件中。通过调用这个 API，开发者可以实现对话生成、摘要、翻译等自然语言处理任务。OpenAI API 被广泛应用于聊天机器人、内容生成、文本摘要和语言翻译等场景。</p>
@@ -684,13 +704,18 @@
 <li><h3 id="找一个靠谱的梯子"><a href="#找一个靠谱的梯子" class="headerlink" title="找一个靠谱的梯子"></a>找一个靠谱的梯子</h3></li>
 </ol>
 <p>推荐使用<strong>stotik</strong>，专业客服解决问题，稳定运行多年、多平台适配，价格合适</p>
-<p>vpn-1<img src="/posts/chatpgt-introduce/vpn-1.png" class=""><br>vpn-2<img src="/posts/chatpgt-introduce/vpn-2.png" class=""></p>
+<img src="/posts/chatpgt-introduce/vpn-1.png" class="" width="500">
+<img src="/posts/chatpgt-introduce/vpn-2.png" class="" width="500">
+
 <ol>
 <li><h3 id="开通虚拟信用卡"><a href="#开通虚拟信用卡" class="headerlink" title="开通虚拟信用卡"></a>开通虚拟信用卡</h3></li>
 </ol>
 <p>推荐使用<strong>WildCard</strong>（推荐码链接：<a target="_blank" rel="noopener" href="https://bewildcard.com/i/HAO102%EF%BC%89">https://bewildcard.com/i/HAO102）</a> 来开通美国信用卡，然后绑定到 chatGPT 和 OpenAI 后台支付渠道。</p>
 <p>收费：两年开卡费用大概100 RMB，充值手续费3.5%。 遇到问题有客服帮助解决，本人能够一次性绑定好信用卡。</p>
-<p>wildcard-1<img src="/posts/chatpgt-introduce/wildcard-1.png" class=""><br>wildcard-2<img src="/posts/chatpgt-introduce/wildcard-2.png" class=""><br>wildcard-3<img src="/posts/chatpgt-introduce/wildcard-3.png" class=""></p>
+<img src="/posts/chatpgt-introduce/wildcard-1.png" class="" width="500">
+<img src="/posts/chatpgt-introduce/wildcard-2.png" class="" width="500">
+<img src="/posts/chatpgt-introduce/wildcard-3.png" class="" width="500">
+
 <h2 id="大模型时代的移动端开发者应该做什么？"><a href="#大模型时代的移动端开发者应该做什么？" class="headerlink" title="大模型时代的移动端开发者应该做什么？"></a>大模型时代的移动端开发者应该做什么？</h2><p>正如某个大佬所说「chatGPT 就是移动时代的 iPhone4」，他们都有的特点：产品本身足够优秀、充满想象力和魔力、开启下一个十年。作为经历了互联网和移动互联网时代的十年行业老兵，下面是我我的真心想法：</p>
 <ol>
 <li><strong>体验行业里面最好的产品</strong>（强烈安利 GPT plus 账号，能够体验 GPT 4 和各种丰富的插件）,学习并使用 Prompt 的技巧和经验，提升生产力或者实现自己的创意。</li>
@@ -706,8 +731,10 @@
 <ul>
 <li><strong>LLM****主题</strong>: <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzIwODA3MDUwOQ==&action=getalbum&album_id=2962216275081166849&scene=173&from_msgid=2652773232&from_itemidx=1&count=3&nolastread=1#wechat_redirect">https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzIwODA3MDUwOQ==&amp;action=getalbum&amp;album_id=2962216275081166849&amp;scene=173&amp;from_msgid=2652773232&amp;from_itemidx=1&amp;count=3&amp;nolastread=1#wechat_redirect</a></li>
 <li><a target="_blank" rel="noopener" href="https://bytedance.larkoffice.com/docs/doccnY3LlUFThQaZRc73PXSFAbg">Hey! 这有一座重庆大厦</a> </li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/tdWzDCL5EqQyIn9KfL_kBQ">如何成为初代 AGI 产品经理？</a><br>公众号-张无常<img src="/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E5%BC%A0%E6%97%A0%E5%B8%B8.png" class=""></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/tdWzDCL5EqQyIn9KfL_kBQ">如何成为初代 AGI 产品经理？</a></li>
 </ul>
+<img src="/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E5%BC%A0%E6%97%A0%E5%B8%B8.png" class="" width="500">
+
 </li>
 <li><p><strong>王建硕</strong>：百姓网创始人，知名 Blog 主。很有意思的一个技术人，可以帮助打开思路。</p>
 <ul>
@@ -715,7 +742,9 @@
 </ul>
 </li>
 </ul>
-<p>公众号-王建硕<img src="/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E7%8E%8B%E5%BB%BA%E7%A1%95.png" class=""></p>
+<img src="/posts/chatpgt-introduce/%E5%85%AC%E4%BC%97%E5%8F%B7-%E7%8E%8B%E5%BB%BA%E7%A1%95.png" class="" width="500">
+
+
 <h3 id="学习资料："><a href="#学习资料：" class="headerlink" title="学习资料："></a>学习资料：</h3><ul>
 <li><a target="_blank" rel="noopener" href="https://bytedance.larkoffice.com/base/AIMAbnJxQaNgSGsBAtwcdAkLnvf?table=tblmZTd8VuUOOONh&view=vew0Eo17BB">AIGC交流群工具沉淀 by 乔向阳</a> : ⭐️⭐️⭐️⭐️⭐️，很全面的工具、X 账号、产品合集，找到你感兴趣的Topic 深入体验、交流，感觉吃透这里面的内容，遇到 AGI 的话题应该能做到「侃侃而谈」</li>
 <li><a target="_blank" rel="noopener" href="https://bytedance.larkoffice.com/docx/LgTSdzOREosKYRxjtATcF81kngx">如何成为初代 AGI 产品经理？</a>  ： ⭐️⭐️⭐️⭐️，海庚从产品经理角度来解读 LLM 时代的现状和机会，产品经理是最接近用户的群体，多看看产品经理的思路有助于自己更好的解决问题。</li>
@@ -731,7 +760,7 @@
             <p>原文作者：<a href="https://coolzeng.com">zenghao0708</a>
             <p>原文链接：<a href="https://coolzeng.com/posts/chatpgt-introduce/">https://coolzeng.com/posts/chatpgt-introduce/</a>
             <p>发表日期：<a href="https://coolzeng.com/posts/chatpgt-introduce/">January 13th 2024, 10:16:28 am</a>
-            <p>更新日期：<a href="https://coolzeng.com/posts/chatpgt-introduce/">January 14th 2024, 12:35:30 pm</a>
+            <p>更新日期：<a href="https://coolzeng.com/posts/chatpgt-introduce/">January 14th 2024, 8:53:35 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
