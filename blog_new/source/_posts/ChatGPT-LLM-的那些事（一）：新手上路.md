@@ -22,7 +22,7 @@ date: 2024-01-13 10:16:28
 
 > 之前是 Tiktok 用了 9 个月~
 
-10亿用户数排名{% asset_img 10亿用户数排名.png %}
+{% asset_img 10亿用户数排名.png 800 '"10亿用户数排名"' %}
 
 ## OpenAI和ChatGPT的发展历程
 
@@ -38,8 +38,7 @@ OpenAI成立于2015年，其愿景是推动人工智能技术的友好发展，�
 - **ChatGPT**: 结合了GPT-3的能力和进一步的优化，ChatGPT专注于**生成更自然、连贯的对话式文本**。它的出现标志着AI在自然语言处理领域的一个重要里程碑。
 - **GPT-4**: 最新一代的GPT-4在2023年推出，它不仅在模型大小上有所增长，而且在**理解复杂文本、****多模态****能力（处理文本和图像）以及更精准的信息处理方面都显示了显著进步**。GPT-4的推出进一步拓宽了AI在各种复杂任务中的应用前景，标志着AI技术向更高层次的演进。
 
-GPT演化历程{% asset_img GPT演化历程.png %}
-
+{% asset_img GPT演化历程.png 800 '"GPT演化历程"' %}
 
 
 ## 关键技术要点
@@ -64,7 +63,7 @@ GPT演化历程{% asset_img GPT演化历程.png %}
 
 LLM 是一个新事物，但也是站在已有的技术上面进行创新。而且很有可能是超出创始人预期的「上帝的礼物」。
 
-LLM&GPT关系{% asset_img LLM&GPT关系.png %}
+{% asset_img LLM&GPT关系.png 800 '"LLM&GPT关系"' %}
 
 #### G, P, T是什么？（Generate, Predict, and Transform，生成、预测、转换）
 
@@ -97,14 +96,14 @@ GPT-3拥有1400万字符串组成的词汇表，主要有下面三个局限性�
 
 **Hello, World**
 
-tokens-gpt-helloworld1{% asset_img tokens-gpt-helloworld1.png %}
-token-raw-hello{% asset_img token-raw-hello.png %}
+{% asset_img tokens-gpt-helloworld1.png 500 '"tokens-gpt-helloworld"' %}
+{% asset_img token-raw-hello.png 500 '"token-raw-hello"' %}
 
 
 **你好，世界**
 
-tokens-gpt-你好{% asset_img tokens-gpt-你好.png %}
-tokens-gpt-你好{% asset_img tokens-gpt-你好.png %}
+{% asset_img tokens-gpt-你好.png 500 %}
+{% asset_img tokens-gpt-你好.png 500 %}
 
 ###  编写高效Prompt的规则
 
@@ -140,8 +139,7 @@ Prompt：
 下面是示例：文字描述「我今天中奖了，想要大吃一顿满足下」， 表情关键字：开心
 
 效果如下：
-
-gpt4-表情{% asset_img gpt4-表情.png %}
+{% asset_img gpt4-表情.png 500 %}
 
 #### iOS 技术专家
 
@@ -153,8 +151,8 @@ Prompt:
 
 我作为一名iOS开发新手，经常会遇到循环引用导致的内存泄露问题，有什么好的建议或者最佳实践呢？
 
-demo-iOS专家-rxswift-1{% asset_img demo-iOS专家-rxswift-1.png %}
-demo-iOS专家-rxswift-2{% asset_img demo-iOS专家-rxswift-2.png %}
+{% asset_img demo-iOS专家-rxswift-1.png 400 %}
+{% asset_img demo-iOS专家-rxswift-2.png 400 %}
 
 #### 让GPT 来写Prompt（比如写一个技术调研文档😊）
 
@@ -205,8 +203,8 @@ Reply in 中文
 
 完整对话：https://shareg.pt/sGNglFQ 
 
-demo-generate-prompt-1{% asset_img demo-generate-prompt-1.png %}
-demo-generate-prompt-2{% asset_img demo-generate-prompt-2.png %}
+{% asset_img demo-generate-prompt-1.png 400 %}
+{% asset_img demo-generate-prompt-2.png 400 %}
 
 **GPT4 +Bing 版本**
 
@@ -224,7 +222,7 @@ github地址：https://github.com/JushBJJ/Mr.-Ranedeer-AI-Tutor
 
 效果:
 
-demo-mr.ranedeer{% asset_img demo-mr.ranedeer.png %}
+{% asset_img demo-mr.ranedeer.png 600 %}
 
 1. ###  My GPTs
 
@@ -236,8 +234,8 @@ demo-mr.ranedeer{% asset_img demo-mr.ranedeer.png %}
 
 继续使用上面的「emoji  工厂」来创建自己 GPT 应用。
 
-demo-gpt-store-表情生成器-1{% asset_img demo-gpt-store-表情生成器-1.png %}
-demo-gpt-store-表情生成器-2{% asset_img demo-gpt-store-表情生成器-2.png %}
+{% asset_img demo-gpt-store-表情生成器-1.png 500 %}
+{% asset_img demo-gpt-store-表情生成器-2.png 500 %}
 
 
 #### B站视频下载器 - My GPT 版本
@@ -248,8 +246,8 @@ GPTs 不能直接下载视频，但是可以推荐一些相关的工具
 
 体验地址【需要GPT Plus?】：https://chat.openai.com/g/g-ozticvPaK-bzhan-shen-qi
 
-demo-gpt-store-B站下载器-1{% asset_img demo-gpt-store-B站下载器-1.png %}
-demo-gpt-store-B站下载器-2{% asset_img demo-gpt-store-B站下载器-2.png %}
+{% asset_img demo-gpt-store-B站下载器-1.png 500 %}
+{% asset_img demo-gpt-store-B站下载器-2.png 500 %}
 
 ## 如何开通 Plus 账号
 
@@ -274,8 +272,8 @@ demo-gpt-store-B站下载器-2{% asset_img demo-gpt-store-B站下载器-2.png %}
 
 推荐使用**stotik**，专业客服解决问题，稳定运行多年、多平台适配，价格合适
 
-vpn-1{% asset_img vpn-1.png %}
-vpn-2{% asset_img vpn-2.png %}
+{% asset_img vpn-1.png 500 %}
+{% asset_img vpn-2.png 500 %}
 
 1. ###  开通虚拟信用卡
 
@@ -283,9 +281,9 @@ vpn-2{% asset_img vpn-2.png %}
 
 收费：两年开卡费用大概100 RMB，充值手续费3.5%。 遇到问题有客服帮助解决，本人能够一次性绑定好信用卡。
 
-wildcard-1{% asset_img wildcard-1.png %}
-wildcard-2{% asset_img wildcard-2.png %}
-wildcard-3{% asset_img wildcard-3.png %}
+{% asset_img wildcard-1.png 500 %}
+{% asset_img wildcard-2.png 500 %}
+{% asset_img wildcard-3.png 500 %}
 
 ## 大模型时代的移动端开发者应该做什么？
 
@@ -304,13 +302,14 @@ wildcard-3{% asset_img wildcard-3.png %}
   - **LLM****主题**: https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzIwODA3MDUwOQ==&action=getalbum&album_id=2962216275081166849&scene=173&from_msgid=2652773232&from_itemidx=1&count=3&nolastread=1#wechat_redirect
   - [Hey! 这有一座重庆大厦](https://bytedance.larkoffice.com/docs/doccnY3LlUFThQaZRc73PXSFAbg) 
   - [如何成为初代 AGI 产品经理？](https://mp.weixin.qq.com/s/tdWzDCL5EqQyIn9KfL_kBQ)
-  公众号-张无常{% asset_img 公众号-张无常.png %}
+  
+  {% asset_img 公众号-张无常.png 500 %}
 
 
 - **王建硕**：百姓网创始人，知名 Blog 主。很有意思的一个技术人，可以帮助打开思路。
   - **ChatGPT 开创的时代**：https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NzI0Mjg0MA==&action=getalbum&album_id=2801018476114149380&scene=173&from_msgid=2652376733&from_itemidx=1&count=3&nolastread=1#wechat_redirect
 
-公众号-王建硕{% asset_img 公众号-王建硕.png %}
+{% asset_img 公众号-王建硕.png 500 %}
 
 
 ### 学习资料：
