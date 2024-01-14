@@ -1,36 +1,33 @@
 ---
 title: ChatGPT & LLM 的那些事（一）：新手上路
 categories: AI
-tags: 'LLM, GPT'
+tags: 
+ - LLM
+ - GPT
 abbrlink: chatpgt-introduce
 date: 2024-01-13 10:16:28
 ---
-
 
 
 ## 开场白
 
 在当今的技术世界中，了解人工智能的最新进展对于一名移动端开发工程师至关重要。OpenAI的ChatGPT是这一领域的最新成果，它不仅代表了大模型时代的前沿，而且还体现了AI技术在日常生活中应用的无限可能性，本文会给大家介绍一些chatGPT 相关的基本概念、Prompt 技巧、GPT 4的能力对比和一些学习资料，希望大家能够在大模型的时代继续遨游。
 
-
-
 <!-- more -->
-
-
 
 **最快到达十亿用户数的应用 -- ChatGPT**
 
-> 之前是 Tiktok 用了 9 个月~
+> 之前是 Tiktok 用了 9 个月
 
 {% asset_img 10亿用户数排名.png 800 '"10亿用户数排名"' %}
 
 ## OpenAI和ChatGPT的发展历程
 
-1. ### OpenAI的愿景与成立
+### OpenAI的愿景与成立
 
 OpenAI成立于2015年，其愿景是推动人工智能技术的友好发展，以使全人类受益。它最初是作为非盈利组织成立的，但后来转型为“有限盈利”公司，旨在平衡盈利与研究目标之间的关系。
 
-1. ### GPT系列的演进
+### GPT系列的演进
 
 - **GPT-1**: OpenAI首个显著的成果是GPT-1，它标志着利用大规模数据集进行深度学习的开始。这个模型虽小，但已显示出巨大潜力。
 - **GPT-2**: 随后，GPT-2的发布展示了在文本生成方面的显著进步，其更大的模型和更复杂的训练数据使其成为当时最强大的语言模型之一。
@@ -40,10 +37,9 @@ OpenAI成立于2015年，其愿景是推动人工智能技术的友好发展，�
 
 {% asset_img GPT演化历程.png 800 '"GPT演化历程"' %}
 
-
 ## 关键技术要点
 
-1. ###  一些基础术语
+### 一些基础术语
 
 #### Prompt（提示）
 
@@ -92,25 +88,24 @@ GPT是一个重要的里程碑，有更好的交互形式、从而可以让大�
 
 GPT-3拥有1400万字符串组成的词汇表，主要有下面三个局限性：区分大小写；数字分块不一致；有时候会附带空格
 
-在https://platform.openai.com/tokenizer 中可以看到 "**Hello, World**"和「**你好，世界**」的 token 数量。各种 LLM 的交互上下文限制、API Cost都是token 来计数的。
+在<https://platform.openai.com/tokenizer> 中可以看到 "**Hello, World**"和「**你好，世界**」的 token 数量。各种 LLM 的交互上下文限制、API Cost都是token 来计数的。
 
 **Hello, World**
 
 {% asset_img tokens-gpt-helloworld1.png 500 '"tokens-gpt-helloworld"' %}
 {% asset_img token-raw-hello.png 500 '"token-raw-hello"' %}
 
-
 **你好，世界**
 
 {% asset_img tokens-gpt-你好.png 500 %}
 {% asset_img tokens-gpt-你好.png 500 %}
 
-###  编写高效Prompt的规则
+### 编写高效Prompt的规则
 
 推荐两个学习源：
 
-- 吴恩达的 Prompt Engingerring 教程：https://github.com/GitHubDaily/ChatGPT-Prompt-Engineering-for-Developers-in-Chinese
-- Learning Prompt 课程 By Jimmy Wong： https://learningprompt.wiki/zh-Hans/
+- 吴恩达的 Prompt Engingerring 教程：<https://github.com/GitHubDaily/ChatGPT-Prompt-Engineering-for-Developers-in-Chinese>
+- Learning Prompt 课程 By Jimmy Wong： <https://learningprompt.wiki/zh-Hans/>
 
 大型语言模型如GPT系列在生成回答时依赖于输入的质量和准确性。清晰和具体的prompt可以提高模型生成文本的相关性和质量。
 
@@ -120,23 +115,25 @@ GPT-3拥有1400万字符串组成的词汇表，主要有下面三个局限性�
 4. **避免歧义**: 尽量使用无歧义的语言，避免引起模型的误解。
 5. **适当的长度**: 不宜过长或过短。过长可能导致模型混淆，过短可能导致信息不足。
 
-1. ###  Demos
+### Demos
 
 #### emoji 工厂
 
 要求：GPT Plus账号 + DELL·E3
 
 Prompt：
+```
 
 给你几个表情关键字：
 
 “开心”：代表现在很高兴、开心、愉悦、心情舒畅
 
-“愤怒”：代表现在有点懊恼，有一种想要找个地方发泄不满情绪。 
+“愤怒”：代表现在有点懊恼，有一种想要找个地方发泄不满情绪。
 
-我会给你一段文字描述，你给我匹配相关的表情关键字，然后画出emoji表情。 
+我会给你一段文字描述，你给我匹配相关的表情关键字，然后画出emoji表情。
 
 下面是示例：文字描述「我今天中奖了，想要大吃一顿满足下」， 表情关键字：开心
+```
 
 效果如下：
 {% asset_img gpt4-表情.png 500 %}
@@ -146,25 +143,28 @@ Prompt：
 要求：chatGPT
 
 Prompt:
-
+```
 你作为一名经验丰富的iOS开发者，帮我解决一些iOS和Swift相关的技术问题。希望给出相关知识点、实践案例，最好搭配上相关代码。
 
 我作为一名iOS开发新手，经常会遇到循环引用导致的内存泄露问题，有什么好的建议或者最佳实践呢？
+```
+效果如下：
 
 {% asset_img demo-iOS专家-rxswift-1.png 400 %}
 {% asset_img demo-iOS专家-rxswift-2.png 400 %}
 
-#### 让GPT 来写Prompt（比如写一个技术调研文档😊）
+#### 让GPT 来帮我们写Prompt（比如写一个技术调研文档😊）
 
 要求：chatGPT(gpt4 效果更佳)
 
 Prompt：
 
+```
 Web search results:
 
-[1] "Oops, there was an error.  Please try again.If it persists, please email ops@duckduckgo.com"
+[1] "Oops, there was an error.  Please try again.If it persists, please email <ops@duckduckgo.com>"
 
-URL: https://lite.duckduckgo.com/50x.html?e=3
+URL: <https://lite.duckduckgo.com/50x.html?e=3>
 
 Current date: 2023/4/9
 
@@ -193,38 +193,37 @@ Remember, the prompt we are creating should be written from the perspective of m
 Your first response should only be a greeting to the user and to ask what the prompt should be about.
 
 Reply in 中文
+```
 
 效果：
 
-
 目测chatGPT的效果比GPT 4好一些，能够比较完整的输出整个文档内容
 
-**chatGPT 版本**   
+**chatGPT 版本**
 
-完整对话：https://shareg.pt/sGNglFQ 
+[完整对话：]<https://shareg.pt/sGNglFQ>
 
 {% asset_img demo-generate-prompt-1.png 400 %}
+
+**GPT4 版本**
 {% asset_img demo-generate-prompt-2.png 400 %}
 
-**GPT4 +Bing 版本**
-
-完整对话：
 
 #### Mr.-Ranedeer-AI-Tutor
 
 一个非常强大的课程生成器，支持中文、难度选择。
 
-github地址：https://github.com/JushBJJ/Mr.-Ranedeer-AI-Tutor
+github地址：<https://github.com/JushBJJ/Mr.-Ranedeer-AI-Tutor>
 
 要求：GPT Plus账号
 
-中文指南：https://zhuanlan.zhihu.com/p/642238713
+中文指南：<https://zhuanlan.zhihu.com/p/642238713>
 
 效果:
 
 {% asset_img demo-mr.ranedeer.png 600 %}
 
-1. ###  My GPTs
+### My GPTs
 
 一个字：牛；两个字：牛逼； 三个字：很牛逼
 
@@ -232,11 +231,10 @@ github地址：https://github.com/JushBJJ/Mr.-Ranedeer-AI-Tutor
 
 #### emoji工厂- My GPT 版本
 
-继续使用上面的「emoji  工厂」来创建自己 GPT 应用。
+继续使用上面的「emoji  工厂」来创建自己 GPT 应用。下面是在GPT Store中配置的截图，可以看到整个创建过程非常顺畅，直接通过对话来进行配置。
 
 {% asset_img demo-gpt-store-表情生成器-1.png 500 %}
 {% asset_img demo-gpt-store-表情生成器-2.png 500 %}
-
 
 #### B站视频下载器 - My GPT 版本
 
@@ -244,7 +242,7 @@ github地址：https://github.com/JushBJJ/Mr.-Ranedeer-AI-Tutor
 
 GPTs 不能直接下载视频，但是可以推荐一些相关的工具
 
-体验地址【需要GPT Plus?】：https://chat.openai.com/g/g-ozticvPaK-bzhan-shen-qi
+[体验地址【需要GPT Plus】：]<https://chat.openai.com/g/g-ozticvPaK-bzhan-shen-qi>
 
 {% asset_img demo-gpt-store-B站下载器-1.png 500 %}
 {% asset_img demo-gpt-store-B站下载器-2.png 500 %}
@@ -265,8 +263,8 @@ GPTs 不能直接下载视频，但是可以推荐一些相关的工具
 
 分享两个小工具：
 
-- **虚拟信用卡**：https://2chuhai.com/recommend/openai-chatgpt-pay/ ，实测很方便、支持很多美区应用；开通信用卡送3个虚拟手机号
-- **科学上网**：https://s.stotik.com/dashboard/invite，已经稳定使用3 年、支持 YouTube 4k 视频； 推荐半年或者一年套餐
+- [**虚拟信用卡**：]<https://2chuhai.com/recommend/openai-chatgpt-pay/> ，实测很方便、支持很多美区应用；开通信用卡送3个虚拟手机号
+- [**科学上网**：]<https://s.stotik.com/dashboard/invite>, 已经稳定使用3 年、支持 YouTube 4k 视频； 推荐半年或者一年套餐
 
 1. ###  找一个靠谱的梯子
 
@@ -277,9 +275,9 @@ GPTs 不能直接下载视频，但是可以推荐一些相关的工具
 
 1. ###  开通虚拟信用卡
 
-推荐使用**WildCard**（推荐码链接：https://bewildcard.com/i/HAO102） 来开通美国信用卡，然后绑定到 chatGPT 和 OpenAI 后台支付渠道。
+推荐使用**WildCard**([推荐码链接](https://bewildcard.com/i/HAO102)) 来开通美国信用卡，然后绑定到 chatGPT 和 OpenAI 后台支付渠道。
 
-收费：两年开卡费用大概100 RMB，充值手续费3.5%。 遇到问题有客服帮助解决，本人能够一次性绑定好信用卡。
+收费：两年开卡费用大概100 RMB，充值手续费3.5%。 遇到问题有客服帮助解决，本人亲测能够一次性绑定好信用卡～
 
 {% asset_img wildcard-1.png 500 %}
 {% asset_img wildcard-2.png 500 %}
@@ -287,32 +285,30 @@ GPTs 不能直接下载视频，但是可以推荐一些相关的工具
 
 ## 大模型时代的移动端开发者应该做什么？
 
-正如某个大佬所说「chatGPT 就是移动时代的 iPhone4」，他们都有的特点：产品本身足够优秀、充满想象力和魔力、开启下一个十年。作为经历了互联网和移动互联网时代的十年行业老兵，下面是我我的真心想法：
+正如某个大佬所说「chatGPT 就是移动时代的 iPhone4」，他们都有的特点：产品本身足够优秀、充满想象力和魔力、开启下一个十年时代。作为经历了互联网和移动互联网时代的十年行业老兵，下面是我的想法：
 
 1. **体验行业里面最好的产品**（强烈安利 GPT plus 账号，能够体验 GPT 4 和各种丰富的插件）,学习并使用 Prompt 的技巧和经验，提升生产力或者实现自己的创意。
 2. **解决一个你自己遇到的问题，**亲自跑 OpenAI 的 API，了解一些基本的概念。
-   1. 把『小宇宙』上面的播客下周到本地，然后上传到飞书妙记，然后使用 MyAI 总结文档内容
+   1. 比如把『小宇宙』上面的某个播客下周到本地，然后上传到飞书妙记，接着使用“智能助理”来总结博客内容
 3. **Be Patient and  Keep Going**（持续跟踪3 ~5个行牛大牛，学习他们的技术文章、分享和观点，沉淀自己的技术能力、发挥想象力）
 
 写会议纪要、建日程、汇总群聊信息、建任务、润色文案、写文档等等痛点问题，用之前的技术，很难解决。现在，大模型技术可以轻而易举地搞定这些事。**钉子早就有，现在，合适的锤子终于来了**。
 
-### **推荐两个公众号**：
+### **推荐两个公众号**
 
 - **张无常**：真名张海庚，字节跳动产品经理。
-  - **LLM****主题**: https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzIwODA3MDUwOQ==&action=getalbum&album_id=2962216275081166849&scene=173&from_msgid=2652773232&from_itemidx=1&count=3&nolastread=1#wechat_redirect
-  - [Hey! 这有一座重庆大厦](https://bytedance.larkoffice.com/docs/doccnY3LlUFThQaZRc73PXSFAbg) 
+  - [**LLM系列**](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzIwODA3MDUwOQ==&action=getalbum&album_id=2962216275081166849&scene=173&from_msgid=2652773232&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
+  - [Hey! 这有一座重庆大厦](https://bytedance.larkoffice.com/docs/doccnY3LlUFThQaZRc73PXSFAbg)
   - [如何成为初代 AGI 产品经理？](https://mp.weixin.qq.com/s/tdWzDCL5EqQyIn9KfL_kBQ)
   
   {% asset_img 公众号-张无常.png 500 %}
 
-
 - **王建硕**：百姓网创始人，知名 Blog 主。很有意思的一个技术人，可以帮助打开思路。
-  - **ChatGPT 开创的时代**：https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NzI0Mjg0MA==&action=getalbum&album_id=2801018476114149380&scene=173&from_msgid=2652376733&from_itemidx=1&count=3&nolastread=1#wechat_redirect
+  - [**ChatGPT 开创的时代**：](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MjM5NzI0Mjg0MA==&action=getalbum&album_id=2801018476114149380&scene=173&from_msgid=2652376733&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 
 {% asset_img 公众号-王建硕.png 500 %}
 
-
-### 学习资料：
+### 学习资料
 
 - [AIGC交流群工具沉淀 by 乔向阳](https://bytedance.larkoffice.com/base/AIMAbnJxQaNgSGsBAtwcdAkLnvf?table=tblmZTd8VuUOOONh&view=vew0Eo17BB) : ⭐️⭐️⭐️⭐️⭐️，很全面的工具、X 账号、产品合集，找到你感兴趣的Topic 深入体验、交流，感觉吃透这里面的内容，遇到 AGI 的话题应该能做到「侃侃而谈」
 - [如何成为初代 AGI 产品经理？](https://bytedance.larkoffice.com/docx/LgTSdzOREosKYRxjtATcF81kngx)  ： ⭐️⭐️⭐️⭐️，海庚从产品经理角度来解读 LLM 时代的现状和机会，产品经理是最接近用户的群体，多看看产品经理的思路有助于自己更好的解决问题。
