@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <!-- title -->
-
-
-    
-
-<!-- keywords -->
-
-
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="author" content="zenghao0708">
-    <meta name="renderer" content="webkit">
-    <meta name="copyright" content="zenghao0708">
-    
-        <meta name="keywords" content="iOS开发,研发管理,字节跳蛋,飞书">
-    
-    <meta name="description" content="Life is struggle!">
-    <meta name="description" content="开场白在当今的技术世界中，了解人工智能的最新进展对于一名移动端开发工程师至关重要。OpenAI的ChatGPT是这一领域的最新成果，它不仅代表了大模型时代的前沿，而且还体现了AI技术在日常生活中应用的无限可能性，本文会给大家介绍一些chatGPT 相关的基本概念、Prompt 技巧、GPT 4的能力对比和一些学习资料，希望大家能够在大模型的时代继续遨游。">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"coolzeng.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="开场白在当今的技术世界中，了解人工智能的最新进展对于一名移动端开发工程师至关重要。OpenAI的ChatGPT是这一领域的最新成果，它不仅代表了大模型时代的前沿，而且还体现了AI技术在日常生活中应用的无限可能性，本文会给大家介绍一些chatGPT 相关的基本概念、Prompt 技巧、GPT 4的能力对比和一些学习资料，希望大家能够在大模型的时代继续遨游。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ChatGPT &amp; LLM 的那些事（一）：新手上路">
 <meta property="og:url" content="https://coolzeng.com/posts/chatpgt-introduce/index.html">
@@ -57,470 +58,186 @@
 <meta property="article:tag" content="GPT">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://coolzeng.com/posts/chatpgt-introduce/10%E4%BA%BF%E7%94%A8%E6%88%B7%E6%95%B0%E6%8E%92%E5%90%8D.png">
-    <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="icon" href="/assets/favicon.ico">
-    
-    <title>ChatGPT &amp; LLM 的那些事（一）：新手上路 · 浩子的小站</title>
-    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
-/* This file is meant as a standalone workflow for
-- testing support for link[rel=preload]
-- enabling async CSS loading in browsers that do not support rel=preload
-- applying rel preload css once loaded, whether supported or not.
-*/ -->
-<script>
-    (function (w) {
-        'use strict'
-        // rel=preload support test
-        if (!w.loadCSS) {
-            w.loadCSS = function () {}
-        }
-        // define on the loadCSS obj
-        var rp = (loadCSS.relpreload = {})
-        // rel=preload feature support test
-        // runs once and returns a function for compat purposes
-        rp.support = (function () {
-            var ret
-            try {
-                ret = w.document.createElement('link').relList.supports('preload')
-            } catch (e) {
-                ret = false
-            }
-            return function () {
-                return ret
-            }
-        })()
 
-        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
-        // then change that media back to its intended value on load
-        rp.bindMediaToggle = function (link) {
-            // remember existing media attr for ultimate state, or default to 'all'
-            var finalMedia = link.media || 'all'
+<link rel="canonical" href="https://coolzeng.com/posts/chatpgt-introduce/">
 
-            function enableStylesheet() {
-                link.media = finalMedia
-            }
 
-            // bind load handlers to enable media
-            if (link.addEventListener) {
-                link.addEventListener('load', enableStylesheet)
-            } else if (link.attachEvent) {
-                link.attachEvent('onload', enableStylesheet)
-            }
-
-            // Set rel and non-applicable media type to start an async request
-            // note: timeout allows this to happen async to let rendering continue in IE
-            setTimeout(function () {
-                link.rel = 'stylesheet'
-                link.media = 'only x'
-            })
-            // also enable media after 3 seconds,
-            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
-            setTimeout(enableStylesheet, 3000)
-        }
-
-        // loop through link elements in DOM
-        rp.poly = function () {
-            // double check this to prevent external calls from running
-            if (rp.support()) {
-                return
-            }
-            var links = w.document.getElementsByTagName('link')
-            for (var i = 0; i < links.length; i++) {
-                var link = links[i]
-                // qualify links to those with rel=preload and as=style attrs
-                if (
-                    link.rel === 'preload' &&
-                    link.getAttribute('as') === 'style' &&
-                    !link.getAttribute('data-loadcss')
-                ) {
-                    // prevent rerunning on link
-                    link.setAttribute('data-loadcss', true)
-                    // bind listeners to toggle media back
-                    rp.bindMediaToggle(link)
-                }
-            }
-        }
-
-        // if unsupported, run the polyfill
-        if (!rp.support()) {
-            // run once at least
-            rp.poly()
-
-            // rerun poly on an interval until onload
-            var run = w.setInterval(rp.poly, 500)
-            if (w.addEventListener) {
-                w.addEventListener('load', function () {
-                    rp.poly()
-                    w.clearInterval(run)
-                })
-            } else if (w.attachEvent) {
-                w.attachEvent('onload', function () {
-                    rp.poly()
-                    w.clearInterval(run)
-                })
-            }
-        }
-
-        // commonjs
-        if (typeof exports !== 'undefined') {
-            exports.loadCSS = loadCSS
-        } else {
-            w.loadCSS = loadCSS
-        }
-    })(typeof global !== 'undefined' ? global : this)
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
 </script>
 
-    <style type="text/css">
-    @font-face {
-        font-family: 'Oswald-Regular';
-        src: url("/font/Oswald-Regular.ttf");
-    }
+  <title>ChatGPT & LLM 的那些事（一）：新手上路 | Zenghao0708的小站</title>
+  
 
-    body {
-        margin: 0;
-    }
 
-    header,
-    footer,
-    .back-top,
-    .sidebar,
-    .container,
-    .site-intro-meta,
-    .toc-wrapper {
-        display: none;
-    }
 
-    .site-intro {
-        position: relative;
-        z-index: 3;
-        width: 100%;
-        /* height: 50vh; */
-        overflow: hidden;
-    }
 
-    .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2.5s ease-out 0s infinite;
-    }
 
-    @keyframes gradient-move {
-        0% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-    }
-</style>
 
-    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
-    <link rel="stylesheet" href="/css/dark.css">
-    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
-    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
-    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
-    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
-    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
-    <!-- algolia -->
-    
-    <!-- 百度统计  -->
-    
-    <!-- Google tag (gtag.js) -->
-    
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
-<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zenghao0708的小站" type="application/atom+xml">
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Zenghao0708的小站" type="application/atom+xml">
 </head>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ == undefined) {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js" />')
-        }
-    </script>
-    
-        <body class="post-body">
-    
-        <!-- header -->
-        <header class="header header-mobile">
-    <!-- top read progress line -->
-    <div class="header-element">
-        <div class="read-progress"></div>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    <!-- sidebar menu button -->
-    <div class="header-element">
-        
-            <div class="header-sidebar-menu">
-        
-            
-                <div style="padding-left: 1px;">&#xe775;</div>
-            
-        </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zenghao0708的小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
-    <!-- header actions -->
-    <div class="header-actions">
-        <!-- theme mode switch button -->
-        <span class="header-theme-btn header-element">
-            <i class="fas fa-adjust"></i>
-        </span>
-        <!-- back to home page text -->
-        <span class="home-link header-element">
-            <a href=/>浩子的小站</a>
-        </span>
-    </div>
-    <!-- toggle banner for post layout -->
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-        
-            <div class="banner">
-        
-            <div class="blog-title header-element">
-                <a href="/">浩子的小站</a>
-            </div>
-            <div class="post-title header-element">
-                <a href="#" class="post-name">ChatGPT & LLM 的那些事（一）：新手上路</a>
-            </div>
-        </div>
-    
-</header>
-
-        <!-- fixed footer -->
-        <footer class="footer-fixed">
-    <!-- back to top button -->
-    <div class="footer-fixed-element">
-        
-            <div class="back-top back-top-hidden">
-        
-        
-            <div>&#xe639;</div>
-        
-        </div>
-    </div>
-</footer>
-
-        <!-- wrapper -->
-        <div class="wrapper">
-            <div class="site-intro" style="
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
-
-
-
-
-    height:50vh;
-
-">
-    
-    <!-- 主页  -->
-    
-        
-    <!-- 404页  -->
-    
-    <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
-    <div class="site-intro-meta">
-        <!-- 标题  -->
-        <h1 class="intro-title">
-            <!-- 主页  -->
+          <div class="content post posts-expand">
             
-                ChatGPT & LLM 的那些事（一）：新手上路
-            <!-- 404 -->
-            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coolzeng.com/posts/chatpgt-introduce/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zenghao0708">
+      <meta itemprop="description" content="Life is struggle!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zenghao0708的小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ChatGPT & LLM 的那些事（一）：新手上路
         </h1>
-        <!-- 副标题 -->
-        <p class="intro-subtitle">
-            <!-- 主页副标题  -->
-            
-                
-            <!-- 404 -->
-            
-        </p>
-        <!-- 文章页 meta -->
-        
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                    <div class= post-intro-tags >
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-13 10:16:28" itemprop="dateCreated datePublished" datetime="2024-01-13T10:16:28+08:00">2024-01-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-14 21:19:04" itemprop="dateModified" datetime="2024-01-14T21:19:04+08:00">2024-01-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/chatpgt-introduce/" class="post-meta-item leancloud_visitors" data-flag-title="ChatGPT & LLM 的那些事（一）：新手上路" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="LLM">LLM</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="GPT">GPT</a>
-    
-</div>
+    <div class="post-body" itemprop="articleBody">
 
-                
-                <!-- 文章字数统计 -->
-                
-                <div class="post-intro-meta">
-                    <!-- 撰写日期 -->
-                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2024/01/13</span>
-                    <!-- busuanzi -->
-                    
-                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    
-                    <!-- 文章分享 -->
-                    <span class="share-wrapper">
-                        <span class="iconfont-archer share-icon">&#xe71d;</span>
-                        <span class="share-text">Share</span>
-                        <ul class="share-list">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
-        
-    </div>
-</div>
-
-            <script>
-  // get user agent
-  function getBrowserVersions() {
-    var u = window.navigator.userAgent
-    return {
-      userAgent: u,
-      trident: u.indexOf('Trident') > -1, //IE内核
-      presto: u.indexOf('Presto') > -1, //opera内核
-      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-      iPad: u.indexOf('iPad') > -1, //是否为iPad
-      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
-      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
-      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
-    }
-  }
-  var browser = {
-    versions: getBrowserVersions(),
-  }
-  console.log('userAgent: ' + browser.versions.userAgent)
-
-  // callback
-  function fontLoaded() {
-    console.log('font loaded')
-    if (document.getElementsByClassName('site-intro-meta')) {
-      document
-        .getElementsByClassName('intro-title')[0]
-        .classList.add('intro-fade-in')
-      document
-        .getElementsByClassName('intro-subtitle')[0]
-        .classList.add('intro-fade-in')
-      var postIntros = document.getElementsByClassName('post-intros')[0]
-      if (postIntros) {
-        postIntros.classList.add('post-fade-in')
-      }
-    }
-  }
-
-  // UC不支持跨域，所以直接显示
-  function asyncCb() {
-    if (browser.versions.uc) {
-      console.log('UCBrowser')
-      fontLoaded()
-    } else {
-      WebFont.load({
-        custom: {
-          families: ['Oswald-Regular'],
-        },
-        loading: function () {
-          // 所有字体开始加载
-          // console.log('font loading');
-        },
-        active: function () {
-          // 所有字体已渲染
-          fontLoaded()
-        },
-        inactive: function () {
-          // 字体预加载失败，无效字体或浏览器不支持加载
-          console.log('inactive: timeout')
-          fontLoaded()
-        },
-        timeout: 5000, // Set the timeout to two seconds
-      })
-    }
-  }
-
-  function asyncErr() {
-    console.warn('script load from CDN failed, will load local script')
-  }
-
-  // load webfont-loader async, and add callback function
-  function async(u, cb, err) {
-    var d = document,
-      t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0]
-    o.src = u
-    if (cb) {
-      o.addEventListener(
-        'load',
-        function (e) {
-          cb(null, e)
-        },
-        false
-      )
-    }
-    if (err) {
-      o.addEventListener(
-        'error',
-        function (e) {
-          err(null, e)
-        },
-        false
-      )
-    }
-    s.parentNode.insertBefore(o, s)
-  }
-
-  var asyncLoadWithFallBack = function (arr, success, reject) {
-    var currReject = function () {
-      reject()
-      arr.shift()
-      if (arr.length) async(arr[0], success, currReject)
-    }
-
-    async(arr[0], success, currReject)
-  }
-
-  asyncLoadWithFallBack(
-    [
-      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
-      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
-      "/lib/webfontloader.min.js",
-    ],
-    asyncCb,
-    asyncErr
-  )
-</script>
-
-            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
-            <div class="container container-unloaded">
-                <main class="main post-page">
-    <article class="article-entry">
+      
         <h2 id="开场白"><a href="#开场白" class="headerlink" title="开场白"></a>开场白</h2><p>在当今的技术世界中，了解人工智能的最新进展对于一名移动端开发工程师至关重要。OpenAI的ChatGPT是这一领域的最新成果，它不仅代表了大模型时代的前沿，而且还体现了AI技术在日常生活中应用的无限可能性，本文会给大家介绍一些chatGPT 相关的基本概念、Prompt 技巧、GPT 4的能力对比和一些学习资料，希望大家能够在大模型的时代继续遨游。</p>
 <span id="more"></span>
 
@@ -710,586 +427,303 @@
 <li><a target="_blank" rel="noopener" href="https://2chuhai.com/recommend/openai-chatgpt-pay/">💳虚拟信用卡推荐Wildcard升级🤖OpenAI&#x2F;ChatGPT Plus付款教程,非DePay&amp;Dupay💥⭐ 爱出海导航💖</a></li>
 </ul>
 
-    </article>
-    <!-- license -->
-    
-        <div class="license-wrapper">
-            <p>原文作者：<a href="https://coolzeng.com">zenghao0708</a>
-            <p>原文链接：<a href="https://coolzeng.com/posts/chatpgt-introduce/">https://coolzeng.com/posts/chatpgt-introduce/</a>
-            <p>发表日期：<a href="https://coolzeng.com/posts/chatpgt-introduce/">January 13th 2024, 10:16:28 am</a>
-            <p>更新日期：<a href="https://coolzeng.com/posts/chatpgt-introduce/">January 14th 2024, 9:19:04 pm</a>
-            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
-        </div>
-    
-    <!-- paginator -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href="/posts/http3-overview/" title="关于HTTP/3 的那些事">
-                    <div class="prevTitle">关于HTTP/3 的那些事</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- comment -->
-    
-        <div class="post-comment">
-            <!-- 来必力 City 版安装代码 -->
-
-
-            
-
-            
-
-            
-
-            <!-- utteranc评论 -->
-
-
-            <!-- partial('_partial/comment/changyan') -->
-            <!--PC版-->
-
-
-            
-            
-
-            
-
-        </div>
-    
-    <!-- timeliness note -->
-    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
-    
-    <!-- Mathjax -->
-    
-</main>
-
-                <!-- profile -->
-                
-            </div>
-            <footer class="footer footer-unloaded">
-    <!-- social  -->
-    
-        <div class="social">
-            
-    
-        
-            
-                <a href="mailto:zenghao.0708@163.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="https://github.com/zenghao0708" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                    
-                    <img class="profile-qr" src="/images/wechat_qr.png" />
-                </span>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-
-        </div>
-    
-    <!-- powered by Hexo  -->
-    <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
     </div>
-    <!-- website approve for Chinese user -->
-    
-    <!-- 不蒜子  -->
-    
-        <div class="busuanzi-container">
-            
-             
-                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
-            
-        </div>
-    	
-</footer>
 
-        </div>
-        <!-- toc -->
-        
-            <div class="toc-wrapper toc-wrapper-loding" style=
-
-
-
-
-
-
-
-    top:50vh;
-
->
-                <div class="toc-catalog">
-                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-                </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%9C%BA%E7%99%BD"><span class="toc-number">1.</span> <span class="toc-text">开场白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenAI%E5%92%8CChatGPT%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">OpenAI和ChatGPT的发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenAI%E7%9A%84%E6%84%BF%E6%99%AF%E4%B8%8E%E6%88%90%E7%AB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">OpenAI的愿景与成立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPT%E7%B3%BB%E5%88%97%E7%9A%84%E6%BC%94%E8%BF%9B"><span class="toc-number">2.2.</span> <span class="toc-text">GPT系列的演进</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">关键技术要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E6%9C%AF%E8%AF%AD"><span class="toc-number">3.1.</span> <span class="toc-text">一些基础术语</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Prompt%EF%BC%88%E6%8F%90%E7%A4%BA%EF%BC%89"><span class="toc-number">3.1.1.</span> <span class="toc-text">Prompt（提示）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LLM%EF%BC%88Large-Language-Models%EF%BC%8C%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="toc-number">3.1.2.</span> <span class="toc-text">LLM（Large Language Models，大型语言模型）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#G-P-T%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%88Generate-Predict-and-Transform%EF%BC%8C%E7%94%9F%E6%88%90%E3%80%81%E9%A2%84%E6%B5%8B%E3%80%81%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-number">3.1.3.</span> <span class="toc-text">G, P, T是什么？（Generate, Predict, and Transform，生成、预测、转换）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%88Pre-training%EF%BC%89%E5%92%8CFine-Tuning"><span class="toc-number">3.1.4.</span> <span class="toc-text">预训练（Pre-training）和Fine-Tuning</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Token%EF%BC%88%E4%BB%A4%E7%89%8C%EF%BC%89"><span class="toc-number">3.1.5.</span> <span class="toc-text">Token（令牌）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E9%AB%98%E6%95%88Prompt%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-number">3.2.</span> <span class="toc-text">编写高效Prompt的规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Demos"><span class="toc-number">3.3.</span> <span class="toc-text">Demos</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#emoji-%E5%B7%A5%E5%8E%82"><span class="toc-number">3.3.1.</span> <span class="toc-text">emoji 工厂</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS-%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6"><span class="toc-number">3.3.2.</span> <span class="toc-text">iOS 技术专家</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A9GPT-%E6%9D%A5%E5%B8%AE%E6%88%91%E4%BB%AC%E5%86%99Prompt%EF%BC%88%E6%AF%94%E5%A6%82%E5%86%99%E4%B8%80%E4%B8%AA%E6%8A%80%E6%9C%AF%E8%B0%83%E7%A0%94%E6%96%87%E6%A1%A3%F0%9F%98%8A%EF%BC%89"><span class="toc-number">3.3.3.</span> <span class="toc-text">让GPT 来帮我们写Prompt（比如写一个技术调研文档😊）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mr-Ranedeer-AI-Tutor"><span class="toc-number">3.3.4.</span> <span class="toc-text">Mr.-Ranedeer-AI-Tutor</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#My-GPTs"><span class="toc-number">3.4.</span> <span class="toc-text">My GPTs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#emoji%E5%B7%A5%E5%8E%82-My-GPT-%E7%89%88%E6%9C%AC"><span class="toc-number">3.4.1.</span> <span class="toc-text">emoji工厂- My GPT 版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B%E7%AB%99%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E5%99%A8-My-GPT-%E7%89%88%E6%9C%AC"><span class="toc-number">3.4.2.</span> <span class="toc-text">B站视频下载器 - My GPT 版本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%BC%80%E9%80%9A-Plus-%E8%B4%A6%E5%8F%B7"><span class="toc-number">4.</span> <span class="toc-text">如何开通 Plus 账号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#chatGPT-Plus-%E8%B4%A6%E5%8F%B7%E3%80%81OpenAI-API-%E8%B4%A6%E5%8F%B7%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.1.</span> <span class="toc-text">chatGPT Plus 账号、OpenAI API 账号的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%BE%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84%E6%A2%AF%E5%AD%90"><span class="toc-number">4.2.</span> <span class="toc-text">找一个靠谱的梯子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E9%80%9A%E8%99%9A%E6%8B%9F%E4%BF%A1%E7%94%A8%E5%8D%A1"><span class="toc-number">4.3.</span> <span class="toc-text">开通虚拟信用卡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%97%B6%E4%BB%A3%E7%9A%84%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E8%80%85%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">大模型时代的移动端开发者应该做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E4%B8%A4%E4%B8%AA%E5%85%AC%E4%BC%97%E5%8F%B7"><span class="toc-number">5.1.</span> <span class="toc-text">推荐两个公众号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99"><span class="toc-number">5.2.</span> <span class="toc-text">学习资料</span></a></li></ol></li></ol>
-            </div>
-        
-        <!-- sidebar -->
-        <div class="sidebar sidebar-hide">
-    <ul class="sidebar-tabs sidebar-tabs-active-0">
-        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
-        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
-        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
-    </ul>
-    <div class="sidebar-content sidebar-content-show-archive">
-        <div class="sidebar-panel-archives">
-    <!-- 在 ejs 中将 archive 按照时间排序 -->
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
     
     
-    
-    <div class="total-and-search">
-        <div class="total-archive">
-        Total : 13
-        </div>
-        <!-- search  -->
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/GPT/" rel="tag"># GPT</a>
+          </div>
+
         
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/http3-overview/" rel="prev" title="关于HTTP/3 的那些事">
+      <i class="fa fa-chevron-left"></i> 关于HTTP/3 的那些事
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
+      </footer>
     
-    <div class="post-archive">
-    
-        
-            
-            
-            <div class="archive-year"> 2024 </div>
-            <ul class="year-list">
-            
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/13</span>
-            <a class="archive-post-title" href="/posts/chatpgt-introduce/">ChatGPT & LLM 的那些事（一）：新手上路</a>
-        </li>
-    
-        
-            
-            
-                
-                </ul>
-            
-            <div class="archive-year"> 2022 </div>
-            <ul class="year-list">
-            
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/06</span>
-            <a class="archive-post-title" href="/posts/http3-overview/">关于HTTP/3 的那些事</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/08</span>
-            <a class="archive-post-title" href="/posts/http2-overview/">关于HTTP/2 的那些事</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/05</span>
-            <a class="archive-post-title" href="/posts/the-palybook/">《人生战术本》- 里弗斯教练帮助他人“成为更好的人”</a>
-        </li>
-    
-        
-            
-            
-                
-                </ul>
-            
-            <div class="archive-year"> 2018 </div>
-            <ul class="year-list">
-            
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/20</span>
-            <a class="archive-post-title" href="/posts/react-native-private-repo/">iOS ReactNative私有库指南</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/21</span>
-            <a class="archive-post-title" href="/posts/xcode-10-migrate/">Xcode 10 beta 版本迁移指南</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/10</span>
-            <a class="archive-post-title" href="/posts/podfile_lock_conflict/">Cocoapods采坑记 - Podfile.lock 冲突问题</a>
-        </li>
-    
-        
-            
-            
-                
-                </ul>
-            
-            <div class="archive-year"> 2017 </div>
-            <ul class="year-list">
-            
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/12</span>
-            <a class="archive-post-title" href="/posts/xcode-tips/">Xcode问题锦集</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/07</span>
-            <a class="archive-post-title" href="/posts/swift-oc-mix/">Swift 与 OC 混编小技巧</a>
-        </li>
-    
-        
-            
-            
-                
-                </ul>
-            
-            <div class="archive-year"> 2016 </div>
-            <ul class="year-list">
-            
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/27</span>
-            <a class="archive-post-title" href="/posts/ios-ssl-pinning/">iOS 网络安全之SSL Pinning</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span>
-            <a class="archive-post-title" href="/posts/ios-thread-tips/">iOS多线程开发笔记</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/12</span>
-            <a class="archive-post-title" href="/posts/hexo_build/">使用hexo+github page搭建个人博客</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/11</span>
-            <a class="archive-post-title" href="/posts/git_manual/">git常用手册</a>
-        </li>
-    
-    </div>
-</div>
+  </article>
+  
+  
+  
 
-        <div class="sidebar-panel-tags">
-    <div class="sidebar-tags-name">
-        
-            <span class="sidebar-tag-name" data-tags="LLM, GPT">
-                <span class="iconfont-archer">&#xe606;</span>
-                LLM, GPT
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iOS">
-                <span class="iconfont-archer">&#xe606;</span>
-                iOS
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="cocoapods">
-                <span class="iconfont-archer">&#xe606;</span>
-                cocoapods
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="ReactNative">
-                <span class="iconfont-archer">&#xe606;</span>
-                ReactNative
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="多线程">
-                <span class="iconfont-archer">&#xe606;</span>
-                多线程
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="hexo">
-                <span class="iconfont-archer">&#xe606;</span>
-                hexo
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="分享">
-                <span class="iconfont-archer">&#xe606;</span>
-                分享
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="网络编程">
-                <span class="iconfont-archer">&#xe606;</span>
-                网络编程
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="git">
-                <span class="iconfont-archer">&#xe606;</span>
-                git
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="LLM">
-                <span class="iconfont-archer">&#xe606;</span>
-                LLM
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="GPT">
-                <span class="iconfont-archer">&#xe606;</span>
-                GPT
-            </span>
-        
-    </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
-    </div> 
-    <div class="sidebar-tags-list"></div>
-</div>
 
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-        <span class="sidebar-category-name" data-categories="AI">
-            <span class="iconfont-archer">&#xe60a;</span>
-            AI
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="开发">
-            <span class="iconfont-archer">&#xe60a;</span>
-            开发
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="ReactNative">
-            <span class="iconfont-archer">&#xe60a;</span>
-            ReactNative
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="分享">
-            <span class="iconfont-archer">&#xe60a;</span>
-            分享
-        </span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
 
-    </div>
-</div>
+          </div>
+          
 
-        <!-- site-meta -->
-        <script>
-    var siteMetaRoot = "/"
-    if (siteMetaRoot === "undefined") {
-        siteMetaRoot = '/'
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
-    var siteMeta = {
-        url: "https://coolzeng.com",
-        root: siteMetaRoot,
-        author: "zenghao0708"
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
     }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
 
-        <!-- import experimental options here -->
-        <!-- Custom Font -->
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%9C%BA%E7%99%BD"><span class="nav-number">1.</span> <span class="nav-text">开场白</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenAI%E5%92%8CChatGPT%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">OpenAI和ChatGPT的发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenAI%E7%9A%84%E6%84%BF%E6%99%AF%E4%B8%8E%E6%88%90%E7%AB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">OpenAI的愿景与成立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT%E7%B3%BB%E5%88%97%E7%9A%84%E6%BC%94%E8%BF%9B"><span class="nav-number">2.2.</span> <span class="nav-text">GPT系列的演进</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">关键技术要点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E6%9C%AF%E8%AF%AD"><span class="nav-number">3.1.</span> <span class="nav-text">一些基础术语</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prompt%EF%BC%88%E6%8F%90%E7%A4%BA%EF%BC%89"><span class="nav-number">3.1.1.</span> <span class="nav-text">Prompt（提示）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LLM%EF%BC%88Large-Language-Models%EF%BC%8C%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="nav-number">3.1.2.</span> <span class="nav-text">LLM（Large Language Models，大型语言模型）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#G-P-T%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%88Generate-Predict-and-Transform%EF%BC%8C%E7%94%9F%E6%88%90%E3%80%81%E9%A2%84%E6%B5%8B%E3%80%81%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="nav-number">3.1.3.</span> <span class="nav-text">G, P, T是什么？（Generate, Predict, and Transform，生成、预测、转换）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%88Pre-training%EF%BC%89%E5%92%8CFine-Tuning"><span class="nav-number">3.1.4.</span> <span class="nav-text">预训练（Pre-training）和Fine-Tuning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Token%EF%BC%88%E4%BB%A4%E7%89%8C%EF%BC%89"><span class="nav-number">3.1.5.</span> <span class="nav-text">Token（令牌）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E9%AB%98%E6%95%88Prompt%E7%9A%84%E8%A7%84%E5%88%99"><span class="nav-number">3.2.</span> <span class="nav-text">编写高效Prompt的规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demos"><span class="nav-number">3.3.</span> <span class="nav-text">Demos</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#emoji-%E5%B7%A5%E5%8E%82"><span class="nav-number">3.3.1.</span> <span class="nav-text">emoji 工厂</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iOS-%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6"><span class="nav-number">3.3.2.</span> <span class="nav-text">iOS 技术专家</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A9GPT-%E6%9D%A5%E5%B8%AE%E6%88%91%E4%BB%AC%E5%86%99Prompt%EF%BC%88%E6%AF%94%E5%A6%82%E5%86%99%E4%B8%80%E4%B8%AA%E6%8A%80%E6%9C%AF%E8%B0%83%E7%A0%94%E6%96%87%E6%A1%A3%F0%9F%98%8A%EF%BC%89"><span class="nav-number">3.3.3.</span> <span class="nav-text">让GPT 来帮我们写Prompt（比如写一个技术调研文档😊）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mr-Ranedeer-AI-Tutor"><span class="nav-number">3.3.4.</span> <span class="nav-text">Mr.-Ranedeer-AI-Tutor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#My-GPTs"><span class="nav-number">3.4.</span> <span class="nav-text">My GPTs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#emoji%E5%B7%A5%E5%8E%82-My-GPT-%E7%89%88%E6%9C%AC"><span class="nav-number">3.4.1.</span> <span class="nav-text">emoji工厂- My GPT 版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B%E7%AB%99%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E5%99%A8-My-GPT-%E7%89%88%E6%9C%AC"><span class="nav-number">3.4.2.</span> <span class="nav-text">B站视频下载器 - My GPT 版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%BC%80%E9%80%9A-Plus-%E8%B4%A6%E5%8F%B7"><span class="nav-number">4.</span> <span class="nav-text">如何开通 Plus 账号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chatGPT-Plus-%E8%B4%A6%E5%8F%B7%E3%80%81OpenAI-API-%E8%B4%A6%E5%8F%B7%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">4.1.</span> <span class="nav-text">chatGPT Plus 账号、OpenAI API 账号的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84%E6%A2%AF%E5%AD%90"><span class="nav-number">4.2.</span> <span class="nav-text">找一个靠谱的梯子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E9%80%9A%E8%99%9A%E6%8B%9F%E4%BF%A1%E7%94%A8%E5%8D%A1"><span class="nav-number">4.3.</span> <span class="nav-text">开通虚拟信用卡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%97%B6%E4%BB%A3%E7%9A%84%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E8%80%85%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">大模型时代的移动端开发者应该做什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E4%B8%A4%E4%B8%AA%E5%85%AC%E4%BC%97%E5%8F%B7"><span class="nav-number">5.1.</span> <span class="nav-text">推荐两个公众号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99"><span class="nav-number">5.2.</span> <span class="nav-text">学习资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zenghao0708"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">zenghao0708</p>
+  <div class="site-description" itemprop="description">Life is struggle!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zenghao0708" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zenghao0708" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zenghao0708@gmail.com" title="E-Mail → mailto:zenghao0708@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
 
-        <!-- main func -->
-        <script src="/scripts/main.js?v=20211217"></script>
-        <!-- dark mode -->
-        <script src="/scripts/dark.js?v=20211217"></script>
-        <!-- fancybox -->
-        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
-        <!-- algolia -->
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolzeng.com/" title="https:&#x2F;&#x2F;coolzeng.com">Title</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
         
-        <!-- busuanzi -->
+
         
-            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zenghao0708</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
         
-        <!-- CNZZ -->
-        
-        <!-- async load share.js -->
-        
-            <script src="/scripts/share.js?v=20211217" async></script>
-        
-        <!-- mermaid -->
-        
-    </body>
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI","app_key":"r39ndDzcLWt6uwrMWfLpahzS","server_url":"https://guk7zyvw.api.lncldglobal.com","security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
 </html>
