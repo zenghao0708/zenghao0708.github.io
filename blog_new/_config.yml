@@ -80,8 +80,8 @@ leancloud_counter_security:
   enable_sync: false
   app_id: GuK7zyVWnq4qKCgLnlWqaM65-MdYXbMMI
   app_key: r39ndDzcLWt6uwrMWfLpahzS
-  username: zenghao0708
-  password: haozi0708
+  username:
+  password:
 
 
 # Local Search
@@ -127,7 +127,7 @@ deploy:
   - type: git
     repo: https://github.com/zenghao0708/zenghao0708.github.io
     branch: master
-    message: 添加"ChatGPT & LLM 的那些事（一）：新手上路"
+    message: 发布 OpenClaw 架构设计文章
   # - type: leancloud_counter_security_sync
 
 jsonContent:
