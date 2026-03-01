@@ -4,3 +4,9 @@ node_modules/
 *.log
 .vscode/
 Blog/public/
+publish/output/
+publish/state/
+.env
+.env.*
+!.env.example
+!publish/.env.example
