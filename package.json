@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "publish:social": "node publish/publish-all.js",
+    "publish:social:all": "node publish/publish-all.js --all",
+    "publish:wechat": "node publish/publish-all.js --platform wechat --publish",
+    "publish:wechat:auto-cover": "WECHAT_AUTO_COVER_GLM=true node publish/publish-all.js --platform wechat --publish"
+  },
   "dependencies": {
     "hexo-generator-feed": "^3.0.0",
     "hexo-generator-json-content": "^4.2.3"
