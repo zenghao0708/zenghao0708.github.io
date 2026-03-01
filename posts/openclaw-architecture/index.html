@@ -27,7 +27,7 @@
 <meta property="og:description" content="基于官方 OpenClaw 源码与本机运行态目录，拆解 Gateway 控制平面、WS&#x2F;HTTP surfaces、多渠道接入、skills 平台、插件与记忆系统，并给出 ~&#x2F;.openclaw 的落地映射与排障 checklist。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-01T02:47:43.000Z">
-<meta property="article:modified_time" content="2026-03-01T02:56:14.622Z">
+<meta property="article:modified_time" content="2026-03-01T11:09:23.501Z">
 <meta property="article:author" content="zenghao0708">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="OpenClaw">
@@ -342,7 +342,7 @@
                 <!-- 文章字数统计 -->
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">2.9k</span>阅读时长: <span class="post-count reading-time">11 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">3k</span>阅读时长: <span class="post-count reading-time">12 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -567,15 +567,16 @@
 <li>WS 连接与握手：<code>src/gateway/server/ws-connection.ts</code></li>
 <li>HTTP surfaces 聚合：<code>src/gateway/server-http.ts</code></li>
 </ul>
-<h2 id="核心模块拆解"><a href="#核心模块拆解" class="headerlink" title="核心模块拆解"></a>核心模块拆解</h2><h3 id="CLI-入口层（启动前置与“向导优先”）"><a href="#CLI-入口层（启动前置与“向导优先”）" class="headerlink" title="CLI 入口层（启动前置与“向导优先”）"></a>CLI 入口层（启动前置与“向导优先”）</h3><p>官方推荐路径是 <code>openclaw onboard</code>（向导驱动配置、通道、skills、守护进程），CLI 的职责本质是：</p>
+<h2 id="核心模块拆解"><a href="#核心模块拆解" class="headerlink" title="核心模块拆解"></a>核心模块拆解</h2><h3 id="CLI-入口层（启动前置与“向导优先”）"><a href="#CLI-入口层（启动前置与“向导优先”）" class="headerlink" title="CLI 入口层（启动前置与“向导优先”）"></a>CLI 入口层（启动前置与“向导优先”）</h3><p>官方推荐路径是 <code>openclaw onboard</code>。它通过向导驱动完成配置、通道、skills 与守护进程初始化。</p>
+<p>CLI 的职责本质是：</p>
 <ul>
 <li>提供一个稳定的“运维&#x2F;配置&#x2F;诊断面”</li>
-<li>把复杂的安装、升级、迁移、风险提示收敛到 <code>doctor/onboard/update/logs/...</code></li>
+<li>统一命令集：<code>doctor/onboard/update/logs/...</code>（覆盖安装、升级、迁移、风险提示）</li>
 </ul>
 <p>代码入口：</p>
 <ul>
-<li><code>src/entry.ts</code>（CLI 进程启动与前置处理）</li>
-<li><code>src/cli/*</code>（各子命令组织）</li>
+<li><code>src/entry.ts</code>：CLI 进程启动与前置处理</li>
+<li><code>src/cli/*</code>：各子命令组织</li>
 </ul>
 <h3 id="Gateway（控制平面：WS-HTTP-同端口复用）"><a href="#Gateway（控制平面：WS-HTTP-同端口复用）" class="headerlink" title="Gateway（控制平面：WS + HTTP 同端口复用）"></a>Gateway（控制平面：WS + HTTP 同端口复用）</h3><p>Gateway 的关键不是“能开一个 WS”，而是把控制平面做成产品化组件：单端口复用、可热重载、可观测、可扩展、默认安全。</p>
 <p>在启动编排里能看到典型顺序：</p>
@@ -699,8 +700,83 @@
 </tr>
 </tbody></table>
 <h2 id="落地到本机：-openclaw-目录映射"><a href="#落地到本机：-openclaw-目录映射" class="headerlink" title="落地到本机：~/.openclaw/ 目录映射"></a>落地到本机：<code>~/.openclaw/</code> 目录映射</h2><p>下面这份目录树做了脱敏：只讲职责，不展示任何令牌&#x2F;密钥&#x2F;账号信息。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">~/.openclaw/</span><br><span class="line">  openclaw.json                  # 主配置（可能含敏感信息：token/keys/账号等）</span><br><span class="line">  openclaw.json.bak*             # 配置备份（迁移/修复时常见）</span><br><span class="line">  config.json                     # 运行态配置快照/兼容层（视版本而定）</span><br><span class="line">  agents/</span><br><span class="line">    main/</span><br><span class="line">      sessions/                   # 会话转录（JSONL），用于追踪/回放/排障</span><br><span class="line">  workspace/</span><br><span class="line">    AGENTS.md                     # 工作区说明与约定（工作区即契约）</span><br><span class="line">    USER.md / SOUL.md / TOOLS.md  # 人格/用户/工具等引导文件</span><br><span class="line">    memory/                       # 以日期为粒度的记忆/日志文件（Markdown 真源）</span><br><span class="line">    skills -&gt; /Users/zenghao/.agents/skills  # workspace skills（已做软连接）</span><br><span class="line">    docs/ scripts/ temp/           # 文档、脚本、临时产物</span><br><span class="line">  memory/</span><br><span class="line">    main.sqlite                   # 记忆索引库（不是真源；可重建）</span><br><span class="line">  devices/                        # 节点配对信息</span><br><span class="line">  cron/                           # 定时任务定义与运行记录</span><br><span class="line">  browser/</span><br><span class="line">    chrome-extension/             # 浏览器扩展（把现有 tab 挂到 relay 供自动化使用）</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">~/.openclaw/</span><br><span class="line">├─ openclaw.json</span><br><span class="line">├─ openclaw.json.bak*</span><br><span class="line">├─ config.json</span><br><span class="line">├─ agents/main/sessions/</span><br><span class="line">├─ workspace/</span><br><span class="line">│  ├─ AGENTS.md</span><br><span class="line">│  ├─ USER.md / SOUL.md / TOOLS.md</span><br><span class="line">│  ├─ memory/</span><br><span class="line">│  ├─ skills -&gt; ~/.agents/skills</span><br><span class="line">│  └─ docs/ scripts/ temp/</span><br><span class="line">├─ memory/main.sqlite</span><br><span class="line">├─ devices/</span><br><span class="line">├─ cron/</span><br><span class="line">└─ browser/chrome-extension/</span><br></pre></td></tr></table></figure>
 
+<p>目录说明（按“是否可重建”优先级）：</p>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>openclaw.json</code></td>
+<td>主配置</td>
+<td>可能包含敏感信息（token&#x2F;keys&#x2F;账号等）</td>
+</tr>
+<tr>
+<td><code>openclaw.json.bak*</code></td>
+<td>配置备份</td>
+<td>迁移&#x2F;修复时常见</td>
+</tr>
+<tr>
+<td><code>config.json</code></td>
+<td>运行态配置快照&#x2F;兼容层</td>
+<td>视版本而定</td>
+</tr>
+<tr>
+<td><code>agents/main/sessions/</code></td>
+<td>会话转录（JSONL）</td>
+<td>用于追踪&#x2F;回放&#x2F;排障</td>
+</tr>
+<tr>
+<td><code>workspace/AGENTS.md</code></td>
+<td>工作区说明与约定</td>
+<td>工作区即契约</td>
+</tr>
+<tr>
+<td><code>workspace/USER.md</code> <code>SOUL.md</code> <code>TOOLS.md</code></td>
+<td>引导文件</td>
+<td>人格&#x2F;用户&#x2F;工具设定</td>
+</tr>
+<tr>
+<td><code>workspace/memory/</code></td>
+<td>记忆&#x2F;日志文件（Markdown）</td>
+<td>真源，建议优先备份</td>
+</tr>
+<tr>
+<td><code>workspace/skills -&gt; ~/.agents/skills</code></td>
+<td>自定义 skills 入口</td>
+<td>软连接</td>
+</tr>
+<tr>
+<td><code>workspace/docs|scripts|temp</code></td>
+<td>文档&#x2F;脚本&#x2F;临时产物</td>
+<td>可按需清理</td>
+</tr>
+<tr>
+<td><code>memory/main.sqlite</code></td>
+<td>记忆索引库</td>
+<td>不是源数据，可重建</td>
+</tr>
+<tr>
+<td><code>devices/</code></td>
+<td>节点配对信息</td>
+<td>丢失需重新配对</td>
+</tr>
+<tr>
+<td><code>cron/</code></td>
+<td>定时任务定义与运行记录</td>
+<td>建议备份</td>
+</tr>
+<tr>
+<td><code>browser/chrome-extension/</code></td>
+<td>浏览器扩展资产</td>
+<td>用于 tab relay 自动化</td>
+</tr>
+</tbody></table>
 <h2 id="排障-Checklist"><a href="#排障-Checklist" class="headerlink" title="排障 Checklist"></a>排障 Checklist</h2><p>先盯住三个入口，再逐步收敛问题范围：</p>
 <ol>
 <li>配置：优先确认 DM 策略（pairing&#x2F;open）、allowlist、Gateway 的鉴权&#x2F;暴露面是否符合预期</li>
@@ -734,7 +810,7 @@
             <p>原文作者：<a href="https://coolzeng.com">zenghao0708</a>
             <p>原文链接：<a href="https://coolzeng.com/posts/openclaw-architecture/">https://coolzeng.com/posts/openclaw-architecture/</a>
             <p>发表日期：<a href="https://coolzeng.com/posts/openclaw-architecture/">March 1st 2026, 10:47:43 am</a>
-            <p>更新日期：<a href="https://coolzeng.com/posts/openclaw-architecture/">March 1st 2026, 10:56:14 am</a>
+            <p>更新日期：<a href="https://coolzeng.com/posts/openclaw-architecture/">March 1st 2026, 7:09:23 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1236,14 +1312,14 @@
                 Agent
             </span>
         
-            <span class="sidebar-tag-name" data-tags="git">
-                <span class="iconfont-archer">&#xe606;</span>
-                git
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="ReactNative">
                 <span class="iconfont-archer">&#xe606;</span>
                 ReactNative
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="git">
+                <span class="iconfont-archer">&#xe606;</span>
+                git
             </span>
         
             <span class="sidebar-tag-name" data-tags="多线程">
