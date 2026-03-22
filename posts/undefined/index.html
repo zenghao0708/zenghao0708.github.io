@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="zenghao0708">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="zenghao0708">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS开发,研发管理,字节跳蛋,飞书">
+    
+    <meta name="description" content="Life is struggle!">
+    <meta name="description" content="Mac 上的 AI 编码利器：打造高效命令行工作流在 AI 辅助编程时代，选对工具能让你的开发效率翻倍。作为一名长期使用 Mac 进行 AI 编码的开发者，我发现命令行工具的选择对工作流的影响远超想象。今天分享几个我每天都在用的神器，它们让我的 AI 编码体验提升了一个档次。 为什么命令行工具对 AI 编码如此重要？在使用 Claude Code、Cursor 等 AI 编程助手时，你会发现：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac 上的 AI 编码利器：打造高效命令行工作流">
+<meta property="og:url" content="https://coolzeng.com/posts/undefined/index.html">
+<meta property="og:site_name" content="Zenghao0708的小站">
+<meta property="og:description" content="Mac 上的 AI 编码利器：打造高效命令行工作流在 AI 辅助编程时代，选对工具能让你的开发效率翻倍。作为一名长期使用 Mac 进行 AI 编码的开发者，我发现命令行工具的选择对工作流的影响远超想象。今天分享几个我每天都在用的神器，它们让我的 AI 编码体验提升了一个档次。 为什么命令行工具对 AI 编码如此重要？在使用 Claude Code、Cursor 等 AI 编程助手时，你会发现：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-22T14:53:28.339Z">
+<meta property="article:author" content="zenghao0708">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="开发工具">
+<meta property="article:tag" content="命令行">
+<meta property="article:tag" content="Mac">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>Mac 上的 AI 编码利器：打造高效命令行工作流 · 浩子的小站</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- Google tag (gtag.js) -->
+    
+
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zenghao0708的小站" type="application/atom+xml">
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>浩子的小站</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">浩子的小站</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">Mac 上的 AI 编码利器：打造高效命令行工作流</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+    
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                Mac 上的 AI 编码利器：打造高效命令行工作流
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="开发工具">开发工具</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="命令行">命令行</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Mac">Mac</a>
+    
+</div>
+
+                
+                <!-- 文章字数统计 -->
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">4.3k</span>阅读时长: <span class="post-count reading-time">18 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2026/03/22</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="Mac-上的-AI-编码利器：打造高效命令行工作流"><a href="#Mac-上的-AI-编码利器：打造高效命令行工作流" class="headerlink" title="Mac 上的 AI 编码利器：打造高效命令行工作流"></a>Mac 上的 AI 编码利器：打造高效命令行工作流</h1><p>在 AI 辅助编程时代，选对工具能让你的开发效率翻倍。作为一名长期使用 Mac 进行 AI 编码的开发者，我发现命令行工具的选择对工作流的影响远超想象。今天分享几个我每天都在用的神器，它们让我的 AI 编码体验提升了一个档次。</p>
+<h2 id="为什么命令行工具对-AI-编码如此重要？"><a href="#为什么命令行工具对-AI-编码如此重要？" class="headerlink" title="为什么命令行工具对 AI 编码如此重要？"></a>为什么命令行工具对 AI 编码如此重要？</h2><p>在使用 Claude Code、Cursor 等 AI 编程助手时，你会发现：</p>
+<ul>
+<li><strong>频繁的文件切换</strong>：AI 可能同时修改多个文件，需要快速定位</li>
+<li><strong>大量的终端操作</strong>：运行测试、查看日志、管理进程</li>
+<li><strong>复杂的项目导航</strong>：在大型代码库中快速找到目标文件</li>
+<li><strong>多任务并行</strong>：同时运行开发服务器、测试、构建等</li>
+</ul>
+<p>传统的 GUI 工具在这些场景下显得力不从心，而精心选择的命令行工具能让你如鱼得水。</p>
+<h2 id="1-fzf：模糊搜索的艺术"><a href="#1-fzf：模糊搜索的艺术" class="headerlink" title="1. fzf：模糊搜索的艺术"></a>1. fzf：模糊搜索的艺术</h2><h3 id="为什么选择-fzf？"><a href="#为什么选择-fzf？" class="headerlink" title="为什么选择 fzf？"></a>为什么选择 fzf？</h3><p><code>fzf</code> 是一个通用的命令行模糊查找器，它能让你在海量文件中秒速定位目标。当 AI 告诉你”请检查 <code>src/components/UserProfile.tsx</code>“时，你不需要手动 <code>cd</code> 进多层目录，一个快捷键就能直达。</p>
+<h3 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 Homebrew 安装</span></span><br><span class="line">brew install fzf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 shell 集成（快捷键绑定）</span></span><br><span class="line">$(brew --prefix)/opt/fzf/install</span><br></pre></td></tr></table></figure>
+
+<h3 id="实战技巧"><a href="#实战技巧" class="headerlink" title="实战技巧"></a>实战技巧</h3><p><strong>1. 快速打开文件（Ctrl+T）</strong></p>
+<p>在任何目录下按 <code>Ctrl+T</code>，输入文件名的几个字母，fzf 会实时过滤匹配的文件。选中后直接插入到命令行，配合 <code>vim</code> 或 <code>code</code> 使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按 Ctrl+T，输入 &quot;user&quot;，选择文件</span></span><br><span class="line">vim &lt;Ctrl+T&gt;UserProfile.tsx</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 历史命令搜索（Ctrl+R）</strong></p>
+<p>当 AI 建议你运行某个之前执行过的复杂命令时，不用翻找历史记录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按 Ctrl+R，输入关键词如 &quot;docker&quot;</span></span><br><span class="line"><span class="comment"># 立即找到之前的 docker compose 命令</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 目录跳转（Alt+C）</strong></p>
+<p>快速切换到项目的任何子目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按 Alt+C，输入 &quot;comp&quot;</span></span><br><span class="line"><span class="comment"># 直接跳转到 src/components/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h3><p>在 <code>~/.zshrc</code> 中添加以下配置，让 fzf 更强大：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 fd 替代 find（更快，自动忽略 .git）</span></span><br><span class="line"><span class="built_in">export</span> FZF_DEFAULT_COMMAND=<span class="string">&#x27;fd --type f --hidden --follow --exclude .git&#x27;</span></span><br><span class="line"><span class="built_in">export</span> FZF_CTRL_T_COMMAND=<span class="string">&quot;<span class="variable">$FZF_DEFAULT_COMMAND</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 预览文件内容</span></span><br><span class="line"><span class="built_in">export</span> FZF_CTRL_T_OPTS=<span class="string">&quot;--preview &#x27;bat --color=always --line-range :500 &#123;&#125;&#x27;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更好的配色</span></span><br><span class="line"><span class="built_in">export</span> FZF_DEFAULT_OPTS=<span class="string">&#x27;--height 40% --layout=reverse --border&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Ghostty：为-AI-编码而生的终端"><a href="#2-Ghostty：为-AI-编码而生的终端" class="headerlink" title="2. Ghostty：为 AI 编码而生的终端"></a>2. Ghostty：为 AI 编码而生的终端</h2><h3 id="为什么不用-iTerm2？"><a href="#为什么不用-iTerm2？" class="headerlink" title="为什么不用 iTerm2？"></a>为什么不用 iTerm2？</h3><p><code>Ghostty</code> 是一个用 Zig 编写的现代终端模拟器，专为性能和开发者体验设计。在 AI 编码场景下，它的优势明显：</p>
+<ul>
+<li><strong>极致性能</strong>：渲染速度比 iTerm2 快 3-5 倍，处理大量日志输出不卡顿</li>
+<li><strong>GPU 加速</strong>：利用 Metal 渲染，滚动和动画丝滑流畅</li>
+<li><strong>原生 macOS 体验</strong>：完美支持 macOS 的手势和快捷键</li>
+<li><strong>配置简单</strong>：TOML 配置文件，清晰易懂</li>
+</ul>
+<h3 id="安装与配置-1"><a href="#安装与配置-1" class="headerlink" title="安装与配置"></a>安装与配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 Homebrew 安装</span></span><br><span class="line">brew install ghostty</span><br></pre></td></tr></table></figure>
+
+<p>创建配置文件 <code>~/.config/ghostty/config</code>：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 字体配置</span></span><br><span class="line"><span class="attr">font-family</span> = <span class="string">&quot;JetBrains Mono&quot;</span></span><br><span class="line"><span class="attr">font-size</span> = <span class="number">14</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主题</span></span><br><span class="line"><span class="attr">theme</span> = <span class="string">&quot;catppuccin-mocha&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 性能优化</span></span><br><span class="line"><span class="attr">window-vsync</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">macos-option-as-alt</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 快捷键</span></span><br><span class="line"><span class="attr">keybind</span> = cmd+t=new_tab</span><br><span class="line"><span class="attr">keybind</span> = cmd+w=close_surface</span><br><span class="line"><span class="attr">keybind</span> = cmd+shift+[=previous_tab</span><br><span class="line">keybind = cmd+shift+]=next_tab</span><br></pre></td></tr></table></figure>
+
+<h3 id="AI-编码场景优化"><a href="#AI-编码场景优化" class="headerlink" title="AI 编码场景优化"></a>AI 编码场景优化</h3><p><strong>1. 分屏布局</strong></p>
+<p>当 AI 同时修改多个文件时，使用 Ghostty 的原生分屏：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cmd+D 垂直分屏</span></span><br><span class="line"><span class="comment"># Cmd+Shift+D 水平分屏</span></span><br><span class="line"><span class="comment"># Cmd+[ / Cmd+] 切换面板</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 快速复制 AI 输出</strong></p>
+<p>Ghostty 支持智能选择，双击选中单词，三击选中整行，非常适合快速复制 AI 生成的代码片段。</p>
+<h2 id="3-Yazi：现代化的文件管理器"><a href="#3-Yazi：现代化的文件管理器" class="headerlink" title="3. Yazi：现代化的文件管理器"></a>3. Yazi：现代化的文件管理器</h2><h3 id="为什么需要-Yazi？"><a href="#为什么需要-Yazi？" class="headerlink" title="为什么需要 Yazi？"></a>为什么需要 Yazi？</h3><p>在 AI 编码时，你经常需要：</p>
+<ul>
+<li>快速浏览项目结构</li>
+<li>批量重命名文件</li>
+<li>预览图片、PDF 等非文本文件</li>
+<li>在多个目录间移动文件</li>
+</ul>
+<p><code>Yazi</code> 是一个用 Rust 编写的终端文件管理器，速度快、功能强、颜值高。</p>
+<h3 id="安装与配置-2"><a href="#安装与配置-2" class="headerlink" title="安装与配置"></a>安装与配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Yazi</span></span><br><span class="line">brew install yazi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖（用于预览）</span></span><br><span class="line">brew install ffmpegthumbnailer unar jq poppler fd ripgrep fzf zoxide</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><p><strong>1. 可视化文件浏览</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动 Yazi</span></span><br><span class="line">yazi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本操作</span></span><br><span class="line"><span class="comment"># j/k - 上下移动</span></span><br><span class="line"><span class="comment"># h/l - 进入/退出目录</span></span><br><span class="line"><span class="comment"># Space - 选中文件</span></span><br><span class="line"><span class="comment"># y - 复制</span></span><br><span class="line"><span class="comment"># p - 粘贴</span></span><br><span class="line"><span class="comment"># d - 删除</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 文件预览</strong></p>
+<p>Yazi 自动识别文件类型并显示预览：</p>
+<ul>
+<li>代码文件：语法高亮</li>
+<li>图片：缩略图</li>
+<li>PDF：首页预览</li>
+<li>视频：帧预览</li>
+</ul>
+<p><strong>3. 批量操作</strong></p>
+<p>当 AI 建议重构文件结构时，Yazi 的批量操作非常高效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 选中多个文件（Space）</span></span><br><span class="line"><span class="comment"># 按 r 批量重命名</span></span><br><span class="line"><span class="comment"># 按 d 批量删除</span></span><br><span class="line"><span class="comment"># 按 y 批量复制</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="与-AI-工具集成"><a href="#与-AI-工具集成" class="headerlink" title="与 AI 工具集成"></a>与 AI 工具集成</h3><p>在 <code>~/.config/yazi/yazi.toml</code> 中配置快捷键：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[opener]</span></span><br><span class="line"><span class="attr">edit</span> = [</span><br><span class="line">  &#123; exec = <span class="string">&#x27;code &quot;$@&quot;&#x27;</span>, block = <span class="literal">true</span> &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="section">[open]</span></span><br><span class="line"><span class="attr">rules</span> = [</span><br><span class="line">  &#123; mime = <span class="string">&quot;text/*&quot;</span>, use = <span class="string">&quot;edit&quot;</span> &#125;,</span><br><span class="line">  &#123; mime = <span class="string">&quot;application/json&quot;</span>, use = <span class="string">&quot;edit&quot;</span> &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>现在在 Yazi 中按 <code>Enter</code> 就能用 VS Code 打开文件。</p>
+<h2 id="4-Tmux：终端复用的王者"><a href="#4-Tmux：终端复用的王者" class="headerlink" title="4. Tmux：终端复用的王者"></a>4. Tmux：终端复用的王者</h2><h3 id="为什么-AI-编码需要-Tmux？"><a href="#为什么-AI-编码需要-Tmux？" class="headerlink" title="为什么 AI 编码需要 Tmux？"></a>为什么 AI 编码需要 Tmux？</h3><p>使用 Claude Code 或 Cursor 时，你经常需要：</p>
+<ul>
+<li>同时运行开发服务器、测试、构建</li>
+<li>保持会话，即使终端关闭</li>
+<li>在多个项目间快速切换</li>
+<li>远程开发时保持连接</li>
+</ul>
+<p><code>Tmux</code> 是终端复用器，让你在一个终端窗口中管理多个会话。</p>
+<h3 id="安装与配置-3"><a href="#安装与配置-3" class="headerlink" title="安装与配置"></a>安装与配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Tmux</span></span><br><span class="line">brew install tmux</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 TPM（Tmux 插件管理器）</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm</span><br></pre></td></tr></table></figure>
+
+<p>创建配置文件 <code>~/.tmux.conf</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 改变前缀键为 Ctrl+a（更顺手）</span></span><br><span class="line">unbind C-b</span><br><span class="line"><span class="built_in">set</span> -g prefix C-a</span><br><span class="line"><span class="built_in">bind</span> C-a send-prefix</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用鼠标支持</span></span><br><span class="line"><span class="built_in">set</span> -g mouse on</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 1 开始编号（0 太远）</span></span><br><span class="line"><span class="built_in">set</span> -g base-index 1</span><br><span class="line">setw -g pane-base-index 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更好的分屏快捷键</span></span><br><span class="line"><span class="built_in">bind</span> | split-window -h -c <span class="string">&quot;#&#123;pane_current_path&#125;&quot;</span></span><br><span class="line"><span class="built_in">bind</span> - split-window -v -c <span class="string">&quot;#&#123;pane_current_path&#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Vim 风格的面板切换</span></span><br><span class="line"><span class="built_in">bind</span> h select-pane -L</span><br><span class="line"><span class="built_in">bind</span> j select-pane -D</span><br><span class="line"><span class="built_in">bind</span> k select-pane -U</span><br><span class="line"><span class="built_in">bind</span> l select-pane -R</span><br><span class="line"></span><br><span class="line"><span class="comment"># 插件</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tpm&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tmux-sensible&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tmux-resurrect&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tmux-continuum&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动保存会话</span></span><br><span class="line"><span class="built_in">set</span> -g @continuum-restore <span class="string">&#x27;on&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 TPM</span></span><br><span class="line">run <span class="string">&#x27;~/.tmux/plugins/tpm/tpm&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="AI-编码工作流"><a href="#AI-编码工作流" class="headerlink" title="AI 编码工作流"></a>AI 编码工作流</h3><p><strong>典型的 Tmux 布局：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────┐</span><br><span class="line">│ Window 1: 开发                       │</span><br><span class="line">├──────────────┬──────────────────────┤</span><br><span class="line">│              │                      │</span><br><span class="line">│  编辑器      │   开发服务器         │</span><br><span class="line">│  (Pane 1)    │   (Pane 2)           │</span><br><span class="line">│              │                      │</span><br><span class="line">├──────────────┴──────────────────────┤</span><br><span class="line">│  测试输出 (Pane 3)                  │</span><br><span class="line">└─────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建这个布局：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建新会话</span></span><br><span class="line">tmux new -s ai-coding</span><br><span class="line"></span><br><span class="line"><span class="comment"># 垂直分屏</span></span><br><span class="line">Ctrl+a |</span><br><span class="line"></span><br><span class="line"><span class="comment"># 水平分屏</span></span><br><span class="line">Ctrl+a -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在右上面板运行开发服务器</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在底部面板运行测试监听</span></span><br><span class="line">npm run <span class="built_in">test</span>:watch</span><br></pre></td></tr></table></figure>
+
+<p><strong>会话管理：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建新会话</span></span><br><span class="line">tmux new -s project-name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有会话</span></span><br><span class="line">tmux <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 附加到会话</span></span><br><span class="line">tmux attach -t project-name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分离会话（保持运行）</span></span><br><span class="line">Ctrl+a d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换会话</span></span><br><span class="line">Ctrl+a s</span><br></pre></td></tr></table></figure>
+
+<h3 id="进阶技巧"><a href="#进阶技巧" class="headerlink" title="进阶技巧"></a>进阶技巧</h3><p><strong>1. 会话持久化</strong></p>
+<p>使用 <code>tmux-resurrect</code> 插件，即使重启电脑也能恢复会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存会话</span></span><br><span class="line">Ctrl+a Ctrl+s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复会话</span></span><br><span class="line">Ctrl+a Ctrl+r</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 与 AI 工具集成</strong></p>
+<p>在 Claude Code 中运行长时间任务时，使用 Tmux 后台运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建后台会话运行构建</span></span><br><span class="line">tmux new -d -s build <span class="string">&#x27;npm run build&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看构建输出</span></span><br><span class="line">tmux attach -t build</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-组合拳：打造完整工作流"><a href="#5-组合拳：打造完整工作流" class="headerlink" title="5. 组合拳：打造完整工作流"></a>5. 组合拳：打造完整工作流</h2><h3 id="场景-1：启动新项目"><a href="#场景-1：启动新项目" class="headerlink" title="场景 1：启动新项目"></a>场景 1：启动新项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 使用 fzf 快速找到项目目录</span></span><br><span class="line"><span class="built_in">cd</span> $(fd --<span class="built_in">type</span> d --max-depth 3 | fzf)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 创建 Tmux 会话</span></span><br><span class="line">tmux new -s $(<span class="built_in">basename</span> $(<span class="built_in">pwd</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 查看项目结构（eza + 树形视图）</span></span><br><span class="line">lt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 分屏布局</span></span><br><span class="line"><span class="comment"># 左侧：编辑器</span></span><br><span class="line"><span class="comment"># 右上：开发服务器</span></span><br><span class="line"><span class="comment"># 右下：测试</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 使用 Yazi 浏览项目结构</span></span><br><span class="line">yazi</span><br></pre></td></tr></table></figure>
+
+<h3 id="场景-2：AI-建议的多文件修改"><a href="#场景-2：AI-建议的多文件修改" class="headerlink" title="场景 2：AI 建议的多文件修改"></a>场景 2：AI 建议的多文件修改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. AI 说：&quot;我修改了 3 个文件，请检查&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 使用 eza 快速查看哪些文件被修改</span></span><br><span class="line">ll  <span class="comment"># 会显示 Git 状态标记</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 使用 Lazygit 可视化查看所有变更</span></span><br><span class="line">lazygit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 使用 fzf 快速打开每个文件</span></span><br><span class="line">vim $(fzf)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 在 Tmux 的另一个面板运行测试</span></span><br><span class="line">npm <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="场景-3：调试复杂问题"><a href="#场景-3：调试复杂问题" class="headerlink" title="场景 3：调试复杂问题"></a>场景 3：调试复杂问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 在 Tmux 中创建调试布局</span></span><br><span class="line"><span class="comment"># 面板 1：运行应用</span></span><br><span class="line"><span class="comment"># 面板 2：查看日志</span></span><br><span class="line"><span class="comment"># 面板 3：运行测试</span></span><br><span class="line"><span class="comment"># 面板 4：编辑代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 使用 Atuin 智能搜索之前的调试命令</span></span><br><span class="line">Ctrl+R -&gt; 输入关键词 -&gt; 按目录过滤</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 使用 Lazygit 查看代码变更历史</span></span><br><span class="line">lazygit -&gt; 按 l 查看文件历史</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 使用 Yazi 快速定位相关文件</span></span><br><span class="line">yazi</span><br></pre></td></tr></table></figure>
+
+<h3 id="场景-4：提交-AI-修改的代码"><a href="#场景-4：提交-AI-修改的代码" class="headerlink" title="场景 4：提交 AI 修改的代码"></a>场景 4：提交 AI 修改的代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 使用 Lazygit 可视化查看所有变更</span></span><br><span class="line">lazygit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 在 Lazygit 中：</span></span><br><span class="line"><span class="comment">#    - 按 Space 选择性暂存文件</span></span><br><span class="line"><span class="comment">#    - 按 c 提交</span></span><br><span class="line"><span class="comment">#    - 按 P 推送</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. Starship 提示符实时显示 Git 状态</span></span><br><span class="line"><span class="comment"># 提交前：🌱 feature/auth ✅3 📝2</span></span><br><span class="line"><span class="comment"># 提交后：🌱 feature/auth ⬆️1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-进阶工具：让-AI-编码更上一层楼"><a href="#6-进阶工具：让-AI-编码更上一层楼" class="headerlink" title="6. 进阶工具：让 AI 编码更上一层楼"></a>6. 进阶工具：让 AI 编码更上一层楼</h2><p>在掌握了前面的基础工具后，这些进阶工具能让你的 AI 编码效率再提升一个档次。它们都是 GitHub 上的热门项目，经过了大量开发者的实战检验。</p>
+<h3 id="Atuin：智能命令历史搜索-⭐-27-5K"><a href="#Atuin：智能命令历史搜索-⭐-27-5K" class="headerlink" title="Atuin：智能命令历史搜索 (⭐ 27.5K)"></a>Atuin：智能命令历史搜索 (⭐ 27.5K)</h3><h4 id="为什么需要-Atuin？"><a href="#为什么需要-Atuin？" class="headerlink" title="为什么需要 Atuin？"></a>为什么需要 Atuin？</h4><p>传统的 <code>Ctrl+R</code> 历史搜索有很多局限：</p>
+<ul>
+<li>只能搜索当前机器的历史</li>
+<li>无法按目录、时间过滤</li>
+<li>搜索结果不够智能</li>
+</ul>
+<p>当 AI 建议你运行一个复杂的命令时，你可能几天前在另一个项目中执行过类似的命令。<code>Atuin</code> 将所有命令历史存储在 SQLite 数据库中，支持跨设备同步，让你永远不会丢失有用的命令。</p>
+<h4 id="安装与配置-4"><a href="#安装与配置-4" class="headerlink" title="安装与配置"></a>安装与配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Atuin</span></span><br><span class="line">brew install atuin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化（会自动导入现有历史）</span></span><br><span class="line">atuin init zsh &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入现有历史</span></span><br><span class="line">atuin import auto</span><br></pre></td></tr></table></figure>
+
+<h4 id="AI-编码场景"><a href="#AI-编码场景" class="headerlink" title="AI 编码场景"></a>AI 编码场景</h4><p><strong>场景 1：找回 AI 建议的复杂命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按 Ctrl+R，输入关键词</span></span><br><span class="line"><span class="comment"># Atuin 会显示：</span></span><br><span class="line"><span class="comment"># - 命令执行时间</span></span><br><span class="line"><span class="comment"># - 执行目录</span></span><br><span class="line"><span class="comment"># - 命令是否成功</span></span><br><span class="line"><span class="comment"># - 执行时长</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 例如搜索 &quot;docker&quot;，立即找到：</span></span><br><span class="line"><span class="comment"># docker compose -f docker-compose.dev.yml up -d</span></span><br><span class="line"><span class="comment"># 📁 ~/projects/api-service</span></span><br><span class="line"><span class="comment"># ✅ 成功 (2s)</span></span><br><span class="line"><span class="comment"># 🕐 2 天前</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>场景 2：跨项目复用命令</strong></p>
+<p>AI 在项目 A 中建议的测试命令，在项目 B 中也能快速找到并复用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在项目 A 中执行过：</span></span><br><span class="line">npm <span class="built_in">test</span> -- --coverage --watchAll=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在项目 B 中按 Ctrl+R 搜索 &quot;coverage&quot;</span></span><br><span class="line"><span class="comment"># 立即找到并复用</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="进阶配置-1"><a href="#进阶配置-1" class="headerlink" title="进阶配置"></a>进阶配置</h4><p>在 <code>~/.config/atuin/config.toml</code> 中配置：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按目录过滤</span></span><br><span class="line"><span class="attr">filter_mode</span> = <span class="string">&quot;directory&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 智能排序（常用命令优先）</span></span><br><span class="line"><span class="attr">search_mode</span> = <span class="string">&quot;fuzzy&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示更多上下文</span></span><br><span class="line"><span class="attr">show_preview</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步到云端（可选）</span></span><br><span class="line"><span class="attr">sync_address</span> = <span class="string">&quot;https://api.atuin.sh&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Lazygit：Git-操作的可视化革命-⭐-55K"><a href="#Lazygit：Git-操作的可视化革命-⭐-55K" class="headerlink" title="Lazygit：Git 操作的可视化革命 (⭐ 55K)"></a>Lazygit：Git 操作的可视化革命 (⭐ 55K)</h3><h4 id="为什么-AI-编码需要-Lazygit？"><a href="#为什么-AI-编码需要-Lazygit？" class="headerlink" title="为什么 AI 编码需要 Lazygit？"></a>为什么 AI 编码需要 Lazygit？</h4><p>当 AI 同时修改 10 个文件时，传统的 <code>git status</code> 和 <code>git diff</code> 显得力不从心：</p>
+<ul>
+<li>无法快速预览每个文件的变更</li>
+<li>暂存&#x2F;取消暂存操作繁琐</li>
+<li>解决冲突时缺乏可视化</li>
+<li>交互式 rebase 难以操作</li>
+</ul>
+<p><code>Lazygit</code> 提供了一个强大的终端 UI，让所有 Git 操作都变得直观和高效。</p>
+<h4 id="安装与配置-5"><a href="#安装与配置-5" class="headerlink" title="安装与配置"></a>安装与配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Lazygit</span></span><br><span class="line">brew install lazygit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建配置文件</span></span><br><span class="line"><span class="built_in">mkdir</span> -p ~/.config/lazygit</span><br></pre></td></tr></table></figure>
+
+<p>创建 <code>~/.config/lazygit/config.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">gui:</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">activeBorderColor:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">green</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">bold</span></span><br><span class="line">  <span class="attr">showFileTree:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">showRandomTip:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">git:</span></span><br><span class="line">  <span class="attr">paging:</span></span><br><span class="line">    <span class="attr">colorArg:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">pager:</span> <span class="string">delta</span> <span class="string">--dark</span> <span class="string">--paging=never</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="AI-编码工作流-1"><a href="#AI-编码工作流-1" class="headerlink" title="AI 编码工作流"></a>AI 编码工作流</h4><p><strong>场景 1：快速查看 AI 的多文件修改</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动 Lazygit</span></span><br><span class="line">lazygit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 界面布局：</span></span><br><span class="line"><span class="comment"># ┌─────────────┬──────────────────┐</span></span><br><span class="line"><span class="comment"># │ 文件列表    │  Diff 预览       │</span></span><br><span class="line"><span class="comment"># │ ✓ auth.ts   │  - old code      │</span></span><br><span class="line"><span class="comment"># │ ✓ user.ts   │  + new code      │</span></span><br><span class="line"><span class="comment"># │   api.ts    │                  │</span></span><br><span class="line"><span class="comment"># └─────────────┴──────────────────┘</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 快捷键：</span></span><br><span class="line"><span class="comment"># j/k - 上下移动</span></span><br><span class="line"><span class="comment"># Space - 暂存/取消暂存</span></span><br><span class="line"><span class="comment"># c - 提交</span></span><br><span class="line"><span class="comment"># P - 推送</span></span><br><span class="line"><span class="comment"># Enter - 查看完整 diff</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>场景 2：交互式暂存</strong></p>
+<p>AI 修改了一个文件的多个部分，但你只想提交其中一部分：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 Lazygit 中：</span></span><br><span class="line"><span class="comment"># 1. 选中文件，按 Enter 查看 diff</span></span><br><span class="line"><span class="comment"># 2. 移动到想要暂存的代码块</span></span><br><span class="line"><span class="comment"># 3. 按 Space 只暂存这个代码块</span></span><br><span class="line"><span class="comment"># 4. 按 c 提交</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>场景 3：解决合并冲突</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Lazygit 会高亮显示冲突文件</span></span><br><span class="line"><span class="comment"># 按 Enter 进入冲突解决模式</span></span><br><span class="line"><span class="comment"># 使用方向键选择保留哪一方的代码</span></span><br><span class="line"><span class="comment"># 或按 e 在编辑器中手动解决</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 快速修改上一次提交</span></span><br><span class="line"><span class="comment"># 在 Lazygit 中按 A（amend）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互式 rebase</span></span><br><span class="line"><span class="comment"># 选中提交，按 e（edit）、s（squash）、d（drop）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看文件历史</span></span><br><span class="line"><span class="comment"># 选中文件，按 l（log）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 快速切换分支</span></span><br><span class="line"><span class="comment"># 按 b（branches），输入分支名</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Starship：智能提示符-⭐-53-7K"><a href="#Starship：智能提示符-⭐-53-7K" class="headerlink" title="Starship：智能提示符 (⭐ 53.7K)"></a>Starship：智能提示符 (⭐ 53.7K)</h3><h4 id="为什么-AI-编码需要-Starship？"><a href="#为什么-AI-编码需要-Starship？" class="headerlink" title="为什么 AI 编码需要 Starship？"></a>为什么 AI 编码需要 Starship？</h4><p>在 AI 编码时，你需要快速了解当前环境的上下文：</p>
+<ul>
+<li>当前 Git 分支和状态</li>
+<li>Node&#x2F;Python&#x2F;Go 版本</li>
+<li>是否在虚拟环境中</li>
+<li>上一个命令是否成功</li>
+</ul>
+<p><code>Starship</code> 是一个跨 shell 的智能提示符，用 Rust 编写，速度极快，能实时显示所有关键信息。</p>
+<h4 id="安装与配置-6"><a href="#安装与配置-6" class="headerlink" title="安装与配置"></a>安装与配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Starship</span></span><br><span class="line">brew install starship</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加到 ~/.zshrc</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;eval &quot;$(starship init zsh)&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>创建配置文件 <code>~/.config/starship.toml</code>：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 简洁模式</span></span><br><span class="line"><span class="attr">format</span> = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">[┌─](bold green)$directory$git_branch$git_status</span></span><br><span class="line"><span class="string">[└─](bold green)$character&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 目录显示</span></span><br><span class="line"><span class="section">[directory]</span></span><br><span class="line"><span class="attr">truncation_length</span> = <span class="number">3</span></span><br><span class="line"><span class="attr">truncate_to_repo</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">style</span> = <span class="string">&quot;bold cyan&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Git 分支</span></span><br><span class="line"><span class="section">[git_branch]</span></span><br><span class="line"><span class="attr">symbol</span> = <span class="string">&quot;🌱 &quot;</span></span><br><span class="line"><span class="attr">style</span> = <span class="string">&quot;bold purple&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Git 状态</span></span><br><span class="line"><span class="section">[git_status]</span></span><br><span class="line"><span class="attr">conflicted</span> = <span class="string">&quot;⚔️ &quot;</span></span><br><span class="line"><span class="attr">ahead</span> = <span class="string">&quot;⬆️ $&#123;count&#125;&quot;</span></span><br><span class="line"><span class="attr">behind</span> = <span class="string">&quot;⬇️ $&#123;count&#125;&quot;</span></span><br><span class="line"><span class="attr">diverged</span> = <span class="string">&quot;🔀&quot;</span></span><br><span class="line"><span class="attr">untracked</span> = <span class="string">&quot;🤷&quot;</span></span><br><span class="line"><span class="attr">stashed</span> = <span class="string">&quot;📦&quot;</span></span><br><span class="line"><span class="attr">modified</span> = <span class="string">&quot;📝&quot;</span></span><br><span class="line"><span class="attr">staged</span> = <span class="string">&quot;✅&quot;</span></span><br><span class="line"><span class="attr">renamed</span> = <span class="string">&quot;👅&quot;</span></span><br><span class="line"><span class="attr">deleted</span> = <span class="string">&quot;🗑️ &quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 语言版本</span></span><br><span class="line"><span class="section">[nodejs]</span></span><br><span class="line"><span class="attr">symbol</span> = <span class="string">&quot;⬢ &quot;</span></span><br><span class="line"><span class="attr">style</span> = <span class="string">&quot;bold green&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[python]</span></span><br><span class="line"><span class="attr">symbol</span> = <span class="string">&quot;🐍 &quot;</span></span><br><span class="line"><span class="attr">style</span> = <span class="string">&quot;bold yellow&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[rust]</span></span><br><span class="line"><span class="attr">symbol</span> = <span class="string">&quot;🦀 &quot;</span></span><br><span class="line"><span class="attr">style</span> = <span class="string">&quot;bold red&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 命令执行时间</span></span><br><span class="line"><span class="section">[cmd_duration]</span></span><br><span class="line"><span class="attr">min_time</span> = <span class="number">500</span></span><br><span class="line"><span class="attr">format</span> = <span class="string">&quot;took [$duration](bold yellow)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="AI-编码场景-1"><a href="#AI-编码场景-1" class="headerlink" title="AI 编码场景"></a>AI 编码场景</h4><p><strong>提示符显示示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">┌─ ~/projects/ai-app 🌱 feature/auth ✅3 📝2</span><br><span class="line">└─ ❯</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解读：</span></span><br><span class="line"><span class="comment"># ~/projects/ai-app - 当前目录</span></span><br><span class="line"><span class="comment"># 🌱 feature/auth - Git 分支</span></span><br><span class="line"><span class="comment"># ✅3 - 3 个文件已暂存</span></span><br><span class="line"><span class="comment"># 📝2 - 2 个文件已修改</span></span><br></pre></td></tr></table></figure>
+
+<p>当 AI 修改文件后，提示符会实时更新，让你一眼看出项目状态。</p>
+<h3 id="eza：现代化的-ls-⭐-20-4K"><a href="#eza：现代化的-ls-⭐-20-4K" class="headerlink" title="eza：现代化的 ls (⭐ 20.4K)"></a>eza：现代化的 ls (⭐ 20.4K)</h3><h4 id="为什么需要-eza？"><a href="#为什么需要-eza？" class="headerlink" title="为什么需要 eza？"></a>为什么需要 eza？</h4><p>传统的 <code>ls</code> 命令输出单调，缺乏关键信息。<code>eza</code> 是 <code>exa</code> 的继任者，提供：</p>
+<ul>
+<li>彩色输出和图标</li>
+<li>Git 状态集成</li>
+<li>树形视图</li>
+<li>更好的排序和过滤</li>
+</ul>
+<p>在 AI 编码时，快速浏览项目结构和文件状态至关重要。</p>
+<h4 id="安装与配置-7"><a href="#安装与配置-7" class="headerlink" title="安装与配置"></a>安装与配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 eza</span></span><br><span class="line">brew install eza</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加别名到 ~/.zshrc</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span>=<span class="string">&quot;eza --icons --group-directories-first&quot;</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">&quot;eza -l --icons --group-directories-first --git&quot;</span></span><br><span class="line"><span class="built_in">alias</span> la=<span class="string">&quot;eza -la --icons --group-directories-first --git&quot;</span></span><br><span class="line"><span class="built_in">alias</span> lt=<span class="string">&quot;eza --tree --level=2 --icons&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="AI-编码场景-2"><a href="#AI-编码场景-2" class="headerlink" title="AI 编码场景"></a>AI 编码场景</h4><p><strong>场景 1：快速查看项目结构</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 lt（tree）查看项目结构</span></span><br><span class="line">lt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># 📁 src</span></span><br><span class="line"><span class="comment"># ├── 📁 components</span></span><br><span class="line"><span class="comment"># │   ├── 📄 Button.tsx</span></span><br><span class="line"><span class="comment"># │   └── 📄 Input.tsx</span></span><br><span class="line"><span class="comment"># ├── 📁 utils</span></span><br><span class="line"><span class="comment"># │   └── 📄 helpers.ts</span></span><br><span class="line"><span class="comment"># └── 📄 index.ts</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>场景 2：查看 Git 状态</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 ll 查看文件详情和 Git 状态</span></span><br><span class="line">ll</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># .rw-r--r-- 1.2k user 22 Mar 10:30 -M auth.ts</span></span><br><span class="line"><span class="comment"># .rw-r--r-- 856  user 22 Mar 09:15 N- user.ts</span></span><br><span class="line"><span class="comment"># .rw-r--r-- 2.1k user 21 Mar 14:20 -- api.ts</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解读：</span></span><br><span class="line"><span class="comment"># -M - 已修改（Modified）</span></span><br><span class="line"><span class="comment"># N- - 新文件（New）</span></span><br><span class="line"><span class="comment"># -- - 未修改</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>场景 3：按时间排序查看最近修改</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看最近修改的文件（AI 刚修改的）</span></span><br><span class="line">eza -l --<span class="built_in">sort</span>=modified --reverse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最新修改的文件会显示在最下面</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="进阶用法"><a href="#进阶用法" class="headerlink" title="进阶用法"></a>进阶用法</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只显示目录</span></span><br><span class="line">eza -D</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示隐藏文件</span></span><br><span class="line">eza -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按大小排序</span></span><br><span class="line">eza -l --<span class="built_in">sort</span>=size</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示文件树（3 层）</span></span><br><span class="line">eza --tree --level=3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示 Git 忽略的文件</span></span><br><span class="line">eza --git-ignore</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-额外推荐工具"><a href="#7-额外推荐工具" class="headerlink" title="7. 额外推荐工具"></a>7. 额外推荐工具</h2><h3 id="bat：更好的-cat"><a href="#bat：更好的-cat" class="headerlink" title="bat：更好的 cat"></a>bat：更好的 cat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew install bat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 语法高亮的文件查看</span></span><br><span class="line">bat src/main.ts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 与 fzf 集成预览</span></span><br><span class="line">fzf --preview <span class="string">&#x27;bat --color=always &#123;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="fd：更快的-find"><a href="#fd：更快的-find" class="headerlink" title="fd：更快的 find"></a>fd：更快的 find</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew install fd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找所有 TypeScript 文件</span></span><br><span class="line">fd -e ts -e tsx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 忽略 node_modules</span></span><br><span class="line">fd --exclude node_modules</span><br></pre></td></tr></table></figure>
+
+<h3 id="ripgrep：更快的-grep"><a href="#ripgrep：更快的-grep" class="headerlink" title="ripgrep：更快的 grep"></a>ripgrep：更快的 grep</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew install ripgrep</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在所有文件中搜索</span></span><br><span class="line">rg <span class="string">&quot;function.*User&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 只搜索 TypeScript 文件</span></span><br><span class="line">rg -t ts <span class="string">&quot;interface&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="zoxide：智能目录跳转"><a href="#zoxide：智能目录跳转" class="headerlink" title="zoxide：智能目录跳转"></a>zoxide：智能目录跳转</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew install zoxide</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加到 ~/.zshrc</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(zoxide init zsh)</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">z project  <span class="comment"># 跳转到最常访问的包含 &quot;project&quot; 的目录</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这些工具的组合让我的 AI 编码效率提升了至少 50%：</p>
+<h3 id="核心工具（必装）"><a href="#核心工具（必装）" class="headerlink" title="核心工具（必装）"></a>核心工具（必装）</h3><ol>
+<li><strong>fzf</strong> - 秒速定位文件和命令</li>
+<li><strong>Ghostty</strong> - 流畅的终端体验</li>
+<li><strong>Yazi</strong> - 可视化文件管理</li>
+<li><strong>Tmux</strong> - 强大的会话管理</li>
+</ol>
+<h3 id="进阶工具（强烈推荐）"><a href="#进阶工具（强烈推荐）" class="headerlink" title="进阶工具（强烈推荐）"></a>进阶工具（强烈推荐）</h3><ol start="5">
+<li><strong>Atuin</strong> (⭐ 27.5K) - 智能命令历史，跨设备同步</li>
+<li><strong>Lazygit</strong> (⭐ 55K) - Git 可视化操作，告别复杂命令</li>
+<li><strong>Starship</strong> (⭐ 53.7K) - 智能提示符，实时显示上下文</li>
+<li><strong>eza</strong> (⭐ 20.4K) - 现代化文件列表，Git 状态集成</li>
+</ol>
+<h3 id="辅助工具（锦上添花）"><a href="#辅助工具（锦上添花）" class="headerlink" title="辅助工具（锦上添花）"></a>辅助工具（锦上添花）</h3><ol start="9">
+<li><strong>bat</strong> - 语法高亮的文件查看</li>
+<li><strong>fd</strong> - 更快的文件搜索</li>
+<li><strong>ripgrep</strong> - 更快的内容搜索</li>
+<li><strong>zoxide</strong> - 智能目录跳转</li>
+</ol>
+<p>关键是要<strong>形成肌肉记忆</strong>。刚开始可能觉得学习曲线陡峭，但坚持使用 2-3 周后，这些操作会变得自然而然。</p>
+<h3 id="完整工作流示例"><a href="#完整工作流示例" class="headerlink" title="完整工作流示例"></a>完整工作流示例</h3><p>当 AI 助手建议你修改 10 个文件时，你的操作流程是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 查看修改了哪些文件</span></span><br><span class="line">ll  <span class="comment"># eza 显示 Git 状态</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 可视化查看所有变更</span></span><br><span class="line">lazygit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 快速打开文件</span></span><br><span class="line">vim $(fzf)  <span class="comment"># Ctrl+T</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 在 Tmux 分屏中运行测试</span></span><br><span class="line">Ctrl+a | &amp;&amp; npm <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 找回之前的复杂命令</span></span><br><span class="line">Ctrl+R  <span class="comment"># Atuin 智能搜索</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 提交代码</span></span><br><span class="line">lazygit  <span class="comment"># 可视化暂存和提交</span></span><br></pre></td></tr></table></figure>
+
+<p>你的提示符会实时显示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌─ ~/projects/ai-app 🌱 feature/auth ✅3 📝2 ⬢ v20.11.0</span><br><span class="line">└─ ❯</span><br></pre></td></tr></table></figure>
+
+<p>这就是现代 AI 编码的正确打开方式。</p>
+<hr>
+<p><strong>你在用什么命令行工具提升 AI 编码效率？欢迎在评论区分享！</strong></p>
+<h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://levelup.gitconnected.com/12-modern-cli-tools-to-boost-your-productivity-in-2026-17a969eb0e00">12 Modern CLI Tools to Boost Your Productivity in 2026</a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.to/_46ea277e677b888e0cd13/20-cli-tools-that-made-me-mass-uninstall-homebrew-defaults-2025-2026-5g22">20 CLI Tools That Made Me Mass-Uninstall Homebrew Defaults</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@annxsa/5-essential-git-tools-every-developer-needs-in-2026-to-boost-productivity-254654e177ed">5 Essential Git Tools Every Developer Needs in 2026</a></li>
+</ul>
+<blockquote>
+<p>本文由 Claude Opus 4.6 辅助创作，工具链：Ghostty + Tmux + fzf + Yazi + Lazygit + Atuin + Starship + eza</p>
+</blockquote>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://coolzeng.com">zenghao0708</a>
+            <p>原文链接：<a href="https://coolzeng.com/posts/undefined/">https://coolzeng.com/posts/undefined/</a>
+            <p>发表日期：<a href="https://coolzeng.com/posts/undefined/">March 22nd 2026, 12:00:00 am</a>
+            <p>更新日期：<a href="https://coolzeng.com/posts/undefined/">March 22nd 2026, 10:53:28 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/posts/openclaw-architecture/" title="OpenClaw 架构设计：一个“控制平面型”个人 AI 助手的工程化落地">
+                    <div class="prevTitle">OpenClaw 架构设计：一个“控制平面型”个人 AI 助手的工程化落地</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:zenghao.0708@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zenghao0708" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                    
+                    <img class="profile-qr" src="/images/wechat_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mac-%E4%B8%8A%E7%9A%84-AI-%E7%BC%96%E7%A0%81%E5%88%A9%E5%99%A8%EF%BC%9A%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">Mac 上的 AI 编码利器：打造高效命令行工作流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E5%AF%B9-AI-%E7%BC%96%E7%A0%81%E5%A6%82%E6%AD%A4%E9%87%8D%E8%A6%81%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">为什么命令行工具对 AI 编码如此重要？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-fzf%EF%BC%9A%E6%A8%A1%E7%B3%8A%E6%90%9C%E7%B4%A2%E7%9A%84%E8%89%BA%E6%9C%AF"><span class="toc-number">1.2.</span> <span class="toc-text">1. fzf：模糊搜索的艺术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-fzf%EF%BC%9F"><span class="toc-number">1.2.1.</span> <span class="toc-text">为什么选择 fzf？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.2.</span> <span class="toc-text">安装与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%8A%80%E5%B7%A7"><span class="toc-number">1.2.3.</span> <span class="toc-text">实战技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.4.</span> <span class="toc-text">进阶配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Ghostty%EF%BC%9A%E4%B8%BA-AI-%E7%BC%96%E7%A0%81%E8%80%8C%E7%94%9F%E7%9A%84%E7%BB%88%E7%AB%AF"><span class="toc-number">1.3.</span> <span class="toc-text">2. Ghostty：为 AI 编码而生的终端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8-iTerm2%EF%BC%9F"><span class="toc-number">1.3.1.</span> <span class="toc-text">为什么不用 iTerm2？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE-1"><span class="toc-number">1.3.2.</span> <span class="toc-text">安装与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AI-%E7%BC%96%E7%A0%81%E5%9C%BA%E6%99%AF%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.3.</span> <span class="toc-text">AI 编码场景优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Yazi%EF%BC%9A%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">3. Yazi：现代化的文件管理器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-Yazi%EF%BC%9F"><span class="toc-number">1.4.1.</span> <span class="toc-text">为什么需要 Yazi？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE-2"><span class="toc-number">1.4.2.</span> <span class="toc-text">安装与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="toc-number">1.4.3.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E-AI-%E5%B7%A5%E5%85%B7%E9%9B%86%E6%88%90"><span class="toc-number">1.4.4.</span> <span class="toc-text">与 AI 工具集成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Tmux%EF%BC%9A%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E7%8E%8B%E8%80%85"><span class="toc-number">1.5.</span> <span class="toc-text">4. Tmux：终端复用的王者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-AI-%E7%BC%96%E7%A0%81%E9%9C%80%E8%A6%81-Tmux%EF%BC%9F"><span class="toc-number">1.5.1.</span> <span class="toc-text">为什么 AI 编码需要 Tmux？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE-3"><span class="toc-number">1.5.2.</span> <span class="toc-text">安装与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AI-%E7%BC%96%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">1.5.3.</span> <span class="toc-text">AI 编码工作流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E6%8A%80%E5%B7%A7"><span class="toc-number">1.5.4.</span> <span class="toc-text">进阶技巧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%BB%84%E5%90%88%E6%8B%B3%EF%BC%9A%E6%89%93%E9%80%A0%E5%AE%8C%E6%95%B4%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">1.6.</span> <span class="toc-text">5. 组合拳：打造完整工作流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-1%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%96%B0%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.6.1.</span> <span class="toc-text">场景 1：启动新项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-2%EF%BC%9AAI-%E5%BB%BA%E8%AE%AE%E7%9A%84%E5%A4%9A%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="toc-number">1.6.2.</span> <span class="toc-text">场景 2：AI 建议的多文件修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-3%EF%BC%9A%E8%B0%83%E8%AF%95%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98"><span class="toc-number">1.6.3.</span> <span class="toc-text">场景 3：调试复杂问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-4%EF%BC%9A%E6%8F%90%E4%BA%A4-AI-%E4%BF%AE%E6%94%B9%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">1.6.4.</span> <span class="toc-text">场景 4：提交 AI 修改的代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E8%BF%9B%E9%98%B6%E5%B7%A5%E5%85%B7%EF%BC%9A%E8%AE%A9-AI-%E7%BC%96%E7%A0%81%E6%9B%B4%E4%B8%8A%E4%B8%80%E5%B1%82%E6%A5%BC"><span class="toc-number">1.7.</span> <span class="toc-text">6. 进阶工具：让 AI 编码更上一层楼</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Atuin%EF%BC%9A%E6%99%BA%E8%83%BD%E5%91%BD%E4%BB%A4%E5%8E%86%E5%8F%B2%E6%90%9C%E7%B4%A2-%E2%AD%90-27-5K"><span class="toc-number">1.7.1.</span> <span class="toc-text">Atuin：智能命令历史搜索 (⭐ 27.5K)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-Atuin%EF%BC%9F"><span class="toc-number">1.7.1.1.</span> <span class="toc-text">为什么需要 Atuin？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE-4"><span class="toc-number">1.7.1.2.</span> <span class="toc-text">安装与配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AI-%E7%BC%96%E7%A0%81%E5%9C%BA%E6%99%AF"><span class="toc-number">1.7.1.3.</span> <span class="toc-text">AI 编码场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE-1"><span class="toc-number">1.7.1.4.</span> <span class="toc-text">进阶配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lazygit%EF%BC%9AGit-%E6%93%8D%E4%BD%9C%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96%E9%9D%A9%E5%91%BD-%E2%AD%90-55K"><span class="toc-number">1.7.2.</span> <span class="toc-text">Lazygit：Git 操作的可视化革命 (⭐ 55K)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-AI-%E7%BC%96%E7%A0%81%E9%9C%80%E8%A6%81-Lazygit%EF%BC%9F"><span class="toc-number">1.7.2.1.</span> <span class="toc-text">为什么 AI 编码需要 Lazygit？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE-5"><span class="toc-number">1.7.2.2.</span> <span class="toc-text">安装与配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AI-%E7%BC%96%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%B5%81-1"><span class="toc-number">1.7.2.3.</span> <span class="toc-text">AI 编码工作流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-number">1.7.2.4.</span> <span class="toc-text">实用技巧</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Starship%EF%BC%9A%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA%E7%AC%A6-%E2%AD%90-53-7K"><span class="toc-number">1.7.3.</span> <span class="toc-text">Starship：智能提示符 (⭐ 53.7K)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-AI-%E7%BC%96%E7%A0%81%E9%9C%80%E8%A6%81-Starship%EF%BC%9F"><span class="toc-number">1.7.3.1.</span> <span class="toc-text">为什么 AI 编码需要 Starship？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE-6"><span class="toc-number">1.7.3.2.</span> <span class="toc-text">安装与配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AI-%E7%BC%96%E7%A0%81%E5%9C%BA%E6%99%AF-1"><span class="toc-number">1.7.3.3.</span> <span class="toc-text">AI 编码场景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eza%EF%BC%9A%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84-ls-%E2%AD%90-20-4K"><span class="toc-number">1.7.4.</span> <span class="toc-text">eza：现代化的 ls (⭐ 20.4K)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-eza%EF%BC%9F"><span class="toc-number">1.7.4.1.</span> <span class="toc-text">为什么需要 eza？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE-7"><span class="toc-number">1.7.4.2.</span> <span class="toc-text">安装与配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AI-%E7%BC%96%E7%A0%81%E5%9C%BA%E6%99%AF-2"><span class="toc-number">1.7.4.3.</span> <span class="toc-text">AI 编码场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95"><span class="toc-number">1.7.4.4.</span> <span class="toc-text">进阶用法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E9%A2%9D%E5%A4%96%E6%8E%A8%E8%8D%90%E5%B7%A5%E5%85%B7"><span class="toc-number">1.8.</span> <span class="toc-text">7. 额外推荐工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bat%EF%BC%9A%E6%9B%B4%E5%A5%BD%E7%9A%84-cat"><span class="toc-number">1.8.1.</span> <span class="toc-text">bat：更好的 cat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fd%EF%BC%9A%E6%9B%B4%E5%BF%AB%E7%9A%84-find"><span class="toc-number">1.8.2.</span> <span class="toc-text">fd：更快的 find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ripgrep%EF%BC%9A%E6%9B%B4%E5%BF%AB%E7%9A%84-grep"><span class="toc-number">1.8.3.</span> <span class="toc-text">ripgrep：更快的 grep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zoxide%EF%BC%9A%E6%99%BA%E8%83%BD%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BD%AC"><span class="toc-number">1.8.4.</span> <span class="toc-text">zoxide：智能目录跳转</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.9.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%B7%A5%E5%85%B7%EF%BC%88%E5%BF%85%E8%A3%85%EF%BC%89"><span class="toc-number">1.9.1.</span> <span class="toc-text">核心工具（必装）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E5%BC%BA%E7%83%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">1.9.2.</span> <span class="toc-text">进阶工具（强烈推荐）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7%EF%BC%88%E9%94%A6%E4%B8%8A%E6%B7%BB%E8%8A%B1%EF%BC%89"><span class="toc-number">1.9.3.</span> <span class="toc-text">辅助工具（锦上添花）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.9.4.</span> <span class="toc-text">完整工作流示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90"><span class="toc-number">1.10.</span> <span class="toc-text">参考资源</span></a></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 15
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2026 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span>
+            <a class="archive-post-title" href="/posts/undefined/">Mac 上的 AI 编码利器：打造高效命令行工作流</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/01</span>
+            <a class="archive-post-title" href="/posts/openclaw-architecture/">OpenClaw 架构设计：一个“控制平面型”个人 AI 助手的工程化落地</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2024 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/13</span>
+            <a class="archive-post-title" href="/posts/chatpgt-introduce/">ChatGPT & LLM 的那些事（一）：新手上路</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/06</span>
+            <a class="archive-post-title" href="/posts/http3-overview/">关于HTTP/3 的那些事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span>
+            <a class="archive-post-title" href="/posts/http2-overview/">关于HTTP/2 的那些事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/05</span>
+            <a class="archive-post-title" href="/posts/the-palybook/">《人生战术本》- 里弗斯教练帮助他人“成为更好的人”</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2018 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/20</span>
+            <a class="archive-post-title" href="/posts/react-native-private-repo/">iOS ReactNative私有库指南</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span>
+            <a class="archive-post-title" href="/posts/xcode-10-migrate/">Xcode 10 beta 版本迁移指南</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/10</span>
+            <a class="archive-post-title" href="/posts/podfile_lock_conflict/">Cocoapods采坑记 - Podfile.lock 冲突问题</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2017 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span>
+            <a class="archive-post-title" href="/posts/xcode-tips/">Xcode问题锦集</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/07</span>
+            <a class="archive-post-title" href="/posts/swift-oc-mix/">Swift 与 OC 混编小技巧</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2016 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span>
+            <a class="archive-post-title" href="/posts/ios-ssl-pinning/">iOS 网络安全之SSL Pinning</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span>
+            <a class="archive-post-title" href="/posts/ios-thread-tips/">iOS多线程开发笔记</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/12</span>
+            <a class="archive-post-title" href="/posts/hexo_build/">使用hexo+github page搭建个人博客</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/11</span>
+            <a class="archive-post-title" href="/posts/git_manual/">git常用手册</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="LLM">
+                <span class="iconfont-archer">&#xe606;</span>
+                LLM
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="GPT">
+                <span class="iconfont-archer">&#xe606;</span>
+                GPT
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iOS">
+                <span class="iconfont-archer">&#xe606;</span>
+                iOS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="cocoapods">
+                <span class="iconfont-archer">&#xe606;</span>
+                cocoapods
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AI">
+                <span class="iconfont-archer">&#xe606;</span>
+                AI
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OpenClaw">
+                <span class="iconfont-archer">&#xe606;</span>
+                OpenClaw
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Agent">
+                <span class="iconfont-archer">&#xe606;</span>
+                Agent
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="git">
+                <span class="iconfont-archer">&#xe606;</span>
+                git
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ReactNative">
+                <span class="iconfont-archer">&#xe606;</span>
+                ReactNative
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="多线程">
+                <span class="iconfont-archer">&#xe606;</span>
+                多线程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="开发工具">
+                <span class="iconfont-archer">&#xe606;</span>
+                开发工具
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="命令行">
+                <span class="iconfont-archer">&#xe606;</span>
+                命令行
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Mac">
+                <span class="iconfont-archer">&#xe606;</span>
+                Mac
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="hexo">
+                <span class="iconfont-archer">&#xe606;</span>
+                hexo
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="分享">
+                <span class="iconfont-archer">&#xe606;</span>
+                分享
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="网络编程">
+                <span class="iconfont-archer">&#xe606;</span>
+                网络编程
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="AI">
+            <span class="iconfont-archer">&#xe60a;</span>
+            AI
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="开发">
+            <span class="iconfont-archer">&#xe60a;</span>
+            开发
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="ReactNative">
+            <span class="iconfont-archer">&#xe60a;</span>
+            ReactNative
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="技术分享">
+            <span class="iconfont-archer">&#xe60a;</span>
+            技术分享
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="分享">
+            <span class="iconfont-archer">&#xe60a;</span>
+            分享
+        </span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://coolzeng.com",
+        root: siteMetaRoot,
+        author: "zenghao0708"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>
