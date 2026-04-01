@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      width: 1080px;
+      height: 1440px;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #10233b;
+      background:
+        radial-gradient(circle at top right, rgba(45, 212, 191, 0.30), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(14, 116, 144, 0.18), transparent 22%),
+        linear-gradient(160deg, #f3fbfb 0%, #dff6f4 100%);
+      overflow: hidden;
+    }
+    .card {
+      width: 100%;
+      height: 100%;
+      padding: 72px;
+      position: relative;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.10);
+      color: #0f766e;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    h1 {
+      margin: 28px 0 18px;
+      font-size: 86px;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #0f172a;
+    }
+    .subtitle {
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.65;
+      color: #365069;
+    }
+    .panel {
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 20px 70px rgba(15, 23, 42, 0.10);
+      border-radius: 34px;
+      backdrop-filter: blur(14px);
+    }
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+    .label {
+      font-size: 24px;
+      color: #4b6b88;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .token {
+      padding: 16px 20px;
+      border-radius: 18px;
+      background: #f7ffff;
+      border: 1px solid rgba(15, 118, 110, 0.10);
+      color: #134e4a;
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .muted-token {
+      padding: 16px 20px;
+      border-radius: 18px;
+      background: #fff8f3;
+      border: 1px solid rgba(180, 83, 9, 0.12);
+      color: #9a3412;
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .num {
+      width: 78px;
+      height: 78px;
+      border-radius: 24px;
+      background: linear-gradient(160deg, #0f766e 0%, #14b8a6 100%);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      font-weight: 800;
+      box-shadow: 0 16px 36px rgba(20, 184, 166, 0.25);
+    }
+    .step h3 {
+      margin: 2px 0 10px;
+      font-size: 34px;
+      line-height: 1.25;
+      color: #0f172a;
+    }
+    .step p {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.7;
+      color: #47627e;
+    }
+    .footer-note {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      bottom: 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 24px;
+      color: #54718c;
+    }
+    .bar {
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #14b8a6 0%, #38bdf8 100%);
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">WHY MIGRATE</div>
+    <h1>为什么我不再继续用<br />oh-my-zsh</h1>
+    <p class="subtitle">不是它突然不好用了，而是我的主力开发机已经不适合继续靠一个“大一统入口”兜底所有职责。</p>
+    <div class="panel" style="margin-top: 46px; padding: 34px;">
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 22px;">
+        <div style="padding: 12px 8px;">
+          <div class="label">旧环境信号</div>
+          <div class="grid" style="margin-top: 16px;">
+            <div class="muted-token">启动越来越慢</div>
+            <div class="muted-token">重复初始化</div>
+            <div class="muted-token">PATH 越叠越乱</div>
+            <div class="muted-token">出问题很难定位</div>
+          </div>
+        </div>
+        <div style="padding: 12px 8px;">
+          <div class="label">真正的问题</div>
+          <div class="grid" style="margin-top: 16px;">
+            <div class="token">插件 / prompt / 历史 / 跳转 / 运行时</div>
+            <div class="token">全部揉进同一个 shell 入口</div>
+            <div class="token">每一项都合理</div>
+            <div class="token">叠很多年后就失控</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>主力开发机环境迁移复盘</span>
+      <span>01 / 03</span>
+    </div>
+  </div></body>
+</html>
