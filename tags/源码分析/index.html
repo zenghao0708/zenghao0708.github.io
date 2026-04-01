@@ -22,7 +22,7 @@
     <meta name="description" content="Life is struggle!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Zenghao0708的小站">
-<meta property="og:url" content="https://coolzeng.com/tags/%E5%88%86%E4%BA%AB/index.html">
+<meta property="og:url" content="https://coolzeng.com/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="Zenghao0708的小站">
 <meta property="og:description" content="Life is struggle!">
 <meta property="og:locale" content="zh_CN">
@@ -433,17 +433,19 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/posts/the-palybook/">
+            <a class="abstract-title" href="/posts/claude-code-source-architecture/">
                 
-                <span class="abstract-title-text">《人生战术本》- 里弗斯教练帮助他人“成为更好的人”</span>
+                <span class="abstract-title-text">Claude Code 架构拆解：一个更像“完整系统”的 AI Coding Agent</span>
             </a>
             <div class="abstract-content">
-                <p>本文内容节选自 Netflix 20 年推出的纪录片《人生战术本》（The Playbook）第一季第一集，主人公是拥有 22 年 NBA 执教经验的主教练道格·里弗斯。</p>
+                <h1 id="Claude-Code-架构拆解：一个更像“完整系统”的-AI-Coding-Agent"><a href="#Claude-Code-架构拆解：一个更像“完整系统”的-AI-Coding-Agent" class="headerlink" title="Claude Code 架构拆解：一个更像“完整系统”的 AI Coding Agent"></a>Claude Code 架构拆解：一个更像“完整系统”的 AI Coding Agent</h1><p>看完 Claude Code 的源码还原版本后，我对它的判断很明确：</p>
+<p>它的优势并不主要来自“模型能力”，而来自非常系统化的 runtime 设计。<br>如果把很多 Agent 工具理解为“LLM + tools + shell”的组合，那 Claude Code 已经明显进入了下一阶段：它在做的是 agent runtime、agent OS 和 productized orchestration。</p>
+<p>下面从几个技术层面拆开说。</p>
             </div>
             <!-- read more -->
             
                 <div class="abstract-read-more-button">
-                    <a href="/posts/the-palybook/">
+                    <a href="/posts/claude-code-source-architecture/">
                         <span style="margin-right: 0.2rem;">阅读全文</span>
                         <i class="fas fa-angle-right"></i>
                     </a>
@@ -451,15 +453,87 @@
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/03/01">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/05</span>
+                <div class="abstract-date" title="Last updated: 2026/04/02">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/04/01</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="分享">分享</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="开发工具">开发工具</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="架构设计">架构设计</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/posts/claude-code-source-why-better/">
+                
+                <span class="abstract-title-text">Claude Code 源码分析：为什么它比很多 Agent 工具更好用</span>
+            </a>
+            <div class="abstract-content">
+                <h1 id="Claude-Code-源码分析：为什么它比很多-Agent-工具更好用"><a href="#Claude-Code-源码分析：为什么它比很多-Agent-工具更好用" class="headerlink" title="Claude Code 源码分析：为什么它比很多 Agent 工具更好用"></a>Claude Code 源码分析：为什么它比很多 Agent 工具更好用</h1><p>这几个月，Agent 工具很多。</p>
+<p>能读文件的，有。<br>能改代码的，有。<br>能跑命令的，也有。</p>
+<p>但真正用下来，你会发现一个很现实的问题：</p>
+<p>很多 Agent 第一次很好用，第三次开始变笨，第十次开始添乱。<br>上下文越来越乱，工具调用越来越冒险，长任务越来越容易崩，最后你不得不自己接管。</p>
+<p>所以我一直有个问题：</p>
+<p>为什么 Claude Code 明明不是最花哨的那个，却普遍被认为“更顺手”“更靠谱”“更像真能拿来干活的 Agent”？</p>
+<p>为了回答这个问题，我专门去看了一遍 Claude Code 的源码还原仓库。看完之后，我的判断很明确：</p>
+<p>Claude Code 的领先，不是因为它“会更多工具”，也不是因为它“模型更强”。<br>它真正领先的，是它终于把 Agent 做成了一个完整系统，而不是一个会调模型的壳。</p>
+            </div>
+            <!-- read more -->
+            
+                <div class="abstract-read-more-button">
+                    <a href="/posts/claude-code-source-why-better/">
+                        <span style="margin-right: 0.2rem;">阅读全文</span>
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </div>
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2026/04/02">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/04/01</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="开发工具">开发工具</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
     
 </div>
 

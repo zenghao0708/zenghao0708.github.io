@@ -433,6 +433,95 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/posts/xcode-10-migrate/">
+                
+                <span class="abstract-title-text">Xcode 10 beta 版本迁移指南</span>
+            </a>
+            <div class="abstract-content">
+                <p>今天的主角就是开发者接触最多的 Xcode 10 beta，详细内容可以参考 <a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2018/408/">WWDC 18 Session</a> ，同时可以看下 Xcode 10 的 <a target="_blank" rel="noopener" href="https://developerbetas.com/wp-content/uploads/2018/06/Xcode_10_Beta_Release_Notes.pdf">release note</a>, 官方文档永远是学习新内容的第一手资料。</p>
+<p>Xcode 10 beta 在 WWDC 18后就对<a target="_blank" rel="noopener" href="https://developer.apple.com/xcode/">开发者开放下载</a>了，WWDC 18的新内容不多，Apple 今年把主要精力放在 Bugfix和性能优化上面，还这几年欠下来的技术债，关于 iOS 11的诟病一直不绝入耳，不得不说，Apple 今年的决策还是比较明智的。</p>
+            </div>
+            <!-- read more -->
+            
+                <div class="abstract-read-more-button">
+                    <a href="/posts/xcode-10-migrate/">
+                        <span style="margin-right: 0.2rem;">阅读全文</span>
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </div>
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2026/03/01">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/21</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="iOS">iOS</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/posts/podfile_lock_conflict/">
+                
+                <span class="abstract-title-text">Cocoapods采坑记 - Podfile.lock 冲突问题</span>
+            </a>
+            <div class="abstract-content">
+                <h2 id="故事的开端是这样的："><a href="#故事的开端是这样的：" class="headerlink" title="故事的开端是这样的："></a><strong>故事的开端是这样的：</strong></h2><p>我们的项目中使用了<a target="_blank" rel="noopener" href="https://github.com/facebook/FBRetainCycleDetector">FBRetainCycleDetector</a>这个第三方库来检查内存泄露，在升级到某一个版本后，出现部分同事的 podfile.lock中FBRetainCycleDetector的checksum 值不一致，每次都需要运行 pod install 来更新 podfile.lock,然后git push 到仓库。其他的同事又出现 podfile.lock 冲突，需要运行 pod install 更新，然后push到 git 仓库。</p>
+            </div>
+            <!-- read more -->
+            
+                <div class="abstract-read-more-button">
+                    <a href="/posts/podfile_lock_conflict/">
+                        <span style="margin-right: 0.2rem;">阅读全文</span>
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </div>
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2026/03/01">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/01/10</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="iOS">iOS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="cocoapods">cocoapods</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/posts/xcode-tips/">
                 
                 <span class="abstract-title-text">Xcode问题锦集</span>
@@ -886,7 +975,39 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -983,7 +1104,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 16
+        Total : 18
         </div>
         <!-- search  -->
         
@@ -999,6 +1120,18 @@
             
         
         <li class="archive-post-item">
+            <span class="archive-post-date">04/01</span>
+            <a class="archive-post-title" href="/posts/claude-code-source-architecture/">Claude Code 架构拆解：一个更像“完整系统”的 AI Coding Agent</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/01</span>
+            <a class="archive-post-title" href="/posts/claude-code-source-why-better/">Claude Code 源码分析：为什么它比很多 Agent 工具更好用</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
             <span class="archive-post-date">03/29</span>
             <a class="archive-post-title" href="/posts/stop-using-oh-my-zsh/">我为什么不再用 oh-my-zsh 了</a>
         </li>
@@ -1006,7 +1139,7 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/22</span>
-            <a class="archive-post-title" href="/posts/undefined/">Mac 上的 AI 编码利器：打造高效命令行工作流</a>
+            <a class="archive-post-title" href="/posts/mac-ai-coding-tools/">Mac 上的 AI 编码利器：打造高效命令行工作流</a>
         </li>
     
         
@@ -1144,16 +1277,6 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="iOS">
-                <span class="iconfont-archer">&#xe606;</span>
-                iOS
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="cocoapods">
-                <span class="iconfont-archer">&#xe606;</span>
-                cocoapods
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="LLM">
                 <span class="iconfont-archer">&#xe606;</span>
                 LLM
@@ -1162,6 +1285,16 @@
             <span class="sidebar-tag-name" data-tags="GPT">
                 <span class="iconfont-archer">&#xe606;</span>
                 GPT
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iOS">
+                <span class="iconfont-archer">&#xe606;</span>
+                iOS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="cocoapods">
+                <span class="iconfont-archer">&#xe606;</span>
+                cocoapods
             </span>
         
             <span class="sidebar-tag-name" data-tags="AI">
@@ -1189,11 +1322,6 @@
                 ReactNative
             </span>
         
-            <span class="sidebar-tag-name" data-tags="多线程">
-                <span class="iconfont-archer">&#xe606;</span>
-                多线程
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="开发工具">
                 <span class="iconfont-archer">&#xe606;</span>
                 开发工具
@@ -1207,6 +1335,11 @@
             <span class="sidebar-tag-name" data-tags="Mac">
                 <span class="iconfont-archer">&#xe606;</span>
                 Mac
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="多线程">
+                <span class="iconfont-archer">&#xe606;</span>
+                多线程
             </span>
         
             <span class="sidebar-tag-name" data-tags="分享">
@@ -1234,6 +1367,26 @@
                 Ghostty
             </span>
         
+            <span class="sidebar-tag-name" data-tags="Claude Code">
+                <span class="iconfont-archer">&#xe606;</span>
+                Claude Code
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="架构设计">
+                <span class="iconfont-archer">&#xe606;</span>
+                架构设计
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="源码分析">
+                <span class="iconfont-archer">&#xe606;</span>
+                源码分析
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AI 编程">
+                <span class="iconfont-archer">&#xe606;</span>
+                AI 编程
+            </span>
+        
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
@@ -1245,14 +1398,14 @@
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="开发">
-            <span class="iconfont-archer">&#xe60a;</span>
-            开发
-        </span>
-    
         <span class="sidebar-category-name" data-categories="AI">
             <span class="iconfont-archer">&#xe60a;</span>
             AI
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="开发">
+            <span class="iconfont-archer">&#xe60a;</span>
+            开发
         </span>
     
         <span class="sidebar-category-name" data-categories="ReactNative">
