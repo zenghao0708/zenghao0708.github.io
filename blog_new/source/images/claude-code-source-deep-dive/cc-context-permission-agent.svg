@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <style>
+      .bg { fill: #f8f7f3; }
+      .title { font: 700 34px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #111827; }
+      .subtitle { font: 500 18px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #475569; }
+      .center { fill: #eef6ff; stroke: #2563eb; stroke-width: 3; rx: 20; ry: 20; }
+      .node1 { fill: #effcf4; stroke: #16a34a; stroke-width: 2; rx: 16; ry: 16; }
+      .node2 { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 16; ry: 16; }
+      .node3 { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 16; ry: 16; }
+      .node4 { fill: #fff1f2; stroke: #e11d48; stroke-width: 2; rx: 16; ry: 16; }
+      .label { font: 700 22px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #0f172a; }
+      .text { font: 500 16px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #334155; }
+      .small { font: 500 14px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #64748b; }
+      .line { stroke: #475569; stroke-width: 3; fill: none; }
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="60" y="70" class="title">Claude Code 为什么更稳：三套系统同时工作</text>
+  <text x="60" y="105" class="subtitle">上下文治理、权限治理、多代理隔离不是附属功能，而是 Claude Code 能长期工作的重要原因</text>
+
+  <rect x="420" y="285" width="360" height="150" class="center"/>
+  <text x="465" y="340" class="label">Claude Code Runtime</text>
+  <text x="465" y="372" class="text">用户感知到的是“顺手”</text>
+  <text x="465" y="398" class="small">源码里真正支撑这种顺手感的是三套治理系统一起工作</text>
+
+  <rect x="130" y="145" width="280" height="130" class="node1"/>
+  <text x="160" y="190" class="label">上下文治理</text>
+  <text x="160" y="220" class="text">autoCompact / token budget / fallback</text>
+  <text x="160" y="245" class="small">解决“越聊越乱、越聊越笨”</text>
+
+  <rect x="790" y="145" width="280" height="130" class="node2"/>
+  <text x="820" y="190" class="label">权限治理</text>
+  <text x="820" y="220" class="text">rules / sandbox / classifier / hooks</text>
+  <text x="820" y="245" class="small">解决“太危险”或“太烦人”</text>
+
+  <rect x="130" y="500" width="280" height="130" class="node3"/>
+  <text x="160" y="545" class="label">多代理与隔离</text>
+  <text x="160" y="575" class="text">AgentTool / worktree / remote CCR</text>
+  <text x="160" y="600" class="small">解决“并行干活但不互相踩”</text>
+
+  <rect x="790" y="500" width="280" height="130" class="node4"/>
+  <text x="820" y="545" class="label">扩展与远程化</text>
+  <text x="820" y="575" class="text">plugins / skills / MCP / remote agents</text>
+  <text x="820" y="600" class="small">解决“能力如何长出来且不失控”</text>
+
+  <path d="M410 260 C470 290 470 290 420 330" class="line"/>
+  <path d="M790 260 C730 290 730 290 780 330" class="line"/>
+  <path d="M410 565 C470 530 470 530 420 390" class="line"/>
+  <path d="M790 565 C730 530 730 530 780 390" class="line"/>
+
+  <text x="90" y="700" class="small">简单理解：Claude Code 的体验好，不是因为某一层特别强，而是它把“能运行、能控制、能扩展、能持续”一起解决了。</text>
+</svg>
