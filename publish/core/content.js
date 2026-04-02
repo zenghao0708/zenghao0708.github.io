@@ -70,6 +70,9 @@ function buildPlatformPayload(post, platform) {
   }
 
   if (platform === 'xhs') {
+    const fallbackImage = process.env.PUBLISH_XHS_DEFAULT_IMAGE
+      ? [process.env.PUBLISH_XHS_DEFAULT_IMAGE]
+      : [];
     const bullets = stripMarkdown(post.body)
       .split(/[。！？!?]/)
       .map((line) => line.trim())
@@ -81,7 +84,7 @@ function buildPlatformPayload(post, platform) {
       title: post.title,
       caption: `${post.summary}\n\n${bullets.join('\n')}`,
       source: post.sourcePath,
-      images: post.images
+      images: Array.isArray(post.images) && post.images.length > 0 ? post.images : fallbackImage
     };
   }
 

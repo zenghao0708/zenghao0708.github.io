@@ -7,7 +7,7 @@
 1. 复制 `publish/.env.example` 到 `~/.config/blog-publish.env`（推荐）或仓库根目录 `.env`。
 2. 为每个平台配置 `PUBLISH_<PLATFORM>_CMD`。
 3. 先跑 dry-run 再执行 publish。
-4. 本仓库已内置 `scripts/post-feishu.js` 和 `scripts/post-x.js`，可直接配到 `.env` 里使用。
+4. 本仓库已内置各平台入口脚本，可直接配到 `.env` 里使用。
 
 默认加载顺序：
 
@@ -42,13 +42,22 @@ npm run publish:social -- --file "blog_new/source/_posts/xxx.md" --platform feis
 PUBLISH_FEISHU_CMD='node scripts/post-feishu.js --input {file} --source {source} --mode create --execute --submit'
 PUBLISH_WECHAT_CMD='node scripts/post-wechat.js --input {file} --source {source} --mode article --execute --submit'
 PUBLISH_X_CMD='node scripts/post-x.js --input {file} --source {source} --mode article --execute --submit'
+PUBLISH_XHS_CMD='node scripts/post-xhs.js {file}'
 ```
+
+当前目录分层：
+
+- `publish/`：统一发布入口、adapter、payload/preview、发布状态、平台规则文档
+- `scripts/`：项目实际使用的发布脚本
+- `scripts/archive/`：历史实验脚本与旧方案，不属于当前主链路
+- `publish/tools/`：仅保留兼容旧路径的 wrapper
 
 X 发布说明：
 
 - `mode=article` 且真实发布时，默认会自动再发 1 条简短 tweet 做引流（可通过 `X_ARTICLE_AUTO_PROMO=false` 关闭）。
 - `X_CHROME_PROFILE` 留空时默认使用 `~/.local/share/x-browser-profile`。
 - 可用 `X_ARTICLE_PROMO_TEMPLATE` 或 `X_ARTICLE_PROMO_TEXT` 自定义引流 tweet 文案。
+- 规则沉淀见：`publish/rules/x.md`
 
 微信公众号发布说明：
 
@@ -73,7 +82,22 @@ X 发布说明：
 - 已固化为 skill：`publish/skills/publish-wechat/SKILL.md`
   - 一键发布（单篇）：`npm run publish:wechat -- --file "blog_new/source/_posts/xxx.md"`
   - 一键发布 + 自动封面：`npm run publish:wechat:auto-cover -- --file "blog_new/source/_posts/xxx.md"`
-  - 发布后检查：`publish/output/wechat/audit/*-appmsgid-*.json|png` 与 `*-cover-appmsgid-*.json|png`
+- 发布后检查：`publish/output/wechat/audit/*-appmsgid-*.json|png` 与 `*-cover-appmsgid-*.json|png`
+- 规则沉淀见：`publish/rules/wechat.md`
+
+小红书发布说明：
+
+- 统一入口在真正发布前，会先调用 `scripts/xhs-prepare-assets.js` 自动分析 Markdown、生成标题/正文/标签/配图。
+- 默认生成 `1080x1440` 的 `3:4` 竖版图文素材。
+- 生成后的素材会归档到 `~/Library/Mobile Documents/com~apple~CloudDocs/AI 文档/小红书/`。
+- 自动发布入口为 `scripts/post-xhs.js`。
+- 自动发布失败时，会在 `publish/output/xhs/audit/` 保留审计截图与 HTML。
+- 规则沉淀见：`publish/rules/xhs.md`
+
+飞书发布说明：
+
+- 统一入口为 `scripts/post-feishu.js`。
+- `create/append` 模式约束见：`publish/rules/feishu.md`
 
 注意：
 - `WECHAT_ARTICLE_THEME` 仅在统一入口 `publish/publish-all.js`（或 `npm run publish:*`）下自动加载生效。

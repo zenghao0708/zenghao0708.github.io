@@ -3,10 +3,16 @@
     "publish:social": "node publish/publish-all.js",
     "publish:social:all": "node publish/publish-all.js --all",
     "publish:wechat": "node publish/publish-all.js --platform wechat --publish",
-    "publish:wechat:auto-cover": "WECHAT_AUTO_COVER_GLM=true node publish/publish-all.js --platform wechat --publish"
+    "publish:wechat:auto-cover": "WECHAT_AUTO_COVER_GLM=true node publish/publish-all.js --platform wechat --publish",
+    "publish:xhs": "node publish/publish-all.js --platform xhs --publish --force",
+    "publish:x": "node publish/publish-all.js --platform x --publish",
+    "publish:feishu": "node publish/publish-all.js --platform feishu --publish"
   },
   "dependencies": {
     "hexo-generator-feed": "^3.0.0",
     "hexo-generator-json-content": "^4.2.3"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.40.0"
   }
 }

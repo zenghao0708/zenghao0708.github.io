@@ -1,11 +1,15 @@
 ## js
 node_modules/
+blog_new/node_modules/
 .deploy*/
 *.log
 .vscode/
 Blog/public/
 publish/output/
 publish/state/
+.DS_Store
+**/.DS_Store
+blog_new/db.json
 .env
 .env.*
 !.env.example
