@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <style>
+      .bg { fill: #f7f4ee; }
+      .panel { fill: #fffdf8; stroke: #1f2937; stroke-width: 2; rx: 18; ry: 18; }
+      .title { font: 700 34px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #111827; }
+      .subtitle { font: 500 18px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #475569; }
+      .layer { fill: #eef6ff; stroke: #2563eb; stroke-width: 2; rx: 14; ry: 14; }
+      .layer2 { fill: #effcf4; stroke: #16a34a; stroke-width: 2; rx: 14; ry: 14; }
+      .layer3 { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 14; ry: 14; }
+      .layer4 { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 14; ry: 14; }
+      .label { font: 700 22px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #0f172a; }
+      .text { font: 500 16px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #334155; }
+      .small { font: 500 14px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #475569; }
+      .arrow { stroke: #334155; stroke-width: 3; fill: none; marker-end: url(#m); }
+      .chip { fill: #ffffff; stroke: #94a3b8; stroke-width: 1.5; rx: 8; ry: 8; }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="760"/>
+  <text x="60" y="70" class="title">Claude Code 源码结构总览</text>
+  <text x="60" y="105" class="subtitle">它不是“终端里套了个模型”，而是 CLI、Agent Runtime、Tools、Services、扩展系统分层装配的工程系统</text>
+
+  <rect x="60" y="145" width="1080" height="560" class="panel"/>
+
+  <rect x="110" y="190" width="980" height="85" class="layer"/>
+  <text x="135" y="225" class="label">1. 交互入口层</text>
+  <text x="135" y="255" class="text">main.tsx / REPL / SDK / slash commands / Ink UI</text>
+  <rect x="690" y="208" width="110" height="34" class="chip"/><text x="712" y="231" class="small">CLI 启动</text>
+  <rect x="815" y="208" width="110" height="34" class="chip"/><text x="842" y="231" class="small">REPL</text>
+  <rect x="940" y="208" width="110" height="34" class="chip"/><text x="975" y="231" class="small">SDK</text>
+
+  <rect x="110" y="305" width="980" height="105" class="layer2"/>
+  <text x="135" y="342" class="label">2. Agent Runtime 层</text>
+  <text x="135" y="372" class="text">QueryEngine + query.ts 主循环：system prompt 组装、消息归一化、流式输出、tool use、错误恢复</text>
+  <text x="135" y="396" class="small">这是 Claude Code 的中枢。UI 和 headless 模式，最终都要落到这一层。</text>
+
+  <rect x="110" y="440" width="980" height="115" class="layer3"/>
+  <text x="135" y="478" class="label">3. 能力执行层</text>
+  <text x="135" y="508" class="text">40+ Tools：Bash / Read / Edit / Write / Web / Agent / MCP / Worktree / Plan / Task</text>
+  <text x="135" y="532" class="small">带并发安全判断、权限检查、sandbox、interrupt 行为和 tool result 生命周期管理</text>
+  <rect x="735" y="462" width="90" height="32" class="chip"/><text x="754" y="484" class="small">Bash</text>
+  <rect x="836" y="462" width="90" height="32" class="chip"/><text x="856" y="484" class="small">Read/Edit</text>
+  <rect x="937" y="462" width="90" height="32" class="chip"/><text x="963" y="484" class="small">Agent</text>
+
+  <rect x="110" y="585" width="980" height="85" class="layer4"/>
+  <text x="135" y="620" class="label">4. 系统服务层</text>
+  <text x="135" y="650" class="text">compact / permissions / analytics / MCP / plugins / skills / voice / remote / team memory</text>
+
+  <path d="M600 275 L600 305" class="arrow"/>
+  <path d="M600 410 L600 440" class="arrow"/>
+  <path d="M600 555 L600 585" class="arrow"/>
+
+  <text x="85" y="715" class="small">读图方式：从上往下看，越往上越接近用户体验，越往下越接近 Claude Code 真正“更好用”的工程底座。</text>
+</svg>

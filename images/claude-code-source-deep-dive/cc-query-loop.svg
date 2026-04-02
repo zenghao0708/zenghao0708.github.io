@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <style>
+      .bg { fill: #fbfaf7; }
+      .title { font: 700 34px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #111827; }
+      .subtitle { font: 500 18px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #475569; }
+      .box1 { fill: #eef6ff; stroke: #2563eb; stroke-width: 2; rx: 16; ry: 16; }
+      .box2 { fill: #effcf4; stroke: #16a34a; stroke-width: 2; rx: 16; ry: 16; }
+      .box3 { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 16; ry: 16; }
+      .box4 { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 16; ry: 16; }
+      .label { font: 700 22px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #0f172a; }
+      .text { font: 500 16px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #334155; }
+      .small { font: 500 14px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #64748b; }
+      .arrow { stroke: #334155; stroke-width: 3; fill: none; marker-end: url(#m2); }
+    </style>
+    <marker id="m2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="60" y="70" class="title">Claude Code 主查询循环</text>
+  <text x="60" y="105" class="subtitle">真正决定体验的不是“单次问答”，而是一个持续管理上下文、工具和恢复逻辑的 agent loop</text>
+
+  <rect x="90" y="165" width="260" height="95" class="box1"/>
+  <text x="120" y="205" class="label">用户输入</text>
+  <text x="120" y="235" class="text">prompt / slash command / SDK 消息</text>
+
+  <rect x="470" y="165" width="260" height="95" class="box2"/>
+  <text x="500" y="205" class="label">预处理</text>
+  <text x="500" y="235" class="text">命令解析、消息归一化、system prompt 拼装</text>
+
+  <rect x="850" y="165" width="260" height="95" class="box3"/>
+  <text x="880" y="205" class="label">query.ts</text>
+  <text x="880" y="235" class="text">进入主代理循环，准备流式请求与状态机</text>
+
+  <rect x="850" y="335" width="260" height="95" class="box4"/>
+  <text x="880" y="375" class="label">模型输出流</text>
+  <text x="880" y="405" class="text">assistant delta / tool_use / error / thinking</text>
+
+  <rect x="470" y="335" width="260" height="95" class="box3"/>
+  <text x="500" y="375" class="label">工具执行</text>
+  <text x="500" y="405" class="text">StreamingToolExecutor / runTools / permission</text>
+
+  <rect x="90" y="335" width="260" height="95" class="box2"/>
+  <text x="120" y="375" class="label">结果回写</text>
+  <text x="120" y="405" class="text">tool_result / 新消息 / 上下文更新 / UI 流式显示</text>
+
+  <rect x="280" y="520" width="640" height="120" class="box1"/>
+  <text x="310" y="560" class="label">后台守护逻辑</text>
+  <text x="310" y="590" class="text">autoCompact、token budget、fallback model、异常恢复、stop hooks、tool use summary</text>
+  <text x="310" y="615" class="small">这部分决定了 Claude Code 为什么在长会话里比很多 Agent 更稳，而不是越聊越乱。</text>
+
+  <path d="M350 212 L470 212" class="arrow"/>
+  <path d="M730 212 L850 212" class="arrow"/>
+  <path d="M980 260 L980 335" class="arrow"/>
+  <path d="M850 382 L730 382" class="arrow"/>
+  <path d="M470 382 L350 382" class="arrow"/>
+  <path d="M220 335 L220 260 C220 230 220 212 90 212" class="arrow"/>
+  <path d="M600 430 L600 520" class="arrow"/>
+
+  <text x="90" y="695" class="small">关键理解：Claude Code 的一个回合不是一次 API 调用，而是“模型输出 - 工具执行 - 状态更新 - 再继续”的循环系统。</text>
+</svg>

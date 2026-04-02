@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <style>
+      .bg { fill: #faf8f4; }
+      .title { font: 700 34px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #111827; }
+      .subtitle { font: 500 18px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #475569; }
+      .lane { fill: #fffdf8; stroke: #cbd5e1; stroke-width: 2; rx: 18; ry: 18; }
+      .safe { fill: #effcf4; stroke: #16a34a; stroke-width: 2; rx: 14; ry: 14; }
+      .unsafe { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 14; ry: 14; }
+      .mid { fill: #eef6ff; stroke: #2563eb; stroke-width: 2; rx: 14; ry: 14; }
+      .label { font: 700 22px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #0f172a; }
+      .text { font: 500 16px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #334155; }
+      .small { font: 500 14px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #64748b; }
+      .arrow { stroke: #334155; stroke-width: 3; fill: none; marker-end: url(#m3); }
+    </style>
+    <marker id="m3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="60" y="70" class="title">Claude Code 的工具编排逻辑</text>
+  <text x="60" y="105" class="subtitle">核心不是“会不会调工具”，而是“哪些工具能并发、哪些必须串行、出了错怎么收场”</text>
+
+  <rect x="70" y="155" width="1060" height="550" class="lane"/>
+
+  <rect x="110" y="205" width="220" height="90" class="mid"/>
+  <text x="135" y="245" class="label">模型产出 tool_use</text>
+  <text x="135" y="273" class="text">Read / Grep / Bash / Edit / Agent ...</text>
+
+  <rect x="430" y="205" width="320" height="90" class="mid"/>
+  <text x="455" y="245" class="label">partitionToolCalls</text>
+  <text x="455" y="273" class="text">先判断 isConcurrencySafe，再分批执行</text>
+
+  <rect x="850" y="185" width="220" height="120" class="safe"/>
+  <text x="878" y="225" class="label">并发安全批次</text>
+  <text x="878" y="252" class="text">Read / Search / 某些查询类工具</text>
+  <text x="878" y="278" class="small">可并行，提高吞吐</text>
+
+  <rect x="850" y="355" width="220" height="120" class="unsafe"/>
+  <text x="878" y="395" class="label">非并发安全批次</text>
+  <text x="878" y="422" class="text">Edit / Write / 有副作用的 Bash</text>
+  <text x="878" y="448" class="small">串行，避免状态冲突</text>
+
+  <rect x="380" y="380" width="370" height="120" class="mid"/>
+  <text x="405" y="420" class="label">StreamingToolExecutor</text>
+  <text x="405" y="447" class="text">跟踪 queued / executing / completed / yielded</text>
+  <text x="405" y="473" class="small">还负责 interrupt、fallback、sibling abort、进度消息管理</text>
+
+  <rect x="140" y="560" width="900" height="95" class="safe"/>
+  <text x="170" y="598" class="label">最终收益</text>
+  <text x="170" y="626" class="text">用户看到的是“能干活”；源码里真正做的是工具语义识别、执行秩序控制和失败后的一致性收尾。</text>
+
+  <path d="M330 250 L430 250" class="arrow"/>
+  <path d="M750 250 L850 250" class="arrow"/>
+  <path d="M590 295 L590 380" class="arrow"/>
+  <path d="M750 400 L850 400" class="arrow"/>
+  <path d="M565 500 L565 560" class="arrow"/>
+
+  <text x="80" y="695" class="small">这也是 Claude Code 和很多“工具堆砌型 Agent”最大的差别：后者只有能力列表，前者有运行时秩序。</text>
+</svg>
