@@ -3,6 +3,7 @@ title: Mac 上的 AI 编码利器：打造高效命令行工作流
 date: 2026-03-22
 tags: [AI, 开发工具, 命令行, Mac]
 categories: [技术分享]
+abbrlink: mac-ai-coding-tools
 ---
 
 # Mac 上的 AI 编码利器：打造高效命令行工作流

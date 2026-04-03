@@ -127,7 +127,7 @@ deploy:
   - type: git
     repo: https://github.com/zenghao0708/zenghao0708.github.io
     branch: master
-    message: 发布 OpenClaw 架构设计文章
+    message: 'Site updated: {{ now("yyyy-MM-dd HH:mm:ss") }}'
   # - type: leancloud_counter_security_sync
 
 jsonContent:

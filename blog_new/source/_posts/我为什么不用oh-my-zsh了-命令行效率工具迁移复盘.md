@@ -1,7 +1,8 @@
 ---
 title: 我为什么不再用 oh-my-zsh 了
 date: 2026-03-29
-tags: [命令行, zsh, 开发工具, Ruby, Node.js, Ghostty]
+abbrlink: stop-using-oh-my-zsh
+tags: [命令行, zsh, 开发工具, Ghostty]
 categories: [技术分享]
 description: 复盘一次从 oh-my-zsh 迁移到 sheldon + starship + atuin + zoxide + mise 的真实过程，重点讨论为什么要迁、如何平稳切换 Ruby/Node、启动耗时优化，以及迁移中的注意事项与回滚策略。
 ---
@@ -37,6 +38,8 @@ description: 复盘一次从 oh-my-zsh 迁移到 sheldon + starship + atuin + zo
 迁移前，我的交互式 `zsh` 启动时间大概在 **2.43s**；迁移后大概是 **1.79s**。这个提升当然有价值，但它不是这次迁移里最重要的部分。更重要的是，我终于把“谁在管插件、谁在管 prompt、谁在管 Ruby、谁在管 Node”这几个问题拆清楚了。
 
 我现在回头看，这次迁移真正有价值的不是“换了一批新工具”，而是把一套越来越像历史包袱的命令行环境，重新整理成了一套边界清晰、能解释、能回滚的系统。
+
+{% asset_img ohmyzsh-why-migrate.png 600 '"为什么我不再继续用 oh-my-zsh"' %}
 
 ## 我为什么决定不再继续用 oh-my-zsh
 
@@ -92,6 +95,8 @@ description: 复盘一次从 oh-my-zsh 迁移到 sheldon + starship + atuin + zo
 
 所以如果一定要说这次迁移的核心收益，我会说不是“从 `oh-my-zsh` 换成了 `sheldon`”，而是“我终于把命令行环境从工具堆砌，整理成了结构”。
 
+{% asset_img ohmyzsh-stack-compare.png 600 '"从 old stack 到 clean stack"' %}
+
 ## 迁移过程里，真正的难点不在 zsh
 
 这次迁移我没有采用“删掉重装”的方式，而是用了一个很保守的原则：
@@ -130,6 +135,35 @@ curl: (56) Recv failure: Connection reset by peer
 
 最后我做的不是“删旧环境”，而是“先准备回滚”。这次我不只是留了备份，还做了一键恢复脚本。因为开发环境迁移最怕的不是切换失败，而是切换失败之后你想退回去，却得靠记忆去想“我刚才到底改了哪几个文件”。
 
+## 迁移做完之后，我又补了一轮“收口”
+
+这次迁移还有一个很真实的后续动作：第一轮切换完成之后，我并没有马上把它当成“结束”。
+
+原因很简单。`which node` 和 `which ruby` 虽然已经指向了 `mise`，但我后来复查交互式 shell 的 `PATH`，还是发现旧的 `~/.nvm/versions/...`、`~/.rbenv/shims`、`~/.rbenv/bin` 继续留在最终环境里。这个问题最麻烦的地方在于，它不会立刻把环境搞挂，你甚至会以为迁移已经成功了，但它会在后面某次 PATH 顺序变化时，把所有权悄悄切回旧链路。
+
+所以我后来新增了一条迁移原则：不要只验证“功能能不能跑”，还要验证“旧链路是不是已经真正退出”。对我来说，下面这些命令比只看 `node -v`、`ruby -v` 更有价值：
+
+```bash
+which node
+which ruby
+mise which node
+mise which ruby
+print -l $path | rg '(\.nvm/|\.rbenv/)'
+```
+
+我后来还补做了另外两类清理。一类是职责重叠的历史残留，比如目录跳转已经切到 `zoxide`，那旧的 `autojump` 就不该继续偷偷加载；另一类是只该在交互式 shell 里存在的能力，比如 `bun`、`OpenClaw`、`fzf` 这类补全和交互增强，不应该继续让脚本 shell 一起背启动成本。
+
+这轮收口里，我还踩到一个很典型的坑：配置文件“看起来对”，不代表它真的能跑。比如后来补 `Yazi` 配置时，我就遇到过版本兼容问题，结果不是某个 opener 失效，而是工具本身直接起不来。那一刻我更确定了一件事：主力开发机上的环境迁移，最终不能靠肉眼判断配置长得像不像文档示例，而要靠真实启动验证。
+
+```bash
+yazi --version
+tmux -V
+lazygit --version
+zsh -i -c 'echo ok'
+```
+
+最后我还把“私密信息”和“功能配置”拆开了。以前我习惯把 API Key、PATH 注入、代理 alias、函数和补全脚本全部堆进一个入口文件里。后来我越来越觉得，这种写法短期省事，长期却会持续放大认知负担。功能配置应该归功能配置，私密凭证至少应该单独放在私有 env 文件里，否则以后你很难分清自己是在排 shell 初始化问题，还是在排环境变量问题。
+
 ## 迁移之后，我最认可的不是速度，而是可解释性
 
 从结果上看，这次迁移是值得的。交互式 `zsh` 启动时间大概从 **2.43s** 降到了 **1.79s**，体感上确实轻了一些。
@@ -163,7 +197,13 @@ mise which node
 
 第四，主力开发机迁移一定要有回滚脚本。只做备份还不够，最好能直接一键恢复。因为当你真的需要回滚时，通常已经是在一个出问题的状态里了，这时候越依赖人工回忆，越容易二次踩坑。
 
-第五，不要迷信某一个工具。说到底，`sheldon`、`starship`、`atuin`、`zoxide`、`mise` 这些名字本身并不是重点。重点是边界是不是清楚，职责是不是独立，出问题时排查入口是不是明确。
+第五，不要只看版本号和表面功能，一定要看 `which`、最终 `PATH`，以及旧链路有没有真的退出。
+
+第六，completion、fzf、prompt 这类交互能力，尽量只在 interactive shell 里加载，不要把脚本 shell 也一起拖慢。
+
+第七，不要迷信某一个工具。说到底，`sheldon`、`starship`、`atuin`、`zoxide`、`mise` 这些名字本身并不是重点。重点是边界是不是清楚，职责是不是独立，出问题时排查入口是不是明确。
+
+{% asset_img ohmyzsh-migration-checklist.png 600 '"命令行环境迁移 checklist"' %}
 
 ## 写在最后
 
