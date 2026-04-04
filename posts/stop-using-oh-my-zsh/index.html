@@ -510,7 +510,7 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h1 id="我为什么不再用-oh-my-zsh-了"><a href="#我为什么不再用-oh-my-zsh-了" class="headerlink" title="我为什么不再用 oh-my-zsh 了"></a>我为什么不再用 oh-my-zsh 了</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这次折腾命令行环境，不是因为我想换一套更潮的工具，而是因为 Ghostty 里开一个 <code>zsh</code>，已经开始拖慢我每天的工作节奏了。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这次折腾命令行环境，不是因为我想换一套更潮的工具，而是因为 Ghostty 里开一个 <code>zsh</code>，已经开始拖慢我每天的工作节奏了。</p>
 <p>那种慢不是 benchmark 里才看得出来的慢，而是你每天开新 tab、开新窗口、切 shell 的时候都能感受到它在拖。对于一个长期把终端当主工作界面的人来说，这种拖沓会不断打断节奏。</p>
 <p>一开始我以为问题出在终端本身，后面认真排查才发现，Ghostty 其实没什么问题，真正越来越重的是我那套已经用了很多年的 <code>oh-my-zsh</code> 环境。更准确地说，不是 <code>oh-my-zsh</code> 不能用，而是我的环境已经不适合继续让它来兜底了。</p>
 <p>这篇文章主要想讲清楚三件事：我为什么不再继续用 <code>oh-my-zsh</code>，我最后留下来的命令行工具组合是什么，以及我是怎么把 <code>Ruby / Node / Zsh</code> 平稳迁过去的。</p>
@@ -798,7 +798,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%86%8D%E7%94%A8-oh-my-zsh-%E4%BA%86"><span class="toc-number">1.</span> <span class="toc-text">我为什么不再用 oh-my-zsh 了</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E8%AF%B4%E7%BB%93%E8%AE%BA"><span class="toc-number">1.2.</span> <span class="toc-text">先说结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%B3%E5%AE%9A%E4%B8%8D%E5%86%8D%E7%BB%A7%E7%BB%AD%E7%94%A8-oh-my-zsh"><span class="toc-number">1.3.</span> <span class="toc-text">我为什么决定不再继续用 oh-my-zsh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E6%AC%A1%E8%BF%81%E7%A7%BB%EF%BC%8C%E6%88%91%E7%9C%9F%E6%AD%A3%E6%83%B3%E8%BF%81%E8%B5%B0%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.4.</span> <span class="toc-text">这次迁移，我真正想迁走的是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E8%BF%87%E7%A8%8B%E9%87%8C%EF%BC%8C%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%9A%BE%E7%82%B9%E4%B8%8D%E5%9C%A8-zsh"><span class="toc-number">1.5.</span> <span class="toc-text">迁移过程里，真正的难点不在 zsh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E5%81%9A%E5%AE%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E5%8F%88%E8%A1%A5%E4%BA%86%E4%B8%80%E8%BD%AE%E2%80%9C%E6%94%B6%E5%8F%A3%E2%80%9D"><span class="toc-number">1.6.</span> <span class="toc-text">迁移做完之后，我又补了一轮“收口”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E6%9C%80%E8%AE%A4%E5%8F%AF%E7%9A%84%E4%B8%8D%E6%98%AF%E9%80%9F%E5%BA%A6%EF%BC%8C%E8%80%8C%E6%98%AF%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7"><span class="toc-number">1.7.</span> <span class="toc-text">迁移之后，我最认可的不是速度，而是可解释性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E6%AC%A1%E8%BF%81%E7%A7%BB%E9%87%8C%EF%BC%8C%E6%88%91%E6%9C%80%E6%83%B3%E6%8F%90%E9%86%92%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B"><span class="toc-number">1.8.</span> <span class="toc-text">这次迁移里，我最想提醒的几件事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">1.9.</span> <span class="toc-text">写在最后</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E8%AF%B4%E7%BB%93%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">先说结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%B3%E5%AE%9A%E4%B8%8D%E5%86%8D%E7%BB%A7%E7%BB%AD%E7%94%A8-oh-my-zsh"><span class="toc-number">3.</span> <span class="toc-text">我为什么决定不再继续用 oh-my-zsh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E6%AC%A1%E8%BF%81%E7%A7%BB%EF%BC%8C%E6%88%91%E7%9C%9F%E6%AD%A3%E6%83%B3%E8%BF%81%E8%B5%B0%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">4.</span> <span class="toc-text">这次迁移，我真正想迁走的是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E8%BF%87%E7%A8%8B%E9%87%8C%EF%BC%8C%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%9A%BE%E7%82%B9%E4%B8%8D%E5%9C%A8-zsh"><span class="toc-number">5.</span> <span class="toc-text">迁移过程里，真正的难点不在 zsh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E5%81%9A%E5%AE%8C%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E5%8F%88%E8%A1%A5%E4%BA%86%E4%B8%80%E8%BD%AE%E2%80%9C%E6%94%B6%E5%8F%A3%E2%80%9D"><span class="toc-number">6.</span> <span class="toc-text">迁移做完之后，我又补了一轮“收口”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E6%9C%80%E8%AE%A4%E5%8F%AF%E7%9A%84%E4%B8%8D%E6%98%AF%E9%80%9F%E5%BA%A6%EF%BC%8C%E8%80%8C%E6%98%AF%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7"><span class="toc-number">7.</span> <span class="toc-text">迁移之后，我最认可的不是速度，而是可解释性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E6%AC%A1%E8%BF%81%E7%A7%BB%E9%87%8C%EF%BC%8C%E6%88%91%E6%9C%80%E6%83%B3%E6%8F%90%E9%86%92%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B"><span class="toc-number">8.</span> <span class="toc-text">这次迁移里，我最想提醒的几件事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">9.</span> <span class="toc-text">写在最后</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -913,6 +913,8 @@
         
         
     
+        
+        
         
         
         
@@ -1244,6 +1246,16 @@
                 OpenClaw
             </span>
         
+            <span class="sidebar-tag-name" data-tags="LLM">
+                <span class="iconfont-archer">&#xe606;</span>
+                LLM
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="GPT">
+                <span class="iconfont-archer">&#xe606;</span>
+                GPT
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="AI">
                 <span class="iconfont-archer">&#xe606;</span>
                 AI
@@ -1262,16 +1274,6 @@
             <span class="sidebar-tag-name" data-tags="开发工具">
                 <span class="iconfont-archer">&#xe606;</span>
                 开发工具
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="LLM">
-                <span class="iconfont-archer">&#xe606;</span>
-                LLM
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="GPT">
-                <span class="iconfont-archer">&#xe606;</span>
-                GPT
             </span>
         
             <span class="sidebar-tag-name" data-tags="iOS">
@@ -1309,14 +1311,14 @@
                 Mac
             </span>
         
-            <span class="sidebar-tag-name" data-tags="分享">
-                <span class="iconfont-archer">&#xe606;</span>
-                分享
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="hexo">
                 <span class="iconfont-archer">&#xe606;</span>
                 hexo
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="分享">
+                <span class="iconfont-archer">&#xe606;</span>
+                分享
             </span>
         
             <span class="sidebar-tag-name" data-tags="网络编程">
