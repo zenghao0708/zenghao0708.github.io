@@ -1,53 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
-  <defs>
-    <style>
-      .bg { fill: #f8f7f3; }
-      .title { font: 700 34px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #111827; }
-      .subtitle { font: 500 18px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #475569; }
-      .center { fill: #eef6ff; stroke: #2563eb; stroke-width: 3; rx: 20; ry: 20; }
-      .node1 { fill: #effcf4; stroke: #16a34a; stroke-width: 2; rx: 16; ry: 16; }
-      .node2 { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 16; ry: 16; }
-      .node3 { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 16; ry: 16; }
-      .node4 { fill: #fff1f2; stroke: #e11d48; stroke-width: 2; rx: 16; ry: 16; }
-      .label { font: 700 22px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #0f172a; }
-      .text { font: 500 16px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #334155; }
-      .small { font: 500 14px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #64748b; }
-      .line { stroke: #475569; stroke-width: 3; fill: none; }
-    </style>
-  </defs>
-  <rect class="bg" width="1200" height="760"/>
-  <text x="60" y="70" class="title">Claude Code 为什么更稳：三套系统同时工作</text>
-  <text x="60" y="105" class="subtitle">上下文治理、权限治理、多代理隔离不是附属功能，而是 Claude Code 能长期工作的重要原因</text>
 
-  <rect x="420" y="285" width="360" height="150" class="center"/>
-  <text x="465" y="340" class="label">Claude Code Runtime</text>
-  <text x="465" y="372" class="text">用户感知到的是“顺手”</text>
-  <text x="465" y="398" class="small">源码里真正支撑这种顺手感的是三套治理系统一起工作</text>
 
-  <rect x="130" y="145" width="280" height="130" class="node1"/>
-  <text x="160" y="190" class="label">上下文治理</text>
-  <text x="160" y="220" class="text">autoCompact / token budget / fallback</text>
-  <text x="160" y="245" class="small">解决“越聊越乱、越聊越笨”</text>
+<rect width="1200" height="760" fill="#f8f3ea"/>
+<path d="M 24 24 L 1178 18 L 1172 742 L 28 736 Z" fill="none" stroke="#d9d1c4" stroke-width="1.4" opacity="0.8"/>
+<text x="58" y="72" fill="#2b2620" font-size="34" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="58" dy="0">Claude Code 为什么更稳：三套系统同时工作</tspan></text>
+<text x="60" y="106" fill="#5a544c" font-size="18" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="60" dy="0">上下文治理、权限治理、多代理隔离，是它能长期工作的三根主轴</tspan></text>
 
-  <rect x="790" y="145" width="280" height="130" class="node2"/>
-  <text x="820" y="190" class="label">权限治理</text>
-  <text x="820" y="220" class="text">rules / sandbox / classifier / hooks</text>
-  <text x="820" y="245" class="small">解决“太危险”或“太烦人”</text>
 
-  <rect x="130" y="500" width="280" height="130" class="node3"/>
-  <text x="160" y="545" class="label">多代理与隔离</text>
-  <text x="160" y="575" class="text">AgentTool / worktree / remote CCR</text>
-  <text x="160" y="600" class="small">解决“并行干活但不互相踩”</text>
+<path d="M 440.6551246923953 281.32304037734866 L 761.4144161140919 283.7622926382348 Q 784.114230529219 281.32304037734866 784.114230529219 304.0228547924757 L 780.6409857425839 417.8892159551755 Q 784.114230529219 440.5890303703025 761.4144161140919 440.5890303703025 L 440.6551246923953 443.3361259825528 Q 417.95531027726827 440.5890303703025 417.95531027726827 417.8892159551755 L 416.3541632052511 304.0228547924757 Q 417.95531027726827 281.32304037734866 440.6551246923953 281.32304037734866 Z" fill="#e7f0ff" fill-opacity="0.98" stroke="none"/>
+<path d="M 440.6551246923953 281.32304037734866 L 761.4144161140919 283.7622926382348 Q 784.114230529219 281.32304037734866 784.114230529219 304.0228547924757 L 780.6409857425839 417.8892159551755 Q 784.114230529219 440.5890303703025 761.4144161140919 440.5890303703025 L 440.6551246923953 443.3361259825528 Q 417.95531027726827 440.5890303703025 417.95531027726827 417.8892159551755 L 416.3541632052511 304.0228547924757 Q 417.95531027726827 281.32304037734866 440.6551246923953 281.32304037734866 Z" fill="none" stroke="#4678d4" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 439.86639118224383 283.1143648650497 L 763.15515310511 283.85103316530586 Q 783.2476932279766 283.1143648650497 783.2476932279766 303.20690498791635 L 781.6529631879181 416.7321624082327 Q 783.2476932279766 436.8247025310993 763.15515310511 436.8247025310993 L 439.86639118224383 438.8961613807827 Q 419.7738510593772 436.8247025310993 419.7738510593772 416.7321624082327 L 420.08731998540463 303.20690498791635 Q 419.7738510593772 283.1143648650497 439.86639118224383 283.1143648650497 Z" fill="none" stroke="#4678d4" stroke-width="2.016" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="464" y="340" fill="#2b2620" font-size="26" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="464" dy="0">Claude Code Runtime</tspan></text>
+<text x="464" y="372" fill="#5a544c" font-size="18" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="464" dy="0">用户感知到的是“顺手”</tspan></text>
+<text x="464" y="397" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="464" dy="0">真正支撑这种顺手感的，是三套治理系统一起工作。</tspan></text>
 
-  <rect x="790" y="500" width="280" height="130" class="node4"/>
-  <text x="820" y="545" class="label">扩展与远程化</text>
-  <text x="820" y="575" class="text">plugins / skills / MCP / remote agents</text>
-  <text x="820" y="600" class="small">解决“能力如何长出来且不失控”</text>
+<path d="M 145.54809568926692 146.4810982560739 L 396.70753579482437 147.86400714684277 Q 411.8402559645474 146.4810982560739 411.8402559645474 161.61381842579692 L 411.4405585432425 259.3751348183304 Q 411.8402559645474 274.50785498805345 396.70753579482437 274.50785498805345 L 145.54809568926692 277.48408056348563 Q 130.4153755195439 274.50785498805345 130.4153755195439 259.3751348183304 L 133.4202642885968 161.61381842579692 Q 130.4153755195439 146.4810982560739 145.54809568926692 146.4810982560739 Z" fill="#ebf8ee" fill-opacity="0.98" stroke="none"/>
+<path d="M 145.54809568926692 146.4810982560739 L 396.70753579482437 147.86400714684277 Q 411.8402559645474 146.4810982560739 411.8402559645474 161.61381842579692 L 411.4405585432425 259.3751348183304 Q 411.8402559645474 274.50785498805345 396.70753579482437 274.50785498805345 L 145.54809568926692 277.48408056348563 Q 130.4153755195439 274.50785498805345 130.4153755195439 259.3751348183304 L 133.4202642885968 161.61381842579692 Q 130.4153755195439 146.4810982560739 145.54809568926692 146.4810982560739 Z" fill="none" stroke="#3e9b60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 146.21228393562137 142.00263111889362 L 396.0453664382547 140.7826307736337 Q 415.16898081712424 142.00263111889362 415.16898081712424 161.12624549776314 L 412.84529385231434 255.90136077083645 Q 415.16898081712424 275.024975149706 396.0453664382547 275.024975149706 L 146.21228393562137 275.96787749528886 Q 127.08866955675185 275.024975149706 127.08866955675185 255.90136077083645 L 125.97805256061257 161.12624549776314 Q 127.08866955675185 142.00263111889362 146.21228393562137 142.00263111889362 Z" fill="none" stroke="#3e9b60" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="160" y="191" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="160" dy="0">上下文治理</tspan></text>
+<text x="160" y="221" fill="#5a544c" font-size="16" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="160" dy="0">autoCompact / token budget / fallback</tspan></text>
+<text x="160" y="247" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="160" dy="0">解决“越聊越乱、越聊越笨”</tspan></text>
 
-  <path d="M410 260 C470 290 470 290 420 330" class="line"/>
-  <path d="M790 260 C730 290 730 290 780 330" class="line"/>
-  <path d="M410 565 C470 530 470 530 420 390" class="line"/>
-  <path d="M790 565 C730 530 730 530 780 390" class="line"/>
+<path d="M 808.2886478296667 145.18600443080066 L 1055.7180947105214 146.30763860885054 Q 1072.8988135820255 145.18600443080066 1072.8988135820255 162.36672330230473 L 1071.596204265766 259.90083756100387 Q 1072.8988135820255 277.0815564325079 1055.7180947105214 277.0815564325079 L 808.2886478296667 276.0628105064854 Q 791.1079289581627 277.0815564325079 791.1079289581627 259.90083756100387 L 788.7550331054256 162.36672330230473 Q 791.1079289581627 145.18600443080066 808.2886478296667 145.18600443080066 Z" fill="#fff1e2" fill-opacity="0.98" stroke="none"/>
+<path d="M 808.2886478296667 145.18600443080066 L 1055.7180947105214 146.30763860885054 Q 1072.8988135820255 145.18600443080066 1072.8988135820255 162.36672330230473 L 1071.596204265766 259.90083756100387 Q 1072.8988135820255 277.0815564325079 1055.7180947105214 277.0815564325079 L 808.2886478296667 276.0628105064854 Q 791.1079289581627 277.0815564325079 791.1079289581627 259.90083756100387 L 788.7550331054256 162.36672330230473 Q 791.1079289581627 145.18600443080066 808.2886478296667 145.18600443080066 Z" fill="none" stroke="#d07d38" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 807.9164856528491 142.9839132938534 L 1052.6092725737394 144.33691974841057 Q 1071.956364081055 142.9839132938534 1071.956364081055 162.33100480116903 L 1074.165049413219 257.82829590275884 Q 1071.956364081055 277.17538741007445 1052.6092725737394 277.17538741007445 L 807.9164856528491 278.1949168540537 Q 788.5693941455335 277.17538741007445 788.5693941455335 257.82829590275884 L 790.6231863617897 162.33100480116903 Q 788.5693941455335 142.9839132938534 807.9164856528491 142.9839132938534 Z" fill="none" stroke="#d07d38" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="820" y="191" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="820" dy="0">权限治理</tspan></text>
+<text x="820" y="221" fill="#5a544c" font-size="16" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="820" dy="0">rules / sandbox / classifier / hooks</tspan></text>
+<text x="820" y="247" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="820" dy="0">解决“太危险”或“太烦人”</tspan></text>
 
-  <text x="90" y="700" class="small">简单理解：Claude Code 的体验好，不是因为某一层特别强，而是它把“能运行、能控制、能扩展、能持续”一起解决了。</text>
+<path d="M 476.82505798235536 496.936852174066 L 724.2048686565086 497.90960006620736 Q 742.6299937186762 496.936852174066 742.6299937186762 515.3619772362337 L 740.7425446188078 614.102565629892 Q 742.6299937186762 632.5276906920597 724.2048686565086 632.5276906920597 L 476.82505798235536 633.6268046056852 Q 458.3999329201877 632.5276906920597 458.3999329201877 614.102565629892 L 456.02955167479814 515.3619772362337 Q 458.3999329201877 496.936852174066 476.82505798235536 496.936852174066 Z" fill="#f1ebff" fill-opacity="0.98" stroke="none"/>
+<path d="M 476.82505798235536 496.936852174066 L 724.2048686565086 497.90960006620736 Q 742.6299937186762 496.936852174066 742.6299937186762 515.3619772362337 L 740.7425446188078 614.102565629892 Q 742.6299937186762 632.5276906920597 724.2048686565086 632.5276906920597 L 476.82505798235536 633.6268046056852 Q 458.3999329201877 632.5276906920597 458.3999329201877 614.102565629892 L 456.02955167479814 515.3619772362337 Q 458.3999329201877 496.936852174066 476.82505798235536 496.936852174066 Z" fill="none" stroke="#8761d6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 474.8018528263271 499.2408106852323 L 724.1715883449465 500.13739835433665 Q 740.7215723264962 499.2408106852323 740.7215723264962 515.7907946667821 L 738.5566602654756 617.3450342395156 Q 740.7215723264962 633.8950182210654 724.1715883449465 633.8950182210654 L 474.8018528263271 635.7942740663885 Q 458.25186884477733 633.8950182210654 458.25186884477733 617.3450342395156 L 456.2925478108227 515.7907946667821 Q 458.25186884477733 499.2408106852323 474.8018528263271 499.2408106852323 Z" fill="none" stroke="#8761d6" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="489" y="546" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="489" dy="0">多代理与隔离</tspan></text>
+<text x="489" y="576" fill="#5a544c" font-size="16" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="489" dy="0">AgentTool / worktree / remote CCR</tspan></text>
+<text x="489" y="602" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="489" dy="0">解决“并行干活但不互相踩”</tspan></text>
+
+<text x="830" y="520" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="830" dy="0">扩展能力会沿着这三套治理长出来：</tspan></text>
+<text x="830" y="546" fill="#5a544c" font-size="15" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="830" dy="0">plugins / skills / MCP / remote</tspan></text>
+
+<path d="M 412 262 C 470 286 470 288 420 330" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 412 262 C 470 286 470 288 420 330" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 788 262 C 730 286 730 288 780 330" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 788 262 C 730 286 730 288 780 330" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 600 498 L 600 438" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 600 498 L 600 438" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+
+<text x="88" y="694" fill="#5a544c" font-size="13" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="88" dy="0">简单理解：Claude Code 的体验好，不是因为某一层特别强，而是它把“能运行、能控制、能扩展、能持续”一起解决了。</tspan></text>
+
 </svg>
