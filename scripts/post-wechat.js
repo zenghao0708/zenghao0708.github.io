@@ -338,6 +338,37 @@ function materializeSvgImages(markdownPath, payload) {
   return { markdownPath: tempMarkdownPath, temp: true, converted };
 }
 
+function rewriteRootImageRefs(markdownPath, payload) {
+  const original = fs.readFileSync(markdownPath, 'utf8');
+  const imagePattern = /!\[([^\]]*)\]\((\/images\/[^)\s]+)(?:\s+["'][^"']*["'])?\)/gi;
+  const matches = Array.from(original.matchAll(imagePattern));
+  if (matches.length === 0) {
+    return { markdownPath, temp: false, rewritten: [] };
+  }
+
+  const label = buildWechatWorkLabel(markdownPath, payload);
+  const outputBaseDir = ensureDir(path.resolve('publish/output/wechat'));
+  const tempMarkdownPath = path.join(outputBaseDir, `${label}.wechat-root-images.md`);
+  const rewritten = [];
+  let updated = original;
+
+  for (const match of matches) {
+    const fullMatch = match[0];
+    const alt = match[1] || '';
+    const imageRef = match[2];
+    const localPath = path.resolve('blog_new/source', `.${imageRef}`);
+    if (!fs.existsSync(localPath)) {
+      throw new Error(`Image not found: ${localPath} (from ${imageRef})`);
+    }
+    const relativeRef = path.relative(path.dirname(tempMarkdownPath), localPath).split(path.sep).join('/');
+    updated = updated.replace(fullMatch, `![${alt}](${relativeRef})`);
+    rewritten.push({ source: imageRef, localPath, outputRef: relativeRef });
+  }
+
+  fs.writeFileSync(tempMarkdownPath, updated, 'utf8');
+  return { markdownPath: tempMarkdownPath, temp: true, rewritten };
+}
+
 function buildStepArticle(opts, payload, markdownPath, skillDir) {
   const scriptPath = path.join(skillDir, 'scripts', 'wechat-article.ts');
   const args = [scriptPath, '--markdown', markdownPath];
@@ -572,9 +603,21 @@ function main() {
 
   const { markdownPath, temp } = resolveMarkdownPath(opts, payload);
   let effectiveMarkdownPath = markdownPath;
+  let tempRootImagePath = '';
+  let tempRootImages = false;
   let tempMaterializedSvg = false;
   let tempCoverInjected = '';
   let generatedCoverPath = '';
+
+  const rooted = rewriteRootImageRefs(effectiveMarkdownPath, payload);
+  if (rooted.temp) {
+    effectiveMarkdownPath = rooted.markdownPath;
+    tempRootImagePath = rooted.markdownPath;
+    tempRootImages = true;
+    console.log(
+      `[wechat] Rewrote ${rooted.rewritten.length} root image reference(s) for local upload: ${effectiveMarkdownPath}`
+    );
+  }
 
   const materialized = materializeSvgImages(effectiveMarkdownPath, payload);
   if (materialized.temp) {
@@ -641,6 +684,9 @@ function main() {
 
   if (!opts.execute) {
     if (temp && fs.existsSync(markdownPath)) fs.unlinkSync(markdownPath);
+    if (tempRootImages && tempRootImagePath && fs.existsSync(tempRootImagePath) && !tempMaterializedSvg) {
+      console.log(`[wechat] Kept root-image compatible temp markdown: ${effectiveMarkdownPath}`);
+    }
     if (tempCoverInjected && fs.existsSync(tempCoverInjected)) fs.unlinkSync(tempCoverInjected);
     if (tempMaterializedSvg && fs.existsSync(effectiveMarkdownPath)) {
       console.log(`[wechat] Kept SVG-compatible temp markdown: ${effectiveMarkdownPath}`);
@@ -655,6 +701,7 @@ function main() {
   });
 
   if (temp && fs.existsSync(markdownPath)) fs.unlinkSync(markdownPath);
+  if (tempRootImages && tempRootImagePath && fs.existsSync(tempRootImagePath)) fs.unlinkSync(tempRootImagePath);
   if (tempCoverInjected && fs.existsSync(tempCoverInjected)) fs.unlinkSync(tempCoverInjected);
 
   if (typeof res.status === 'number' && res.status !== 0) {
