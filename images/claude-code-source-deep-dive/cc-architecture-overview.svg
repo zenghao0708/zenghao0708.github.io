@@ -1,58 +1,54 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
-  <defs>
-    <style>
-      .bg { fill: #f7f4ee; }
-      .panel { fill: #fffdf8; stroke: #1f2937; stroke-width: 2; rx: 18; ry: 18; }
-      .title { font: 700 34px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #111827; }
-      .subtitle { font: 500 18px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #475569; }
-      .layer { fill: #eef6ff; stroke: #2563eb; stroke-width: 2; rx: 14; ry: 14; }
-      .layer2 { fill: #effcf4; stroke: #16a34a; stroke-width: 2; rx: 14; ry: 14; }
-      .layer3 { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 14; ry: 14; }
-      .layer4 { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 14; ry: 14; }
-      .label { font: 700 22px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #0f172a; }
-      .text { font: 500 16px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #334155; }
-      .small { font: 500 14px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #475569; }
-      .arrow { stroke: #334155; stroke-width: 3; fill: none; marker-end: url(#m); }
-      .chip { fill: #ffffff; stroke: #94a3b8; stroke-width: 1.5; rx: 8; ry: 8; }
-    </style>
-    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
-    </marker>
-  </defs>
 
-  <rect class="bg" width="1200" height="760"/>
-  <text x="60" y="70" class="title">Claude Code 源码结构总览</text>
-  <text x="60" y="105" class="subtitle">它不是“终端里套了个模型”，而是 CLI、Agent Runtime、Tools、Services、扩展系统分层装配的工程系统</text>
 
-  <rect x="60" y="145" width="1080" height="560" class="panel"/>
+<rect width="1200" height="760" fill="#f8f3ea"/>
+<path d="M 24 24 L 1178 18 L 1172 742 L 28 736 Z" fill="none" stroke="#d9d1c4" stroke-width="1.4" opacity="0.8"/>
+<text x="58" y="72" fill="#2b2620" font-size="34" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="58" dy="0">Claude Code 源码结构总览</tspan></text>
+<text x="60" y="106" fill="#5a544c" font-size="18" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="60" dy="0">Claude Code 更像分层装配的工程系统，而不是“终端里塞了个模型”</tspan></text>
 
-  <rect x="110" y="190" width="980" height="85" class="layer"/>
-  <text x="135" y="225" class="label">1. 交互入口层</text>
-  <text x="135" y="255" class="text">main.tsx / REPL / SDK / slash commands / Ink UI</text>
-  <rect x="690" y="208" width="110" height="34" class="chip"/><text x="712" y="231" class="small">CLI 启动</text>
-  <rect x="815" y="208" width="110" height="34" class="chip"/><text x="842" y="231" class="small">REPL</text>
-  <rect x="940" y="208" width="110" height="34" class="chip"/><text x="975" y="231" class="small">SDK</text>
+<path d="M 82.10390051987022 144.21561413928868 L 1116.7579798920826 144.48937468081715 Q 1140.7784536616878 144.21561413928868 1140.7784536616878 168.23608790889384 L 1137.754642023705 684.6286612094194 Q 1140.7784536616878 708.6491349790246 1116.7579798920826 708.6491349790246 L 82.10390051987022 708.8687746630982 Q 58.08342675026506 708.6491349790246 58.08342675026506 684.6286612094194 L 58.85913015361875 168.23608790889384 Q 58.08342675026506 144.21561413928868 82.10390051987022 144.21561413928868 Z" fill="#fffdf8" fill-opacity="0.98" stroke="none"/>
+<path d="M 82.10390051987022 144.21561413928868 L 1116.7579798920826 144.48937468081715 Q 1140.7784536616878 144.21561413928868 1140.7784536616878 168.23608790889384 L 1137.754642023705 684.6286612094194 Q 1140.7784536616878 708.6491349790246 1116.7579798920826 708.6491349790246 L 82.10390051987022 708.8687746630982 Q 58.08342675026506 708.6491349790246 58.08342675026506 684.6286612094194 L 58.85913015361875 168.23608790889384 Q 58.08342675026506 144.21561413928868 82.10390051987022 144.21561413928868 Z" fill="none" stroke="#2b2620" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 79.72069975540042 143.35065484754742 L 1119.103893859759 142.30083517581224 Q 1141.1845285568386 143.35065484754742 1141.1845285568386 165.43128954462708 L 1140.7269674364477 687.5077289175988 Q 1141.1845285568386 709.5883636146784 1119.103893859759 709.5883636146784 L 79.72069975540042 709.2678615856917 Q 57.64006505832076 709.5883636146784 57.64006505832076 687.5077289175988 L 55.65218593589961 165.43128954462708 Q 57.64006505832076 143.35065484754742 79.72069975540042 143.35065484754742 Z" fill="none" stroke="#2b2620" stroke-width="1.7999999999999998" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <rect x="110" y="305" width="980" height="105" class="layer2"/>
-  <text x="135" y="342" class="label">2. Agent Runtime 层</text>
-  <text x="135" y="372" class="text">QueryEngine + query.ts 主循环：system prompt 组装、消息归一化、流式输出、tool use、错误恢复</text>
-  <text x="135" y="396" class="small">这是 Claude Code 的中枢。UI 和 headless 模式，最终都要落到这一层。</text>
+<path d="M 123.37834067862481 187.61860922854393 L 1074.5738011422009 190.4409306632355 Q 1090.4396450255067 187.61860922854393 1090.4396450255067 203.48445311184972 L 1093.1042493062096 259.28733640894296 Q 1090.4396450255067 275.15318029224875 1074.5738011422009 275.15318029224875 L 123.37834067862481 274.0429395396263 Q 107.51249679531902 275.15318029224875 107.51249679531902 259.28733640894296 L 107.1009743794799 203.48445311184972 Q 107.51249679531902 187.61860922854393 123.37834067862481 187.61860922854393 Z" fill="#e7f0ff" fill-opacity="0.98" stroke="none"/>
+<path d="M 123.37834067862481 187.61860922854393 L 1074.5738011422009 190.4409306632355 Q 1090.4396450255067 187.61860922854393 1090.4396450255067 203.48445311184972 L 1093.1042493062096 259.28733640894296 Q 1090.4396450255067 275.15318029224875 1074.5738011422009 275.15318029224875 L 123.37834067862481 274.0429395396263 Q 107.51249679531902 275.15318029224875 107.51249679531902 259.28733640894296 L 107.1009743794799 203.48445311184972 Q 107.51249679531902 187.61860922854393 123.37834067862481 187.61860922854393 Z" fill="none" stroke="#4678d4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 120.57322218723596 187.24635843858124 L 1074.9255258391797 185.54274339713157 Q 1089.6024319164455 187.24635843858124 1089.6024319164455 201.92326451584697 L 1090.643549663946 263.15601531036197 Q 1089.6024319164455 277.8329213876277 1074.9255258391797 277.8329213876277 L 120.57322218723596 276.5082013372332 Q 105.89631610997021 277.8329213876277 105.89631610997021 263.15601531036197 L 104.91779281161726 201.92326451584697 Q 105.89631610997021 187.24635843858124 120.57322218723596 187.24635843858124 Z" fill="none" stroke="#4678d4" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="136" y="225" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="136" dy="0">1. 交互入口层</tspan></text>
+<text x="136" y="254" fill="#5a544c" font-size="16" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="136" dy="0">main.tsx / REPL / SDK / slash commands / Ink UI</tspan></text>
 
-  <rect x="110" y="440" width="980" height="115" class="layer3"/>
-  <text x="135" y="478" class="label">3. 能力执行层</text>
-  <text x="135" y="508" class="text">40+ Tools：Bash / Read / Edit / Write / Web / Agent / MCP / Worktree / Plan / Task</text>
-  <text x="135" y="532" class="small">带并发安全判断、权限检查、sandbox、interrupt 行为和 tool result 生命周期管理</text>
-  <rect x="735" y="462" width="90" height="32" class="chip"/><text x="754" y="484" class="small">Bash</text>
-  <rect x="836" y="462" width="90" height="32" class="chip"/><text x="856" y="484" class="small">Read/Edit</text>
-  <rect x="937" y="462" width="90" height="32" class="chip"/><text x="963" y="484" class="small">Agent</text>
+<path d="M 128.55465342581272 304.06370218414816 L 1074.9404126013442 304.0053374953568 Q 1092.9677634475752 304.06370218414816 1092.9677634475752 322.09105303037916 L 1095.9498805973678 394.26920196589083 Q 1092.9677634475752 412.29655281212183 1074.9404126013442 412.29655281212183 L 128.55465342581272 411.8876721693203 Q 110.52730257958174 412.29655281212183 110.52730257958174 394.26920196589083 L 107.3419427599758 322.09105303037916 Q 110.52730257958174 304.06370218414816 128.55465342581272 304.06370218414816 Z" fill="#ebf8ee" fill-opacity="0.98" stroke="none"/>
+<path d="M 128.55465342581272 304.06370218414816 L 1074.9404126013442 304.0053374953568 Q 1092.9677634475752 304.06370218414816 1092.9677634475752 322.09105303037916 L 1095.9498805973678 394.26920196589083 Q 1092.9677634475752 412.29655281212183 1074.9404126013442 412.29655281212183 L 128.55465342581272 411.8876721693203 Q 110.52730257958174 412.29655281212183 110.52730257958174 394.26920196589083 L 107.3419427599758 322.09105303037916 Q 110.52730257958174 304.06370218414816 128.55465342581272 304.06370218414816 Z" fill="none" stroke="#3e9b60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 124.11609666705131 305.4143184389919 L 1075.6695216675848 306.3744852218777 Q 1093.507002935931 305.4143184389919 1093.507002935931 323.25179970733825 L 1092.8059511572121 394.4917121013254 Q 1093.507002935931 412.3291933696717 1075.6695216675848 412.3291933696717 L 124.11609666705131 410.45835622623565 Q 106.278615398705 412.3291933696717 106.278615398705 394.4917121013254 L 107.48427575826645 323.25179970733825 Q 106.278615398705 305.4143184389919 124.11609666705131 305.4143184389919 Z" fill="none" stroke="#3e9b60" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="136" y="342" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="136" dy="0">2. Agent Runtime 层</tspan></text>
+<text x="136" y="368" fill="#5a544c" font-size="15" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="136" dy="0">QueryEngine + query.ts 主循环：system prompt 组装、</tspan><tspan x="136" dy="18">消息归一化、流式输出、tool use、错误恢复</tspan></text>
+<text x="136" y="397" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="136" dy="0">这是 Claude Code 的中枢。UI 和 headless 模式，最终都要落到这一层。</tspan></text>
 
-  <rect x="110" y="585" width="980" height="85" class="layer4"/>
-  <text x="135" y="620" class="label">4. 系统服务层</text>
-  <text x="135" y="650" class="text">compact / permissions / analytics / MCP / plugins / skills / voice / remote / team memory</text>
+<path d="M 120.10651310030372 435.9239728016779 L 1076.7262007465586 434.3301746789366 Q 1091.3741327969358 435.9239728016779 1091.3741327969358 450.571904852055 L 1091.1472438629717 539.385147897713 Q 1091.3741327969358 554.0330799480901 1076.7262007465586 554.0330799480901 L 120.10651310030372 552.723925579153 Q 105.45858104992658 554.0330799480901 105.45858104992658 539.385147897713 L 108.47914039380848 450.571904852055 Q 105.45858104992658 435.9239728016779 120.10651310030372 435.9239728016779 Z" fill="#fff1e2" fill-opacity="0.98" stroke="none"/>
+<path d="M 120.10651310030372 435.9239728016779 L 1076.7262007465586 434.3301746789366 Q 1091.3741327969358 435.9239728016779 1091.3741327969358 450.571904852055 L 1091.1472438629717 539.385147897713 Q 1091.3741327969358 554.0330799480901 1076.7262007465586 554.0330799480901 L 120.10651310030372 552.723925579153 Q 105.45858104992658 554.0330799480901 105.45858104992658 539.385147897713 L 108.47914039380848 450.571904852055 Q 105.45858104992658 435.9239728016779 120.10651310030372 435.9239728016779 Z" fill="none" stroke="#d07d38" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 122.56651645943522 440.8337030850351 L 1078.062286751643 440.8223729021847 Q 1092.5240697775037 440.8337030850351 1092.5240697775037 455.29548611089587 L 1094.4371804662048 540.1915884654225 Q 1092.5240697775037 554.6533714912832 1078.062286751643 554.6533714912832 L 122.56651645943522 554.8454295936972 Q 108.10473343357444 554.6533714912832 108.10473343357444 540.1915884654225 L 106.41852778829634 455.29548611089587 Q 108.10473343357444 440.8337030850351 122.56651645943522 440.8337030850351 Z" fill="none" stroke="#d07d38" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="136" y="477" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="136" dy="0">3. 能力执行层</tspan></text>
+<text x="136" y="499" fill="#5a544c" font-size="15" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="136" dy="0">Bash / Read / Edit / Write / Web / Agent / MCP / Worktree / Plan / Task</tspan></text>
+<text x="136" y="526" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="136" dy="0">重点不在工具数量，而在并发安全、权限检查、sandbox 与执行秩序。</tspan></text>
 
-  <path d="M600 275 L600 305" class="arrow"/>
-  <path d="M600 410 L600 440" class="arrow"/>
-  <path d="M600 555 L600 585" class="arrow"/>
+<path d="M 125.82962950266898 581.5491734238342 L 1076.8173724762723 579.0935474939645 Q 1092.7556460572407 581.5491734238342 1092.7556460572407 597.4874470048026 L 1090.5641572700813 657.3463454519957 Q 1092.7556460572407 673.2846190329641 1076.8173724762723 673.2846190329641 L 125.82962950266898 674.5553056966513 Q 109.8913559217006 673.2846190329641 109.8913559217006 657.3463454519957 L 108.4803404442966 597.4874470048026 Q 109.8913559217006 581.5491734238342 125.82962950266898 581.5491734238342 Z" fill="#f1ebff" fill-opacity="0.98" stroke="none"/>
+<path d="M 125.82962950266898 581.5491734238342 L 1076.8173724762723 579.0935474939645 Q 1092.7556460572407 581.5491734238342 1092.7556460572407 597.4874470048026 L 1090.5641572700813 657.3463454519957 Q 1092.7556460572407 673.2846190329641 1076.8173724762723 673.2846190329641 L 125.82962950266898 674.5553056966513 Q 109.8913559217006 673.2846190329641 109.8913559217006 657.3463454519957 L 108.4803404442966 597.4874470048026 Q 109.8913559217006 581.5491734238342 125.82962950266898 581.5491734238342 Z" fill="none" stroke="#8761d6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 122.52284673698247 584.5552039120346 L 1076.8045491339267 586.924183889851 Q 1092.7699810154736 584.5552039120346 1092.7699810154736 600.5206357935815 L 1091.328389404714 656.2792495971173 Q 1092.7699810154736 672.2446814786642 1076.8045491339267 672.2446814786642 L 122.52284673698247 670.1524332851171 Q 106.5574148554355 672.2446814786642 106.5574148554355 656.2792495971173 L 104.93018168248237 600.5206357935815 Q 106.5574148554355 584.5552039120346 122.52284673698247 584.5552039120346 Z" fill="none" stroke="#8761d6" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="136" y="620" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="136" dy="0">4. 系统服务层</tspan></text>
+<text x="136" y="649" fill="#5a544c" font-size="15" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="136" dy="0">compact / permissions / MCP / plugins / skills / remote / team memory</tspan></text>
 
-  <text x="85" y="715" class="small">读图方式：从上往下看，越往上越接近用户体验，越往下越接近 Claude Code 真正“更好用”的工程底座。</text>
+<path d="M 603 278 L 603 304" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 603 278 L 603 304" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 609.1031303162166 292.52168129283393 L 603 304 L 596.8968696837834 292.52168129283393" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 609.1031303162166 292.52168129283393 L 603 304 L 596.8968696837834 292.52168129283393" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+<path d="M 603 412 L 603 439" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 603 412 L 603 439" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 609.1031303162166 427.52168129283393 L 603 439 L 596.8968696837834 427.52168129283393" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 609.1031303162166 427.52168129283393 L 603 439 L 596.8968696837834 427.52168129283393" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+<path d="M 603 557 L 603 584" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 603 557 L 603 584" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 609.1031303162166 572.5216812928339 L 603 584 L 596.8968696837834 572.5216812928339" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 609.1031303162166 572.5216812928339 L 603 584 L 596.8968696837834 572.5216812928339" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+
+<text x="84" y="701" fill="#5a544c" font-size="13" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="84" dy="0">读图方式：从上往下看，越往上越接近用户体验，越往下越接近 Claude Code 真正“更好用”的工程底座。</tspan></text>
+
 </svg>

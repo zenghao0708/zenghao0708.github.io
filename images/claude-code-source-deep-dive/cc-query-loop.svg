@@ -1,62 +1,84 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
-  <defs>
-    <style>
-      .bg { fill: #fbfaf7; }
-      .title { font: 700 34px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #111827; }
-      .subtitle { font: 500 18px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #475569; }
-      .box1 { fill: #eef6ff; stroke: #2563eb; stroke-width: 2; rx: 16; ry: 16; }
-      .box2 { fill: #effcf4; stroke: #16a34a; stroke-width: 2; rx: 16; ry: 16; }
-      .box3 { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 16; ry: 16; }
-      .box4 { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 16; ry: 16; }
-      .label { font: 700 22px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #0f172a; }
-      .text { font: 500 16px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #334155; }
-      .small { font: 500 14px 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #64748b; }
-      .arrow { stroke: #334155; stroke-width: 3; fill: none; marker-end: url(#m2); }
-    </style>
-    <marker id="m2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
-    </marker>
-  </defs>
-  <rect class="bg" width="1200" height="760"/>
-  <text x="60" y="70" class="title">Claude Code 主查询循环</text>
-  <text x="60" y="105" class="subtitle">真正决定体验的不是“单次问答”，而是一个持续管理上下文、工具和恢复逻辑的 agent loop</text>
 
-  <rect x="90" y="165" width="260" height="95" class="box1"/>
-  <text x="120" y="205" class="label">用户输入</text>
-  <text x="120" y="235" class="text">prompt / slash command / SDK 消息</text>
 
-  <rect x="470" y="165" width="260" height="95" class="box2"/>
-  <text x="500" y="205" class="label">预处理</text>
-  <text x="500" y="235" class="text">命令解析、消息归一化、system prompt 拼装</text>
+<rect width="1200" height="760" fill="#f8f3ea"/>
+<path d="M 24 24 L 1178 18 L 1172 742 L 28 736 Z" fill="none" stroke="#d9d1c4" stroke-width="1.4" opacity="0.8"/>
+<text x="58" y="72" fill="#2b2620" font-size="34" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="58" dy="0">Claude Code 主查询循环</tspan></text>
+<text x="60" y="106" fill="#5a544c" font-size="18" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="60" dy="0">真正决定体验的不是“单次问答”，而是一个持续管理上下文、工具和恢复逻辑的 agent loop</tspan></text>
 
-  <rect x="850" y="165" width="260" height="95" class="box3"/>
-  <text x="880" y="205" class="label">query.ts</text>
-  <text x="880" y="235" class="text">进入主代理循环，准备流式请求与状态机</text>
 
-  <rect x="850" y="335" width="260" height="95" class="box4"/>
-  <text x="880" y="375" class="label">模型输出流</text>
-  <text x="880" y="405" class="text">assistant delta / tool_use / error / thinking</text>
+<path d="M 102.70897095505148 165.90657403972 L 334.9600734624639 167.29874386228622 Q 352.29237982798367 165.90657403972 352.29237982798367 183.23888040523977 L 352.9225375730544 245.69741182211786 Q 352.29237982798367 263.0297181876376 334.9600734624639 263.0297181876376 L 102.70897095505148 266.3657117607072 Q 85.37666458953171 263.0297181876376 85.37666458953171 245.69741182211786 L 83.422533743456 183.23888040523977 Q 85.37666458953171 165.90657403972 102.70897095505148 165.90657403972 Z" fill="#e7f0ff" fill-opacity="0.98" stroke="none"/>
+<path d="M 102.70897095505148 165.90657403972 L 334.9600734624639 167.29874386228622 Q 352.29237982798367 165.90657403972 352.29237982798367 183.23888040523977 L 352.9225375730544 245.69741182211786 Q 352.29237982798367 263.0297181876376 334.9600734624639 263.0297181876376 L 102.70897095505148 266.3657117607072 Q 85.37666458953171 263.0297181876376 85.37666458953171 245.69741182211786 L 83.422533743456 183.23888040523977 Q 85.37666458953171 165.90657403972 102.70897095505148 165.90657403972 Z" fill="none" stroke="#4678d4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 108.54739541880787 164.47345246896148 L 331.5124673166871 164.34115204885603 Q 349.91394771039484 164.47345246896148 349.91394771039484 182.87493286266923 L 348.7227367930114 242.61571163885299 Q 349.91394771039484 261.01719203256073 331.5124673166871 261.01719203256073 L 108.54739541880787 261.48475511148575 Q 90.14591502510011 261.01719203256073 90.14591502510011 242.61571163885299 L 87.9050309818238 182.87493286266923 Q 90.14591502510011 164.47345246896148 108.54739541880787 164.47345246896148 Z" fill="none" stroke="#4678d4" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="120" y="205" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="120" dy="0">用户输入</tspan></text>
+<text x="120" y="235" fill="#5a544c" font-size="16" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="120" dy="0">prompt / slash command / SDK 消息</tspan></text>
 
-  <rect x="470" y="335" width="260" height="95" class="box3"/>
-  <text x="500" y="375" class="label">工具执行</text>
-  <text x="500" y="405" class="text">StreamingToolExecutor / runTools / permission</text>
+<path d="M 489.80195562858137 164.31659340951592 L 713.3955893743783 165.81986121460795 Q 733.8431258607656 164.31659340951592 733.8431258607656 184.76412989590318 L 735.1803516022861 245.05529020577666 Q 733.8431258607656 265.5028266921639 713.3955893743783 265.5028266921639 L 489.80195562858137 267.6784247906878 Q 469.3544191421941 265.5028266921639 469.3544191421941 245.05529020577666 L 469.2871638525277 184.76412989590318 Q 469.3544191421941 164.31659340951592 489.80195562858137 164.31659340951592 Z" fill="#ebf8ee" fill-opacity="0.98" stroke="none"/>
+<path d="M 489.80195562858137 164.31659340951592 L 713.3955893743783 165.81986121460795 Q 733.8431258607656 164.31659340951592 733.8431258607656 184.76412989590318 L 735.1803516022861 245.05529020577666 Q 733.8431258607656 265.5028266921639 713.3955893743783 265.5028266921639 L 489.80195562858137 267.6784247906878 Q 469.3544191421941 265.5028266921639 469.3544191421941 245.05529020577666 L 469.2871638525277 184.76412989590318 Q 469.3544191421941 164.31659340951592 489.80195562858137 164.31659340951592 Z" fill="none" stroke="#3e9b60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 489.5396216907352 164.06831594407558 L 713.0280134770275 163.97262423820794 Q 732.5466947615147 164.06831594407558 732.5466947615147 183.58699722856284 L 734.7721879363061 241.40754720784722 Q 732.5466947615147 260.9262284923345 713.0280134770275 260.9262284923345 L 489.5396216907352 261.77726019360125 Q 470.020940406248 260.9262284923345 470.020940406248 241.40754720784722 L 471.985419280082 183.58699722856284 Q 470.020940406248 164.06831594407558 489.5396216907352 164.06831594407558 Z" fill="none" stroke="#3e9b60" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="500" y="205" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="500" dy="0">预处理</tspan></text>
+<text x="500" y="233" fill="#5a544c" font-size="15" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="500" dy="0">命令解析、消息归一化、</tspan><tspan x="500" dy="18">system prompt 拼装</tspan></text>
 
-  <rect x="90" y="335" width="260" height="95" class="box2"/>
-  <text x="120" y="375" class="label">结果回写</text>
-  <text x="120" y="405" class="text">tool_result / 新消息 / 上下文更新 / UI 流式显示</text>
+<path d="M 863.4497103969753 167.21560997739434 L 1092.3731952058895 165.12683915887027 Q 1109.3607850840315 167.21560997739434 1109.3607850840315 184.2031998555362 L 1109.1887634629384 247.77445364974437 Q 1109.3607850840315 264.76204352788625 1092.3731952058895 264.76204352788625 L 863.4497103969753 261.3554525572806 Q 846.4621205188334 264.76204352788625 846.4621205188334 247.77445364974437 L 848.2013473823667 184.2031998555362 Q 846.4621205188334 167.21560997739434 863.4497103969753 167.21560997739434 Z" fill="#fff1e2" fill-opacity="0.98" stroke="none"/>
+<path d="M 863.4497103969753 167.21560997739434 L 1092.3731952058895 165.12683915887027 Q 1109.3607850840315 167.21560997739434 1109.3607850840315 184.2031998555362 L 1109.1887634629384 247.77445364974437 Q 1109.3607850840315 264.76204352788625 1092.3731952058895 264.76204352788625 L 863.4497103969753 261.3554525572806 Q 846.4621205188334 264.76204352788625 846.4621205188334 247.77445364974437 L 848.2013473823667 184.2031998555362 Q 846.4621205188334 167.21560997739434 863.4497103969753 167.21560997739434 Z" fill="none" stroke="#d07d38" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 866.2136678475142 164.52399565353988 L 1092.8139666528255 164.34555985815823 Q 1111.954039113596 164.52399565353988 1111.954039113596 183.66406811431048 L 1114.0623004112392 243.5851080969721 Q 1111.954039113596 262.7251805577427 1092.8139666528255 262.7251805577427 L 866.2136678475142 261.6624459389597 Q 847.0735953867436 262.7251805577427 847.0735953867436 243.5851080969721 L 849.0253355503082 183.66406811431048 Q 847.0735953867436 164.52399565353988 866.2136678475142 164.52399565353988 Z" fill="none" stroke="#d07d38" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="880" y="205" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="880" dy="0">query.ts</tspan></text>
+<text x="880" y="233" fill="#5a544c" font-size="15" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="880" dy="0">进入主代理循环，准备</tspan><tspan x="880" dy="18">流式请求与状态机</tspan></text>
 
-  <rect x="280" y="520" width="640" height="120" class="box1"/>
-  <text x="310" y="560" class="label">后台守护逻辑</text>
-  <text x="310" y="590" class="text">autoCompact、token budget、fallback model、异常恢复、stop hooks、tool use summary</text>
-  <text x="310" y="615" class="small">这部分决定了 Claude Code 为什么在长会话里比很多 Agent 更稳，而不是越聊越乱。</text>
+<path d="M 869.1889545670897 337.3149258857593 L 1096.0313396283238 334.00791788939387 Q 1113.6682692084462 337.3149258857593 1113.6682692084462 354.9518554658815 L 1116.2555972989649 412.41579664953053 Q 1113.6682692084462 430.05272622965276 1096.0313396283238 430.05272622965276 L 869.1889545670897 430.1278491541743 Q 851.5520249869675 430.05272622965276 851.5520249869675 412.41579664953053 L 849.34539190121 354.9518554658815 Q 851.5520249869675 337.3149258857593 869.1889545670897 337.3149258857593 Z" fill="#f1ebff" fill-opacity="0.98" stroke="none"/>
+<path d="M 869.1889545670897 337.3149258857593 L 1096.0313396283238 334.00791788939387 Q 1113.6682692084462 337.3149258857593 1113.6682692084462 354.9518554658815 L 1116.2555972989649 412.41579664953053 Q 1113.6682692084462 430.05272622965276 1096.0313396283238 430.05272622965276 L 869.1889545670897 430.1278491541743 Q 851.5520249869675 430.05272622965276 851.5520249869675 412.41579664953053 L 849.34539190121 354.9518554658815 Q 851.5520249869675 337.3149258857593 869.1889545670897 337.3149258857593 Z" fill="none" stroke="#8761d6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 863.9814170590043 333.674996234104 L 1095.1315319107473 332.0583843003958 Q 1111.406847731024 333.674996234104 1111.406847731024 349.95031205438073 L 1111.1320151641964 417.3676757977903 Q 1111.406847731024 433.642991618067 1095.1315319107473 433.642991618067 L 863.9814170590043 433.0523599091917 Q 847.7061012387276 433.642991618067 847.7061012387276 417.3676757977903 L 847.715439362824 349.95031205438073 Q 847.7061012387276 333.674996234104 863.9814170590043 333.674996234104 Z" fill="none" stroke="#8761d6" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="880" y="375" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="880" dy="0">模型输出流</tspan></text>
+<text x="880" y="401" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="880" dy="0">assistant delta / tool_use /</tspan><tspan x="880" dy="18">error / thinking</tspan></text>
 
-  <path d="M350 212 L470 212" class="arrow"/>
-  <path d="M730 212 L850 212" class="arrow"/>
-  <path d="M980 260 L980 335" class="arrow"/>
-  <path d="M850 382 L730 382" class="arrow"/>
-  <path d="M470 382 L350 382" class="arrow"/>
-  <path d="M220 335 L220 260 C220 230 220 212 90 212" class="arrow"/>
-  <path d="M600 430 L600 520" class="arrow"/>
+<path d="M 484.00598818302154 332.63433282654734 L 716.519678564407 331.27762763760984 Q 735.1820720935241 332.63433282654734 735.1820720935241 351.2967263556644 L 737.6767721073702 415.1768668711558 Q 735.1820720935241 433.8392604002729 716.519678564407 433.8392604002729 L 484.00598818302154 436.8324847754091 Q 465.34359465390446 433.8392604002729 465.34359465390446 415.1768668711558 L 465.9483711898327 351.2967263556644 Q 465.34359465390446 332.63433282654734 484.00598818302154 332.63433282654734 Z" fill="#fff1e2" fill-opacity="0.98" stroke="none"/>
+<path d="M 484.00598818302154 332.63433282654734 L 716.519678564407 331.27762763760984 Q 735.1820720935241 332.63433282654734 735.1820720935241 351.2967263556644 L 737.6767721073702 415.1768668711558 Q 735.1820720935241 433.8392604002729 716.519678564407 433.8392604002729 L 484.00598818302154 436.8324847754091 Q 465.34359465390446 433.8392604002729 465.34359465390446 415.1768668711558 L 465.9483711898327 351.2967263556644 Q 465.34359465390446 332.63433282654734 484.00598818302154 332.63433282654734 Z" fill="none" stroke="#d07d38" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 483.6954896758497 336.22419061250986 L 713.1729936678707 335.24440956935285 Q 730.6505224518478 336.22419061250986 730.6505224518478 353.7017193964869 L 730.5897586930544 414.49777891270816 Q 730.6505224518478 431.9753076966852 713.1729936678707 431.9753076966852 L 483.6954896758497 431.30975176021457 Q 466.2179608918726 431.9753076966852 466.2179608918726 414.49777891270816 L 465.1341631572693 353.7017193964869 Q 466.2179608918726 336.22419061250986 483.6954896758497 336.22419061250986 Z" fill="none" stroke="#d07d38" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="500" y="375" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="500" dy="0">工具执行</tspan></text>
+<text x="500" y="401" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="500" dy="0">StreamingToolExecutor /</tspan><tspan x="500" dy="18">runTools / permission</tspan></text>
 
-  <text x="90" y="695" class="small">关键理解：Claude Code 的一个回合不是一次 API 调用，而是“模型输出 - 工具执行 - 状态更新 - 再继续”的循环系统。</text>
+<path d="M 102.42898419570177 335.11457787118854 L 332.73006498649715 335.61871313545856 Q 349.25070825368164 335.11457787118854 349.25070825368164 351.635221138373 L 351.3900870924815 417.6132590808347 Q 349.25070825368164 434.1339023480192 332.73006498649715 434.1339023480192 L 102.42898419570177 436.30521222464745 Q 85.90834092851728 434.1339023480192 85.90834092851728 417.6132590808347 L 82.50054158251731 351.635221138373 Q 85.90834092851728 335.11457787118854 102.42898419570177 335.11457787118854 Z" fill="#ebf8ee" fill-opacity="0.98" stroke="none"/>
+<path d="M 102.42898419570177 335.11457787118854 L 332.73006498649715 335.61871313545856 Q 349.25070825368164 335.11457787118854 349.25070825368164 351.635221138373 L 351.3900870924815 417.6132590808347 Q 349.25070825368164 434.1339023480192 332.73006498649715 434.1339023480192 L 102.42898419570177 436.30521222464745 Q 85.90834092851728 434.1339023480192 85.90834092851728 417.6132590808347 L 82.50054158251731 351.635221138373 Q 85.90834092851728 335.11457787118854 102.42898419570177 335.11457787118854 Z" fill="none" stroke="#3e9b60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 107.98437120966614 332.85593106634917 L 332.63621473111215 335.06678914316 Q 351.30410231389106 332.85593106634917 351.30410231389106 351.5238186491281 L 352.5472385402769 411.2123071099073 Q 351.30410231389106 429.8801946926862 332.63621473111215 429.8801946926862 L 107.98437120966614 431.81369954198595 Q 89.3164836268872 429.8801946926862 89.3164836268872 411.2123071099073 L 91.67207537405193 351.5238186491281 Q 89.3164836268872 332.85593106634917 107.98437120966614 332.85593106634917 Z" fill="none" stroke="#3e9b60" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="120" y="375" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="120" dy="0">结果回写</tspan></text>
+<text x="120" y="401" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="120" dy="0">tool_result / 新消息 /</tspan><tspan x="120" dy="18">上下文更新 / UI 流式显示</tspan></text>
+
+<path d="M 303.97621173277497 516.9753228733316 L 900.6888159076124 515.7906554440036 Q 923.4197242144495 516.9753228733316 923.4197242144495 539.7062311801687 L 920.9874390518293 619.3038822591677 Q 923.4197242144495 642.0347905660049 900.6888159076124 642.0347905660049 L 303.97621173277497 644.86388664376 Q 281.2453034259379 642.0347905660049 281.2453034259379 619.3038822591677 L 278.7020490519702 539.7062311801687 Q 281.2453034259379 516.9753228733316 303.97621173277497 516.9753228733316 Z" fill="#e7f0ff" fill-opacity="0.98" stroke="none"/>
+<path d="M 303.97621173277497 516.9753228733316 L 900.6888159076124 515.7906554440036 Q 923.4197242144495 516.9753228733316 923.4197242144495 539.7062311801687 L 920.9874390518293 619.3038822591677 Q 923.4197242144495 642.0347905660049 900.6888159076124 642.0347905660049 L 303.97621173277497 644.86388664376 Q 281.2453034259379 642.0347905660049 281.2453034259379 619.3038822591677 L 278.7020490519702 539.7062311801687 Q 281.2453034259379 516.9753228733316 303.97621173277497 516.9753228733316 Z" fill="none" stroke="#4678d4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 297.67909892469646 517.7694356836379 L 901.7840648858994 519.091908088699 Q 921.0257307287305 517.7694356836379 921.0257307287305 537.011101526469 L 920.4303333636373 621.5026451713592 Q 921.0257307287305 640.7443110141903 901.7840648858994 640.7443110141903 L 297.67909892469646 642.6990345519037 Q 278.4374330818653 640.7443110141903 278.4374330818653 621.5026451713592 L 278.2450361035764 537.011101526469 Q 278.4374330818653 517.7694356836379 297.67909892469646 517.7694356836379 Z" fill="none" stroke="#4678d4" stroke-width="1.584" opacity="0.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="310" y="561" fill="#2b2620" font-size="24" font-weight="700" font-family="'Comic Sans MS', 'Marker Felt', 'Kaiti SC', 'STKaiti', 'LXGW WenKai', 'PingFang SC', sans-serif"><tspan x="310" dy="0">后台守护逻辑</tspan></text>
+<text x="310" y="592" fill="#5a544c" font-size="15" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="310" dy="0">autoCompact / token budget / fallback / stop hooks</tspan></text>
+<text x="310" y="616" fill="#5a544c" font-size="14" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="310" dy="0">这些守护逻辑决定长会话是否稳定。</tspan></text>
+
+<path d="M 350 214 L 468 214" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 350 214 L 468 214" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 456.52168129283393 207.89686968378342 L 468 214 L 456.52168129283393 220.10313031621658" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 456.52168129283393 207.89686968378342 L 468 214 L 456.52168129283393 220.10313031621658" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+<path d="M 732 214 L 848 214" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 732 214 L 848 214" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 836.5216812928339 207.89686968378342 L 848 214 L 836.5216812928339 220.10313031621658" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 836.5216812928339 207.89686968378342 L 848 214 L 836.5216812928339 220.10313031621658" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+<path d="M 980 262 L 980 334" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 980 262 L 980 334" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 986.1031303162166 322.52168129283393 L 980 334 L 973.8968696837834 322.52168129283393" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 986.1031303162166 322.52168129283393 L 980 334 L 973.8968696837834 322.52168129283393" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+<path d="M 848 383 L 732 383" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 848 383 L 732 383" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 743.4783187071661 389.10313031621655 L 732 383 L 743.4783187071661 376.8968696837834" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 743.4783187071661 389.10313031621655 L 732 383 L 743.4783187071661 376.8968696837834" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+<path d="M 468 383 L 350 383" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 468 383 L 350 383" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 361.47831870716607 389.10313031621655 L 350 383 L 361.47831870716607 376.8968696837834" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 361.47831870716607 389.10313031621655 L 350 383 L 361.47831870716607 376.8968696837834" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+<path d="M 220 334 L 220 262" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 220 334 L 220 262" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 213.89686968378342 273.47831870716607 L 220 262 L 226.10313031621658 273.47831870716607" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 213.89686968378342 273.47831870716607 L 220 262 L 226.10313031621658 273.47831870716607" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+<path d="M 600 432 L 600 518" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 600 432 L 600 518" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" transform="translate(1.9 -1.1)"/>
+<path d="M 606.1031303162166 506.52168129283393 L 600 518 L 593.8968696837834 506.52168129283393" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 606.1031303162166 506.52168129283393 L 600 518 L 593.8968696837834 506.52168129283393" fill="none" stroke="#2b2620" stroke-width="1.728" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" transform="translate(0.8 -0.5)"/>
+
+<text x="88" y="690" fill="#5a544c" font-size="13" font-weight="500" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"><tspan x="88" dy="0">关键理解：Claude Code 的一个回合不是一次 API 调用，而是“模型输出 - 工具执行 - 状态更新 - 再继续”的循环系统。</tspan></text>
+
 </svg>
