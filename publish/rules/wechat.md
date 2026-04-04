@@ -24,6 +24,7 @@
 ## 运行约束
 
 - 必须使用已登录公众号后台的 Chrome profile。
+- 发布前默认清理同一 automation profile 下残留的 Chrome/CDP 进程，避免复用到只剩 `chrome://newtab/` 的旧实例。
 - 发布前若正文引用本地或远程 `.svg`，统一先物化成临时 `PNG` 再发，不改原文 Markdown。
 - 社交平台兼容优先级里，技术结构图首选 `PNG`，不要默认转 `webp`。
 - 发布后要保留审计产物：
