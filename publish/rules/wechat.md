@@ -7,9 +7,9 @@
 
 ## 主题与排版
 
-- 默认主题固定为 `mdnice-simple`。
+- 默认主题固定为 `mdnice-lanqing`。
 - 不要默认回退到 `grace`；此前已验证它会让技术文章排版效果明显变差。
-- 如未显式指定 theme，环境变量和脚本默认值都应保持 `WECHAT_ARTICLE_THEME=mdnice-simple`。
+- 如未显式指定 theme，环境变量和脚本默认值都应保持 `WECHAT_ARTICLE_THEME=mdnice-lanqing`。
 
 ## 封面规则
 

@@ -13,7 +13,7 @@ function parseArgs(argv) {
     input: '',
     source: '',
     mode: process.env.WECHAT_PUBLISH_MODE || 'article',
-    theme: process.env.WECHAT_ARTICLE_THEME || 'mdnice-simple',
+    theme: process.env.WECHAT_ARTICLE_THEME || 'mdnice-lanqing',
     profile: process.env.WECHAT_CHROME_PROFILE || '',
     execute: false,
     submit: false,
