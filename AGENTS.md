@@ -30,14 +30,21 @@
 - 不要在仓库提交真实密钥；只维护 `publish/.env.example`。
 - 平台规则沉淀在 `publish/rules/`，遇到发布问题先查规则，再改脚本：
   - `publish/rules/feishu.md`
+  - `publish/rules/blog-images.md`
   - `publish/rules/wechat.md`
   - `publish/rules/x.md`
   - `publish/rules/xhs.md`
 
+## 博客配图约定
+- 博客配图规则先看 `publish/rules/blog-images.md`。
+- 技术结构图母版优先保留 `SVG`，发布优先导出 `PNG`。
+- 通用导出脚本：`scripts/export-blog-svg.js`。
+- 需要高精度、手绘风技术图时，优先保留生成脚本，不要只提交最终位图。
+
 ## 微信公众号发布约定
 - 一键脚本：`scripts/post-wechat.js`。
 - 封面脚本：`scripts/wechat-cover-glm.js`、`scripts/wechat-cover-apply.ts`。
-- 默认正文主题固定为 `WECHAT_ARTICLE_THEME=mdnice-simple`，不要默认切回 `grace`。
+- 默认正文主题固定为 `WECHAT_ARTICLE_THEME=mdnice-lanqing`，不要默认切回 `grace`。
 - 当前策略可配置：
   - 自动封面：`WECHAT_AUTO_COVER_GLM`
   - 引擎：`WECHAT_COVER_ENGINE=gemini-cli|glm`
