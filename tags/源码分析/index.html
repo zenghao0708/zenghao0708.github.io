@@ -430,6 +430,7 @@
         
         
             
+            
         
         <article class="index-post">
             <a class="abstract-title" href="/posts/claude-code-source-analysis/">
@@ -437,20 +438,35 @@
                 <span class="abstract-title-text">深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？</span>
             </a>
             <div class="abstract-content">
-                深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？
-基于 Claude Code v2.1.88 反编译源码分析
-
-
-前言如果你用过几个不同的 AI 编程工具，你会发现一个现象：Claude Code 总是更聪明、更稳定、更懂你的需求。
-这不仅仅是模型能力的问题，更是一个工程架构的问题。
-最近，我拿到了 Claude Code 的完整源码（反编译自 v2.1.88，163,000 行 TypeScript 代码），深入分析后发现：Claude Code 之所以好用，是因为它在工具系统设计、上下文管理、权限控制等关键维度上都做到了极致。
-更重要的是，我还发现了一些隐藏功...
+                <h1 id="深度揭秘-Claude-Code：为什么它是最强大的-AI-编程助手？"><a href="#深度揭秘-Claude-Code：为什么它是最强大的-AI-编程助手？" class="headerlink" title="深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？"></a>深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？</h1><blockquote>
+<p>基于 Claude Code v2.1.88 还原源码分析</p>
+</blockquote>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果你把市面上的 AI 编程工具都用一遍，会很快发现一个区别：</p>
+<p>有些工具第一回合看起来很惊艳，但任务一复杂、会话一拉长、工具一并发，就开始变钝、变乱、变得需要你不停接管。</p>
+<p>Claude Code 不一样。</p>
+<p>它不一定总是“最会炫技”的那个，但往往是那个<strong>最稳、最顺、最像能长期干活的系统</strong>。</p>
+<p>我最近把 Claude Code v2.1.88 的还原源码完整过了一遍。看完之后，我的判断比以前更明确了：</p>
+<p><strong>Claude Code 的优势，并不主要来自模型本身，而来自它把 Agent 做成了一套完整 runtime。</strong></p>
+<p>这篇文章我不再停留在“它很好用”的层面，而是回答三个更具体的问题：</p>
+<ol>
+<li>它到底在哪些源码层面做得更好？</li>
+<li>这些设计为什么会直接影响日常使用体验？</li>
+<li>如果你也在做自己的 Agent，到底该抄它哪些作业？</li>
+</ol>
             </div>
             <!-- read more -->
             
+                <div class="abstract-read-more-button">
+                    <a href="/posts/claude-code-source-analysis/">
+                        <span style="margin-right: 0.2rem;">阅读全文</span>
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </div>
+            
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/04/03">
+                <div class="abstract-date" title="Last updated: 2026/04/04">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/04/03</span>
                 </div>
                 <!-- tags -->
@@ -460,9 +476,9 @@
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="OpenClaw">OpenClaw</a>
     
@@ -517,17 +533,17 @@
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="架构设计">架构设计</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
     
 </div>
 
@@ -572,17 +588,17 @@
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="架构设计">架构设计</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="开发工具">开发工具</a>
     
@@ -634,15 +650,15 @@
                     <div class= abstract-tags >
     
     
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
+    
         <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="开发工具">开发工具</a>
     
@@ -977,8 +993,6 @@
         
         
         
-        
-        
     
     
     
@@ -1170,26 +1184,6 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="Claude Code">
-                <span class="iconfont-archer">&#xe606;</span>
-                Claude Code
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="AI 编程">
-                <span class="iconfont-archer">&#xe606;</span>
-                AI 编程
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="源码分析">
-                <span class="iconfont-archer">&#xe606;</span>
-                源码分析
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="OpenClaw">
-                <span class="iconfont-archer">&#xe606;</span>
-                OpenClaw
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="LLM">
                 <span class="iconfont-archer">&#xe606;</span>
                 LLM
@@ -1205,6 +1199,11 @@
                 AI
             </span>
         
+            <span class="sidebar-tag-name" data-tags="Claude Code">
+                <span class="iconfont-archer">&#xe606;</span>
+                Claude Code
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="Agent">
                 <span class="iconfont-archer">&#xe606;</span>
                 Agent
@@ -1213,6 +1212,16 @@
             <span class="sidebar-tag-name" data-tags="架构设计">
                 <span class="iconfont-archer">&#xe606;</span>
                 架构设计
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="源码分析">
+                <span class="iconfont-archer">&#xe606;</span>
+                源码分析
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AI 编程">
+                <span class="iconfont-archer">&#xe606;</span>
+                AI 编程
             </span>
         
             <span class="sidebar-tag-name" data-tags="开发工具">
@@ -1230,6 +1239,11 @@
                 cocoapods
             </span>
         
+            <span class="sidebar-tag-name" data-tags="OpenClaw">
+                <span class="iconfont-archer">&#xe606;</span>
+                OpenClaw
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="git">
                 <span class="iconfont-archer">&#xe606;</span>
                 git
@@ -1245,6 +1259,11 @@
                 多线程
             </span>
         
+            <span class="sidebar-tag-name" data-tags="分享">
+                <span class="iconfont-archer">&#xe606;</span>
+                分享
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="命令行">
                 <span class="iconfont-archer">&#xe606;</span>
                 命令行
@@ -1255,19 +1274,14 @@
                 Mac
             </span>
         
-            <span class="sidebar-tag-name" data-tags="分享">
+            <span class="sidebar-tag-name" data-tags="hexo">
                 <span class="iconfont-archer">&#xe606;</span>
-                分享
+                hexo
             </span>
         
             <span class="sidebar-tag-name" data-tags="网络编程">
                 <span class="iconfont-archer">&#xe606;</span>
                 网络编程
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="hexo">
-                <span class="iconfont-archer">&#xe606;</span>
-                hexo
             </span>
         
             <span class="sidebar-tag-name" data-tags="zsh">
@@ -1291,11 +1305,6 @@
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="AI 工具">
-            <span class="iconfont-archer">&#xe60a;</span>
-            AI 工具
-        </span>
-    
         <span class="sidebar-category-name" data-categories="AI">
             <span class="iconfont-archer">&#xe60a;</span>
             AI
@@ -1306,9 +1315,14 @@
             开发
         </span>
     
-        <span class="sidebar-category-name" data-categories="技术分享">
+        <span class="sidebar-category-name" data-categories="AI 工具">
             <span class="iconfont-archer">&#xe60a;</span>
-            技术分享
+            AI 工具
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="ReactNative">
+            <span class="iconfont-archer">&#xe60a;</span>
+            ReactNative
         </span>
     
         <span class="sidebar-category-name" data-categories="分享">
@@ -1316,9 +1330,9 @@
             分享
         </span>
     
-        <span class="sidebar-category-name" data-categories="ReactNative">
+        <span class="sidebar-category-name" data-categories="技术分享">
             <span class="iconfont-archer">&#xe60a;</span>
-            ReactNative
+            技术分享
         </span>
     
     </div>
