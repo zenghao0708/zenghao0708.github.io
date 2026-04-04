@@ -108,6 +108,88 @@ function resolveBunRunner() {
   return { cmd: 'npx', prefix: ['-y', 'bun'] };
 }
 
+function sleepSync(ms) {
+  spawnSync('sh', ['-lc', `sleep ${Math.max(0, Number(ms) || 0) / 1000}`], { stdio: 'ignore' });
+}
+
+function isPidAlive(pid) {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function listChromePidsForProfile(profileDir) {
+  const resolvedProfile = path.resolve(profileDir);
+  const res = spawnSync('ps', ['ax', '-o', 'pid=', '-o', 'command='], {
+    encoding: 'utf8',
+    maxBuffer: 10 * 1024 * 1024
+  });
+  if (res.error || res.status !== 0) {
+    return [];
+  }
+
+  return String(res.stdout || '')
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .filter((line) => line.includes(`--user-data-dir=${resolvedProfile}`))
+    .map((line) => {
+      const match = line.match(/^(\d+)\s+(.*)$/);
+      if (!match) {
+        return null;
+      }
+      return { pid: Number(match[1]), command: match[2] };
+    })
+    .filter(Boolean);
+}
+
+function cleanupChromeForProfile(profileDir) {
+  const shouldCleanup = (process.env.X_KILL_STALE_BROWSER || 'true').toLowerCase() !== 'false';
+  if (!shouldCleanup || !profileDir) {
+    return;
+  }
+
+  const resolvedProfile = path.resolve(profileDir);
+  const entries = listChromePidsForProfile(resolvedProfile);
+  if (entries.length === 0) {
+    return;
+  }
+
+  console.log(`[post-x] Cleaning ${entries.length} stale Chrome process(es) for profile: ${resolvedProfile}`);
+
+  for (const entry of entries) {
+    try {
+      process.kill(entry.pid, 'SIGTERM');
+    } catch {}
+  }
+
+  const deadline = Date.now() + 5000;
+  while (Date.now() < deadline) {
+    const alive = entries.some((entry) => isPidAlive(entry.pid));
+    if (!alive) {
+      break;
+    }
+    sleepSync(200);
+  }
+
+  for (const entry of entries) {
+    if (!isPidAlive(entry.pid)) {
+      continue;
+    }
+    try {
+      process.kill(entry.pid, 'SIGKILL');
+    } catch {}
+  }
+
+  const remaining = entries.filter((entry) => isPidAlive(entry.pid)).map((entry) => entry.pid);
+  if (remaining.length > 0) {
+    console.warn(`[post-x] Some Chrome processes still remain for profile ${resolvedProfile}: ${remaining.join(', ')}`);
+  }
+}
+
 function resolveDefaultProfileDir() {
   const base = process.env.XDG_DATA_HOME || path.join(os.homedir(), '.local', 'share');
   return path.join(base, 'x-browser-profile');
@@ -373,6 +455,10 @@ function buildSteps(opts, payload, markdownPath, skillDir) {
 }
 
 function runStep(step, bun) {
+  if (step.meta?.profile) {
+    cleanupChromeForProfile(step.meta.profile);
+  }
+
   const execArgs = [...bun.prefix, ...step.args];
   const res = spawnSync(bun.cmd, execArgs, {
     stdio: 'inherit',
