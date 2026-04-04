@@ -239,6 +239,105 @@ function guessImagesDir(markdownPath) {
   return '';
 }
 
+function ensureDir(dirPath) {
+  fs.mkdirSync(dirPath, { recursive: true });
+  return dirPath;
+}
+
+function buildWechatWorkLabel(markdownPath, payload) {
+  const base =
+    (payload && (payload.slug || payload.title)) ||
+    path.basename(markdownPath || 'wechat', path.extname(markdownPath || ''));
+  return sanitizeFileToken(base);
+}
+
+function resolveSvgSourcePath(imageRef, markdownPath) {
+  if (/^https?:\/\//i.test(imageRef)) {
+    return { type: 'remote', sourcePath: imageRef };
+  }
+  if (path.isAbsolute(imageRef) && fs.existsSync(imageRef)) {
+    return { type: 'local', sourcePath: imageRef };
+  }
+  if (imageRef.startsWith('/images/')) {
+    const repoImagePath = path.resolve('blog_new/source', `.${imageRef}`);
+    return { type: 'local', sourcePath: repoImagePath };
+  }
+  return {
+    type: 'local',
+    sourcePath: path.resolve(path.dirname(markdownPath), imageRef)
+  };
+}
+
+function rasterizeSvgToPng(svgPath, pngPath) {
+  const tmpPngPath = `${pngPath}.tmp.png`;
+  ensureDir(path.dirname(pngPath));
+  runCommand('sips', ['-s', 'format', 'png', svgPath, '--out', tmpPngPath], {
+    stdio: ['ignore', 'pipe', 'pipe'],
+    encoding: 'utf8',
+    env: process.env
+  });
+  fs.renameSync(tmpPngPath, pngPath);
+}
+
+function materializeSvgImages(markdownPath, payload) {
+  const original = fs.readFileSync(markdownPath, 'utf8');
+  const imagePattern = /!\[([^\]]*)\]\(([^)\s]+\.svg)(?:\s+["'][^"']*["'])?\)/gi;
+  const matches = Array.from(original.matchAll(imagePattern));
+  if (matches.length === 0) {
+    return { markdownPath, temp: false, converted: [] };
+  }
+
+  if (!commandExists('sips')) {
+    throw new Error('sips is required for SVG -> PNG conversion on macOS.');
+  }
+
+  const label = buildWechatWorkLabel(markdownPath, payload);
+  const outputBaseDir = ensureDir(path.resolve('publish/output/wechat'));
+  const rasterDir = ensureDir(path.join(outputBaseDir, `svg-rasterized-${label}`));
+  const tempMarkdownPath = path.join(outputBaseDir, `${label}.wechat-temp.md`);
+  const remoteSvgDir = ensureDir(path.join(rasterDir, '_remote-svg-cache'));
+  const converted = [];
+  let updated = original;
+  let index = 0;
+
+  for (const match of matches) {
+    const fullMatch = match[0];
+    const alt = match[1] || '';
+    const imageRef = match[2];
+    const resolved = resolveSvgSourcePath(imageRef, markdownPath);
+    let svgPath = resolved.sourcePath;
+    if (resolved.type === 'remote') {
+      const downloadPath = path.join(remoteSvgDir, `${String(index + 1).padStart(2, '0')}.svg`);
+      runCommand('curl', ['-L', '--fail', '--silent', '--show-error', imageRef, '-o', downloadPath], {
+        stdio: ['ignore', 'pipe', 'pipe'],
+        encoding: 'utf8',
+        env: process.env
+      });
+      svgPath = downloadPath;
+    }
+    if (!fs.existsSync(svgPath)) {
+      throw new Error(`SVG image not found: ${svgPath} (from ${imageRef})`);
+    }
+
+    index += 1;
+    const outputName = `${path.basename(imageRef)}.png`;
+    const pngPath = path.join(rasterDir, outputName);
+    rasterizeSvgToPng(svgPath, pngPath);
+
+    const relativePngRef = path.relative(path.dirname(tempMarkdownPath), pngPath).split(path.sep).join('/');
+    updated = updated.replace(fullMatch, `![${alt}](${relativePngRef})`);
+    converted.push({
+      source: imageRef,
+      sourcePath: svgPath,
+      outputPath: pngPath,
+      outputRef: relativePngRef
+    });
+  }
+
+  fs.writeFileSync(tempMarkdownPath, updated, 'utf8');
+  return { markdownPath: tempMarkdownPath, temp: true, converted };
+}
+
 function buildStepArticle(opts, payload, markdownPath, skillDir) {
   const scriptPath = path.join(skillDir, 'scripts', 'wechat-article.ts');
   const args = [scriptPath, '--markdown', markdownPath];
@@ -473,8 +572,18 @@ function main() {
 
   const { markdownPath, temp } = resolveMarkdownPath(opts, payload);
   let effectiveMarkdownPath = markdownPath;
+  let tempMaterializedSvg = false;
   let tempCoverInjected = '';
   let generatedCoverPath = '';
+
+  const materialized = materializeSvgImages(effectiveMarkdownPath, payload);
+  if (materialized.temp) {
+    effectiveMarkdownPath = materialized.markdownPath;
+    tempMaterializedSvg = true;
+    console.log(
+      `[wechat] Materialized ${materialized.converted.length} SVG image(s) to PNG for compatibility: ${effectiveMarkdownPath}`
+    );
+  }
 
   if (opts.autoCoverGlm && !opts.execute) {
     console.warn('[wechat] --auto-cover-glm is skipped in dry-run (without --execute).');
@@ -496,7 +605,7 @@ function main() {
         generatedCoverPath = path.resolve(generated.coverPath);
         console.log(`[wechat] GLM cover generated: ${generatedCoverPath}`);
       }
-      tempCoverInjected = injectCoverIntoMarkdown(markdownPath, generatedCoverPath);
+      tempCoverInjected = injectCoverIntoMarkdown(effectiveMarkdownPath, generatedCoverPath);
       effectiveMarkdownPath = tempCoverInjected;
       console.log(`[wechat] Injected cover image into markdown: ${effectiveMarkdownPath}`);
     }
@@ -533,6 +642,9 @@ function main() {
   if (!opts.execute) {
     if (temp && fs.existsSync(markdownPath)) fs.unlinkSync(markdownPath);
     if (tempCoverInjected && fs.existsSync(tempCoverInjected)) fs.unlinkSync(tempCoverInjected);
+    if (tempMaterializedSvg && fs.existsSync(effectiveMarkdownPath)) {
+      console.log(`[wechat] Kept SVG-compatible temp markdown: ${effectiveMarkdownPath}`);
+    }
     return;
   }
 
