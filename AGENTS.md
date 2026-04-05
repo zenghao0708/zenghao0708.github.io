@@ -41,6 +41,11 @@
 - 通用导出脚本：`scripts/export-blog-svg.js`。
 - 需要高精度、手绘风技术图时，优先保留生成脚本，不要只提交最终位图。
 
+## 文章质量约定
+- 文章评分规则先看 `publish/rules/article-quality.md`。
+- 快速检查脚本：`node scripts/article-quality-score.js <markdown-file>`。
+- 公开发布文章默认目标分数：`>= 9.0`。
+
 ## 微信公众号发布约定
 - 一键脚本：`scripts/post-wechat.js`。
 - 封面脚本：`scripts/wechat-cover-glm.js`、`scripts/wechat-cover-apply.ts`。
