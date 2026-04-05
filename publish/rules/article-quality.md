@@ -73,6 +73,11 @@
 - 是否至少有一段“可执行建议 / 最值得抄的作业 / 操作建议”
 - 是否有必要的结构图、流程图、知识卡
 - 是否给出相关阅读，避免系列文章互相抢位
+- 默认发布入口 `node publish/publish-all.js` 会在发布前自动执行质量检查
+- 默认门槛：`9.0`
+- 可覆盖：`--quality-min <n>`
+- 临时跳过：`--skip-quality-gate`
+- 质量报告输出到：`publish/output/article-quality/`
 
 ## Claude Code 系列的定位建议
 

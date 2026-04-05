@@ -8,6 +8,7 @@ const { loadEnv } = require('./core/env');
 const { getAdapter } = require('./adapters');
 const { listFilesRecursive } = require('./core/fs-utils');
 const { readPost } = require('./core/markdown');
+const { scoreArticleFromPost, writeQualityReport } = require('./core/article-quality');
 const {
   appendLog,
   getPublishState,
@@ -28,6 +29,8 @@ function printHelp() {
     '  --publish              Execute publish commands (default: dry-run)',
     '  --dry-run              Force dry-run',
     '  --force                Ignore state hash and republish',
+    '  --quality-min <n>      Minimum article quality score (default: 9.0)',
+    '  --skip-quality-gate    Skip article quality gate',
     '  --help                 Show help'
   ].join('\n');
   console.log(text);
@@ -40,6 +43,8 @@ function parseArgs(argv) {
     platforms: [],
     dryRun: true,
     force: false,
+    qualityMin: Number(process.env.ARTICLE_QUALITY_MIN || '9'),
+    skipQualityGate: /^(1|true|yes|on)$/i.test(process.env.ARTICLE_QUALITY_SKIP || ''),
     help: false
   };
 
@@ -83,6 +88,17 @@ function parseArgs(argv) {
 
     if (arg === '--force') {
       out.force = true;
+      continue;
+    }
+
+    if (arg === '--quality-min') {
+      out.qualityMin = Number(argv[i + 1] || '9');
+      i += 1;
+      continue;
+    }
+
+    if (arg === '--skip-quality-gate') {
+      out.skipQualityGate = true;
       continue;
     }
   }
@@ -150,7 +166,31 @@ async function run() {
 
   for (const postFile of postFiles) {
     const post = readPost(postFile);
+    const quality = scoreArticleFromPost(post);
+    const qualityReportPath = writeQualityReport(quality, {
+      suffix: args.dryRun ? 'dry-run' : 'publish'
+    });
     const platforms = normalizePlatforms(args.platforms, post.frontMatter.publish_to);
+
+    if (!args.skipQualityGate && quality.score.final < args.qualityMin) {
+      hasFailure = true;
+      appendLog({
+        level: 'error',
+        post: post.sourcePath,
+        platform: 'quality',
+        dryRun: args.dryRun,
+        error: `article-quality-below-threshold: ${quality.score.final} < ${args.qualityMin}`,
+        reportPath: qualityReportPath
+      });
+      summary.push({
+        post: post.slug,
+        platform: 'quality',
+        status: 'blocked',
+        reason: `article-quality-below-threshold: ${quality.score.final} < ${args.qualityMin}`,
+        detail: qualityReportPath
+      });
+      continue;
+    }
 
     for (const platform of platforms) {
       const adapter = getAdapter(platform);
@@ -209,7 +249,9 @@ async function run() {
           post: post.slug,
           platform,
           status: args.dryRun ? 'dry-run' : 'published',
-          detail: result.previewPath || ''
+          detail: result.previewPath || '',
+          qualityScore: quality.score.final,
+          qualityReport: qualityReportPath
         });
       } catch (err) {
         hasFailure = true;

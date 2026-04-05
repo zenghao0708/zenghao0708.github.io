@@ -102,7 +102,7 @@ Claude Code 不一样。
 
 短期能跑，但一旦你要支持：
 
-- Headless 模式
+- Headless **模式**
 - SDK 接入
 - 子代理
 - 远程执行

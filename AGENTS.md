@@ -44,6 +44,8 @@
 ## 文章质量约定
 - 文章评分规则先看 `publish/rules/article-quality.md`。
 - 快速检查脚本：`node scripts/article-quality-score.js <markdown-file>`。
+- 全站巡检脚本：`node scripts/article-quality-audit.js --min-score 9`。
+- 社交发布入口 `node publish/publish-all.js` 默认会执行质量门禁。
 - 公开发布文章默认目标分数：`>= 9.0`。
 
 ## 微信公众号发布约定
