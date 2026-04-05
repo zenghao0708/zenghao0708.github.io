@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+<rect width="1200" height="720" fill="#f7f3ea"/>
+<rect x="20" y="20" width="1160" height="680" fill="none" stroke="#ddd2c2" stroke-width="1.5"/>
+<text x="58" y="70" fill="#2b2620" font-size="34" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="58" dy="0">AI 编码工作流的命令行分层</tspan></text>
+<text x="60" y="106" fill="#5f5952" font-size="18" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="60" dy="0">这套组合不是“换一堆新工具”，而是把文件、历史、目录、会话和运行时的职责拆清楚</tspan></text>
+<rect x="100" y="170" width="1000" height="86" rx="18" fill="#dfeafe" stroke="#4678d4" stroke-width="2.2"/>
+<text x="138" y="208" fill="#2b2620" font-size="26" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="138" dy="0">终端入口：Ghostty / zsh</tspan></text>
+<text x="138" y="236" fill="#5f5952" font-size="15" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="138" dy="0">交互界面和 shell 启动链路，决定体感的第一层</tspan></text>
+
+<rect x="100" y="292" width="220" height="110" rx="18" fill="#e7f5ea" stroke="#3e9b60" stroke-width="2.2"/>
+<text x="130" y="334" fill="#2b2620" font-size="26" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="130" dy="0">fzf</tspan></text>
+<text x="130" y="368" fill="#5f5952" font-size="15" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="130" dy="0">模糊搜索 / 历史命令 / 目录过滤</tspan></text>
+
+<rect x="360" y="292" width="220" height="110" rx="18" fill="#fff1e1" stroke="#d48836" stroke-width="2.2"/>
+<text x="390" y="334" fill="#2b2620" font-size="26" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="390" dy="0">Yazi</tspan></text>
+<text x="390" y="368" fill="#5f5952" font-size="15" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="390" dy="0">文件浏览 / 批量操作 / 预览</tspan></text>
+
+<rect x="620" y="292" width="220" height="110" rx="18" fill="#efe7ff" stroke="#8663d6" stroke-width="2.2"/>
+<text x="650" y="334" fill="#2b2620" font-size="26" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="650" dy="0">Tmux</tspan></text>
+<text x="650" y="368" fill="#5f5952" font-size="15" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="650" dy="0">会话复用 / 后台任务 / 面板编排</tspan></text>
+
+<rect x="880" y="292" width="220" height="110" rx="18" fill="#fdeaf0" stroke="#c95e7b" stroke-width="2.2"/>
+<text x="910" y="334" fill="#2b2620" font-size="26" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="910" dy="0">mise</tspan></text>
+<text x="910" y="368" fill="#5f5952" font-size="15" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="910" dy="0">Node / Ruby 等运行时所有权</tspan></text>
+
+<rect x="200" y="480" width="800" height="120" rx="18" fill="#dfeafe" stroke="#4678d4" stroke-width="2.2"/>
+<text x="236" y="522" fill="#2b2620" font-size="18" font-weight="600" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="236" dy="0">真正的收益不是“命令更多”，而是：AI 给出下一步以后，你能更快定位文件、切会话、查历史、跑命令。</tspan></text>
+
+<path d="M 210 256 L 210 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 204.7933951305893 281.18837358517095 L 210 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 215.20660486941068 281.18837358517095 L 210 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 470 256 L 470 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 464.7933951305893 281.18837358517095 L 470 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 475.2066048694107 281.18837358517095 L 470 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 730 256 L 730 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 724.7933951305893 281.18837358517095 L 730 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 735.2066048694107 281.18837358517095 L 730 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 990 256 L 990 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 984.7933951305893 281.18837358517095 L 990 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 995.2066048694107 281.18837358517095 L 990 292" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

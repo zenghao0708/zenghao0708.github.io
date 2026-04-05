@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+<rect width="1200" height="720" fill="#f7f3ea"/>
+<rect x="20" y="20" width="1160" height="680" fill="none" stroke="#ddd2c2" stroke-width="1.5"/>
+<text x="58" y="70" fill="#2b2620" font-size="34" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="58" dy="0">一次 AI 编码任务如何在终端里流动</tspan></text>
+<text x="60" y="106" fill="#5f5952" font-size="18" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="60" dy="0">目标不是把所有能力塞进一个工具，而是让搜索、编辑、运行、观察形成顺滑链路</tspan></text>
+<rect x="90" y="190" width="220" height="100" rx="18" fill="#dfeafe" stroke="#4678d4" stroke-width="2.2"/>
+<text x="120" y="230" fill="#2b2620" font-size="24" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="120" dy="0">AI 给出目标</tspan></text>
+<text x="120" y="262" fill="#5f5952" font-size="15" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="120" dy="0">文件名 / 命令 / 修改建议</tspan></text>
+
+<rect x="360" y="190" width="220" height="100" rx="18" fill="#e7f5ea" stroke="#3e9b60" stroke-width="2.2"/>
+<text x="390" y="230" fill="#2b2620" font-size="24" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="390" dy="0">fzf / Yazi 定位</tspan></text>
+<text x="390" y="262" fill="#5f5952" font-size="15" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="390" dy="0">先找到文件，再决定怎么改</tspan></text>
+
+<rect x="630" y="190" width="220" height="100" rx="18" fill="#fff1e1" stroke="#d48836" stroke-width="2.2"/>
+<text x="660" y="230" fill="#2b2620" font-size="24" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="660" dy="0">编辑与运行</tspan></text>
+<text x="660" y="262" fill="#5f5952" font-size="15" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="660" dy="0">Ghostty / 编辑器 / shell 命令</tspan></text>
+
+<rect x="900" y="190" width="220" height="100" rx="18" fill="#efe7ff" stroke="#8663d6" stroke-width="2.2"/>
+<text x="930" y="230" fill="#2b2620" font-size="24" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="930" dy="0">Tmux 观察</tspan></text>
+<text x="930" y="262" fill="#5f5952" font-size="15" font-weight="500" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="930" dy="0">日志 / 测试 / server 持续运行</tspan></text>
+
+<rect x="280" y="430" width="640" height="120" rx="18" fill="#fdeaf0" stroke="#c95e7b" stroke-width="2.2"/>
+<text x="318" y="472" fill="#2b2620" font-size="19" font-weight="600" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"><tspan x="318" dy="0">真正高效的不是单个工具，而是“定位 -&gt; 编辑 -&gt; 运行 -&gt; 观察”这条链路足够短。</tspan></text>
+
+<path d="M 310 240 L 360 240" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 349.18837358517095 245.2066048694107 L 360 240" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 349.18837358517095 234.7933951305893 L 360 240" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 580 240 L 630 240" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 619.188373585171 245.2066048694107 L 630 240" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 619.188373585171 234.7933951305893 L 630 240" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 850 240 L 900 240" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 889.188373585171 245.2066048694107 L 900 240" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 889.188373585171 234.7933951305893 L 900 240" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 720 290 L 720 430" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 714.7933951305893 419.18837358517095 L 720 430" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 725.2066048694107 419.18837358517095 L 720 430" fill="none" stroke="#2b2620" stroke-width="2.4" stroke-linecap="round"/>
+</svg>
