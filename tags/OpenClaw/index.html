@@ -502,7 +502,13 @@
                 <span class="abstract-title-text">OpenClaw 架构设计：一个“控制平面型”个人 AI 助手的工程化落地</span>
             </a>
             <div class="abstract-content">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>OpenClaw 的定位更接近“个人 AI 助手系统”，而不是一个单纯的聊天机器人：它运行在你自己的设备上，通过你已经在用的渠道（WhatsApp&#x2F;Telegram&#x2F;Slack&#x2F;Discord&#x2F;Signal&#x2F;iMessage&#x2F;Google Chat&#x2F;Microsoft Teams&#x2F;WebChat…）回答你；同时它还能提供语音、节点能力（iOS&#x2F;Android&#x2F;macOS）、浏览器控制与一个可视化的 Live Canvas。</p>
+                <p>这篇是 OpenClaw 系列里的<code>架构主稿</code>。</p>
+<p>如果你更关心升级后“为什么飞书消息突然收不到、gateway 为什么挂掉”，那先看排障 skill：</p>
+<ul>
+<li>OpenClaw 升级后飞书恢复：<a href="/Users/zenghao/.codex/skills/openclaw-feishu-upgrade-recovery/SKILL.md">&#x2F;Users&#x2F;zenghao&#x2F;.codex&#x2F;skills&#x2F;openclaw-feishu-upgrade-recovery&#x2F;SKILL.md</a></li>
+</ul>
+<p>如果你想先建立系统认知，再决定怎么部署、怎么排障、哪些目录必须备份，那这篇更适合。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>OpenClaw 的定位更接近“个人 AI 助手系统”，而不是一个单纯的聊天机器人：它运行在你自己的设备上，通过你已经在用的渠道（WhatsApp&#x2F;Telegram&#x2F;Slack&#x2F;Discord&#x2F;Signal&#x2F;iMessage&#x2F;Google Chat&#x2F;Microsoft Teams&#x2F;WebChat…）回答你；同时它还能提供语音、节点能力（iOS&#x2F;Android&#x2F;macOS）、浏览器控制与一个可视化的 Live Canvas。</p>
 <p>在官方文档里有一句我很认同的表述：<strong>Gateway 只是控制平面（control plane）</strong>，真正的产品是“助手本身”。因此这篇文章不讲安装流程，而是关注工程化落地里最关键的三件事：</p>
 <ul>
 <li>系统怎么拆层：控制平面、通道、技能、插件、记忆、运维面</li>
@@ -526,7 +532,7 @@
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/03/01">
+                <div class="abstract-date" title="Last updated: 2026/04/05">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/03/01</span>
                 </div>
                 <!-- tags -->
@@ -1110,11 +1116,6 @@
                 ReactNative
             </span>
         
-            <span class="sidebar-tag-name" data-tags="多线程">
-                <span class="iconfont-archer">&#xe606;</span>
-                多线程
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="开发工具">
                 <span class="iconfont-archer">&#xe606;</span>
                 开发工具
@@ -1133,6 +1134,11 @@
             <span class="sidebar-tag-name" data-tags="分享">
                 <span class="iconfont-archer">&#xe606;</span>
                 分享
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="多线程">
+                <span class="iconfont-archer">&#xe606;</span>
+                多线程
             </span>
         
             <span class="sidebar-tag-name" data-tags="hexo">

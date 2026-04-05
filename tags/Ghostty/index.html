@@ -438,7 +438,13 @@
                 <span class="abstract-title-text">我为什么不再用 oh-my-zsh 了</span>
             </a>
             <div class="abstract-content">
-                <h1 id="我为什么不再用-oh-my-zsh-了"><a href="#我为什么不再用-oh-my-zsh-了" class="headerlink" title="我为什么不再用 oh-my-zsh 了"></a>我为什么不再用 oh-my-zsh 了</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这次折腾命令行环境，不是因为我想换一套更潮的工具，而是因为 Ghostty 里开一个 <code>zsh</code>，已经开始拖慢我每天的工作节奏了。</p>
+                <h1 id="我为什么不再用-oh-my-zsh-了"><a href="#我为什么不再用-oh-my-zsh-了" class="headerlink" title="我为什么不再用 oh-my-zsh 了"></a>我为什么不再用 oh-my-zsh 了</h1><p>这篇是命令行迁移系列里的<code>迁移复盘版</code>。</p>
+<p>如果你想先看“迁移之后的工具清单和工作流长什么样”，可以先读：</p>
+<ul>
+<li>Mac 命令行工具总览：<a href="/posts/mac-ai-coding-tools/">&#x2F;posts&#x2F;mac-ai-coding-tools&#x2F;</a></li>
+</ul>
+<p>这篇更聚焦的是另一件事：为什么我决定迁、真实迁移过程踩了什么坑、以及主力开发机迁环境到底应该怎么收口。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这次折腾命令行环境，不是因为我想换一套更潮的工具，而是因为 Ghostty 里开一个 <code>zsh</code>，已经开始拖慢我每天的工作节奏了。</p>
 <p>那种慢不是 benchmark 里才看得出来的慢，而是你每天开新 tab、开新窗口、切 shell 的时候都能感受到它在拖。对于一个长期把终端当主工作界面的人来说，这种拖沓会不断打断节奏。</p>
 <p>一开始我以为问题出在终端本身，后面认真排查才发现，Ghostty 其实没什么问题，真正越来越重的是我那套已经用了很多年的 <code>oh-my-zsh</code> 环境。更准确地说，不是 <code>oh-my-zsh</code> 不能用，而是我的环境已经不适合继续让它来兜底了。</p>
 <p>这篇文章主要想讲清楚三件事：我为什么不再继续用 <code>oh-my-zsh</code>，我最后留下来的命令行工具组合是什么，以及我是怎么把 <code>Ruby / Node / Zsh</code> 平稳迁过去的。</p>
@@ -454,7 +460,7 @@
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/04/01">
+                <div class="abstract-date" title="Last updated: 2026/04/05">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/03/29</span>
                 </div>
                 <!-- tags -->
@@ -1040,11 +1046,6 @@
                 ReactNative
             </span>
         
-            <span class="sidebar-tag-name" data-tags="多线程">
-                <span class="iconfont-archer">&#xe606;</span>
-                多线程
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="开发工具">
                 <span class="iconfont-archer">&#xe606;</span>
                 开发工具
@@ -1063,6 +1064,11 @@
             <span class="sidebar-tag-name" data-tags="分享">
                 <span class="iconfont-archer">&#xe606;</span>
                 分享
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="多线程">
+                <span class="iconfont-archer">&#xe606;</span>
+                多线程
             </span>
         
             <span class="sidebar-tag-name" data-tags="hexo">
