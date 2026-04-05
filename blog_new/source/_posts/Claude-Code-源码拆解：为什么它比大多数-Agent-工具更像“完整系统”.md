@@ -12,9 +12,14 @@ tags:
 categories: AI
 abbrlink: claude-code-source-architecture
 description: 从 QueryEngine、工具调度、上下文压缩、权限治理、插件与 Skills、多代理和远程化几个维度，拆解 Claude Code 为什么更像一个完整的 AI Coding Agent 系统。
+published: false
 ---
 
 # Claude Code 架构拆解：一个更像“完整系统”的 AI Coding Agent
+
+> 这篇已从公共列表下线。
+> 其中核心判断已经并入更新、更完整的主稿：[/posts/claude-code-source-analysis/](/posts/claude-code-source-analysis/)
+> 如果你更想快速建立结构脑图，建议看图解导读版：[/posts/claude-code-source-deep-dive/](/posts/claude-code-source-deep-dive/)
 
 看完 Claude Code 的源码还原版本后，我对它的判断很明确：
 

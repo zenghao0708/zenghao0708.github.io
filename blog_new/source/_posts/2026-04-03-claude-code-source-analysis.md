@@ -9,6 +9,7 @@ tags:
 categories:
   - AI 工具
 abbrlink: claude-code-source-analysis
+description: Claude Code 系列里的主稿与最终权威版。从运行时、工具调度、上下文治理、权限链路和多代理基础设施几个维度，解释它为什么更像完整系统。
 ---
 
 # 深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？
@@ -434,3 +435,8 @@ Claude Code 之所以更好用，不是因为它更会说，
 - 反编译源码：https://github.com/zenghao0708/collection-claude-code-source-code
 
 *注：本文仅供学术研究与教育目的。使用者应自行遵守相关法律法规及服务条款。*
+
+## 延伸阅读
+
+- 快速判断版：[/posts/claude-code-source-why-better/](/posts/claude-code-source-why-better/)
+- 结构图导读版：[/posts/claude-code-source-deep-dive/](/posts/claude-code-source-deep-dive/)
