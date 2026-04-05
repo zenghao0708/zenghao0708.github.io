@@ -442,7 +442,9 @@
 <p>基于 Claude Code v2.1.88 还原源码分析</p>
 </blockquote>
 <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果你把市面上的 AI 编程工具都用一遍，会很快发现一个区别：</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇是 Claude Code 系列里唯一保留的<code>主稿</code>，也是后续持续维护的<code>最终权威版</code>。</p>
+<p>如果你只想保留一篇 Claude Code 源码分析文章，看这篇就够了。</p>
+<p>如果你把市面上的 AI 编程工具都用一遍，会很快发现一个区别：</p>
 <p>有些工具第一回合看起来很惊艳，但任务一复杂、会话一拉长、工具一并发，就开始变钝、变乱、变得需要你不停接管。</p>
 <p>Claude Code 不一样。</p>
 <p>它不一定总是“最会炫技”的那个，但往往是那个<strong>最稳、最顺、最像能长期干活的系统</strong>。</p>
@@ -454,6 +456,29 @@
 <li>这些设计为什么会直接影响日常使用体验？</li>
 <li>如果你也在做自己的 Agent，到底该抄它哪些作业？</li>
 </ol>
+<p>如果你想把这套 runtime 思路继续放回自己的工具栈和系统设计里看，可以结合这两篇公开文章一起读：</p>
+<ul>
+<li>AI 编码工具链总览：<a href="/posts/mac-ai-coding-tools/">&#x2F;posts&#x2F;mac-ai-coding-tools&#x2F;</a></li>
+<li>控制平面型 Agent 架构：<a href="/posts/openclaw-architecture/">&#x2F;posts&#x2F;openclaw-architecture&#x2F;</a></li>
+</ul>
+<h3 id="版本边界"><a href="#版本边界" class="headerlink" title="版本边界"></a>版本边界</h3><p>这篇分析基于 <code>Claude Code v2.1.88</code> 的还原源码。</p>
+<p>有两类结论需要区分开来看：</p>
+<ul>
+<li><code>稳定结论</code><ul>
+<li>运行时和交互层分离</li>
+<li>工具调度不是简单 tool calling</li>
+<li>上下文治理和权限链路是系统能力</li>
+<li>多代理和远程执行是明确产品方向</li>
+</ul>
+</li>
+<li><code>可能随版本调整的细节</code><ul>
+<li>某些文件路径和模块命名</li>
+<li>hidden features &#x2F; feature flags 的具体开关</li>
+<li>compact、fallback、hooks 细枝末节的实现顺序</li>
+</ul>
+</li>
+</ul>
+<p>所以这篇文章更适合用来理解 Claude Code 的工程方法，而不是把每一个函数名都当成长期不变的接口。</p>
             </div>
             <!-- read more -->
             
@@ -481,149 +506,6 @@
         <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="OpenClaw">OpenClaw</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/posts/claude-code-source-deep-dive/">
-                
-                <span class="abstract-title-text">Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手</span>
-            </a>
-            <div class="abstract-content">
-                <h1 id="Claude-Code-图解导读：从-CLI-入口到多代理系统，一次看懂它为什么顺手"><a href="#Claude-Code-图解导读：从-CLI-入口到多代理系统，一次看懂它为什么顺手" class="headerlink" title="Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手"></a>Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手</h1><p>这篇不是 Claude Code 系列里的<code>最终主稿</code>，而是<code>结构图导读版</code>。</p>
-<p>如果你属于下面这类读者，这篇会比直接啃长文更合适：</p>
-<ul>
-<li>想快速建立 Claude Code 的源码脑图</li>
-<li>想先看结构，再去读细节</li>
-<li>不想一上来就掉进 <code>query.ts</code> 这种大文件里</li>
-</ul>
-<p>如果你想直接看最完整、最权威的版本，可以去主稿：</p>
-<ul>
-<li>完整技术主稿：<a href="/posts/claude-code-source-analysis/">&#x2F;posts&#x2F;claude-code-source-analysis&#x2F;</a></li>
-<li>快速判断版：<a href="/posts/claude-code-source-why-better/">&#x2F;posts&#x2F;claude-code-source-why-better&#x2F;</a></li>
-</ul>
-<p>这篇文章的任务更明确：</p>
-<p><strong>用图把 Claude Code 的运行时结构拆开，帮你建立“应该从哪里开始读源码”的脑内地图。</strong></p>
-<p>因为 Claude Code 最容易被误解的一点是：很多人以为它只是一个“终端里的大模型”，顶多加了一些工具调用能力。可一旦你顺着源码往下看，就会发现它实际是一套分层很清楚的工程系统：</p>
-<ul>
-<li>上层是 CLI、REPL、slash commands 和终端 UI</li>
-<li>中间是 Agent Runtime，也就是 <code>QueryEngine + query.ts</code></li>
-<li>下层是工具系统、权限系统、上下文治理、MCP、plugins、skills、voice、remote、多代理</li>
-</ul>
-<p>换句话说，Claude Code 不是把模型塞进终端，而是把“一个能长期工作的 Agent”拆成了很多独立但互相配合的子系统。</p>
-<p>本文基于本地分析的 Claude Code v2.1.88 还原源码仓库整理。</p>
-            </div>
-            <!-- read more -->
-            
-                <div class="abstract-read-more-button">
-                    <a href="/posts/claude-code-source-deep-dive/">
-                        <span style="margin-right: 0.2rem;">阅读全文</span>
-                        <i class="fas fa-angle-right"></i>
-                    </a>
-                </div>
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/04/05">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/04/02</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="架构设计">架构设计</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/posts/claude-code-source-why-better/">
-                
-                <span class="abstract-title-text">Claude Code 源码分析：为什么它比很多 Agent 工具更好用</span>
-            </a>
-            <div class="abstract-content">
-                <h1 id="Claude-Code-源码分析：为什么它比很多-Agent-工具更好用"><a href="#Claude-Code-源码分析：为什么它比很多-Agent-工具更好用" class="headerlink" title="Claude Code 源码分析：为什么它比很多 Agent 工具更好用"></a>Claude Code 源码分析：为什么它比很多 Agent 工具更好用</h1><p>这篇是 Claude Code 系列里的<code>快速判断版</code>。</p>
-<p>如果你只想先用 5 分钟判断一件事：</p>
-<p><code>Claude Code 到底为什么更好用？</code></p>
-<p>那先看这篇就够了。</p>
-<p>如果你后面还想继续追：</p>
-<ul>
-<li>看完整技术主稿：<a href="/posts/claude-code-source-analysis/">&#x2F;posts&#x2F;claude-code-source-analysis&#x2F;</a></li>
-<li>看结构图导读版：<a href="/posts/claude-code-source-deep-dive/">&#x2F;posts&#x2F;claude-code-source-deep-dive&#x2F;</a></li>
-</ul>
-<p>这几个月，Agent 工具很多。</p>
-<p>能读文件的，有。<br>能改代码的，有。<br>能跑命令的，也有。</p>
-<p>但真正用下来，你会发现一个很现实的问题：</p>
-<p>很多 Agent 第一次很好用，第三次开始变笨，第十次开始添乱。<br>上下文越来越乱，工具调用越来越冒险，长任务越来越容易崩，最后你不得不自己接管。</p>
-<p>所以我一直有个问题：</p>
-<p>为什么 Claude Code 明明不是最花哨的那个，却普遍被认为“更顺手”“更靠谱”“更像真能拿来干活的 Agent”？</p>
-<p>为了回答这个问题，我专门去看了一遍 Claude Code 的源码还原仓库。看完之后，我的判断很明确：</p>
-<p>Claude Code 的领先，不是因为它“会更多工具”，也不是因为它“模型更强”。<br>它真正领先的，是它终于把 Agent 做成了一个完整系统，而不是一个会调模型的壳。</p>
-            </div>
-            <!-- read more -->
-            
-                <div class="abstract-read-more-button">
-                    <a href="/posts/claude-code-source-why-better/">
-                        <span style="margin-right: 0.2rem;">阅读全文</span>
-                        <i class="fas fa-angle-right"></i>
-                    </a>
-                </div>
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/04/05">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/04/01</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="开发工具">开发工具</a>
     
 </div>
 
@@ -1003,31 +885,7 @@
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -1134,7 +992,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 19
+        Total : 17
         </div>
         <!-- search  -->
         
@@ -1152,18 +1010,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">04/03</span>
             <a class="archive-post-title" href="/posts/claude-code-source-analysis/">深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/02</span>
-            <a class="archive-post-title" href="/posts/claude-code-source-deep-dive/">Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/01</span>
-            <a class="archive-post-title" href="/posts/claude-code-source-why-better/">Claude Code 源码分析：为什么它比很多 Agent 工具更好用</a>
         </li>
     
         
@@ -1343,21 +1189,6 @@
                 GPT
             </span>
         
-            <span class="sidebar-tag-name" data-tags="AI">
-                <span class="iconfont-archer">&#xe606;</span>
-                AI
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="Agent">
-                <span class="iconfont-archer">&#xe606;</span>
-                Agent
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="架构设计">
-                <span class="iconfont-archer">&#xe606;</span>
-                架构设计
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="iOS">
                 <span class="iconfont-archer">&#xe606;</span>
                 iOS
@@ -1368,14 +1199,29 @@
                 cocoapods
             </span>
         
-            <span class="sidebar-tag-name" data-tags="git">
+            <span class="sidebar-tag-name" data-tags="AI">
                 <span class="iconfont-archer">&#xe606;</span>
-                git
+                AI
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Agent">
+                <span class="iconfont-archer">&#xe606;</span>
+                Agent
             </span>
         
             <span class="sidebar-tag-name" data-tags="ReactNative">
                 <span class="iconfont-archer">&#xe606;</span>
                 ReactNative
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="git">
+                <span class="iconfont-archer">&#xe606;</span>
+                git
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="多线程">
+                <span class="iconfont-archer">&#xe606;</span>
+                多线程
             </span>
         
             <span class="sidebar-tag-name" data-tags="开发工具">
@@ -1396,11 +1242,6 @@
             <span class="sidebar-tag-name" data-tags="分享">
                 <span class="iconfont-archer">&#xe606;</span>
                 分享
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="多线程">
-                <span class="iconfont-archer">&#xe606;</span>
-                多线程
             </span>
         
             <span class="sidebar-tag-name" data-tags="hexo">

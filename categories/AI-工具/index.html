@@ -442,7 +442,9 @@
 <p>基于 Claude Code v2.1.88 还原源码分析</p>
 </blockquote>
 <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果你把市面上的 AI 编程工具都用一遍，会很快发现一个区别：</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇是 Claude Code 系列里唯一保留的<code>主稿</code>，也是后续持续维护的<code>最终权威版</code>。</p>
+<p>如果你只想保留一篇 Claude Code 源码分析文章，看这篇就够了。</p>
+<p>如果你把市面上的 AI 编程工具都用一遍，会很快发现一个区别：</p>
 <p>有些工具第一回合看起来很惊艳，但任务一复杂、会话一拉长、工具一并发，就开始变钝、变乱、变得需要你不停接管。</p>
 <p>Claude Code 不一样。</p>
 <p>它不一定总是“最会炫技”的那个，但往往是那个<strong>最稳、最顺、最像能长期干活的系统</strong>。</p>
@@ -454,6 +456,29 @@
 <li>这些设计为什么会直接影响日常使用体验？</li>
 <li>如果你也在做自己的 Agent，到底该抄它哪些作业？</li>
 </ol>
+<p>如果你想把这套 runtime 思路继续放回自己的工具栈和系统设计里看，可以结合这两篇公开文章一起读：</p>
+<ul>
+<li>AI 编码工具链总览：<a href="/posts/mac-ai-coding-tools/">&#x2F;posts&#x2F;mac-ai-coding-tools&#x2F;</a></li>
+<li>控制平面型 Agent 架构：<a href="/posts/openclaw-architecture/">&#x2F;posts&#x2F;openclaw-architecture&#x2F;</a></li>
+</ul>
+<h3 id="版本边界"><a href="#版本边界" class="headerlink" title="版本边界"></a>版本边界</h3><p>这篇分析基于 <code>Claude Code v2.1.88</code> 的还原源码。</p>
+<p>有两类结论需要区分开来看：</p>
+<ul>
+<li><code>稳定结论</code><ul>
+<li>运行时和交互层分离</li>
+<li>工具调度不是简单 tool calling</li>
+<li>上下文治理和权限链路是系统能力</li>
+<li>多代理和远程执行是明确产品方向</li>
+</ul>
+</li>
+<li><code>可能随版本调整的细节</code><ul>
+<li>某些文件路径和模块命名</li>
+<li>hidden features &#x2F; feature flags 的具体开关</li>
+<li>compact、fallback、hooks 细枝末节的实现顺序</li>
+</ul>
+</li>
+</ul>
+<p>所以这篇文章更适合用来理解 Claude Code 的工程方法，而不是把每一个函数名都当成长期不变的接口。</p>
             </div>
             <!-- read more -->
             
@@ -677,31 +702,7 @@
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -808,7 +809,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 19
+        Total : 17
         </div>
         <!-- search  -->
         
@@ -826,18 +827,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">04/03</span>
             <a class="archive-post-title" href="/posts/claude-code-source-analysis/">深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/02</span>
-            <a class="archive-post-title" href="/posts/claude-code-source-deep-dive/">Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/01</span>
-            <a class="archive-post-title" href="/posts/claude-code-source-why-better/">Claude Code 源码分析：为什么它比很多 Agent 工具更好用</a>
         </li>
     
         
@@ -1017,21 +1006,6 @@
                 GPT
             </span>
         
-            <span class="sidebar-tag-name" data-tags="AI">
-                <span class="iconfont-archer">&#xe606;</span>
-                AI
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="Agent">
-                <span class="iconfont-archer">&#xe606;</span>
-                Agent
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="架构设计">
-                <span class="iconfont-archer">&#xe606;</span>
-                架构设计
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="iOS">
                 <span class="iconfont-archer">&#xe606;</span>
                 iOS
@@ -1042,14 +1016,29 @@
                 cocoapods
             </span>
         
-            <span class="sidebar-tag-name" data-tags="git">
+            <span class="sidebar-tag-name" data-tags="AI">
                 <span class="iconfont-archer">&#xe606;</span>
-                git
+                AI
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Agent">
+                <span class="iconfont-archer">&#xe606;</span>
+                Agent
             </span>
         
             <span class="sidebar-tag-name" data-tags="ReactNative">
                 <span class="iconfont-archer">&#xe606;</span>
                 ReactNative
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="git">
+                <span class="iconfont-archer">&#xe606;</span>
+                git
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="多线程">
+                <span class="iconfont-archer">&#xe606;</span>
+                多线程
             </span>
         
             <span class="sidebar-tag-name" data-tags="开发工具">
@@ -1070,11 +1059,6 @@
             <span class="sidebar-tag-name" data-tags="分享">
                 <span class="iconfont-archer">&#xe606;</span>
                 分享
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="多线程">
-                <span class="iconfont-archer">&#xe606;</span>
-                多线程
             </span>
         
             <span class="sidebar-tag-name" data-tags="hexo">
