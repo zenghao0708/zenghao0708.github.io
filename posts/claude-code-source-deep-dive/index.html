@@ -19,33 +19,33 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS开发,研发管理,字节跳蛋,飞书">
     
     <meta name="description" content="Life is struggle!">
-    <meta name="description" content="结合 4 张结构图，详细拆解 Claude Code 从 CLI 入口、主查询循环、工具调度、上下文压缩、权限治理到多代理系统的源码设计，解释它为什么比很多 Agent 工具更顺手、更稳定。">
+    <meta name="description" content="Claude Code 系列里的结构图导读版。结合多张配图，带读者先建立源码脑图，再进入完整主稿。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Claude Code 源码详解：从 CLI 入口到多代理系统，一次看懂 cc 为什么好用">
+<meta property="og:title" content="Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手">
 <meta property="og:url" content="https://coolzeng.com/posts/claude-code-source-deep-dive/index.html">
 <meta property="og:site_name" content="Zenghao0708的小站">
-<meta property="og:description" content="结合 4 张结构图，详细拆解 Claude Code 从 CLI 入口、主查询循环、工具调度、上下文压缩、权限治理到多代理系统的源码设计，解释它为什么比很多 Agent 工具更顺手、更稳定。">
+<meta property="og:description" content="Claude Code 系列里的结构图导读版。结合多张配图，带读者先建立源码脑图，再进入完整主稿。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://coolzeng.com/images/claude-code-source-deep-dive/cc-architecture-overview.png">
 <meta property="og:image" content="https://coolzeng.com/images/claude-code-source-deep-dive/cc-query-loop.png">
 <meta property="og:image" content="https://coolzeng.com/images/claude-code-source-deep-dive/cc-tool-orchestration.png">
 <meta property="og:image" content="https://coolzeng.com/images/claude-code-source-deep-dive/cc-context-permission-agent.png">
 <meta property="article:published_time" content="2026-04-02T02:30:00.000Z">
-<meta property="article:modified_time" content="2026-04-04T14:42:48.241Z">
+<meta property="article:modified_time" content="2026-04-05T04:41:37.113Z">
 <meta property="article:author" content="zenghao0708">
-<meta property="article:tag" content="AI">
 <meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="AI 编程">
+<meta property="article:tag" content="源码分析">
+<meta property="article:tag" content="AI">
 <meta property="article:tag" content="Agent">
 <meta property="article:tag" content="架构设计">
-<meta property="article:tag" content="源码分析">
-<meta property="article:tag" content="AI 编程">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://coolzeng.com/images/claude-code-source-deep-dive/cc-architecture-overview.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>Claude Code 源码详解：从 CLI 入口到多代理系统，一次看懂 cc 为什么好用 · 浩子的小站</title>
+    <title>Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手 · 浩子的小站</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -272,7 +272,7 @@
                 <a href="/">浩子的小站</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">Claude Code 源码详解：从 CLI 入口到多代理系统，一次看懂 cc 为什么好用</a>
+                <a href="#" class="post-name">Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手</a>
             </div>
         </div>
     
@@ -318,7 +318,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                Claude Code 源码详解：从 CLI 入口到多代理系统，一次看懂 cc 为什么好用
+                Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手
             <!-- 404 -->
             
         </h1>
@@ -338,17 +338,17 @@
                     <div class= post-intro-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags="Claude Code">Claude Code</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="架构设计">架构设计</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="源码分析">源码分析</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
     
 </div>
 
@@ -516,8 +516,20 @@
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
                 <main class="main post-page">
-    <article class="article-entry"><p>前面我已经写过两篇关于 Claude Code 的文章：一篇偏传播，回答“为什么它比很多 Agent 工具更好用”；另一篇偏技术，回答“它为什么更像一个完整系统”。</p>
-<p>但如果你真的想把 Claude Code 看明白，这两篇还不够。</p>
+    <article class="article-entry"><p>这篇不是 Claude Code 系列里的<code>最终主稿</code>，而是<code>结构图导读版</code>。</p>
+<p>如果你属于下面这类读者，这篇会比直接啃长文更合适：</p>
+<ul>
+<li>想快速建立 Claude Code 的源码脑图</li>
+<li>想先看结构，再去读细节</li>
+<li>不想一上来就掉进 <code>query.ts</code> 这种大文件里</li>
+</ul>
+<p>如果你想直接看最完整、最权威的版本，可以去主稿：</p>
+<ul>
+<li>完整技术主稿：<a href="/posts/claude-code-source-analysis/">&#x2F;posts&#x2F;claude-code-source-analysis&#x2F;</a></li>
+<li>快速判断版：<a href="/posts/claude-code-source-why-better/">&#x2F;posts&#x2F;claude-code-source-why-better&#x2F;</a></li>
+</ul>
+<p>这篇文章的任务更明确：</p>
+<p><strong>用图把 Claude Code 的运行时结构拆开，帮你建立“应该从哪里开始读源码”的脑内地图。</strong></p>
 <p>因为 Claude Code 最容易被误解的一点是：很多人以为它只是一个“终端里的大模型”，顶多加了一些工具调用能力。可一旦你顺着源码往下看，就会发现它实际是一套分层很清楚的工程系统：</p>
 <ul>
 <li>上层是 CLI、REPL、slash commands 和终端 UI</li>
@@ -525,7 +537,6 @@
 <li>下层是工具系统、权限系统、上下文治理、MCP、plugins、skills、voice、remote、多代理</li>
 </ul>
 <p>换句话说，Claude Code 不是把模型塞进终端，而是把“一个能长期工作的 Agent”拆成了很多独立但互相配合的子系统。</p>
-<p>这篇文章我想做一件更具体的事：<strong>带着你从源码结构出发，一层一层看清楚 Claude Code 为什么会比很多 Agent 工具更稳、更顺、更适合真实开发工作流。</strong></p>
 <p>本文基于本地分析的 Claude Code v2.1.88 还原源码仓库整理。</p>
 <span id="more"></span>
 
@@ -819,6 +830,10 @@
 <p>这就是为什么我越来越觉得，Claude Code 不只是一个 AI coding tool。</p>
 <p>它更像一个 Agent Runtime 的雏形。</p>
 <p>也是因为这个原因，它比很多 Agent 工具更好用，不是偶然。</p>
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul>
+<li>完整技术主稿：<a href="/posts/claude-code-source-analysis/">&#x2F;posts&#x2F;claude-code-source-analysis&#x2F;</a></li>
+<li>快速判断版：<a href="/posts/claude-code-source-why-better/">&#x2F;posts&#x2F;claude-code-source-why-better&#x2F;</a></li>
+</ul>
 
     </article>
     <!-- license -->
@@ -827,7 +842,7 @@
             <p>原文作者：<a href="https://coolzeng.com">zenghao0708</a>
             <p>原文链接：<a href="https://coolzeng.com/posts/claude-code-source-deep-dive/">https://coolzeng.com/posts/claude-code-source-deep-dive/</a>
             <p>发表日期：<a href="https://coolzeng.com/posts/claude-code-source-deep-dive/">April 2nd 2026, 10:30:00 am</a>
-            <p>更新日期：<a href="https://coolzeng.com/posts/claude-code-source-deep-dive/">April 4th 2026, 10:42:48 pm</a>
+            <p>更新日期：<a href="https://coolzeng.com/posts/claude-code-source-deep-dive/">April 5th 2026, 12:41:37 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -844,8 +859,8 @@
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/posts/claude-code-source-architecture/" title="Claude Code 架构拆解：一个更像“完整系统”的 AI Coding Agent">
-                    <div class="prevTitle">Claude Code 架构拆解：一个更像“完整系统”的 AI Coding Agent</div>
+                <a href="/posts/claude-code-source-why-better/" title="Claude Code 源码分析：为什么它比很多 Agent 工具更好用">
+                    <div class="prevTitle">Claude Code 源码分析：为什么它比很多 Agent 工具更好用</div>
                 </a>
             
         </li>
@@ -985,7 +1000,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Claude-Code-%E6%BA%90%E7%A0%81%E8%AF%A6%E8%A7%A3%EF%BC%9A%E4%BB%8E-CLI-%E5%85%A5%E5%8F%A3%E5%88%B0%E5%A4%9A%E4%BB%A3%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%8C%E4%B8%80%E6%AC%A1%E7%9C%8B%E6%87%82-cc-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">Claude Code 源码详解：从 CLI 入口到多代理系统，一次看懂 cc 为什么好用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E7%9C%8B%E5%85%A8%E5%B1%80%EF%BC%9AClaude-Code-%E5%88%B0%E5%BA%95%E7%94%B1%E5%93%AA%E4%BA%9B%E5%B1%82%E7%BB%84%E6%88%90%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">先看全局：Claude Code 到底由哪些层组成？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%B1%82%EF%BC%9A%E4%BA%A4%E4%BA%92%E5%85%A5%E5%8F%A3%E5%B1%82"><span class="toc-number">1.1.1.</span> <span class="toc-text">第一层：交互入口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%B1%82%EF%BC%9AAgent-Runtime-%E5%B1%82"><span class="toc-number">1.1.2.</span> <span class="toc-text">第二层：Agent Runtime 层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%B1%82%EF%BC%9A%E8%83%BD%E5%8A%9B%E6%89%A7%E8%A1%8C%E5%B1%82"><span class="toc-number">1.1.3.</span> <span class="toc-text">第三层：能力执行层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%82%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%B1%82"><span class="toc-number">1.1.4.</span> <span class="toc-text">第四层：系统服务层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A5%E5%8F%A3%E5%B1%82%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-Claude-Code-%E4%B8%80%E5%90%AF%E5%8A%A8%E5%B0%B1%E6%98%BE%E5%BE%97%E6%9B%B4%E9%A1%BA%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">入口层：为什么 Claude Code 一启动就显得更顺？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E4%B8%AD%E6%9E%A2%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-QueryEngine-%E6%98%AF%E7%90%86%E8%A7%A3-Claude-Code-%E7%9A%84%E7%AC%AC%E4%B8%80%E6%8A%8A%E9%92%A5%E5%8C%99%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">核心中枢：为什么 QueryEngine 是理解 Claude Code 的第一把钥匙？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E4%B8%80%E5%B1%82%EF%BC%9A%E4%B8%BB%E6%9F%A5%E8%AF%A2%E5%BE%AA%E7%8E%AF%E5%88%B0%E5%BA%95%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">关键一层：主查询循环到底在做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BE%93%E5%85%A5%E8%BF%9B%E5%85%A5%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 输入进入系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 预处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%9B%E5%85%A5-query-ts"><span class="toc-number">1.4.3.</span> <span class="toc-text">3. 进入 query.ts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA"><span class="toc-number">1.4.4.</span> <span class="toc-text">4. 模型流式输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%A7%A6%E5%8F%91%E5%B7%A5%E5%85%B7%E6%89%A7%E8%A1%8C"><span class="toc-number">1.4.5.</span> <span class="toc-text">5. 触发工具执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BB%93%E6%9E%9C%E5%9B%9E%E5%86%99"><span class="toc-number">1.4.6.</span> <span class="toc-text">6. 结果回写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%90%8E%E5%8F%B0%E5%AE%88%E6%8A%A4%E9%80%BB%E8%BE%91%E6%8C%81%E7%BB%AD%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.4.7.</span> <span class="toc-text">7. 后台守护逻辑持续工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E5%B1%82%EF%BC%9AClaude-Code-%E7%9C%9F%E6%AD%A3%E5%BC%BA%E7%9A%84%E4%B8%8D%E6%98%AF%E5%B7%A5%E5%85%B7%E5%A4%9A%EF%BC%8C%E8%80%8C%E6%98%AF%E5%B7%A5%E5%85%B7%E6%80%8E%E4%B9%88%E8%B7%91"><span class="toc-number">1.5.</span> <span class="toc-text">工具层：Claude Code 真正强的不是工具多，而是工具怎么跑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">1.5.1.</span> <span class="toc-text">并发安全工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">1.5.2.</span> <span class="toc-text">非并发安全工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E8%BF%9B%E4%B8%80%E6%AD%A5%EF%BC%9AStreamingToolExecutor"><span class="toc-number">1.5.3.</span> <span class="toc-text">更进一步：StreamingToolExecutor</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-Claude-Code-%E9%95%BF%E4%BC%9A%E8%AF%9D%E6%9B%B4%E7%A8%B3%EF%BC%9F"><span class="toc-number">1.6.</span> <span class="toc-text">上下文管理：为什么 Claude Code 长会话更稳？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%EF%BC%9AClaude-Code-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E2%80%9C%E8%A6%81%E4%B9%88%E5%A4%AA%E5%8D%B1%E9%99%A9%E3%80%81%E8%A6%81%E4%B9%88%E5%A4%AA%E7%83%A6%E2%80%9D%EF%BC%9F"><span class="toc-number">1.7.</span> <span class="toc-text">权限系统：Claude Code 为什么不是“要么太危险、要么太烦”？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E7%AB%AF%E4%B8%80%EF%BC%9A%E8%BF%87%E4%BA%8E%E8%87%AA%E7%94%B1"><span class="toc-number">1.7.1.</span> <span class="toc-text">极端一：过于自由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E7%AB%AF%E4%BA%8C%EF%BC%9A%E8%BF%87%E4%BA%8E%E4%BF%9D%E5%AE%88"><span class="toc-number">1.7.2.</span> <span class="toc-text">极端二：过于保守</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%BB%A3%E7%90%86%E4%B8%8E%E9%9A%94%E7%A6%BB%EF%BC%9AClaude-Code-%E5%B7%B2%E7%BB%8F%E4%B8%8D%E5%8F%AA%E6%98%AF%E5%8D%95%E4%BC%9A%E8%AF%9D-Agent"><span class="toc-number">1.8.</span> <span class="toc-text">多代理与隔离：Claude Code 已经不只是单会话 Agent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-worktree%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E7%89%B9%E5%88%AB%E8%81%AA%E6%98%8E%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%80%89%E6%8B%A9%EF%BC%9F"><span class="toc-number">1.9.</span> <span class="toc-text">Git worktree：为什么这是一个特别聪明的工程选择？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E8%97%8F%E8%83%BD%E5%8A%9B%EF%BC%9A%E5%93%AA%E4%BA%9B%E6%BA%90%E7%A0%81%E4%BF%A1%E5%8F%B7%E6%9C%80%E5%80%BC%E5%BE%97%E5%85%B3%E6%B3%A8%EF%BC%9F"><span class="toc-number">1.10.</span> <span class="toc-text">隐藏能力：哪些源码信号最值得关注？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BF%9C%E7%A8%8B%E5%AE%9A%E6%97%B6%E4%BB%A3%E7%90%86"><span class="toc-number">1.10.1.</span> <span class="toc-text">1. 远程定时代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AF%AD%E9%9F%B3%E9%93%BE%E8%B7%AF"><span class="toc-number">1.10.2.</span> <span class="toc-text">2. 语音链路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Team-Memory-Sync"><span class="toc-number">1.10.3.</span> <span class="toc-text">3. Team Memory Sync</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Undercover-mode"><span class="toc-number">1.10.4.</span> <span class="toc-text">4. Undercover mode</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E5%9B%9E%E5%88%B0%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9AClaude-Code-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%AF%94%E5%BE%88%E5%A4%9A-Agent-%E5%B7%A5%E5%85%B7%E6%9B%B4%E9%A1%BA%E6%89%8B%EF%BC%9F"><span class="toc-number">1.11.</span> <span class="toc-text">最后回到一个问题：Claude Code 为什么会比很多 Agent 工具更顺手？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%A5%97%E8%B4%9F%E8%B4%A3%E8%AE%A9%E5%AE%83%E5%88%AB%E8%B6%8A%E8%81%8A%E8%B6%8A%E4%B9%B1"><span class="toc-number">1.11.1.</span> <span class="toc-text">一套负责让它别越聊越乱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%A5%97%E8%B4%9F%E8%B4%A3%E8%AE%A9%E5%AE%83%E5%88%AB%E8%B6%8A%E5%B9%B2%E8%B6%8A%E5%8D%B1%E9%99%A9"><span class="toc-number">1.11.2.</span> <span class="toc-text">一套负责让它别越干越危险</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%A5%97%E8%B4%9F%E8%B4%A3%E8%AE%A9%E5%AE%83%E5%8F%AF%E4%BB%A5%E5%B9%B6%E8%A1%8C%E5%B7%A5%E4%BD%9C%E4%BD%86%E4%B8%8D%E4%BA%92%E7%9B%B8%E8%B8%A9"><span class="toc-number">1.11.3.</span> <span class="toc-text">一套负责让它可以并行工作但不互相踩</span></a></li></ol></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Claude-Code-%E5%9B%BE%E8%A7%A3%E5%AF%BC%E8%AF%BB%EF%BC%9A%E4%BB%8E-CLI-%E5%85%A5%E5%8F%A3%E5%88%B0%E5%A4%9A%E4%BB%A3%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%8C%E4%B8%80%E6%AC%A1%E7%9C%8B%E6%87%82%E5%AE%83%E4%B8%BA%E4%BB%80%E4%B9%88%E9%A1%BA%E6%89%8B"><span class="toc-number">1.</span> <span class="toc-text">Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E7%9C%8B%E5%85%A8%E5%B1%80%EF%BC%9AClaude-Code-%E5%88%B0%E5%BA%95%E7%94%B1%E5%93%AA%E4%BA%9B%E5%B1%82%E7%BB%84%E6%88%90%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">先看全局：Claude Code 到底由哪些层组成？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%B1%82%EF%BC%9A%E4%BA%A4%E4%BA%92%E5%85%A5%E5%8F%A3%E5%B1%82"><span class="toc-number">1.1.1.</span> <span class="toc-text">第一层：交互入口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%B1%82%EF%BC%9AAgent-Runtime-%E5%B1%82"><span class="toc-number">1.1.2.</span> <span class="toc-text">第二层：Agent Runtime 层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%B1%82%EF%BC%9A%E8%83%BD%E5%8A%9B%E6%89%A7%E8%A1%8C%E5%B1%82"><span class="toc-number">1.1.3.</span> <span class="toc-text">第三层：能力执行层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%82%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%B1%82"><span class="toc-number">1.1.4.</span> <span class="toc-text">第四层：系统服务层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A5%E5%8F%A3%E5%B1%82%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-Claude-Code-%E4%B8%80%E5%90%AF%E5%8A%A8%E5%B0%B1%E6%98%BE%E5%BE%97%E6%9B%B4%E9%A1%BA%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">入口层：为什么 Claude Code 一启动就显得更顺？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E4%B8%AD%E6%9E%A2%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-QueryEngine-%E6%98%AF%E7%90%86%E8%A7%A3-Claude-Code-%E7%9A%84%E7%AC%AC%E4%B8%80%E6%8A%8A%E9%92%A5%E5%8C%99%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">核心中枢：为什么 QueryEngine 是理解 Claude Code 的第一把钥匙？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E4%B8%80%E5%B1%82%EF%BC%9A%E4%B8%BB%E6%9F%A5%E8%AF%A2%E5%BE%AA%E7%8E%AF%E5%88%B0%E5%BA%95%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">关键一层：主查询循环到底在做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BE%93%E5%85%A5%E8%BF%9B%E5%85%A5%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 输入进入系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 预处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%9B%E5%85%A5-query-ts"><span class="toc-number">1.4.3.</span> <span class="toc-text">3. 进入 query.ts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA"><span class="toc-number">1.4.4.</span> <span class="toc-text">4. 模型流式输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%A7%A6%E5%8F%91%E5%B7%A5%E5%85%B7%E6%89%A7%E8%A1%8C"><span class="toc-number">1.4.5.</span> <span class="toc-text">5. 触发工具执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BB%93%E6%9E%9C%E5%9B%9E%E5%86%99"><span class="toc-number">1.4.6.</span> <span class="toc-text">6. 结果回写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%90%8E%E5%8F%B0%E5%AE%88%E6%8A%A4%E9%80%BB%E8%BE%91%E6%8C%81%E7%BB%AD%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.4.7.</span> <span class="toc-text">7. 后台守护逻辑持续工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E5%B1%82%EF%BC%9AClaude-Code-%E7%9C%9F%E6%AD%A3%E5%BC%BA%E7%9A%84%E4%B8%8D%E6%98%AF%E5%B7%A5%E5%85%B7%E5%A4%9A%EF%BC%8C%E8%80%8C%E6%98%AF%E5%B7%A5%E5%85%B7%E6%80%8E%E4%B9%88%E8%B7%91"><span class="toc-number">1.5.</span> <span class="toc-text">工具层：Claude Code 真正强的不是工具多，而是工具怎么跑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">1.5.1.</span> <span class="toc-text">并发安全工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">1.5.2.</span> <span class="toc-text">非并发安全工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E8%BF%9B%E4%B8%80%E6%AD%A5%EF%BC%9AStreamingToolExecutor"><span class="toc-number">1.5.3.</span> <span class="toc-text">更进一步：StreamingToolExecutor</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-Claude-Code-%E9%95%BF%E4%BC%9A%E8%AF%9D%E6%9B%B4%E7%A8%B3%EF%BC%9F"><span class="toc-number">1.6.</span> <span class="toc-text">上下文管理：为什么 Claude Code 长会话更稳？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%EF%BC%9AClaude-Code-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E2%80%9C%E8%A6%81%E4%B9%88%E5%A4%AA%E5%8D%B1%E9%99%A9%E3%80%81%E8%A6%81%E4%B9%88%E5%A4%AA%E7%83%A6%E2%80%9D%EF%BC%9F"><span class="toc-number">1.7.</span> <span class="toc-text">权限系统：Claude Code 为什么不是“要么太危险、要么太烦”？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E7%AB%AF%E4%B8%80%EF%BC%9A%E8%BF%87%E4%BA%8E%E8%87%AA%E7%94%B1"><span class="toc-number">1.7.1.</span> <span class="toc-text">极端一：过于自由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E7%AB%AF%E4%BA%8C%EF%BC%9A%E8%BF%87%E4%BA%8E%E4%BF%9D%E5%AE%88"><span class="toc-number">1.7.2.</span> <span class="toc-text">极端二：过于保守</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%BB%A3%E7%90%86%E4%B8%8E%E9%9A%94%E7%A6%BB%EF%BC%9AClaude-Code-%E5%B7%B2%E7%BB%8F%E4%B8%8D%E5%8F%AA%E6%98%AF%E5%8D%95%E4%BC%9A%E8%AF%9D-Agent"><span class="toc-number">1.8.</span> <span class="toc-text">多代理与隔离：Claude Code 已经不只是单会话 Agent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-worktree%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E7%89%B9%E5%88%AB%E8%81%AA%E6%98%8E%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%80%89%E6%8B%A9%EF%BC%9F"><span class="toc-number">1.9.</span> <span class="toc-text">Git worktree：为什么这是一个特别聪明的工程选择？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E8%97%8F%E8%83%BD%E5%8A%9B%EF%BC%9A%E5%93%AA%E4%BA%9B%E6%BA%90%E7%A0%81%E4%BF%A1%E5%8F%B7%E6%9C%80%E5%80%BC%E5%BE%97%E5%85%B3%E6%B3%A8%EF%BC%9F"><span class="toc-number">1.10.</span> <span class="toc-text">隐藏能力：哪些源码信号最值得关注？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BF%9C%E7%A8%8B%E5%AE%9A%E6%97%B6%E4%BB%A3%E7%90%86"><span class="toc-number">1.10.1.</span> <span class="toc-text">1. 远程定时代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AF%AD%E9%9F%B3%E9%93%BE%E8%B7%AF"><span class="toc-number">1.10.2.</span> <span class="toc-text">2. 语音链路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Team-Memory-Sync"><span class="toc-number">1.10.3.</span> <span class="toc-text">3. Team Memory Sync</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Undercover-mode"><span class="toc-number">1.10.4.</span> <span class="toc-text">4. Undercover mode</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E5%9B%9E%E5%88%B0%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9AClaude-Code-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%AF%94%E5%BE%88%E5%A4%9A-Agent-%E5%B7%A5%E5%85%B7%E6%9B%B4%E9%A1%BA%E6%89%8B%EF%BC%9F"><span class="toc-number">1.11.</span> <span class="toc-text">最后回到一个问题：Claude Code 为什么会比很多 Agent 工具更顺手？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%A5%97%E8%B4%9F%E8%B4%A3%E8%AE%A9%E5%AE%83%E5%88%AB%E8%B6%8A%E8%81%8A%E8%B6%8A%E4%B9%B1"><span class="toc-number">1.11.1.</span> <span class="toc-text">一套负责让它别越聊越乱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%A5%97%E8%B4%9F%E8%B4%A3%E8%AE%A9%E5%AE%83%E5%88%AB%E8%B6%8A%E5%B9%B2%E8%B6%8A%E5%8D%B1%E9%99%A9"><span class="toc-number">1.11.2.</span> <span class="toc-text">一套负责让它别越干越危险</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%A5%97%E8%B4%9F%E8%B4%A3%E8%AE%A9%E5%AE%83%E5%8F%AF%E4%BB%A5%E5%B9%B6%E8%A1%8C%E5%B7%A5%E4%BD%9C%E4%BD%86%E4%B8%8D%E4%BA%92%E7%9B%B8%E8%B8%A9"><span class="toc-number">1.11.3.</span> <span class="toc-text">一套负责让它可以并行工作但不互相踩</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-number">1.12.</span> <span class="toc-text">延伸阅读</span></a></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1094,18 +1109,7 @@
         
         
         
-        
-        
-        
-        
-        
     
-        
-        
-        
-        
-        
-        
         
         
         
@@ -1226,7 +1230,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 20
+        Total : 19
         </div>
         <!-- search  -->
         
@@ -1249,13 +1253,7 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">04/02</span>
-            <a class="archive-post-title" href="/posts/claude-code-source-deep-dive/">Claude Code 源码详解：从 CLI 入口到多代理系统，一次看懂 cc 为什么好用</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/01</span>
-            <a class="archive-post-title" href="/posts/claude-code-source-architecture/">Claude Code 架构拆解：一个更像“完整系统”的 AI Coding Agent</a>
+            <a class="archive-post-title" href="/posts/claude-code-source-deep-dive/">Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手</a>
         </li>
     
         
@@ -1411,6 +1409,26 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
+            <span class="sidebar-tag-name" data-tags="Claude Code">
+                <span class="iconfont-archer">&#xe606;</span>
+                Claude Code
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AI 编程">
+                <span class="iconfont-archer">&#xe606;</span>
+                AI 编程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="源码分析">
+                <span class="iconfont-archer">&#xe606;</span>
+                源码分析
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OpenClaw">
+                <span class="iconfont-archer">&#xe606;</span>
+                OpenClaw
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="LLM">
                 <span class="iconfont-archer">&#xe606;</span>
                 LLM
@@ -1426,11 +1444,6 @@
                 AI
             </span>
         
-            <span class="sidebar-tag-name" data-tags="Claude Code">
-                <span class="iconfont-archer">&#xe606;</span>
-                Claude Code
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="Agent">
                 <span class="iconfont-archer">&#xe606;</span>
                 Agent
@@ -1441,21 +1454,6 @@
                 架构设计
             </span>
         
-            <span class="sidebar-tag-name" data-tags="源码分析">
-                <span class="iconfont-archer">&#xe606;</span>
-                源码分析
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="AI 编程">
-                <span class="iconfont-archer">&#xe606;</span>
-                AI 编程
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="开发工具">
-                <span class="iconfont-archer">&#xe606;</span>
-                开发工具
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="iOS">
                 <span class="iconfont-archer">&#xe606;</span>
                 iOS
@@ -1464,11 +1462,6 @@
             <span class="sidebar-tag-name" data-tags="cocoapods">
                 <span class="iconfont-archer">&#xe606;</span>
                 cocoapods
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="OpenClaw">
-                <span class="iconfont-archer">&#xe606;</span>
-                OpenClaw
             </span>
         
             <span class="sidebar-tag-name" data-tags="git">
@@ -1486,9 +1479,9 @@
                 多线程
             </span>
         
-            <span class="sidebar-tag-name" data-tags="分享">
+            <span class="sidebar-tag-name" data-tags="开发工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                分享
+                开发工具
             </span>
         
             <span class="sidebar-tag-name" data-tags="命令行">
@@ -1499,6 +1492,11 @@
             <span class="sidebar-tag-name" data-tags="Mac">
                 <span class="iconfont-archer">&#xe606;</span>
                 Mac
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="分享">
+                <span class="iconfont-archer">&#xe606;</span>
+                分享
             </span>
         
             <span class="sidebar-tag-name" data-tags="hexo">
@@ -1532,6 +1530,11 @@
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
+        <span class="sidebar-category-name" data-categories="AI 工具">
+            <span class="iconfont-archer">&#xe60a;</span>
+            AI 工具
+        </span>
+    
         <span class="sidebar-category-name" data-categories="AI">
             <span class="iconfont-archer">&#xe60a;</span>
             AI
@@ -1542,24 +1545,19 @@
             开发
         </span>
     
-        <span class="sidebar-category-name" data-categories="AI 工具">
-            <span class="iconfont-archer">&#xe60a;</span>
-            AI 工具
-        </span>
-    
         <span class="sidebar-category-name" data-categories="ReactNative">
             <span class="iconfont-archer">&#xe60a;</span>
             ReactNative
         </span>
     
-        <span class="sidebar-category-name" data-categories="分享">
-            <span class="iconfont-archer">&#xe60a;</span>
-            分享
-        </span>
-    
         <span class="sidebar-category-name" data-categories="技术分享">
             <span class="iconfont-archer">&#xe60a;</span>
             技术分享
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="分享">
+            <span class="iconfont-archer">&#xe60a;</span>
+            分享
         </span>
     
     </div>
