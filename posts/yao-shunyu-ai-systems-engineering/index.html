@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="zenghao0708">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="zenghao0708">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS开发,研发管理,字节跳蛋,飞书">
+    
+    <meta name="description" content="Life is struggle!">
+    <meta name="description" content="听完张小珺对姚顺宇的四小时访谈后，我整理了几个判断：模型能力接近之后，差距会落在问题定义、训练系统、组织协作、产品反馈和人与 AI 协作能力上。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="听完姚顺宇的 4 小时访谈：AI 的下半场不拼神话">
+<meta property="og:url" content="https://coolzeng.com/posts/yao-shunyu-ai-systems-engineering/index.html">
+<meta property="og:site_name" content="Zenghao0708的小站">
+<meta property="og:description" content="听完张小珺对姚顺宇的四小时访谈后，我整理了几个判断：模型能力接近之后，差距会落在问题定义、训练系统、组织协作、产品反馈和人与 AI 协作能力上。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://coolzeng.com/images/yao-shunyu-ai-systems-engineering/ai-systems-shift.png">
+<meta property="og:image" content="https://coolzeng.com/images/yao-shunyu-ai-systems-engineering/ai-product-moat.png">
+<meta property="og:image" content="https://coolzeng.com/images/yao-shunyu-ai-systems-engineering/ai-coding-role-shift.png">
+<meta property="article:published_time" content="2026-05-17T13:05:00.000Z">
+<meta property="article:modified_time" content="2026-05-18T15:25:27.903Z">
+<meta property="article:author" content="zenghao0708">
+<meta property="article:tag" content="AI 编程">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="大模型">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="产品">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://coolzeng.com/images/yao-shunyu-ai-systems-engineering/ai-systems-shift.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>听完姚顺宇的 4 小时访谈：AI 的下半场不拼神话 · 浩子的小站</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- Google tag (gtag.js) -->
+    
+
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zenghao0708的小站" type="application/atom+xml">
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>浩子的小站</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">浩子的小站</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">听完姚顺宇的 4 小时访谈：AI 的下半场不拼神话</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+    
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                听完姚顺宇的 4 小时访谈：AI 的下半场不拼神话
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI 编程">AI 编程</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AI">AI</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="大模型">大模型</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Agent">Agent</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="产品">产品</a>
+    
+</div>
+
+                
+                <!-- 文章字数统计 -->
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">3k</span>阅读时长: <span class="post-count reading-time">10 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2026/05/17</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry"><p>我把张小珺这期对姚顺宇的访谈转成文字稿，又做了一遍高亮。四个小时听下来，印象最深的是一件事：</p>
+<p>AI 正在从神话现场，回到工程现场。</p>
+<p>这篇更适合做 AI 产品、写代码，或者正在选 AI 方向的人看。尤其是已经开始觉得”只追模型新闻有点不够”的人。</p>
+<span id="more"></span>
+
+<p><img src="/images/yao-shunyu-ai-systems-engineering/ai-systems-shift.png" alt="从模型能力竞赛到系统工程"></p>
+<p>我之前写过 <a href="/posts/claude-code-source-analysis/">&#x2F;posts&#x2F;claude-code-source-analysis&#x2F;</a> 和 <a href="/posts/mac-ai-coding-tools/">&#x2F;posts&#x2F;mac-ai-coding-tools&#x2F;</a>，更偏工具和工程细节。这一篇不讲教程，只看模型能力接近之后，哪些东西会继续拉开差距。</p>
+<h2 id="分数接近以后，难题才开始"><a href="#分数接近以后，难题才开始" class="headerlink" title="分数接近以后，难题才开始"></a>分数接近以后，难题才开始</h2><p>过去两年看模型，很多人习惯先看榜。SWE-bench 高了几个点，数学题又过了哪条线，reasoning 比谁强，coding 比谁顺。这个阶段当然有意义——纸面上领先，体感上通常也会领先。</p>
+<p>但访谈里有个判断我很认同：几个头部模型都挤进高分区间之后，benchmark 的解释力会下降。你今天再比较 Claude、Gemini、OpenAI，很难只靠一个分数判断谁好用。某个模型在工具使用上更顺，另一个在日常 reasoning 上更稳，还有一个在 coding 场景里追得很快。差异还在，只是不都写在一张榜单上。</p>
+<p>竞争会往后推一层：模型应该表现出什么行为。</p>
+<p>放到产品里看，这件事很具体。一个 coding agent 可以激进地改文件，也可以先解释计划；遇到不确定需求，可以先问人，也可以先做一个可回滚的草稿；做产品问答，可以追求”回答完整”，也可以优先承认”不知道”。这些产品判断不会从模型里自然长出来。场景、数据、训练目标、评测方式都会参与塑形。AI 行业正在从”能力有没有”转向”行为怎么定义”——后面这件事不热闹，但更难抄。</p>
+<h2 id="壳应用危险在入口层"><a href="#壳应用危险在入口层" class="headerlink" title="壳应用危险在入口层"></a>壳应用危险在入口层</h2><p>现在很多 AI 产品的早期形态，都像是把模型能力接到一个工作流里。只要模型足够强，一些原本想不到的产品形态就会突然冒出来。OpenClaude 这类东西的价值，不一定在技术多神秘，而在它让更多人意识到模型可以串起很长的任务，可以调用不同工具，可以像一个粗糙但有用的工作台。</p>
+<p>如果你的产品壁垒主要还停在”我把模型能力包装得更好看”，那模型公司迟早会看见。看见之后，要么自己做，要么收团队，要么把同类能力放进官方产品里。</p>
+<p>Cursor 的焦虑就很典型。它有价值，模型公司才会盯上 coding 这个场景。它要继续保持位置，就不能永远只做模型能力的优秀入口。壳应用想活下来，需要尽快离开单纯入口层——要么占住用户心智，要么积累真实工作流数据，要么选足够窄、足够深的市场，让大公司短期内没有动力重兵投入。</p>
+<p><img src="/images/yao-shunyu-ai-systems-engineering/ai-product-moat.png" alt="壳应用从包装能力到产品壁垒"></p>
+<p>做 AI 产品时，有个问题可以直接问自己：做久了之后，用户为什么还留在我这里？如果回答只是”我调用的模型比较强”，那就还没到安全区。</p>
+<h2 id="Coding-会先把人重新分层"><a href="#Coding-会先把人重新分层" class="headerlink" title="Coding 会先把人重新分层"></a>Coding 会先把人重新分层</h2><p>访谈里谈程序员的部分，是我听得最认真的一段。因为我自己的工作已经被 AI coding 改变了。</p>
+<p>过去一个工程师的产出，里面混着很多层东西：理解需求、拆任务、设计边界、写实现、补测试、看日志、修 bug、和对面对齐上下文。AI coding 先吃掉的，主要是中间那层相对明确的实现工作。</p>
+<p>这会造成一个结果：普通编码岗位会被挤压，强工程师的杠杆会变大。以前一个小团队才能完成的事情，现在可能一个强工程师带几个 agent 就能推进。这个人未必是手写代码最快的人，但他得能把模糊需求拆成可执行任务，看懂代码改动背后的系统影响，并且在 AI 犯错时知道是收窄问题还是换路径。</p>
+<p>我拆 Claude Code 源码的时候就看到了——真正影响 Agent 体感的，往往是一句 prompt 背后的 runtime、session 管理、tool 调度、compact 策略和 permissions 链路。这些是 Agent 的”工程质量”，不是模型能力的”展示层”。换到团队工程里也一样：模型生成只是中间一环，前面的任务拆解和后面的验证调度，才决定它能不能进入真实工作流。</p>
+<p><img src="/images/yao-shunyu-ai-systems-engineering/ai-coding-role-shift.png" alt="AI coding 之后工程师能力重心的移动"></p>
+<p>很多人把任务直接扔给模型，然后等一个看起来很完整的结果。小任务里没问题。一旦进入真实项目，边界条件、历史包袱、团队约定、运行环境、权限限制，模型不一定知道，知道了也不一定重视。</p>
+<p>程序员要补的是把自己的工程判断显性化——哪些地方可以放手，哪些地方必须盯住。会用 AI 只是起点，能验收 AI 才是门槛。我最近经常提醒自己：每次提交前多看一眼 diff，不是因为我信不过模型，是因为我发现模型生成的代码里，最容易藏问题的地方恰好是我最不想看的那些——边界处理、权限判断、异步状态。这些地方模型不会主动提醒你，但出了问题又最难排查。</p>
+<h2 id="产品经理不容易训练"><a href="#产品经理不容易训练" class="headerlink" title="产品经理不容易训练"></a>产品经理不容易训练</h2><p>这期访谈里还有一个判断：产品经理未必会比程序员更早被 AI 直接替代。</p>
+<p>关键在奖励信号。代码好坏，至少有一部分可以直接验证：能不能编译，测试过不过，线上有没有报错。产品就麻烦得多。一个需求到底好不好，可能要上线之后才知道。用户会不会用，为什么不用，是入口不对、时机不对，还是根本问题不存在——这些反馈都不干净。很多时候团队内部争了半天，也只是拿着不完整信号互相说服。</p>
+<p>AI 可以帮产品经理做很多事：整理用户反馈、生成竞品分析、写 PRD 草稿、模拟用户路径。可最后那个判断——这个问题值不值得做，先做哪一刀，放弃什么——仍然要人来负责。越是奖励信号模糊的工作，越不能只追求自动化，更需要把判断过程写清楚。</p>
+<h2 id="研究像实验，也像工厂"><a href="#研究像实验，也像工厂" class="headerlink" title="研究像实验，也像工厂"></a>研究像实验，也像工厂</h2><p>姚顺宇从物理转到 AI，这条线值得看。我原本以为这部分会比较个人经历化，读下来发现，物理训练能迁移到 AI 研究，靠的主要是做实验的方式：先提出理解，再设计验证；发现结果不对，系统性排除变量；不要在没有反馈的地方过度自洽。</p>
+<p>这套方法放到大模型训练里很接地气。训练系统里有太多东西互相影响：数据分布、强化学习目标、评测方式、基础设施、bug、随机性。一个 trick 在原系统里有效，换一个系统可能就失效，甚至反过来误导。很多经验不是孤立知识，它长在系统里——脱离原来的基础设施、数据和评测，把一个训练技巧单独搬走，很可能只搬走了表面动作。我们经常问”某某公司怎么做的”，更应该补一句：那套做法成立，需要哪些前提。前提不一样，抄作业就变成了抄姿势。</p>
+<h2 id="组织和安全都是硬问题"><a href="#组织和安全都是硬问题" class="headerlink" title="组织和安全都是硬问题"></a>组织和安全都是硬问题</h2><p>大模型训练这个场景里，组织是硬因素。前沿模型不是一个人把 idea 写进 notebook 就能跑出来的东西。算力调度、数据管线、训练稳定性、评测系统、产品反馈、研究判断，任何一个环节掉链子都可能拖偏结果。</p>
+<p>访谈里对 Anthropic 和 Google DeepMind 的比较很有意思：Anthropic 更像纵向打穿，集中资源把一个方向推进到底；Google DeepMind 的优势在横向广度和工程土壤，技术更容易从研究溢出到产品。创业公司需要 make bet，大公司有资源但流程更重。个人开源项目可以先把可能性做出来，大公司要把它变成可承诺的产品，就背上安全、法务、品牌、稳定性的一整套负担。有些产品形态先从外部冒出来，原因也在这里——大公司研究员未必想不到，想到和发出去之间隔着很长一段组织成本。</p>
+<p>AI 安全同理。不能指望某家公司单方面停下来解决整个行业的风险。技术浪潮一旦卷起来，单个玩家停下可能只是把主动权交给别人。更可行的路径是多方制衡、自动化监管、可解释性研究和更成熟的部署边界。安全重要，正因为重要，才不能寄托在”某个好公司永远克制”上。能力记录、场景边界、自动化监控、行业制衡——这些不如”AI 会不会毁灭人类”抓眼球，但更适合往前推进。</p>
+<h2 id="机会还在没定义清楚的地方"><a href="#机会还在没定义清楚的地方" class="headerlink" title="机会还在没定义清楚的地方"></a>机会还在没定义清楚的地方</h2><p>通用语言模型主战场已经挤满了。头部公司有模型、算力、数据、研究团队和产品入口，新人正面冲进去难度极高。</p>
+<p>但访谈里提到的几个方向还可以继续看：long horizon 和 context management，解决系统如何处理更长任务；AI for research，让 AI 进入科学研究本身；多模态、机器人、世界模型和持续学习，还在更早的定义阶段。这些方向的共同点：问题还没被完全定义清楚。</p>
+<p>如果一个赛道已经有清晰指标、清晰产品和清晰玩家，后来者能做，但更像在成熟牌桌上找位置。不确定的地方风险更大，也更可能长出新东西。刚入行的话，我会优先找两类位置：能接触真实系统的，和能接触真实问题的。不一定最光鲜，但更容易积累判断力。</p>
+<h2 id="写完这篇之后"><a href="#写完这篇之后" class="headerlink" title="写完这篇之后"></a>写完这篇之后</h2><p>回头检查自己手里的工作流有没有接住 AI：用 Agent 写代码时，验收标准有没有提前写清楚；做产品时，有没有保留失败样本和留存反馈；看一个 trick 时，有没有顺手查它在哪个训练系统里成立。</p>
+<p>这几件事不新，也不漂亮，但离日常工作更近。</p>
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul>
+<li><a href="/posts/claude-code-source-analysis/">&#x2F;posts&#x2F;claude-code-source-analysis&#x2F;</a>：如果你想看 Agent runtime、tool 调度、compact 和 permissions 这些工程细节，可以继续读这篇。</li>
+<li><a href="/posts/mac-ai-coding-tools/">&#x2F;posts&#x2F;mac-ai-coding-tools&#x2F;</a>：如果你关心 AI coding 落到日常开发时，session、日志、文件定位和终端工作流怎么配，可以看这篇。</li>
+</ul>
+<hr>
+<p>说明：本文基于小宇宙播客《140. 对姚顺宇的4小时访谈：请允许我小疯一下！在Anthropic和Gemini训模型、技术预测、英雄主义已过去》的逐字稿整理与个人理解写成。文中观点为转述和延展，不是嘉宾逐字引用。节目提到录制时间为 2026 年 3 月，AI 行业变化很快，具体公司和产品判断需要放回当时语境里看。</p>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://coolzeng.com">zenghao0708</a>
+            <p>原文链接：<a href="https://coolzeng.com/posts/yao-shunyu-ai-systems-engineering/">https://coolzeng.com/posts/yao-shunyu-ai-systems-engineering/</a>
+            <p>发表日期：<a href="https://coolzeng.com/posts/yao-shunyu-ai-systems-engineering/">May 17th 2026, 9:05:00 pm</a>
+            <p>更新日期：<a href="https://coolzeng.com/posts/yao-shunyu-ai-systems-engineering/">May 18th 2026, 11:25:27 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/posts/claude-code-source-analysis/" title="深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？">
+                    <div class="prevTitle">深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:zenghao.0708@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zenghao0708" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                    
+                    <img class="profile-qr" src="/images/wechat_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AC%E5%AE%8C%E5%A7%9A%E9%A1%BA%E5%AE%87%E7%9A%84-4-%E5%B0%8F%E6%97%B6%E8%AE%BF%E8%B0%88%EF%BC%9AAI-%E7%9A%84%E4%B8%8B%E5%8D%8A%E5%9C%BA%E4%B8%8D%E6%8B%BC%E7%A5%9E%E8%AF%9D"><span class="toc-number">1.</span> <span class="toc-text">听完姚顺宇的 4 小时访谈：AI 的下半场不拼神话</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%95%B0%E6%8E%A5%E8%BF%91%E4%BB%A5%E5%90%8E%EF%BC%8C%E9%9A%BE%E9%A2%98%E6%89%8D%E5%BC%80%E5%A7%8B"><span class="toc-number">1.1.</span> <span class="toc-text">分数接近以后，难题才开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B3%E5%BA%94%E7%94%A8%E5%8D%B1%E9%99%A9%E5%9C%A8%E5%85%A5%E5%8F%A3%E5%B1%82"><span class="toc-number">1.2.</span> <span class="toc-text">壳应用危险在入口层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Coding-%E4%BC%9A%E5%85%88%E6%8A%8A%E4%BA%BA%E9%87%8D%E6%96%B0%E5%88%86%E5%B1%82"><span class="toc-number">1.3.</span> <span class="toc-text">Coding 会先把人重新分层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E4%B8%8D%E5%AE%B9%E6%98%93%E8%AE%AD%E7%BB%83"><span class="toc-number">1.4.</span> <span class="toc-text">产品经理不容易训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E5%83%8F%E5%AE%9E%E9%AA%8C%EF%BC%8C%E4%B9%9F%E5%83%8F%E5%B7%A5%E5%8E%82"><span class="toc-number">1.5.</span> <span class="toc-text">研究像实验，也像工厂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E7%BB%87%E5%92%8C%E5%AE%89%E5%85%A8%E9%83%BD%E6%98%AF%E7%A1%AC%E9%97%AE%E9%A2%98"><span class="toc-number">1.6.</span> <span class="toc-text">组织和安全都是硬问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E4%BC%9A%E8%BF%98%E5%9C%A8%E6%B2%A1%E5%AE%9A%E4%B9%89%E6%B8%85%E6%A5%9A%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-number">1.7.</span> <span class="toc-text">机会还在没定义清楚的地方</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%AE%8C%E8%BF%99%E7%AF%87%E4%B9%8B%E5%90%8E"><span class="toc-number">1.8.</span> <span class="toc-text">写完这篇之后</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-number">1.9.</span> <span class="toc-text">延伸阅读</span></a></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 18
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2026 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/17</span>
+            <a class="archive-post-title" href="/posts/yao-shunyu-ai-systems-engineering/">听完姚顺宇的 4 小时访谈：AI 的下半场不拼神话</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span>
+            <a class="archive-post-title" href="/posts/claude-code-source-analysis/">深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span>
+            <a class="archive-post-title" href="/posts/stop-using-oh-my-zsh/">我为什么不再用 oh-my-zsh 了</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span>
+            <a class="archive-post-title" href="/posts/mac-ai-coding-tools/">Mac 上的 AI 编码利器：打造高效命令行工作流</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/01</span>
+            <a class="archive-post-title" href="/posts/openclaw-architecture/">OpenClaw 架构设计：一个“控制平面型”个人 AI 助手的工程化落地</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2024 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/13</span>
+            <a class="archive-post-title" href="/posts/chatpgt-introduce/">ChatGPT & LLM 的那些事（一）：新手上路</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/06</span>
+            <a class="archive-post-title" href="/posts/http3-overview/">关于HTTP/3 的那些事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span>
+            <a class="archive-post-title" href="/posts/http2-overview/">关于HTTP/2 的那些事</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/05</span>
+            <a class="archive-post-title" href="/posts/the-palybook/">《人生战术本》- 里弗斯教练帮助他人“成为更好的人”</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2018 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/20</span>
+            <a class="archive-post-title" href="/posts/react-native-private-repo/">iOS ReactNative私有库指南</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span>
+            <a class="archive-post-title" href="/posts/xcode-10-migrate/">Xcode 10 beta 版本迁移指南</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/10</span>
+            <a class="archive-post-title" href="/posts/podfile_lock_conflict/">Cocoapods采坑记 - Podfile.lock 冲突问题</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2017 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span>
+            <a class="archive-post-title" href="/posts/xcode-tips/">Xcode问题锦集</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/07</span>
+            <a class="archive-post-title" href="/posts/swift-oc-mix/">Swift 与 OC 混编小技巧</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2016 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span>
+            <a class="archive-post-title" href="/posts/ios-ssl-pinning/">iOS 网络安全之SSL Pinning</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span>
+            <a class="archive-post-title" href="/posts/ios-thread-tips/">iOS多线程开发笔记</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/12</span>
+            <a class="archive-post-title" href="/posts/hexo_build/">使用hexo+github page搭建个人博客</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/11</span>
+            <a class="archive-post-title" href="/posts/git_manual/">git常用手册</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="Claude Code">
+                <span class="iconfont-archer">&#xe606;</span>
+                Claude Code
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AI 编程">
+                <span class="iconfont-archer">&#xe606;</span>
+                AI 编程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="源码分析">
+                <span class="iconfont-archer">&#xe606;</span>
+                源码分析
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OpenClaw">
+                <span class="iconfont-archer">&#xe606;</span>
+                OpenClaw
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AI">
+                <span class="iconfont-archer">&#xe606;</span>
+                AI
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="大模型">
+                <span class="iconfont-archer">&#xe606;</span>
+                大模型
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Agent">
+                <span class="iconfont-archer">&#xe606;</span>
+                Agent
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="产品">
+                <span class="iconfont-archer">&#xe606;</span>
+                产品
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="LLM">
+                <span class="iconfont-archer">&#xe606;</span>
+                LLM
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="GPT">
+                <span class="iconfont-archer">&#xe606;</span>
+                GPT
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iOS">
+                <span class="iconfont-archer">&#xe606;</span>
+                iOS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="cocoapods">
+                <span class="iconfont-archer">&#xe606;</span>
+                cocoapods
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="git">
+                <span class="iconfont-archer">&#xe606;</span>
+                git
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ReactNative">
+                <span class="iconfont-archer">&#xe606;</span>
+                ReactNative
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="多线程">
+                <span class="iconfont-archer">&#xe606;</span>
+                多线程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="开发工具">
+                <span class="iconfont-archer">&#xe606;</span>
+                开发工具
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="命令行">
+                <span class="iconfont-archer">&#xe606;</span>
+                命令行
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Mac">
+                <span class="iconfont-archer">&#xe606;</span>
+                Mac
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="hexo">
+                <span class="iconfont-archer">&#xe606;</span>
+                hexo
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="分享">
+                <span class="iconfont-archer">&#xe606;</span>
+                分享
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="网络编程">
+                <span class="iconfont-archer">&#xe606;</span>
+                网络编程
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="zsh">
+                <span class="iconfont-archer">&#xe606;</span>
+                zsh
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Ghostty">
+                <span class="iconfont-archer">&#xe606;</span>
+                Ghostty
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="AI 工具">
+            <span class="iconfont-archer">&#xe60a;</span>
+            AI 工具
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="AI">
+            <span class="iconfont-archer">&#xe60a;</span>
+            AI
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="开发">
+            <span class="iconfont-archer">&#xe60a;</span>
+            开发
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="ReactNative">
+            <span class="iconfont-archer">&#xe60a;</span>
+            ReactNative
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="技术分享">
+            <span class="iconfont-archer">&#xe60a;</span>
+            技术分享
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="分享">
+            <span class="iconfont-archer">&#xe60a;</span>
+            分享
+        </span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://coolzeng.com",
+        root: siteMetaRoot,
+        author: "zenghao0708"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

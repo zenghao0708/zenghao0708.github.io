@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+  <defs>
+    <filter id="s" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#101828" flood-opacity="0.08"/></filter>
+    <style>
+      .bg{fill:#fbfcff}.grid{stroke:#eef2f8}.h{font:800 40px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}.p{font:500 20px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}.card{fill:#fff;stroke:#d8dee8;stroke-width:2;filter:url(#s)}.t{font:800 25px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}.b{font:600 18px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#475467}.bar{rx:12;opacity:.82}.axis{stroke:#aeb8c8;stroke-width:2}.label{font:700 16px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#344054}.hint{font:600 15px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="760"/>
+  <g opacity=".7"><path class="grid" d="M0 100H1400M0 200H1400M0 300H1400M0 400H1400M0 500H1400M0 600H1400M0 700H1400"/><path class="grid" d="M100 0V760M200 0V760M300 0V760M400 0V760M500 0V760M600 0V760M700 0V760M800 0V760M900 0V760M1000 0V760M1100 0V760M1200 0V760M1300 0V760"/></g>
+  <text class="h" x="72" y="78">AI coding 之后，工程师的重心往哪移动？</text>
+  <text class="p" x="72" y="114">不是“程序员消失”，而是具体编码动作被压缩，规划、验收和系统判断变得更贵。</text>
+  <g transform="translate(88 198)">
+    <rect class="card" width="560" height="420" rx="18"/>
+    <text class="t" x="34" y="54">过去：更多时间花在实现</text>
+    <text class="hint" x="34" y="84">需求、设计和验证也重要，但编码动作占了更大比例。</text>
+    <line class="axis" x1="58" y1="350" x2="500" y2="350"/>
+    <rect class="bar" x="84" y="158" width="76" height="192" fill="#8fb8ff"/><text class="label" x="80" y="382">需求</text>
+    <rect class="bar" x="190" y="126" width="76" height="224" fill="#80d1bf"/><text class="label" x="186" y="382">设计</text>
+    <rect class="bar" x="296" y="96" width="76" height="254" fill="#f0b38b"/><text class="label" x="292" y="382">编码</text>
+    <rect class="bar" x="402" y="206" width="76" height="144" fill="#b9a7ff"/><text class="label" x="398" y="382">验证</text>
+  </g>
+  <g transform="translate(752 198)">
+    <rect class="card" width="560" height="420" rx="18"/>
+    <text class="t" x="34" y="54">接下来：验收和调度更值钱</text>
+    <text class="hint" x="34" y="84">AI 压缩实现成本后，人要补上规划、边界判断和验收。</text>
+    <line class="axis" x1="58" y1="350" x2="500" y2="350"/>
+    <rect class="bar" x="84" y="126" width="76" height="224" fill="#8fb8ff"/><text class="label" x="80" y="382">拆解</text>
+    <rect class="bar" x="190" y="104" width="76" height="246" fill="#80d1bf"/><text class="label" x="186" y="382">规划</text>
+    <rect class="bar" x="296" y="234" width="76" height="116" fill="#f0b38b"/><text class="label" x="292" y="382">编码</text>
+    <rect class="bar" x="402" y="92" width="76" height="258" fill="#b9a7ff"/><text class="label" x="398" y="382">验收</text>
+  </g>
+  <text class="p" x="230" y="682">判断：会用 AI 只是起点，能判断 AI 哪里错、为什么错、该怎么收窄任务，才是新的工程能力。</text>
+</svg>

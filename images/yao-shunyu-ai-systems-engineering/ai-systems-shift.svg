@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" role="img" aria-labelledby="title desc">
+  <title id="title">从模型能力竞赛到系统工程</title>
+  <desc id="desc">图示大模型竞争从模型分数、问题定义，转向训练系统、产品反馈、组织协作和安全制衡。</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#101828" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="13" markerHeight="13" refX="10" refY="6.5" orient="auto">
+      <path d="M2,2 L11,6.5 L2,11 Z" fill="#667085"/>
+    </marker>
+    <style>
+      .bg { fill: #fbfcff; }
+      .grid { stroke: #eef2f8; stroke-width: 1; }
+      .title { font: 800 42px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #101828; }
+      .subtitle { font: 500 20px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #667085; }
+      .card { fill: #fff; stroke: #d8dee8; stroke-width: 2; filter: url(#shadow); }
+      .card-title { font: 800 28px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #101828; }
+      .card-subtitle { font: 600 18px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #667085; }
+      .item { font: 600 18px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #344054; }
+      .label { font: 800 16px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #fff; }
+      .arrow { stroke: #667085; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .note { font: 650 20px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #344054; }
+      .small { font: 500 16px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #667085; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1400" height="820"/>
+  <g opacity="0.8">
+    <path class="grid" d="M0 80H1400M0 160H1400M0 240H1400M0 320H1400M0 400H1400M0 480H1400M0 560H1400M0 640H1400M0 720H1400"/>
+    <path class="grid" d="M100 0V820M200 0V820M300 0V820M400 0V820M500 0V820M600 0V820M700 0V820M800 0V820M900 0V820M1000 0V820M1100 0V820M1200 0V820M1300 0V820"/>
+  </g>
+
+  <text class="title" x="72" y="78">从“模型够不够强”到“系统能不能跑起来”</text>
+  <text class="subtitle" x="72" y="116">这篇访谈里最有价值的变化：AI 不再只是模型竞赛，而是问题定义、训练系统、产品反馈和组织协作的组合题。</text>
+
+  <g transform="translate(72 178)">
+    <rect class="card" width="344" height="360" rx="18"/>
+    <rect x="24" y="24" width="86" height="34" rx="17" fill="#8fb8ff"/>
+    <text class="label" x="43" y="47">过去</text>
+    <text class="card-title" x="24" y="100">追模型能力</text>
+    <text class="card-subtitle" x="24" y="134">看 benchmark，看谁先追上</text>
+    <text class="item" x="28" y="190">• 分数差距清晰</text>
+    <text class="item" x="28" y="232">• 能力短板容易命名</text>
+    <text class="item" x="28" y="274">• 竞争更像单点突破</text>
+    <text class="small" x="28" y="322">问题：当分数都很高，纸面差距开始变得不够解释体验。</text>
+  </g>
+
+  <path class="arrow" d="M440 358 C495 358 515 358 570 358"/>
+
+  <g transform="translate(594 178)">
+    <rect class="card" width="344" height="360" rx="18"/>
+    <rect x="24" y="24" width="112" height="34" rx="17" fill="#80d1bf"/>
+    <text class="label" x="44" y="47">现在</text>
+    <text class="card-title" x="24" y="100">定义问题</text>
+    <text class="card-subtitle" x="24" y="134">不是能不能做，而是做什么</text>
+    <text class="item" x="28" y="190">• 行为目标要说清楚</text>
+    <text class="item" x="28" y="232">• 场景反馈要能闭合</text>
+    <text class="item" x="28" y="274">• 数据和评测反过来塑形</text>
+    <text class="small" x="28" y="322">变化：产品、训练目标、用户心智开始决定差异。</text>
+  </g>
+
+  <path class="arrow" d="M962 358 C1017 358 1037 358 1092 358"/>
+
+  <g transform="translate(1116 178)">
+    <rect class="card" width="212" height="360" rx="18"/>
+    <rect x="24" y="24" width="112" height="34" rx="17" fill="#f0b38b"/>
+    <text class="label" x="44" y="47">接下来</text>
+    <text class="card-title" x="24" y="100">拼系统</text>
+    <text class="card-subtitle" x="24" y="134">把能力稳定变成价值</text>
+    <text class="item" x="28" y="190">• 训练稳定性</text>
+    <text class="item" x="28" y="232">• 组织协作</text>
+    <text class="item" x="28" y="274">• 产品反馈</text>
+    <text class="item" x="28" y="316">• 安全制衡</text>
+  </g>
+
+  <g transform="translate(152 622)">
+    <rect x="0" y="0" width="1096" height="112" rx="18" fill="#ffffff" stroke="#d8dee8" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="24" y="24" width="146" height="34" rx="17" fill="#e7edf7"/>
+    <text class="note" x="45" y="47" fill="#172033">启发</text>
+    <text class="small" x="34" y="84" fill="#475467">研究团队补 ablation 和排错机制；产品团队补真实反馈；工程团队重估规划、验收和 AI 协作能力；个人少追热词，多找还没被定义清楚的问题。</text>
+  </g>
+</svg>

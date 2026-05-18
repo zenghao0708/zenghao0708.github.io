@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+  <defs>
+    <filter id="s" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#101828" flood-opacity="0.08"/></filter>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M2 2L10 6L2 10Z" fill="#98a2b3"/></marker>
+    <style>
+      .bg{fill:#fbfcff}.grid{stroke:#eef2f8}.h{font:800 40px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}.p{font:500 20px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}.card{fill:#fff;stroke:#d8dee8;stroke-width:2;filter:url(#s)}.t{font:800 26px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}.b{font:600 18px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#475467}.tag{font:800 16px -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}.line{stroke:#98a2b3;stroke-width:3;fill:none;marker-end:url(#a)}
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="760"/>
+  <g opacity=".7"><path class="grid" d="M0 100H1400M0 200H1400M0 300H1400M0 400H1400M0 500H1400M0 600H1400M0 700H1400"/><path class="grid" d="M100 0V760M200 0V760M300 0V760M400 0V760M500 0V760M600 0V760M700 0V760M800 0V760M900 0V760M1000 0V760M1100 0V760M1200 0V760M1300 0V760"/></g>
+  <text class="h" x="72" y="78">壳应用什么时候开始不只是壳？</text>
+  <text class="p" x="72" y="114">模型能力会外溢，产品要活下来，必须把“包装能力”变成“持续壁垒”。</text>
+  <g transform="translate(88 210)">
+    <rect class="card" width="260" height="210" rx="18"/><rect x="24" y="24" width="92" height="32" rx="16" fill="#f0b38b"/><text class="tag" x="45" y="46">入口</text><text class="t" x="24" y="96">模型包装</text><text class="b" x="24" y="138">把模型接进一个界面或工作流，先证明可能性。</text>
+  </g>
+  <path class="line" d="M370 315H505"/>
+  <g transform="translate(528 170)">
+    <rect class="card" width="344" height="290" rx="18"/><rect x="24" y="24" width="118" height="32" rx="16" fill="#80d1bf"/><text class="tag" x="44" y="46">关键变化</text><text class="t" x="24" y="96">从 demo 到工作流</text><text class="b" x="24" y="140">用户不只是试用一次，而是在这里完成真实任务。</text><text class="b" x="24" y="184">真实任务会留下反馈、偏好、失败案例和上下文。</text><text class="b" x="24" y="228">这些东西才可能变成模型公司不容易直接复制的资产。</text>
+  </g>
+  <path class="line" d="M895 315H1030"/>
+  <g transform="translate(1052 142)">
+    <rect class="card" width="260" height="346" rx="18"/><rect x="24" y="24" width="92" height="32" rx="16" fill="#8fb8ff"/><text class="tag" x="45" y="46">壁垒</text><text class="b" x="24" y="102">• 用户心智</text><text class="b" x="24" y="146">• 工作流数据</text><text class="b" x="24" y="190">• 自研模型</text><text class="b" x="24" y="234">• 垂直场景深度</text><text class="b" x="24" y="278">• 分发与服务能力</text>
+  </g>
+  <text class="p" x="230" y="620">判断：如果产品只停在“模型能力的展示窗口”，惊喜很容易变成官方功能。</text>
+</svg>
