@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS page_views (
+  url TEXT PRIMARY KEY,
+  title TEXT,
+  views INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_page_views_updated_at
+  ON page_views(updated_at);

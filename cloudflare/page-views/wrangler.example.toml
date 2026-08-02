@@ -1,0 +1,11 @@
+name = "coolzeng-page-views"
+main = "src/worker.js"
+compatibility_date = "2026-08-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://coolzeng.com,https://www.coolzeng.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "coolzeng-page-views"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"

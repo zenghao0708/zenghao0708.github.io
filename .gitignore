@@ -14,3 +14,7 @@ blog_new/db.json
 .env.*
 !.env.example
 !publish/.env.example
+.dev.vars*
+.wrangler/
+cloudflare/page-views/wrangler.toml
+services/page-views/data/

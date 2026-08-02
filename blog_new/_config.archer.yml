@@ -158,11 +158,20 @@ comment:
 
 # ========== Analytics ========== #
 # enable Busuanzi analytics
-busuanzi: true
+busuanzi: false
 # fill in pv or uv
 busuanzi_pv_or_uv: 'pv'
 # custom analytic slogan, '${count}' is the analytic number, DO NOT modify it.
 busuanzi_slug: 'PV: ${count} :)'
+# Self-hosted page view counter.
+# Self-hosted SQLite endpoint; Cloudflare can be added later as an optional fallback.
+page_views:
+  enable: true
+  api_bases:
+    - https://coolzeng.cn/blog-views
+    # - https://coolzeng-page-views.<your-subdomain>.workers.dev
+  site_total: true
+  request_timeout_ms: 2500
 # Baidu analytics
 baidu_analytics: 
 # Google analytics

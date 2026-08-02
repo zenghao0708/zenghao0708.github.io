@@ -1,0 +1,23 @@
+[Unit]
+Description=Coolzeng blog page-view counter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/blog-page-views
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=8789
+Environment=PAGE_VIEWS_DB_PATH=/home/ubuntu/.local/share/blog-page-views/page-views.db
+Environment=ALLOWED_ORIGINS=https://coolzeng.com,https://www.coolzeng.com
+ExecStart=/usr/bin/node --no-warnings /home/ubuntu/blog-page-views/server.js
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target
