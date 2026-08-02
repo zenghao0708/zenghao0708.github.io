@@ -47,6 +47,26 @@ test('increments page views and returns the site total', async (context) => {
   assert.deepEqual(await total.json(), { views: 2 });
 });
 
+test('describes the service at the root path', async (context) => {
+  const service = await startService();
+  context.after(() => new Promise((resolve) => service.server.close(() => {
+    service.close();
+    resolve();
+  })));
+
+  const response = await fetch(`${service.baseUrl}/`);
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), {
+    ok: true,
+    service: 'blog-page-views',
+    endpoints: {
+      health: './health',
+      siteViews: './api/views/site',
+      pageViews: './api/views?url=/posts/example/'
+    }
+  });
+});
+
 test('imports LeanCloud-compatible records and rejects other browser origins', async (context) => {
   const service = await startService();
   context.after(() => new Promise((resolve) => service.server.close(() => {

@@ -145,6 +145,19 @@ function createPageViewService(options = {}) {
       }
 
       const requestUrl = new URL(request.url, 'http://localhost');
+      if (request.method === 'GET' && requestUrl.pathname === '/') {
+        sendJson(response, 200, {
+          ok: true,
+          service: 'blog-page-views',
+          endpoints: {
+            health: './health',
+            siteViews: './api/views/site',
+            pageViews: './api/views?url=/posts/example/'
+          }
+        }, request, allowedOrigins);
+        return;
+      }
+
       if (request.method === 'GET' && requestUrl.pathname === '/health') {
         sendJson(response, 200, { ok: true }, request, allowedOrigins);
         return;
