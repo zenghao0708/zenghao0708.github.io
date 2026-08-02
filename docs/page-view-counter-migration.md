@@ -27,10 +27,30 @@ Cloudflare Workers + D1 保留为可选的海外灾备。当前博客只使用�
 ## 当前生产状态
 
 - 主服务：`https://coolzeng.cn/blog-views`
-- 迁移基线：60 条记录、总阅读数 8029
-- 生产切换后的首次端到端访问：`/posts/http2-overview/` 从 82 增至 83，全站从 8029 增至 8030
-- 海外验证：Globalping 的美国、德国、新加坡、澳大利亚探针均返回 HTTP 200，耗时约 0.95-1.70 秒
+- LeanCloud 原始基线：60 条记录、总阅读数 8029
+- 不蒜子恢复：18 篇当前文章、总阅读数 1284
+- canonical 合并结果：18 篇当前文章全部命中，另保留 3 条已下线文章记录；合并完成基线为 21 条、总阅读数 9321
+- 旧 URL 清理：合并并删除 45 个历史别名，其中 1 个为标题拼写不同的人工映射
+- 国内验证：深圳电信直连可以读取并自增，CORS 正确返回 `https://coolzeng.com`
+- 海外验证：美国代理可以读取并自增；Globalping 的美国、德国、新加坡、日本探针读取均返回 HTTP 200，CORS 预检均返回 HTTP 204
 - Cloudflare 备用服务：代码已准备，账号尚未授权，因此当前未部署、未写入博客配置
+
+## 为什么第一次切换后显示 1
+
+迁移前存在两套前后连续的计数器：
+
+- 2024-01-14 之前的 Next 主题使用 LeanCloud。
+- 2024-01-14 起的 Archer 主题使用不蒜子。
+
+首次迁移只导入了 LeanCloud，因此近两年新增文章在新数据库里没有 canonical URL，第一次打开就会创建为 1。最终迁移按照下面的公式合并：
+
+```text
+最终阅读数 = 相同文章全部 LeanCloud 旧路径之和
+           + 不蒜子 page_pv
+           + 切换到新服务后的新增阅读数
+```
+
+不蒜子查询本身会增加一次 `page_pv`，恢复时已经按每篇文章的实际审计请求次数扣除，避免迁移操作污染历史值。
 
 ## 数据模型
 
@@ -63,9 +83,13 @@ LeanCloud `Counter` 表的核心字段：
 ~/.local/share/blog-publish/page-views/leancloud-counter-2026-08-01.json
 ~/.local/share/blog-publish/page-views/page-views-normalized-2026-08-01.json
 ~/.local/share/blog-publish/page-views/page-views-d1-2026-08-01.sql
+~/.local/share/blog-publish/page-views/busuanzi-recovered-2026-08-02.json
+~/.local/share/blog-publish/page-views/page-views-canonical-merge-2026-08-02.json
+~/.local/share/blog-publish/page-views/page-views-before-busuanzi-merge-2026-08-02T03-06-37-112Z.db
+~/.local/share/blog-publish/page-views/page-views-canonical-merge-result-2026-08-02.json
 ```
 
-本次核对结果：60 条记录、60 个唯一 URL、总阅读数 8029。
+原始 LeanCloud 核对结果：60 条记录、60 个唯一 URL、总阅读数 8029。合并后 18 篇线上文章均有唯一 canonical 记录，不再依赖旧 permalink。
 
 如需从 LeanCloud 控制台重新导出，也可以在 `Data Storage > Import/Export > Data Export` 下载 JSON，再运行：
 
