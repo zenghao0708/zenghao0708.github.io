@@ -13,7 +13,7 @@ description: 这篇是命令行工具系列里的工具总览版。围绕 AI 编
 
 如果你更关心“为什么我后来决定彻底迁出 oh-my-zsh、以及迁移里到底踩了哪些坑”，可以继续看：
 
-- 迁移复盘版：[/posts/stop-using-oh-my-zsh/](/posts/stop-using-oh-my-zsh/)
+- 迁移复盘版：[我为什么不再用 oh-my-zsh 了](/posts/stop-using-oh-my-zsh/)
 
 如果你只想先回答一个问题：
 
@@ -23,7 +23,7 @@ description: 这篇是命令行工具系列里的工具总览版。围绕 AI 编
 
 如果你想再往下看“为什么现代 AI coding agent 最终会把体验问题做成 runtime 问题”，也可以继续读：
 
-- Claude Code 主稿：[/posts/claude-code-source-analysis/](/posts/claude-code-source-analysis/)
+- Claude Code 主稿：[深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？](/posts/claude-code-source-analysis/)
 
 这篇文章更适合做第一入口：先帮你建立一张工具地图，知道每种工具到底解决的是文件定位、会话管理、历史搜索，还是运行时接管。
 

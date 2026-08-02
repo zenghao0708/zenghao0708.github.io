@@ -18,8 +18,8 @@ published: false
 # Claude Code 架构拆解：一个更像“完整系统”的 AI Coding Agent
 
 > 这篇已从公共列表下线。
-> 其中核心判断已经并入更新、更完整的主稿：[/posts/claude-code-source-analysis/](/posts/claude-code-source-analysis/)
-> 如果你更想快速建立结构脑图，建议看图解导读版：[/posts/claude-code-source-deep-dive/](/posts/claude-code-source-deep-dive/)
+> 其中核心判断已经并入更新、更完整的主稿：[深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？](/posts/claude-code-source-analysis/)
+> 如果你更想快速建立结构脑图，建议看图解导读版：[Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手](/posts/claude-code-source-deep-dive/)
 
 看完 Claude Code 的源码还原版本后，我对它的判断很明确：
 

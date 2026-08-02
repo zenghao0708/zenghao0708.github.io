@@ -17,7 +17,7 @@ published: false
 # Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手
 
 > 这篇已从公共列表下线。
-> 结构图和核心结论已经并入唯一保留版：[/posts/claude-code-source-analysis/](/posts/claude-code-source-analysis/)
+> 结构图和核心结论已经并入唯一保留版：[深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？](/posts/claude-code-source-analysis/)
 
 这篇不是 Claude Code 系列里的`最终主稿`，而是`结构图导读版`。
 
@@ -29,7 +29,7 @@ published: false
 
 如果你想直接看最完整、最权威的版本，可以去主稿：
 
-- 完整技术主稿：[/posts/claude-code-source-analysis/](/posts/claude-code-source-analysis/)
+- 完整技术主稿：[深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？](/posts/claude-code-source-analysis/)
 
 这篇文章的任务更明确：
 
@@ -492,5 +492,5 @@ Claude Code 里专门有 `EnterWorktreeTool` / `ExitWorktreeTool`。
 
 ## 延伸阅读
 
-- 完整技术主稿：[/posts/claude-code-source-analysis/](/posts/claude-code-source-analysis/)
-- 快速判断版：[/posts/claude-code-source-why-better/](/posts/claude-code-source-why-better/)
+- 完整技术主稿：[深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？](/posts/claude-code-source-analysis/)
+- 快速判断版：[Claude Code 源码分析：为什么它比很多 Agent 工具更好用](/posts/claude-code-source-why-better/)

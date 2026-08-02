@@ -13,7 +13,7 @@ description: 复盘一次从 oh-my-zsh 迁移到 sheldon + starship + atuin + zo
 
 如果你想先看“迁移之后的工具清单和工作流长什么样”，可以先读：
 
-- Mac 命令行工具总览：[/posts/mac-ai-coding-tools/](/posts/mac-ai-coding-tools/)
+- Mac 命令行工具总览：[Mac 上的 AI 编码利器：打造高效命令行工作流](/posts/mac-ai-coding-tools/)
 
 这篇更聚焦的是另一件事：为什么我决定迁、真实迁移过程踩了什么坑、以及主力开发机迁环境到底应该怎么收口。
 
@@ -244,4 +244,4 @@ mise which node
 
 ## 延伸阅读
 
-- Mac 命令行工具总览：[/posts/mac-ai-coding-tools/](/posts/mac-ai-coding-tools/)
+- Mac 命令行工具总览：[Mac 上的 AI 编码利器：打造高效命令行工作流](/posts/mac-ai-coding-tools/)

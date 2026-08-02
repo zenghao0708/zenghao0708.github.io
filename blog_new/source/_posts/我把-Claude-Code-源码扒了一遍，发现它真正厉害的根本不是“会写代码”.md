@@ -17,7 +17,7 @@ published: false
 # Claude Code 源码分析：为什么它比很多 Agent 工具更好用
 
 > 这篇已从公共列表下线。
-> 主要结论已经并入唯一保留版：[/posts/claude-code-source-analysis/](/posts/claude-code-source-analysis/)
+> 主要结论已经并入唯一保留版：[深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？](/posts/claude-code-source-analysis/)
 
 这篇是 Claude Code 系列里的`快速判断版`。
 
@@ -29,7 +29,7 @@ published: false
 
 如果你后面还想继续追，直接去看完整技术主稿：
 
-- 完整技术主稿：[/posts/claude-code-source-analysis/](/posts/claude-code-source-analysis/)
+- 完整技术主稿：[深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？](/posts/claude-code-source-analysis/)
 
 这几个月，Agent 工具很多。
 
@@ -272,5 +272,5 @@ Claude Code 之所以更好用，不是因为它更会回答。
 
 ## 延伸阅读
 
-- 完整技术主稿：[/posts/claude-code-source-analysis/](/posts/claude-code-source-analysis/)
-- 结构图导读版：[/posts/claude-code-source-deep-dive/](/posts/claude-code-source-deep-dive/)
+- 完整技术主稿：[深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？](/posts/claude-code-source-analysis/)
+- 结构图导读版：[Claude Code 图解导读：从 CLI 入口到多代理系统，一次看懂它为什么顺手](/posts/claude-code-source-deep-dive/)

@@ -44,8 +44,8 @@ Claude Code 不一样。
 
 如果你想把这套 runtime 思路继续放回自己的工具栈和系统设计里看，可以结合这两篇公开文章一起读：
 
-- AI 编码工具链总览：[/posts/mac-ai-coding-tools/](/posts/mac-ai-coding-tools/)
-- 控制平面型 Agent 架构：[/posts/openclaw-architecture/](/posts/openclaw-architecture/)
+- AI 编码工具链总览：[Mac 上的 AI 编码利器：打造高效命令行工作流](/posts/mac-ai-coding-tools/)
+- 控制平面型 Agent 架构：[OpenClaw 架构设计：一个“控制平面型”个人 AI 助手的工程化落地](/posts/openclaw-architecture/)
 
 ### 版本边界
 
