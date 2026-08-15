@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#5f5646" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#f5f1e8"/>
+  <rect x="38" y="34" width="1524" height="832" rx="28" fill="none" stroke="#22313a" stroke-width="3"/>
+  <rect x="58" y="56" width="1484" height="788" rx="24" fill="none" stroke="#22313a" stroke-opacity="0.15" stroke-width="1.5"/>
+  
+  
+    <text x="88" y="112" fill="#1f2a32" font-size="38" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">557 万美元，训出一个前沿模型</text>
+    <text x="88" y="152" fill="#5e6b73" font-size="19" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">DeepSeek-V3 与同量级模型的正式预训练成本对比 · 公开数字整理</text>
+  
+
+  
+    <text x="220" y="274" fill="#1f2a32" font-size="24" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">Llama 3.1 同量级</text>
+    <text x="860" y="274" fill="#5e6b73" font-size="19" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">业内普遍估算</text>
+    <rect x="220" y="300" width="1080" height="92" rx="14" fill="#c96d3b" stroke="#22313a" stroke-width="2.5"/>
+    <rect x="220" y="300" width="14" height="92" rx="7" fill="#22313a" fill-opacity="0.25"/>
+    <text x="1270" y="355" text-anchor="end" fill="#fffdf8" font-size="26" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">约 10 倍</text>
+  
+  
+    <text x="220" y="494" fill="#1f2a32" font-size="24" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">DeepSeek-V3</text>
+    <text x="860" y="494" fill="#5e6b73" font-size="19" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">671B MoE · 激活 37B</text>
+    <rect x="220" y="520" width="108" height="92" rx="14" fill="#2f7f73" stroke="#22313a" stroke-width="2.5"/>
+    <rect x="220" y="520" width="14" height="92" rx="7" fill="#22313a" fill-opacity="0.25"/>
+    <text x="354" y="575" fill="#1f2a32" font-size="26" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">557 万美元</text>
+  
+
+  <line x1="220" y1="660" x2="1300" y2="660" stroke="#22313a" stroke-opacity="0.3" stroke-width="2"/>
+  <line x1="328" y1="652" x2="328" y2="668" stroke="#22313a" stroke-opacity="0.4" stroke-width="2"/>
+  <line x1="760" y1="652" x2="760" y2="668" stroke="#22313a" stroke-opacity="0.4" stroke-width="2"/>
+  <line x1="1300" y1="652" x2="1300" y2="668" stroke="#22313a" stroke-opacity="0.4" stroke-width="2"/>
+  <text x="328" y="694" text-anchor="middle" fill="#5e6b73" font-size="17" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">×1 · 557 万美元</text>
+  <text x="760" y="694" text-anchor="middle" fill="#5e6b73" font-size="17" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">×5</text>
+  <text x="1300" y="694" text-anchor="middle" fill="#5e6b73" font-size="17" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">×10</text>
+
+  <text x="220" y="740" fill="#5e6b73" font-size="17" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">口径：仅正式训练运行成本（2.788M H800 GPU 小时），不含前期实验、基建与人力；Epoch AI 估算总投入更高</text>
+
+  
+    <rect x="88" y="776" width="1424" height="52" rx="26" fill="#d9efe9" stroke="#2f7f73" stroke-width="2"/>
+    <text x="800" y="809" text-anchor="middle" fill="#1f2a32" font-size="22" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">成本差一个数量级，性能同量级 —— 这就是&quot;价格屠夫&quot;的底气</text>
+  
+
+</svg>

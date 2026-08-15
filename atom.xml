@@ -6,7 +6,7 @@
   <link href="https://coolzeng.com/atom.xml" rel="self"/>
   
   <link href="https://coolzeng.com/"/>
-  <updated>2026-08-02T12:21:45.709Z</updated>
+  <updated>2026-08-15T14:49:53.992Z</updated>
   <id>https://coolzeng.com/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DeepSeek 开源 Harness（dsh）：模型负责思考，&quot;壳&quot;负责干活</title>
+    <link href="https://coolzeng.com/posts/deepseek-harness-intro/"/>
+    <id>https://coolzeng.com/posts/deepseek-harness-intro/</id>
+    <published>2026-08-15T14:43:00.000Z</published>
+    <updated>2026-08-15T14:49:53.992Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="DeepSeek-开源-Harness（dsh）：模型负责思考，”壳”负责干活"><a href="#DeepSeek-开源-Harness（dsh）：模型负责思考，”壳”负责干活" class="headerlink" title="DeepSeek 开源 Harness（dsh）：模型负责思考，”壳”负责干活"></a>DeepSeek 开源 Harness（dsh）：模型负责思考，”壳”负责干活</h1><blockquote><p>摘要：2026 年 8 月，DeepSeek 开源了第一款 Agent 产品 DeepSeek Harness（dsh）——“Model + Harness &#x3D; Agent”的运行框架，核心口号是 Everything is a Plugin（一切皆插件）。这篇聊聊 dsh 是什么、为什么 Agent 需要一层 Harness、插件化意味着什么，以及它还只是开发者预览版这件事。</p></blockquote><p>8 月中旬，DeepSeek 开源了自己的第一款 Agent 产品：DeepSeek Harness，简称 dsh。v0.1，MIT 协议，发布当天 GitHub 就冲了好几万 star。</p><p>整个项目最显眼的一句话是 Everything is a Plugin——一切皆插件。</p><p>我看了官方发布页，翻了仓库结构，也读了不少社区讨论。这篇不写安装教程，只讲四件事：dsh 是什么、为什么 Agent 需要一层 Harness、”一切皆插件”到底意味着什么，以及开发者预览版这个身份提醒我们什么。</p><span id="more"></span><h2 id="模型是马，Harness-是挽具"><a href="#模型是马，Harness-是挽具" class="headerlink" title="模型是马，Harness 是挽具"></a>模型是马，Harness 是挽具</h2><p>Harness 这个词原意是马具、挽具，引申义是”把马套上车的那套装置”。</p><p>用在 Agent 上很贴切：模型是那匹马，Harness 是把马的力气真正转化成”干活”的整套装置。</p><p>dsh 的官方定位可以用一句话概括：<strong>Model + Harness &#x3D; Agent</strong>。模型负责推理和生成，Harness 负责模型之外的一切——agent loop、工具调度、上下文管理、会话状态、权限链路。它提供的形态包括：Python 库和 dsh CLI、浏览器里的 Web UI、无界面的 headless 模式，以及 MCP 服务，底层跑在一个叫 Cordis 的插件内核上。</p><p>一句话：dsh 不是又一个”聊天窗口”，而是让你在上面搭建、运行、甚至改装 Agent 的运行时。</p><h2 id="为什么-Harness-对-Agent-很重要"><a href="#为什么-Harness-对-Agent-很重要" class="headerlink" title="为什么 Harness 对 Agent 很重要"></a>为什么 Harness 对 Agent 很重要</h2><p>先说一个容易被忽略的事实：<strong>模型权重里不包含”干活”的能力</strong>。</p><p>一个能真正完成任务的 Agent，至少需要五件事：感知（读文件、查状态）、决策（拆任务、定计划）、行动（调工具、执行命令）、记忆（记住上下文和中间结果）、恢复（出错后读日志、换路径、重试）。这五件事没有一件长在模型参数里，全靠外面的那层壳实现。</p><p>这层壳就是 Harness。它承载 agent loop，编排工具调用，管理上下文预算，维护多步任务的状态。这也是 DeepSeek 强调 Model + Harness &#x3D; Agent 的原因——模型负责推理，Harness 负责把推理变成行动。</p><p>顺着这个思路往下想，会发现一个更重要的判断：<strong>当头部模型能力越来越接近，Agent 的差距正在从”模型”转移到”壳”上</strong>。谁的运行时更稳、上下文治理更聪明、工具调度更可靠，谁的 Agent 就更好用。我拆 Claude Code 源码的时候就有这个体感——真正影响好不好用的，往往不是模型多强，而是 runtime、会话管理、工具调度这些工程细节。dsh 是模型厂商第一次把这一层当作核心产品来认真做。</p><h2 id="“一切皆插件”不是口号，是架构"><a href="#“一切皆插件”不是口号，是架构" class="headerlink" title="“一切皆插件”不是口号，是架构"></a>“一切皆插件”不是口号，是架构</h2><p>dsh 最核心的设计理念，就是 Everything is a Plugin。</p><p>这不是营销话术，而是架构事实：在 dsh 里，几乎每个组成部分都是插件——</p><ul><li><strong>模型是插件</strong>：模型提供商可以插拔，今天用 DeepSeek，明天可以换别的</li><li><strong>工具是插件</strong>：文件读写、代码执行、搜索，都以插件形式注册</li><li><strong>上下文和记忆是插件</strong>：上下文怎么管理、记忆怎么存，可以换成自己的实现</li><li><strong>连 agent loop 本身都是插件</strong>：循环不是写死在内核里的，可以被替换、被改写</li></ul><p>内核只保留最小的一层”壳”，负责加载插件、按事件把插件串起来，其余全部交给插件。这个设计有三层意义：</p><p><strong>可替换。</strong> 想换模型、加工具，不用动框架本身，换插件就行。</p><p><strong>可组合。</strong> 功能以插件为粒度组装，像搭乐高，也像 Android 的应用生态——官方提供基础件，剩下交给社区。社区里已经冒出了插件市场、Web 端插件管理器这些周边项目，说明这个思路正在被验证。</p><p><strong>可自修改。</strong> 既然一切皆插件，Agent 理论上可以在运行时管理自己的插件——加插件、换插件、改自己的行为。很多报道把它称为”自进化软件”的雏形。听起来有点科幻，但”Agent 能改装自己”确实是这个架构最自然的结果。</p><p>对普通开发者来说，这意味着扩展 dsh 的成本，从”改框架”降到了”写插件”。</p><h2 id="Web-UI-和-headless，两种打开方式"><a href="#Web-UI-和-headless，两种打开方式" class="headerlink" title="Web UI 和 headless，两种打开方式"></a>Web UI 和 headless，两种打开方式</h2><p>dsh 提供了两种典型的使用形态，对应两类场景。</p><p><strong>Web UI：人机协作的工作台。</strong> 安装后拉起 Web UI，在浏览器里和 Agent 对话、查看会话、管理插件。适合你坐在电脑前，和 Agent 一起调试代码、边看边改的场景。官方仓库里提供了独立的 Web 应用包（npm 上的 <code>@deepseek-ai/dsh-web-app</code>），可以本地自托管；社区也有人做了 Electron 桌面壳，想当普通 App 用可以关注。</p><p><strong>headless：无人值守的自动化。</strong> 不需要界面，通过 CLI 或 Python SDK 以程序化方式驱动 agent 循环，适合写脚本、接 CI、跑批量任务，或者把 dsh 嵌进自己的产品里当”干活引擎”。官方部署指南里也给了两条接入路径：一条是 npx 一键拉起 Web 端，另一条是直接用 Python SDK 做完整接入。</p><p>两种形态共用同一套插件体系，切换成本很低。建议先开 Web UI 把交互玩明白，再把重复性任务脚本化、挪到 headless 里去跑。</p><h2 id="别忘了：它还是开发者预览版"><a href="#别忘了：它还是开发者预览版" class="headerlink" title="别忘了：它还是开发者预览版"></a>别忘了：它还是开发者预览版</h2><p>最后说点冷静的。dsh 目前的身份是 <strong>v0.1 开发者预览版（developer preview）</strong>——虽然已经 MIT 开源，代码可读可改，但官方定位很明确：还不是稳定版。</p><p>这意味着几件事：</p><ul><li><strong>迭代会很快</strong>：功能、接口都在快速演进</li><li><strong>兼容性可能变化</strong>：API、插件接口、配置格式都可能调整，甚至出现破坏性变更，不保证向后兼容</li><li><strong>别在关键生产链路上深度绑定</strong>：拿它学习架构、写插件、跑实验完全没问题，但生产环境建议锁好版本、关注 changelog、给插件做版本管理</li></ul><p>这类项目资料更新极快，本文基于 2026 年 8 月中旬的公开信息写成，具体以官方仓库和发布页为准。</p><h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>dsh 的发布，在我看来是一个信号：模型厂商终于开始认真做”模型外面那层壳”了，而且选了最开放的方式——MIT 开源 + 一切皆插件。</p><p>无论 dsh 最终能不能成为主流，**”Agent 的差异在 Harness，而 Harness 应该是可拼装的”**这个判断，很可能会成为接下来一两年 agent 开发的共识。</p><p>如果你也感兴趣，建议做三件事：去官方发布页读一遍介绍，去 GitHub 仓库翻翻架构，然后动手写自己的第一个插件——毕竟一切皆插件，动手才是最快的理解方式。</p><h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul><li><a href="/posts/claude-code-source-analysis/">深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？</a>：如果你想看 Agent runtime、tool 调度、compact 和 permissions 这些工程细节，可以继续读这篇。</li><li><a href="/posts/mac-ai-coding-tools/">Mac 上的 AI 编码利器：打造高效命令行工作流</a>：如果你关心 AI coding 落到日常开发时，终端工作流怎么配，可以看这篇。</li></ul><hr><p>说明：本文由 DeepSeek V4-Flash 模型撰写，内容基于 DeepSeek 官方发布页、GitHub 仓库（deepseek-ai&#x2F;DeepSeek-Harness）与公开报道整理，文中观点为个人判断，不代表官方立场。dsh 仍处于开发者预览阶段，接口与兼容性可能变化，具体以官方文档为准。</p>]]></content>
+    
+    
+    <summary type="html">DeepSeek 开源了自己的第一款 Agent 产品 Harness（dsh），核心口号是&quot;一切皆插件&quot;。这篇聊聊 dsh 是什么、为什么 Agent 需要一层 Harness、插件化架构意味着什么，以及它还只是开发者预览版这件事。</summary>
+    
+    
+    
+    <category term="AI 工具" scheme="https://coolzeng.com/categories/AI-%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="AI" scheme="https://coolzeng.com/tags/AI/"/>
+    
+    <category term="Agent" scheme="https://coolzeng.com/tags/Agent/"/>
+    
+    <category term="AI 编程" scheme="https://coolzeng.com/tags/AI-%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="开源" scheme="https://coolzeng.com/tags/%E5%BC%80%E6%BA%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>看完梁文锋的 4 小时路演纪要：DeepSeek 拿了 500 亿，一票没让</title>
+    <link href="https://coolzeng.com/posts/deepseek-liang-wenfeng-first-funding/"/>
+    <id>https://coolzeng.com/posts/deepseek-liang-wenfeng-first-funding/</id>
+    <published>2026-08-15T13:05:00.000Z</published>
+    <updated>2026-08-15T15:03:45.067Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="看完梁文锋的-4-小时路演纪要：DeepSeek-拿了-500-亿，一票没让"><a href="#看完梁文锋的-4-小时路演纪要：DeepSeek-拿了-500-亿，一票没让" class="headerlink" title="看完梁文锋的 4 小时路演纪要：DeepSeek 拿了 500 亿，一票没让"></a>看完梁文锋的 4 小时路演纪要：DeepSeek 拿了 500 亿，一票没让</h1><p>DeepSeek 在 2026 年 5 月完成了成立以来的第一笔外部融资：超过 500 亿人民币，约合 74 亿美元，估值 500 亿美元以上，中国最值钱的 AI 创业公司。</p><p>但真正让我把材料翻来覆去看了几遍的，不是金额，是结构。这 500 亿里，约 200 亿是梁文锋自己出的；其余外部投资人的钱，大部分不直接买 DeepSeek 的股权，而是进了一个由梁文锋控制的有限合伙——五年锁定期，零投票权。</p><p>拿钱，不交权。</p><p>这篇适合关注 AI 行业、想知道”DeepSeek 为什么现在才融资”的读者。如果只追模型发布的新闻，这篇可能有点绕；但如果你想知道一家不缺钱的公司怎么设计自己的第一轮融资，往下看。</p><span id="more"></span><p>前阵子中文互联网流出了一份路演纪要：四小时的投资人线上会，梁文锋一个人从持续学习讲到华为芯片。纪要是非官方的，Momentum Works 后来做了英文翻译，翻译时明确标注”未经发言人确认”。我把它和 Forbes、Reuters 的报道对照着读了一遍，想理清三件事：梁文锋怎么从量化基金走到大模型；DeepSeek 的技术底牌到底是什么；以及为什么偏偏是 2026 年，这家”钱从来不是问题”的公司第一次拿了别人的钱。</p><h2 id="幻方不是前史，是来路"><a href="#幻方不是前史，是来路" class="headerlink" title="幻方不是前史，是来路"></a>幻方不是前史，是来路</h2><p>很多报道介绍梁文锋，爱用”量化大佬跨界做 AI”。看完材料我觉得”跨界”这个词不太准。</p><p>他 1985 年生在广东湛江，17 岁进浙江大学读电子信息工程，硕士念信息与通信工程，研究方向是机器视觉。在量化圈，这种履历是少数派：没有海外留学背景，没有物理或数学博士，纯本土工科出身。2015 年他和浙大校友创办幻方量化，几年时间做到国内量化私募”四大”之一，峰值管理规模约 80 亿美元。</p><p>关键要看幻方在赚钱之外攒下了什么。量化交易的核心竞争力就两样：算力，和 AI 工程能力。幻方很早把 AI 定为公司主线，自建”萤火”系列超算，做到万卡级 GPU 集群，从算子优化到集群调度都自己动手——幻方官网写过一组数字：LSTM 算子快 20% 到 6 倍，Attention 算子快 30%。</p><p>这两样东西，恰好是大模型研发最贵、最难攒的两样。</p><p>所以 2023 年 7 月他成立深度求索，幻方首期自投 30 亿，算力和工程班底直接沿用。与其说是转行，不如说是把手里的牌打到了另一张牌桌上。</p><h2 id="“钱从来不是问题，芯片才是”"><a href="#“钱从来不是问题，芯片才是”" class="headerlink" title="“钱从来不是问题，芯片才是”"></a>“钱从来不是问题，芯片才是”</h2><p>梁文锋 2023 年说过一句话，后来被反复引用：”钱从来不是我们的问题，先进芯片的出口管制才是。”</p><p>这句话能解释 DeepSeek 前三年的几乎所有动作。不融资，因为不需要——幻方的利润足够养一个不盈利的实验室，有报道称其量化基金 2025 年收益率超过 55%。API 定价敢往死里压、模型敢直接开源，因为它的账本上从来就没有”靠卖模型回本”这一栏。业内叫它”价格屠夫”，底色其实是资本结构：它不是拿 VC 的钱烧出来的公司，没有对赌，没有退出压力，开源砸的是别人家的定价体系，不是自己的估值叙事。</p><p>有意思的是，三年后的路演纪要里，他还在讲同一套逻辑。纪要里有个现成的例子：有投资人问融资之后会不会加大数据方面的投入，他回答说高质量数据标注的瓶颈是时间不是钱，”即使没有更多钱，现有资金也够我们以最快速度扩张”。翻译一下：这轮钱不是来救急的。</p><h2 id="技术底牌：被出口管制逼出来的效率"><a href="#技术底牌：被出口管制逼出来的效率" class="headerlink" title="技术底牌：被出口管制逼出来的效率"></a>技术底牌：被出口管制逼出来的效率</h2><p>技术上的事，公开材料比八卦扎实，三组数字就能讲完。</p><p>DeepSeek-V3，2024 年 12 月发布。MoE 架构，总参数 671B，每个 token 只激活 37B；自研 MLA 注意力把 KV cache 压下去；FP8 混合精度训练。完整预训练用了 2.788M 个 H800 GPU 小时——2048 张卡跑大约两个月，折合约 557 万美元。同量级的 Llama 3.1，业内普遍估算训练成本是它的十倍上下。技术报告还专门强调训练全程稳定，这个规模的 MoE 能做到这点，本身就少见。</p><p><img src="/images/deepseek-liang-wenfeng-first-funding/v3-cost-comparison.png" alt="DeepSeek-V3 与同量级模型的训练成本对比"></p><p>差出一个数量级这件事，画出来比写出来直观。</p><p>DeepSeek-R1，2025 年 1 月发布。在 V3 的底子上做强化学习，把推理能力拉到对标 OpenAI o1，建模成本在 500 万美元量级。</p><p>第三组数字是市场给的：R1 开源一周后，英伟达单日市值蒸发近 6000 亿美元，是美股历史上最大规模的单日市值缩水。</p><p>这里得补一句公道话：557 万美元只是那次正式训练运行的成本，不含前期实验、基础设施和人力。Epoch AI 做过估算，这个案例把账算全的话，总投入要高出不少。但就算翻几倍，成本差距依然是碾压级的。</p><p>我的判断：护城河不在某一代模型里，模型会一代代换；能延续下去的是”算法和工程协同设计”这套方法论。MLA、FP8、流水线并行，每一项都冲着同一个目标去——在拿不到最顶级卡的约束下，把 H800 的效率榨到极限。这是被出口管制逼出来的能力。纪要里梁文锋自己说得也不客气：中国模型在成本和产品上可能有结构性优势，”因为他们不需要这么做，所以不发展这种能力”。</p><h2 id="为什么偏偏是-2026-年"><a href="#为什么偏偏是-2026-年" class="headerlink" title="为什么偏偏是 2026 年"></a>为什么偏偏是 2026 年</h2><p>“钱不是问题”说了三年，为什么 2026 年 5 月忽然要拿 500 亿外部的钱？我把公开信息拼起来，觉得原因有三层，分量不一样。</p><p>最表面的一层是算力账。投资人会上有人问得很直白：全球头部 AI 玩家从芯片采购到集群调度，每家都是千亿美元级的投入，中国的算力短板多久能补上？AGI 冲刺阶段的算力账单，已经不是一家量化基金的利润能长期覆盖的量级——哪怕梁文锋嘴上说钱不是瓶颈。</p><p>中间一层是上市。首轮关闭后，7 月 DeepSeek 就启动了新一轮，估值约 740 亿美元，路透社报道明确指向境内 IPO。回头再看首轮：引入腾讯、宁德时代这类战略股东，理顺股权结构，是很标准的上市前动作。</p><p>最深的一层，我认为是和国家对齐。这轮融资里唯一的例外条款，给了国家人工智能产业投资基金：它是唯一一家直接投资 DeepSeek 主体、拿到真实投票权、且不受五年锁定期约束的投资方。换个说法，这 500 亿买到的不只是股权，还有北京在这家中国最重要的 AI 公司里的一个正式席位。</p><p><img src="/images/deepseek-liang-wenfeng-first-funding/deepseek-timeline.png" alt="DeepSeek 从幻方到首次融资的路径"></p><p>顺序倒过来看更清楚：DeepSeek 并不缺钱，它缺的是另外三样东西——算力要储备、上市要铺路、和国家的关系要摆到明面上。这三件事在 2026 年凑齐了。</p><h2 id="200-亿跟投：整笔交易里最值得琢磨的部分"><a href="#200-亿跟投：整笔交易里最值得琢磨的部分" class="headerlink" title="200 亿跟投：整笔交易里最值得琢磨的部分"></a>200 亿跟投：整笔交易里最值得琢磨的部分</h2><p>回到梁文锋自己那 200 亿。</p><p>按路透社报道，他个人认购了这轮融资的 40%，约 200 亿人民币——既是创始人，也是本轮最大的出资方，据报道这笔交易让他的净资产直接翻倍。CNBC 还提到一条不太寻常的条款：投资人不得挖 DeepSeek 的员工。</p><p>整笔交易作为一个案例，最特别的不是金额，是条款设计。这张结构图把三条出资路径画在了一起：</p><p><img src="/images/deepseek-liang-wenfeng-first-funding/funding-structure.png" alt="首轮 500 亿的交易结构"></p><p>为什么创始人要自己跟投这么重？我的理解分三层，而且三层互为因果。</p><p>最直接的是控制权的算术。他自己拿 40%，其余外部资金几乎全走”无投票权的有限合伙”通道。这么设计的结果是：融完这轮，梁文锋对公司的控制权没有被稀释，反而被法律结构加固了。</p><p>往上一层是信号。一家奔着 IPO 去的公司，创始人重金跟投是给公开市场投资人最硬的利益绑定——你自己敢掏 200 亿，说明你对这个估值有信心。</p><p>而最实在的一层，我认为是他本来就不缺钱。这轮融资是战略性的，不是生存性的。既然不是等着钱救命，大头自己出，估值上行的大头也就留在自己手里。</p><p>纪要里有段问答值得单独拎出来。有投资人说：你们一直很纯粹地做研究，现在行业走到了资本市场，你既要对团队和投资人负责，后面还有公众股东，怎么平衡纯 AGI 研究和资本市场？他的回答大意是”我们全都要”——今年能有几亿美元的 B2B 收入，加上消费端用户，公司已经接近脱离纯烧钱阶段；最坏情况下，”卖 API 也够养活一家上市公司”。</p><p>把这段话和交易结构放在一起看，逻辑就通了：外部股东没有投票权，就没有人能逼他放弃前沿研究去变现。”全都要”的前提，是先把”要什么、不要什么”的决定权攥在自己手里。</p><h2 id="几个我存疑的地方"><a href="#几个我存疑的地方" class="headerlink" title="几个我存疑的地方"></a>几个我存疑的地方</h2><p>写到这，有几处必须交代清楚，免得这篇文章显得比事实更确定。</p><p>那份四小时纪要是流出的非官方记录，Momentum Works 翻译时标注了”未经发言人确认”。我引用的观点在方向上可信，和他其他场合的公开表态对得上，但逐字表述别太当真。</p><p>腾讯 100 亿、宁德时代 50 亿这些数字，路透社报道时用的措辞是”考虑中”。最终出资名单，DeepSeek 官方没有确认过。</p><p>第二轮的状态目前说法打架。有报道称纪要泄露后 DeepSeek 把新一轮融资”无限期暂停”，但路透社 7 月 15 日还在报道这轮融资推进中。后者更新，信源也更硬，我倾向于相信在推进，但这件事值得持续盯着。</p><h2 id="接下来盯什么"><a href="#接下来盯什么" class="headerlink" title="接下来盯什么"></a>接下来盯什么</h2><p>如果你也想持续跟踪这家公司，比起追模型发布，有三个信号更值得看。</p><p>先看结构，再看金额。这轮最有信息量的不是 500 亿，是”钱进 LP、投票权留在梁文锋手里、国资直投拿例外条款”这个设计。上面那张结构图可以直接当模板用：之后 DeepSeek 的 IPO 招股书披露股权结构时，拿它对照，能看出很多名堂。</p><p>把”考虑中”和”完成了”分开记。举个例子，这轮消息刚出来时，腾讯和宁德的金额满天飞，但口径一直是传闻。这类案例读多了会发现，财经报道里”考虑””洽谈””计划”和”完成””确认”是两回事，混着读容易被带节奏。</p><p>把非官方纪要当线索，不当事实。那份纪要信息量确实大，但它没有经过本人确认。合理的用法是：拿它形成判断，再去找官方信源交叉验证——公开访谈、技术报告、公司声明，对得上的才采信。</p><p>另外记一个纪要里的判断，未来一两年可以拿来验证：国内做大模型的公司太多了，最后只会剩下三四家。这话从坐在牌桌上的人嘴里说出来，分量不一样。</p><h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>如果你只想再读一篇，优先读第一篇，和这篇对照着看最省时间。</p><ul><li><a href="/posts/yao-shunyu-ai-systems-engineering/">听完姚顺宇的 4 小时访谈：AI 的下半场不拼神话</a>：同样是四小时长访谈的整理。那篇讲模型能力接近之后差距落在哪，这篇讲一家模型公司的钱和控制权，可以对照着看。</li><li><a href="/posts/claude-code-source-analysis/">深度揭秘 Claude Code：为什么它是最强大的 AI 编程助手？</a>：纪要里梁文锋说当下最重要的产品方向还是 coding agent。想看 coding agent 在工程上怎么组织、源码里长什么样，可以从这篇开始。</li></ul><hr><p>说明：本文基于 2026 年 5-7 月公开报道（Forbes、Reuters、CNBC 等，原始信源为 The Information 的首发报道）与网络流传的 DeepSeek 融资路演纪要（Momentum Works 英译版）整理写成。纪要为非官方记录，未经发言人确认；部分出资金额在成文时仍是传闻。文中观点为个人整理与判断，不构成投资建议。</p>]]></content>
+    
+    
+    <summary type="html">DeepSeek 在 2026 年 5 月完成首次外部融资：500 亿人民币，梁文锋自己认购 40%，多数外部投资人拿到的是无投票权的有限合伙份额。把路演纪要和公开报道对照着读完，我整理了这家公司的来路、技术底牌，以及这笔钱背后的结构逻辑。</summary>
+    
+    
+    
+    <category term="AI" scheme="https://coolzeng.com/categories/AI/"/>
+    
+    
+    <category term="AI" scheme="https://coolzeng.com/tags/AI/"/>
+    
+    <category term="大模型" scheme="https://coolzeng.com/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="DeepSeek" scheme="https://coolzeng.com/tags/DeepSeek/"/>
+    
+    <category term="商业" scheme="https://coolzeng.com/tags/%E5%95%86%E4%B8%9A/"/>
+    
+  </entry>
   
   <entry>
     <title>听完姚顺宇的 4 小时访谈：AI 的下半场不拼神话</title>
@@ -33,13 +87,13 @@
     <category term="AI" scheme="https://coolzeng.com/categories/AI/"/>
     
     
-    <category term="AI 编程" scheme="https://coolzeng.com/tags/AI-%E7%BC%96%E7%A8%8B/"/>
-    
     <category term="AI" scheme="https://coolzeng.com/tags/AI/"/>
     
     <category term="大模型" scheme="https://coolzeng.com/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
     
     <category term="Agent" scheme="https://coolzeng.com/tags/Agent/"/>
+    
+    <category term="AI 编程" scheme="https://coolzeng.com/tags/AI-%E7%BC%96%E7%A8%8B/"/>
     
     <category term="产品" scheme="https://coolzeng.com/tags/%E4%BA%A7%E5%93%81/"/>
     
@@ -62,9 +116,9 @@
     <category term="AI 工具" scheme="https://coolzeng.com/categories/AI-%E5%B7%A5%E5%85%B7/"/>
     
     
-    <category term="Claude Code" scheme="https://coolzeng.com/tags/Claude-Code/"/>
-    
     <category term="AI 编程" scheme="https://coolzeng.com/tags/AI-%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Claude Code" scheme="https://coolzeng.com/tags/Claude-Code/"/>
     
     <category term="源码分析" scheme="https://coolzeng.com/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     
@@ -143,11 +197,11 @@
     <category term="AI" scheme="https://coolzeng.com/categories/AI/"/>
     
     
-    <category term="OpenClaw" scheme="https://coolzeng.com/tags/OpenClaw/"/>
-    
     <category term="AI" scheme="https://coolzeng.com/tags/AI/"/>
     
     <category term="Agent" scheme="https://coolzeng.com/tags/Agent/"/>
+    
+    <category term="OpenClaw" scheme="https://coolzeng.com/tags/OpenClaw/"/>
     
   </entry>
   

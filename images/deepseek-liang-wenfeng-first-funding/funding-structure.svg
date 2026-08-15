@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#5f5646" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#f5f1e8"/>
+  <rect x="38" y="34" width="1524" height="832" rx="28" fill="none" stroke="#22313a" stroke-width="3"/>
+  <rect x="58" y="56" width="1484" height="788" rx="24" fill="none" stroke="#22313a" stroke-opacity="0.15" stroke-width="1.5"/>
+  
+  
+    <text x="88" y="112" fill="#1f2a32" font-size="38" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">500 亿怎么进来，权利怎么留下</text>
+    <text x="88" y="152" fill="#5e6b73" font-size="19" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">DeepSeek 首轮外部融资的交易结构 · 2026.05-06 · 依据公开报道整理，金额以官方披露为准</text>
+  
+
+  
+    <g filter="url(#shadow)">
+      <rect x="88" y="210" width="380" height="128" rx="24" fill="#fffdf8" stroke="#22313a" stroke-width="2.5" />
+      <rect x="106" y="228" width="10" height="92" rx="5" fill="#2f7f73"/>
+      <text x="136" y="262" fill="#1f2a32" font-size="26" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">梁文锋本人</text>
+      
+    <text x="136" y="298" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">认购 200 亿 · 占本轮 40%</text>
+  
+    <text x="136" y="326" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">既是创始人，也是最大出资方</text>
+  
+    </g>
+  
+
+  
+    <g filter="url(#shadow)">
+      <rect x="88" y="386" width="380" height="128" rx="24" fill="#fffdf8" stroke="#22313a" stroke-width="2.5" />
+      <rect x="106" y="404" width="10" height="92" rx="5" fill="#c96d3b"/>
+      <text x="136" y="438" fill="#1f2a32" font-size="26" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">产业资本（传闻）</text>
+      
+    <text x="136" y="474" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">腾讯约 100 亿 · 宁德约 50 亿</text>
+  
+    <text x="136" y="502" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">路透社口径：'考虑中'</text>
+  
+    </g>
+  
+
+  
+    <g filter="url(#shadow)">
+      <rect x="88" y="562" width="380" height="128" rx="24" fill="#fffdf8" stroke="#22313a" stroke-width="2.5" />
+      <rect x="106" y="580" width="10" height="92" rx="5" fill="#306a92"/>
+      <text x="136" y="614" fill="#1f2a32" font-size="26" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">国家 AI 产业投资基金</text>
+      
+    <text x="136" y="650" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">国资战略基金</text>
+  
+    <text x="136" y="678" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">唯一的例外条款</text>
+  
+    </g>
+  
+
+  
+    <g>
+      <rect x="700" y="236" width="260" height="42" rx="21" fill="#f7e4d8" stroke="#22313a" stroke-width="2"/>
+      <text x="830" y="263" text-anchor="middle" fill="#1f2a32" font-size="19" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">外部资金的通道</text>
+    </g>
+  
+
+  
+    <g filter="url(#shadow)">
+      <rect x="660" y="310" width="340" height="150" rx="24" fill="#fffdf8" stroke="#22313a" stroke-width="2.5" stroke-dasharray="10 8"/>
+      <rect x="678" y="328" width="10" height="114" rx="5" fill="#c96d3b"/>
+      <text x="708" y="362" fill="#1f2a32" font-size="26" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">有限合伙（LP）</text>
+      
+    <text x="708" y="398" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">梁文锋控制</text>
+  
+    <text x="708" y="426" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">五年锁定期 · 零投票权</text>
+  
+    </g>
+  
+
+  
+    <g filter="url(#shadow)">
+      <rect x="1160" y="350" width="352" height="220" rx="24" fill="#d9efe9" stroke="#22313a" stroke-width="2.5" />
+      <rect x="1178" y="368" width="10" height="184" rx="5" fill="#2f7f73"/>
+      <text x="1208" y="402" fill="#1f2a32" font-size="26" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">DeepSeek 主体</text>
+      
+    <text x="1208" y="438" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">融资总额 500 亿人民币</text>
+  
+    <text x="1208" y="466" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">估值 500 亿美元以上</text>
+  
+    <text x="1208" y="494" fill="#5e6b73" font-size="20" font-weight="500" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">中国最值钱 AI 创业公司</text>
+  
+    </g>
+  
+
+  
+    <g>
+      <line x1="468" y1="274" x2="1160" y2="390" stroke="#2f7f73" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 1160 390 L 1145.2007079722073 393.6029093072284 L 1147.1845884135294 381.768036329687 Z" fill="#2f7f73"/>
+      <text x="814" y="320" text-anchor="middle" fill="#2f7f73" font-size="18" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">直接出资</text>
+    </g>
+  
+  
+    <g>
+      <line x1="468" y1="450" x2="660" y2="385" stroke="#c96d3b" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 660 385 L 648.663284747928 395.17245728884797 L 644.8153135135431 383.8061422580499 Z" fill="#c96d3b"/>
+      
+    </g>
+  
+  
+    <g>
+      <line x1="1000" y1="385" x2="1160" y2="440" stroke="#c96d3b" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 1160 440 L 1144.8099089986656 441.1230028366745 L 1148.7108662207982 429.7747636450161 Z" fill="#c96d3b"/>
+      <text x="1080" y="400.5" text-anchor="middle" fill="#c96d3b" font-size="18" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">只进钱，不进权利</text>
+    </g>
+  
+  
+    <g>
+      <line x1="468" y1="626" x2="1160" y2="500" stroke="#306a92" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 1160 500 L 1147.3012725527014 508.41084545210686 L 1145.151644708958 496.6049528499609 Z" fill="#306a92"/>
+      <text x="814" y="551" text-anchor="middle" fill="#306a92" font-size="18" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">直投 · 唯一有投票权</text>
+    </g>
+  
+
+  
+    <rect x="88" y="776" width="1424" height="52" rx="26" fill="#d9efe9" stroke="#2f7f73" stroke-width="2"/>
+    <text x="800" y="809" text-anchor="middle" fill="#1f2a32" font-size="22" font-weight="700" font-family="Avenir Next, PingFang SC, Source Han Sans SC, sans-serif">钱全部进来，投票权几乎全部留在梁文锋手里 —— 拿钱，不交权</text>
+  
+
+</svg>
