@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拾光待办 (ChronoTodo) - 隐私政策 (Privacy Policy)</title>
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --text: #1F2937;
+      --text-muted: #4B5563;
+      --bg: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --border: #E5E7EB;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #F9FAFB;
+        --text-muted: #9CA3AF;
+        --bg: #111827;
+        --card-bg: #1F2937;
+        --border: #374151;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+    .update-date {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 28px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    p, li {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .highlight-box {
+      background: rgba(79, 70, 229, 0.08);
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>拾光待办 (ChronoTodo) 隐私政策</h1>
+    <div class="update-date">生效日期：2026 年 10 月 2 日 | 最后更新：2026 年 10 月 6 日</div>
+
+    <div class="highlight-box">
+      <strong>核心承诺：</strong> 拾光待办采用本地优先的数据存储方式。您的待办内容保存在本地设备及您个人的 Apple iCloud 私有数据库中。我们不接入广告追踪 SDK；配置了诊断服务的版本会向 Sentry 发送经过脱敏的错误信息及结构化诊断日志，用于发现和修复应用及同步故障。
+    </div>
+
+    <h2>1. 我们收集的信息</h2>
+    <p>应用不会向诊断服务发送您的任务标题、备注、分类名称或 Apple 账户信息。在使用“拾光待办”期间产生的内容包括：</p>
+    <ul>
+      <li><strong>待办事项与分类：</strong>您创建的任务标题、备注、分类、提醒时间、子任务等。</li>
+      <li><strong>数据存储方式：</strong>上述数据首先保存在您本地设备的 SQLite 数据库中；支持 iCloud 的平台在您开启同步后，将对应记录同步至您个人的 CloudKit 私有数据库。</li>
+    </ul>
+
+    <h2>2. 数据同步与 Apple iCloud</h2>
+    <p>如果您在设备上启用了 iCloud 且开启了本应用的云同步功能：</p>
+    <ul>
+      <li>您的任务与分类数据将通过 Apple 官方提供的 <strong>CloudKit 私有数据库 (Private Database)</strong> 进行跨设备同步。同步不等同于独立备份，修改和删除也会传播，网络、账户或权限异常会导致延迟或失败。</li>
+      <li>同步数据直接在您的设备与 Apple 官方 iCloud 服务器之间传输，本应用开发者不通过自有服务器收集这些同步内容。CloudKit 私有数据库的访问受 Apple 账户及平台权限控制，处理规则以 Apple 的说明为准。</li>
+      <li>您可随时在 iOS 或 macOS 的系统「设置 → Apple 账户 → iCloud → 使用 iCloud 的 App」中关闭“拾光待办”的云同步权限。</li>
+    </ul>
+
+    <h2>3. 权限使用说明</h2>
+    <ul>
+      <li><strong>本地通知权限 (Notifications)：</strong>用于在您设定的任务提醒时间到达时向您发送通知提醒。通知由系统调度并本地触发，不会向任何服务器发送通知记录。</li>
+    </ul>
+
+    <h2>4. 第三方 SDK 与追踪</h2>
+    <p>“拾光待办”不包含广告追踪器、行为分析代码或社交分享 SDK。启用诊断服务的版本使用 <a href="https://sentry.io/privacy/">Sentry</a> 处理应用错误、同步故障及结构化诊断日志：</p>
+    <ul>
+      <li><strong>诊断字段：</strong>应用版本与构建号、平台、系统名称/版本，以及平台提供时的设备架构、品牌/厂商、型号、受控错误类型与代码调用栈、日志时间及级别、固定模块和事件、执行状态、同步阶段、耗时、数量和数字错误码。用户主动提交技术报告时，还会发送受控反馈类别及随机短时关联码；关联码不源于账号或永久设备 ID。</li>
+      <li><strong>脱敏范围：</strong>删除原始异常文本、任务内容、用户标识、请求地址、本机文件路径及任意附加上下文；不发送截图、录屏或文件附件。</li>
+      <li><strong>当前采集范围：</strong>本次实现包括 Dart 异常、受控同步诊断、结构化日志和主动技术报告。原生崩溃、ANR、卡顿/watchdog、自动会话、NDK、性能追踪与 Replay 保持关闭；没有完整的设备运行记录或全平台崩溃率。</li>
+      <li><strong>用途与范围：</strong>诊断数据仅用于排查故障，不用于广告或行为画像。网络连接会向服务方暴露 IP 地址等连接信息；具体处理方式参见 Sentry 隐私政策。</li>
+    </ul>
+
+    <h2>5. 数据控制与删除</h2>
+    <p>您对您的数据拥有完全的控制权：</p>
+    <ul>
+      <li>在应用内删除任务或分类，会先更新本地记录，并在后续成功同步时将删除传播至对应云端及其他设备；离线或同步失败时不会立即完成云端删除。</li>
+      <li>卸载应用不会自动保证删除已同步的云端记录。设备数据与云端数据应分别管理；如需处理云端历史记录，请查看 Apple 提供的 iCloud 储存空间管理选项或联系支持，不要将卸载当作排障步骤。</li>
+    </ul>
+
+    <h2>6. 诊断开关、本地记录与主动反馈</h2>
+    <p>以下新增诊断控制、本地记录与技术报告说明仅适用于包含这些功能的版本。旧版 TestFlight 1.0.0 (3) 不提供这些新增入口，可通过本页支持邮箱反馈。</p>
+    <ul>
+      <li>含本次诊断功能的版本可在「设置 → 诊断与反馈 → 允许诊断采集」关闭诊断。关闭先阻断新的诊断出站并尝试停止 SDK、清除待发及本地记录；若提示保存或清理失败，请使用「重试关闭」。关闭成功持久化后，下次启动沿用该选择。点击前已经发出的数据无法撤回，关闭也不删除 Sentry 已收到的记录。</li>
+      <li>诊断开启时，可选本地缓冲只保存脱敏结构化记录，容量最多 1 MiB，只提供最近 24 小时的可用记录；应用加载、读写或导出时清除过期记录。应用未运行期间不能保证在第 24 小时准点删除，下次读取会再次检查期限。</li>
+      <li>「清除本地记录」会删除本地记录和关联码，不删除业务任务或远端记录。「预览技术摘要」后可由您主动复制或通过邮件分享；应用不会自动上传完整本地缓冲。</li>
+      <li>技术报告仅发送受控类别及关联信息。问题描述由您自行在邮件客户端编辑并发送，不自动进入 Sentry；SDK 显示已排队不代表服务端已收到。仍可在诊断关闭时使用不含诊断的普通邮件反馈。</li>
+    </ul>
+
+    <h2>7. 政策更新</h2>
+    <p>如因功能调整或法律法规要求需要更新本隐私政策，我们将在应用更新说明及本页面公布最新版本。</p>
+
+    <h2>8. 联系我们</h2>
+    <p>如果您对本隐私政策有任何疑问、意见或反馈，请通过以下方式联系开发者：</p>
+    <ul>
+      <li>电子邮箱：<a href="mailto:zenghao.0708@163.com">zenghao.0708@163.com</a></li>
+      <li>技术支持：<a href="support.html">技术支持页面</a></li>
+    </ul>
+
+    <div class="footer">
+      © 2026 拾光待办 (ChronoTodo) · 保留所有权利
+    </div>
+  </div>
+</body>
+</html>
